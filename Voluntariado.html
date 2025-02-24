@@ -3,9 +3,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Voluntariado - Manos Amigas</title>
-    <link href="assets/js/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="assets/js/bootstrap-5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
@@ -28,33 +28,37 @@
 
     <!-- Contenido -->
     <div class="container mt-4">
-            <h2 class="text-center">Formulario de Voluntariado</h2>
-            <form>
-                <div class="mb-3">
-                    <label for="nombreCompleto" class="form-label">Nombre Completo</label>
-                    <input type="text" class="form-control" id="nombreCompleto" placeholder="Ingresa tu nombre completo" required>
-                </div>
-                <div class="mb-3">
-                    <label for="universidad" class="form-label">Universidad o Institución</label>
-                    <input type="text" class="form-control" id="universidad" placeholder="Ingresa el nombre de tu universidad o institución" required>
-                </div>
-                <div class="mb-3">
-                    <label for="carrera" class="form-label">Carrera</label>
-                    <input type="text" class="form-control" id="carrera" placeholder="Ingresa tu carrera" required>
-                </div>
-                <div class="mb-3">
-                    <label for="propuesta" class="form-label">Propuesta</label>
-                    <textarea class="form-control" id="propuesta" rows="4" placeholder="Describe tu propuesta de voluntariado" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Enviar</button>
-            </form> 
+        <h2 class="text-center">Formulario de Voluntariado</h2>
+        <form>
+            <div class="mb-3">
+                <label for="nombreCompleto" class="form-label">Nombre Completo</label>
+                <input type="text" class="form-control" id="nombreCompleto" placeholder="Ingresa tu nombre completo" required>
+            </div>
+            <div class="mb-3">
+                <label for="universidad" class="form-label">Universidad o Institución</label>
+                <input type="text" class="form-control" id="universidad" placeholder="Ingresa el nombre de tu universidad o institución" required>
+            </div>
+            <div class="mb-3">
+                <label for="carrera" class="form-label">Carrera</label>
+                <input type="text" class="form-control" id="carrera" placeholder="Ingresa tu carrera" required>
+            </div>
+            <div class="mb-3">
+                <label for="propuesta" class="form-label">Propuesta</label>
+                <textarea class="form-control" id="propuesta" rows="4" placeholder="Describe tu propuesta de voluntariado" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Enviar</button>
+        </form>
     </div>
 
+
     <!-- Footer -->
-    <footer class="bg-dark text-light text-center py-3 mt-5">
+    <footer class="bg-dark text-light text-center py-3 mt-auto">
         <p class="mb-0">&copy; 2025 Mi Página. Todos los derechos reservados.</p>
+        <small class="position-absolute bottom-0 end-0 text-muted pe-2 pb-1" style="font-size: 10px; opacity: 0.5;">
+            Powered by Churchill
+        </small>
     </footer>
 
-    <script src="assets/js/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
