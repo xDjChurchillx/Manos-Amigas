@@ -4,6 +4,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Servicios - Manos Amigas</title>
     <link href="assets/js/bootstrap-5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .service-card {
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+            .service-card:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+            }
+
+        .selected-service {
+            animation: expand 0.5s ease-in-out;
+        }
+
+        @keyframes expand {
+            from {
+                transform: scale(0.95);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .service-image {
+            height: 200px;
+            object-fit: cover;
+        }
+    </style>
 </head>
 <body class="d-flex flex-column min-vh-100">
     <!-- Navbar -->
@@ -28,12 +60,20 @@
     </nav>
 
     <!-- Contenido -->
-    <div class="container mt-4">
-        <h1 class="text-center">Servicios</h1>
-        <h1 class="text-center">Bienvenido a mi Página</h1>
-        <p class="text-center">Este es un ejemplo de una página con Bootstrap.</p>
-    </div>
+    <!-- Contenido Principal -->
+    <main class="flex-grow-1">
+        <div class="container py-5">
+            <h1 class="text-center mb-5 display-4 fw-bold text-primary">Nuestros Servicios</h1>
 
+            <!-- Grid de Servicios -->
+            <div id="servicesGrid" class="row g-4">
+                <!-- Los servicios se cargarán aquí dinámicamente -->
+            </div>
+
+            <!-- Sección de Detalle (mantener igual) -->
+        </div>
+    </main>
+ 
     <!-- Footer -->
     <footer class="bg-dark text-light text-center py-3 mt-auto position-relative">
         <p class="mb-0">&copy; 2025 Mi Página. Todos los derechos reservados.</p>
@@ -45,5 +85,81 @@
 
 
     <script src="assets/js/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/site/ServiciosScript.js"></script>
+    <script>
+        // Función para crear las tarjetas de servicio
+        function createServiceCard(service) {
+            return `
+ <div class="col-md-6 col-lg-4">
+     <div class="card service-card h-100" onclick="showDetails(${service.id})">
+         <img src="${service.cardImage}" class="service-image card-img-top" alt="${service.title}">
+             <div class="card-body">
+                 <h5 class="card-title">${service.title}</h5>
+                 <p class="card-text">${service.description}</p>
+             </div>
+     </div>
+ </div>
+ `;
+        }
+
+        // Función para cargar los servicios
+        async function loadServices() {
+            try {
+                const response = await fetch('assets/json/Servicios.json');
+                const data = await response.json();
+                const servicesGrid = document.getElementById('servicesGrid');
+
+                // Generar tarjetas
+                servicesGrid.innerHTML = data.services.map(service =>
+                    createServiceCard(service)
+                ).join('');
+
+                // Guardar servicios en variable global
+                window.services = data.services.reduce((acc, service) => {
+                    acc[service.id] = service;
+                    return acc;
+                }, {});
+
+            } catch (error) {
+                console.error('Error cargando servicios:', error);
+                servicesGrid.innerHTML = `
+ <div class="alert alert-danger">
+     Error cargando los servicios. Por favor intenta nuevamente más tarde.
+ </div>
+ `;
+            }
+        }
+
+        // Función para mostrar detalles (modificada para usar la variable global)
+        function showDetails(serviceId) {
+            const service = window.services[serviceId];
+            if (!service) return;
+
+            document.getElementById('servicesGrid').classList.add('d-none');
+            document.getElementById('serviceDetail').classList.remove('d-none');
+
+            document.getElementById('detailTitle').textContent = service.title;
+            document.getElementById('detailText').textContent = service.description;
+            document.getElementById('detailImage').src = service.image;
+
+            const list = document.getElementById('detailList');
+            list.innerHTML = service.details.map(detail => `
+ <li class="list-group-item d-flex align-items-center">
+     <span class="badge bg-primary me-3"><i class="bi bi-check2"></i></span>
+     ${detail}
+ </li>
+ `).join('');
+        }
+
+        // Función hideDetails se mantiene igual
+        function hideDetails() {
+            document.getElementById('servicesGrid').classList.remove('d-none');
+            document.getElementById('serviceDetail').classList.add('d-none');
+        }
+
+        // Cargar servicios al iniciar
+        loadServices();
+
+    </script>
 </body>
 </html>

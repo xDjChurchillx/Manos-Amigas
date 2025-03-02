@@ -1,0 +1,43 @@
+{
+  "services": [
+    {
+      "id": 1,
+      "title": "Cuidado Médico Integral",
+      "description": "Atención médica especializada las 24 horas con equipos de última generación y personal certificado en geriatría.",
+      "image": "https://via.placeholder.com/800x400/FFE4E1/000000?text=Equipo+Médico",
+      "cardImage": "https://via.placeholder.com/300x200/FFE4E1/000000?text=Enfermería+24hrs",
+      "details": [
+        "Consultoría geriátrica diaria",
+        "Servicio de enfermería permanente",
+        "Monitoreo de signos vitales",
+        "Medicación controlada"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Talleres Creativos",
+      "description": "Programa de actividades artísticas y culturales para estimulación cognitiva y emocional.",
+      "image": "https://via.placeholder.com/800x400/B0E0E6/000000?text=Taller+de+Arte",
+      "cardImage": "https://via.placeholder.com/300x200/B0E0E6/000000?text=Actividades+Grupo",
+      "details": [
+        "Clases de pintura y escultura",
+        "Musicoterapia guiada",
+        "Taller de escritura creativa",
+        "Actividades intergeneracionales"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Nutrición Personalizada",
+      "description": "Planes alimenticios adaptados a necesidades específicas de cada residente.",
+      "image": "https://via.placeholder.com/800x400/98FB98/000000?text=Comida+Saludable",
+      "cardImage": "https://via.placeholder.com/300x200/98FB98/000000?text=Comida+Saludable",
+      "details": [
+        "Menús supervisados por nutricionistas",
+        "5 comidas diarias balanceadas",
+        "Dietas especiales (diabéticos, hipertensos, etc.)",
+        "Acompañamiento nutricional semanal"
+      ]
+    }
+  ]
+}
