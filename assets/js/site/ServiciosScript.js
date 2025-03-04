@@ -47,6 +47,7 @@ function showDetails(serviceId) {
     const service = window.services[serviceId];
     if (!service) return;
 
+    document.getElementById('title').classList.add('d-none');
     document.getElementById('servicesGrid').classList.add('d-none');
     document.getElementById('serviceDetail').classList.remove('d-none');
 
@@ -65,6 +66,7 @@ function showDetails(serviceId) {
 
 // Función hideDetails se mantiene igual
 function hideDetails() {
+    document.getElementById('title').classList.remove('d-none');
     document.getElementById('servicesGrid').classList.remove('d-none');
     document.getElementById('serviceDetail').classList.add('d-none');
 }
