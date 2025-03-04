@@ -51,17 +51,19 @@ function showDetails(serviceId) {
     document.getElementById('servicesGrid').classList.add('d-none');
     document.getElementById('serviceDetail').classList.remove('d-none');
 
-    document.getElementById('detailTitle').textContent = service.title;
-    document.getElementById('detailText').textContent = service.description;
-    document.getElementById('detailImage').src = service.image;
+    document.getElementById('detailTitle').textContent = service.title || '';
+    document.getElementById('detailText').textContent = service.description || '';
+    document.getElementById('detailImage').src = service.image || '';
 
     const list = document.getElementById('detailList');
-    list.innerHTML = service.details.map(detail => `
-             <li class="list-group-item d-flex align-items-center">
-                 <span class="badge bg-primary me-3"><i class="bi bi-check2"></i></span>
-                 ${detail}
-             </li>
- `).join('');
+    list.innerHTML = Array.isArray(service.details) && service.details.length > 0
+        ? service.details.map(detail => `
+            <li class="list-group-item d-flex align-items-center">
+                <span class="badge bg-primary me-3"><i class="bi bi-check2"></i></span>
+                ${detail}
+            </li>
+        `).join('')
+        : '';
 }
 
 // Función hideDetails se mantiene igual
