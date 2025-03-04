@@ -47,35 +47,37 @@ function showDetails(serviceId) {
     const service = window.services[serviceId];
     if (!service) return;
 
-    // Mostrar sección de detalles y ocultar las otras
     document.getElementById('title').classList.add('d-none');
     document.getElementById('servicesGrid').classList.add('d-none');
     document.getElementById('serviceDetail').classList.remove('d-none');
 
-    // Limpiar o asignar datos
-    document.getElementById('detailTitle').textContent = service.title || '';
-    document.getElementById('detailText').textContent = service.description || '';
-    document.getElementById('detailImage').src = service.image || '';
+    document.getElementById('detailTitle').textContent = service.title;
+    document.getElementById('detailText').textContent = service.description;
+    document.getElementById('detailImage').src = service.image;
 
     const list = document.getElementById('detailList');
-    if (Array.isArray(service.details) && service.details.length > 0) {
-        list.innerHTML = service.details.map(detail => `
-            <li class="list-group-item d-flex align-items-center">
-                <span class="badge bg-primary me-3"><i class="bi bi-check2"></i></span>
-                ${detail}
-            </li>
-        `).join('');
-    } else {
-        list.innerHTML = '<li class="list-group-item">No hay detalles disponibles.</li>';
-    }
+    list.innerHTML = service.details.map(detail => `
+             <li class="list-group-item d-flex align-items-center">
+                 <span class="badge bg-primary me-3"><i class="bi bi-check2"></i></span>
+                 ${detail}
+             </li>
+ `).join('');
 }
 
 // Función hideDetails se mantiene igual
 function hideDetails() {
+    // Mostrar nuevamente los títulos y tarjetas
     document.getElementById('title').classList.remove('d-none');
     document.getElementById('servicesGrid').classList.remove('d-none');
     document.getElementById('serviceDetail').classList.add('d-none');
+
+    // Limpiar contenido del detalle
+    document.getElementById('detailTitle').textContent = '';
+    document.getElementById('detailText').textContent = '';
+    document.getElementById('detailImage').src = '';
+    document.getElementById('detailList').innerHTML = '';
 }
+
 
 // Cargar servicios al iniciar
 loadServices();
