@@ -29,12 +29,14 @@
     {
       "id": 3,
       "title": "Nutrición Personalizada",
-      "description": "Planes alimenticios adaptados a necesidades específicas de cada residente.",
+      "description": "Planes alimenticios cuidadosamente diseñados y adaptados a las necesidades nutricionales específicas de cada residente, considerando sus preferencias personales, condiciones médicas, restricciones dietéticas y objetivos de salud para garantizar una alimentación balanceada, segura y de alta calidad.",
       "image": "https://i2.wp.com/thehappening.com/wp-content/uploads/2017/01/comida-healthy.jpg?fit=1024%2C694&ssl=1",
       "cardImage": "https://th.bing.com/th/id/R.40c0b0adca0b0fb476353ed051c0a885?rik=DBkIMITYc18kvg&riu=http%3a%2f%2frunrun.es%2fwp-content%2fuploads%2f2014%2f09%2f15892016_xl.jpg&ehk=bTvM%2bs0rB8aBKyJxZabUFRV5D%2fH8FL3q3kSIg9D7Oqo%3d&risl=&pid=ImgRaw&r=0",
       "details": [
-        "La tecnología avanza a un ritmo impresionante, transformando la manera en que vivimos y trabajamos cada día. Desde la automatización de tareas simples hasta el desarrollo de inteligencia artificial avanzada, el impacto es evidente en todos los sectores. Por eso, es fundamental adaptarse continuamente y adquirir nuevos conocimientos para no quedar rezagados en un mundo tan dinámico."
-        
+        "Menús supervisados por nutricionistas",
+        "5 comidas diarias balanceadas",
+        "Dietas especiales (diabéticos, hipertensos, etc.)",
+        "Acompañamiento nutricional semanal"
       ]
     }
   ]
