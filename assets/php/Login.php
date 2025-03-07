@@ -4,12 +4,11 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        // Sanitizar datos del formulario
         $username = mysqli_real_escape_string($conn, $_POST["username"]);
-        $password = $_POST["password"];
+        $password = mysqli_real_escape_string($conn, $_POST["password"]);
 
-        // Prepared statement para evitar inyección SQL
-        $stmt = $conn->prepare("CALL Cte_Login(?, ?)");
+        // Llamar al Stored Procedure con prepared statement
+        $stmt = $conn->prepare("CALL sp_Login(?, ?)");
         $stmt->bind_param("ss", $username, $password);
         $stmt->execute();
         $result = $stmt->get_result();
@@ -20,25 +19,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
 
         if ($row = $result->fetch_assoc()) {
-            $name = $row['Name'];
-            $hashed_password = $row['Pass'];
+            // Login exitoso, guardar datos en sesión
+            $_SESSION["Codigo"] = $row['Codigo'];
+            $_SESSION["Usuario"] = $row['Usuario'];
 
-            // Si el SP devuelve la contraseña hasheada, puedes verificar:
-            if (hash_equals($hashed_password, hash('sha256', $password))) {
-                $_SESSION["username"] = $username;
-                $_SESSION["name"] = $name;
-                header("Location: dashboard.php"); // Redireccionar a la página principal
-                exit();
-            } else {
-                header("Location: index.html?error=2"); // Contraseña incorrecta
-                exit();
-            }
+            header("Location: dashboard.php"); // Redireccionar a la página principal
+            exit();
         } else {
-            header("Location: index.html?error=1"); // Usuario no encontrado
+            header("Location: index.html?error=1"); // Usuario o contraseña incorrectos
             exit();
         }
     } catch (Exception $ex) {
-        header("Location: index.html?error=4"); // Error general
+        header("Location: index.html?error=4"); // Error inesperado
         exit();
     }
 }
