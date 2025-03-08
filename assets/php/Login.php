@@ -37,8 +37,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Verificar si el usuario existe
         if ($row = $result->fetch_assoc()) {
-            $_SESSION["Codigo"] = $row['Codigo'];
-            $_SESSION["Usuario"] = $row['Usuario'];
+            $_SESSION["username"]  = $username;
+            $_SESSION["password"] = $password;
 
             header("Location: /Gestion/panel.html"); // Redirigir a dashboard
             exit();
