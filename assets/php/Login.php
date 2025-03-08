@@ -40,7 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["Codigo"] = $row['Codigo'];
             $_SESSION["Usuario"] = $row['Usuario'];
 
-            header("Location: /Gestion/dashboard.php"); // Redirigir a dashboard
+            header("Location: /Gestion/panel.html"); // Redirigir a dashboard
             exit();
         } else {
             header("Location: /Gestion/ingreso.html?error=1"); // Usuario o contraseña incorrectos
