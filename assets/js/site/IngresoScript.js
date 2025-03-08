@@ -13,7 +13,7 @@ if (error) {
             errorMessage.textContent = 'Usuario no encontrado.';
             break;
         case '2':
-            errorMessage.textContent = 'Contraseña incorrecta.';
+            errorMessage.textContent = 'Contrase\u00F1a incorrecta.';
             break;
         case '3':
             errorMessage.textContent = 'Error en la base de datos. Inténtalo más tarde.';
