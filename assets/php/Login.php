@@ -4,9 +4,9 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
-        // Verificar si los datos fueron enviados
+        // Verificar si los datos fueron enviados correctamente
         if (!isset($_POST["username"]) || !isset($_POST["password"])) {
-            header("Location: ../../html/index.html?error=2"); // Falta de datos
+            header("Location: /Gestion/ingreso.html?error=2"); // Falta de datos
             exit();
         }
 
@@ -15,14 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = trim($_POST["password"]);
 
         if (empty($username) || empty($password)) {
-            header("Location: ../../html/index.html?error=2"); // Campos vacíos
+            header("Location: /Gestion/ingreso.html?error=2"); // Campos vacíos
             exit();
         }
 
         // Preparar la consulta con Prepared Statements
         $stmt = $conn->prepare("CALL sp_Login(?, ?)");
         if (!$stmt) {
-            header("Location: ../../html/index.html?error=3"); // Error en la base de datos
+            header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
             exit();
         }
 
@@ -31,24 +31,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $stmt->get_result();
 
         if ($result === false) {
-            header("Location: ../../html/index.html?error=3"); // Error en base de datos
+            header("Location: /Gestion/ingreso.html?error=3"); // Error en base de datos
             exit();
         }
 
         // Verificar si el usuario existe
         if ($row = $result->fetch_assoc()) {
-            $_SESSION["user"] = $username;
-            $_SESSION["password"] = $password;
+            $_SESSION["Codigo"] = $row['Codigo'];
+            $_SESSION["Usuario"] = $row['Usuario'];
 
-            header("Location: ../../html/dashboard.php"); // Redireccionar a dashboard
+            header("Location: /Gestion/dashboard.php"); // Redirigir a dashboard
             exit();
         } else {
-            header("Location: ../../html/index.html?error=1"); // Usuario o contraseña incorrectos
+            header("Location: /Gestion/ingreso.html?error=1"); // Usuario o contraseña incorrectos
             exit();
         }
     } catch (Exception $ex) {
-        header("Location: ../../html/index.html?error=4"); // Error inesperado
+        header("Location: /Gestion/ingreso.html?error=4"); // Error inesperado
         exit();
     }
 }
-?>
