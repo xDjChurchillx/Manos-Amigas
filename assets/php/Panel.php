@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 require '../../../Private/Credentials/DataBase/connection.php';
 header('Content-Type: application/json');
 
@@ -6,7 +6,7 @@ session_start();
 
 try {
     if (!isset($_SESSION["username"]) || !isset($_SESSION["password"])) {
-        echo json_encode(["status" => "error", "message" => "Sesión no iniciada"]);
+        echo json_encode(["status" => "error", "message" => "SesiÃ³n no iniciada"]);
         exit();
     }
 
@@ -28,10 +28,10 @@ try {
     if ($row = $result->fetch_assoc()) {
         echo json_encode(["status" => "success", "user" => $_SESSION["username"]]);
     } else {
-        echo json_encode(["status" => "error", "message" => "Usuario o contraseña incorrectos"]);
+        echo json_encode(["status" => "error", "message" => "Usuario o contraseÃ±a incorrectos"]);
     }
 } catch (Exception $ex) {
-    echo json_encode(["status" => "error", "message" => "Error inesperado, por favor intenta más tarde."]);
+    echo json_encode(["status" => "error", "message" => "Error inesperado, por favor intenta mÃ¡s tarde."]);
 }
 exit();
 ?>
