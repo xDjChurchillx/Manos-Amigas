@@ -21,7 +21,7 @@ try {
     $result = $stmt->get_result();
 
     if ($result === false) {
-        echo json_encode(["status" => "error", "message" => "Error en la base de datos"]);
+         echo json_encode(["status" => "error", "message" => "Error en la base de datos"]);
         exit();
     }
 
