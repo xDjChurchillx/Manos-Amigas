@@ -14,8 +14,6 @@
 }
 /* Agrega esto en tu archivo CSS (assets/css/ServiciosStyle.css) */
 #serviceDetail {
-    max-height: 500px;
-    overflow-y: auto;
     margin-top: 30px;
 }
 
