@@ -32,8 +32,7 @@ if (!isset($_SESSION["username"]) ||
 // Si pasa todas las validaciones, se puede mostrar el contenido
 echo json_encode([
     'status' => 'success',
-    'username' => htmlspecialchars($_SESSION["username"]),
-    '<section id="counter" class="counter">
+    'html' => '<section id="counter" class="counter">
             <div class="main_counter_area">
                 <div class="overlay p-y-3">
                     <div class="container">
