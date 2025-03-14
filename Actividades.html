@@ -30,101 +30,36 @@
     </nav>
 
     <!-- Contenido -->
-    <div class="container mt-4">
-        <h1 class="text-center mb-4">Actividades</h1>
-        <div class="row">
-            <!-- Card 1 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://th.bing.com/th/id/R.4da9feb61731dc3a77be2b1601501b0d?rik=TR1Gsoni4ngxuw&riu=http%3a%2f%2fwww.fastmed.com.ve%2fwp-content%2fuploads%2f2016%2f09%2fholaaa.jpg&ehk=ZWb%2f8TwOfCDcrtbujk%2fP9njMFCz%2fLYP%2bbSFSj9HtvrI%3d&risl=&pid=ImgRaw&r=0" class="card-img-top" alt="Actividad 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Taller de Manualidades</h5>
-                        <p class="card-text">Únete a nuestro taller de manualidades donde aprenderás a crear hermosas artesanías con materiales reciclados.</p>
-                    </div>
-                </div>
+    <!-- Contenido Principal -->
+    <main class="flex-grow-1">
+        <div class="container py-5">
+            <h1 id="title" class="text-center mb-5 display-4 fw-bold c2color">Nuestros Servicios</h1>
+
+            <!-- Grid de Servicios -->
+            <div id="activitysGrid" class="row g-4">
+                <!-- Los servicios se cargarán aquí dinámicamente -->
             </div>
-            <!-- Card 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://thumbs.dreamstime.com/b/teenage-boys-playing-volleyball-beach-low-angle-shot-summer-129653377.jpg" class="card-img-top" alt="Actividad 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Clases de Cocina</h5>
-                        <p class="card-text">Participa en nuestras clases de cocina y descubre cómo preparar deliciosos platillos tradicionales.</p>
+
+            <!-- Sección de Detalle -->
+            <div id="activityDetail" class="d-none">
+                <div class="card selected-activity mx-auto shadow-sm">
+                    <div class="card-header bg2color text-white d-flex justify-content-between align-items-center">
+                        <h3 id="detailTitle" class="mb-0"></h3>
+                        <button class="btn btn-danger p-2" onclick="hideDetails()">
+                            <svg class="closeicon-bg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="white" />
+                            </svg>
+                        </button>
                     </div>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://th.bing.com/th/id/OIP.twle5R6XiOTSw_AsGxL4MwHaEY?rs=1&pid=ImgDetMain" class="card-img-top" alt="Actividad 3">
+                    <img id="detailImage" class="card-img-top activity-image" alt="Detalle servicio">
                     <div class="card-body">
-                        <h5 class="card-title">Excursiones Ecológicas</h5>
-                        <p class="card-text">Disfruta de nuestras excursiones ecológicas y conoce la belleza natural de nuestra región.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 1 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://th.bing.com/th/id/R.4da9feb61731dc3a77be2b1601501b0d?rik=TR1Gsoni4ngxuw&riu=http%3a%2f%2fwww.fastmed.com.ve%2fwp-content%2fuploads%2f2016%2f09%2fholaaa.jpg&ehk=ZWb%2f8TwOfCDcrtbujk%2fP9njMFCz%2fLYP%2bbSFSj9HtvrI%3d&risl=&pid=ImgRaw&r=0" class="card-img-top" alt="Actividad 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Taller de Manualidades</h5>
-                        <p class="card-text">Únete a nuestro taller de manualidades donde aprenderás a crear hermosas artesanías con materiales reciclados.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://thumbs.dreamstime.com/b/teenage-boys-playing-volleyball-beach-low-angle-shot-summer-129653377.jpg" class="card-img-top" alt="Actividad 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Clases de Cocina</h5>
-                        <p class="card-text">Participa en nuestras clases de cocina y descubre cómo preparar deliciosos platillos tradicionales.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://th.bing.com/th/id/OIP.twle5R6XiOTSw_AsGxL4MwHaEY?rs=1&pid=ImgDetMain" class="card-img-top" alt="Actividad 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Excursiones Ecológicas</h5>
-                        <p class="card-text">Disfruta de nuestras excursiones ecológicas y conoce la belleza natural de nuestra región.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 1 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://th.bing.com/th/id/R.4da9feb61731dc3a77be2b1601501b0d?rik=TR1Gsoni4ngxuw&riu=http%3a%2f%2fwww.fastmed.com.ve%2fwp-content%2fuploads%2f2016%2f09%2fholaaa.jpg&ehk=ZWb%2f8TwOfCDcrtbujk%2fP9njMFCz%2fLYP%2bbSFSj9HtvrI%3d&risl=&pid=ImgRaw&r=0" class="card-img-top" alt="Actividad 1">
-                    <div class="card-body">
-                        <h5 class="card-title">Taller de Manualidades</h5>
-                        <p class="card-text">Únete a nuestro taller de manualidades donde aprenderás a crear hermosas artesanías con materiales reciclados.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 2 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://thumbs.dreamstime.com/b/teenage-boys-playing-volleyball-beach-low-angle-shot-summer-129653377.jpg" class="card-img-top" alt="Actividad 2">
-                    <div class="card-body">
-                        <h5 class="card-title">Clases de Cocina</h5>
-                        <p class="card-text">Participa en nuestras clases de cocina y descubre cómo preparar deliciosos platillos tradicionales.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Card 3 -->
-            <div class="col-md-4 mb-4">
-                <div class="card h-100">
-                    <img src="https://th.bing.com/th/id/OIP.twle5R6XiOTSw_AsGxL4MwHaEY?rs=1&pid=ImgDetMain" class="card-img-top" alt="Actividad 3">
-                    <div class="card-body">
-                        <h5 class="card-title">Excursiones Ecológicas</h5>
-                        <p class="card-text">Disfruta de nuestras excursiones ecológicas y conoce la belleza natural de nuestra región.</p>
+                        <p id="detailText" class="lead"></p>
+                        <ul id="detailList" class="list-group list-group-flush"></ul>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer class="bg1color text-light text-center py-3 mt-auto position-relative">
