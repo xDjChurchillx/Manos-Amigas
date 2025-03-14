@@ -5,6 +5,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
 
+    // Validar que los campos no estén vacíos
+    if (empty($username) || empty($password)) {
+        echo "Error: Todos los campos son obligatorios.";
+        exit();
+    }
+
     // Hashear la contraseña
     $hash = password_hash($password, PASSWORD_BCRYPT);
 
