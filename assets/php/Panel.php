@@ -32,49 +32,46 @@ if (!isset($_SESSION["username"]) ||
 // Si pasa todas las validaciones, se puede mostrar el contenido
 echo json_encode([
     'status' => 'success',
-    'html' => '
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
-<section id="counter" class="counter">
-            <div class="main_counter_area">
-                <div class="overlay p-y-3">
-                    <div class="container">
-                        <div class="row">
-                            <div class="main_counter_content text-center white-text wow fadeInUp">
-                                <div class="col-md-3">
-                                    <div class="single_counter p-y-2 m-t-1">
-                                        <i class="fa fa-briefcase m-b-1"></i>
-                                        <h2 class="statistic-counter">200</h2>
-                                        <span></span>
-                                        <p>Study</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="single_counter p-y-2 m-t-1">
-                                        <i class="fa fa-check m-b-1"></i>
-                                        <h2 class="statistic-counter">1000</h2>
-                                        <p>Checked</p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="single_counter p-y-2 m-t-1">
-                                        <i class="fa fa-coffee m-b-1"></i>
-                                        <h2 class="statistic-counter">500</h2>
-                                        <p>Coffee </p>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="single_counter p-y-2 m-t-1">
-                                        <i class="fa fa-beer m-b-1"></i>
-                                        <h2 class="statistic-counter">400</h2>
-                                        <p>Pizzas</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>'
+    'html' => '<div class="container">
+	<div class="row">
+	    <br/>
+	   <div class="col text-center">
+		<h2>Bootstrap 4 counter</h2>
+		<p>counter to count up to a target number</p>
+		</div>
+		
+             
+		
+	</div>
+		<div class="row text-center">
+	        <div class="col">
+	        <div class="counter">
+      <i class="fa fa-code fa-2x"></i>
+      <h2 class="timer count-title count-number" data-to="100" data-speed="1500"></h2>
+       <p class="count-text ">Our Customer</p>
+    </div>
+	        </div>
+              <div class="col">
+               <div class="counter">
+      <i class="fa fa-coffee fa-2x"></i>
+      <h2 class="timer count-title count-number" data-to="1700" data-speed="1500"></h2>
+      <p class="count-text ">Happy Clients</p>
+    </div>
+              </div>
+              <div class="col">
+                  <div class="counter">
+      <i class="fa fa-lightbulb-o fa-2x"></i>
+      <h2 class="timer count-title count-number" data-to="11900" data-speed="1500"></h2>
+      <p class="count-text ">Project Complete</p>
+    </div></div>
+              <div class="col">
+              <div class="counter">
+      <i class="fa fa-bug fa-2x"></i>
+      <h2 class="timer count-title count-number" data-to="157" data-speed="1500"></h2>
+      <p class="count-text ">Coffee With Clients</p>
+    </div>
+              </div>
+         </div>
+</div>'
 ]);
 ?>
