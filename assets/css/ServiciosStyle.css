@@ -14,27 +14,28 @@
 }
 /* Agrega esto en tu archivo CSS (assets/css/ServiciosStyle.css) */
 #serviceDetail {
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    max-height: 500px;
+    overflow-y: auto;
+    margin-top: 30px;
 }
- 
-.card {
-    border: 1px solid #98D2C0 !important;
-}
-@keyframes expand {
-    from {
-        transform: scale(0.95);
-        opacity: 0;
+
+@media (max-width: 768px) {
+    #serviceDetail {
+        max-height: 400px;
     }
 
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
+        #serviceDetail .card {
+            width: 100%;
+        }
+}
+
+.selected-service .card-header {
+    position: sticky;
+    top: 0;
+    z-index: 1;
 }
 
 .service-image {
-    height: 200px;
     object-fit: cover;
+    max-height: 300px;
 }
