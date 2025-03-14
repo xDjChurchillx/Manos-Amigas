@@ -1,5 +1,18 @@
 <?php
 require '../../../Private/Credentials/DataBase/connection.php';
+
+
+ini_set('session.use_only_cookies', 1); // Solo cookies, no IDs en URL
+
+session_set_cookie_params([
+    'lifetime' => 0, // Hasta cerrar navegador
+    'path' => '/',
+    'domain' => '', // Cambia por tu dominio real
+    'secure' => false, // Solo HTTPS (IMPORTANTE en producción)
+    'httponly' => true, // No accesible desde JavaScript
+    'samesite' => 'Strict', // Protección contra CSRF
+]);
+
 session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -41,7 +54,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             // Verificar la contraseña usando password_verify()
             if (password_verify($password, $storedHash)) {
+                session_regenerate_id(true); // Regenerar sesión para evitar fixation
                 $_SESSION["username"] = $username;
+                $_SESSION["user_agent"] = $_SERVER['HTTP_USER_AGENT']; // Asociar sesión al navegador
+                $_SESSION["ip_address"] = $_SERVER['REMOTE_ADDR']; // Opcional: asociar a IP
                 header("Location: /Gestion/panel.html"); // Redirigir a dashboard
                 exit();
             } else {

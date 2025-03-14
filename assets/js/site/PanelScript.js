@@ -2,22 +2,18 @@ document.addEventListener("DOMContentLoaded", function () {
     // Función para verificar la sesión
     function startSession() {
         // Realizar la solicitud AJAX
-        fetch('../assets/php/panel.php')
-            .then(response => {
-                // Verificar si la respuesta fue exitosa
-                if (!response.ok) {
-                    throw new Error('Error al conectar con el servidor');
-                }
-                return response.json();
-            })
+        fetch('../assets/php/panel.php', {
+            method: 'GET',
+            credentials: 'same-origin',  // Mantener la sesión activa si es posible
+        })
+            .then(response => response.json())
             .then(data => {
-                // Verificar si la respuesta contiene un estado exitoso
-                if (data.status === "success") {
-                    // Si la sesión es válida, mostrar el nombre del usuario en el panel
-                    document.getElementById('panel').innerHTML = `<h1>Bienvenido, ${data.user}</h1>`;
-                } else {
-                    console.error('Error iniciando la sesión:', data.message);
-                    window.location.href = 'ingreso.html';
+                if (data.status === 'error') {
+                    // Si la sesión no es válida, redirigir al usuario
+                    window.location.href = data.redirect;
+                } else if (data.status === 'success') {
+                    // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
+                    document.getElementById('contenido').innerHTML = data.html;
                 }
             })
             .catch(error => {
