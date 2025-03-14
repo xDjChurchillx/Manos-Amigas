@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
         alert(errorMessage);
 
         // Redirigir al login
-        window.location.href = 'Gestion/ingreso.html';
+        window.location.href = 'ingreso.html';
     }
 
     // Llamar a la función de verificación de sesión al cargar la página

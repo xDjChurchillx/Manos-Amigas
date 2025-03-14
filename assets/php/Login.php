@@ -6,7 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     try {
         // Verificar si los datos fueron enviados correctamente
         if (!isset($_POST["username"]) || !isset($_POST["password"])) {
-            header("Location: /ingreso.html?error=2"); // Falta de datos
+            header("Location: /Gestion/ingreso.html?error=2"); // Falta de datos
             exit();
         }
 
@@ -15,14 +15,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $password = trim($_POST["password"]);
 
         if (empty($username) || empty($password)) {
-            header("Location: /ingreso.html?error=2"); // Campos vacíos
+            header("Location: /Gestion/ingreso.html?error=2"); // Campos vacíos
             exit();
         }
 
         // Preparar la consulta con Prepared Statements
         $stmt = $conn->prepare("CALL sp_Login(?, ?)");
         if (!$stmt) {
-            header("Location: /ingreso.html?error=3"); // Error en la base de datos
+            header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
             exit();
         }
 
@@ -31,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $result = $stmt->get_result();
 
         if ($result === false) {
-            header("Location: /ingreso.html?error=3"); // Error en base de datos
+            header("Location: /Gestion/ingreso.html?error=3"); // Error en base de datos
             exit();
         }
 
@@ -40,14 +40,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION["username"]  = $username;
             $_SESSION["password"] = $password;
 
-            header("Location: /panel.html"); // Redirigir a dashboard
+            header("Location: /Gestion/panel.html"); // Redirigir a dashboard
             exit();
         } else {
-            header("Location: /ingreso.html?error=1"); // Usuario o contraseña incorrectos
+            header("Location: /Gestion/ingreso.html?error=1"); // Usuario o contraseña incorrectos
             exit();
         }
     } catch (Exception $ex) {
-        header("Location: /ingreso.html?error=4"); // Error inesperado
+        header("Location: /Gestion/ingreso.html?error=4"); // Error inesperado
         exit();
     }
 }
