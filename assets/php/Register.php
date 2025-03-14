@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
-        echo "Usuario registrado exitosamente.";
+        echo "Usuario registrado exitosamente.".$password;
     } else {
         echo "Error al registrar el usuario.";
     }
