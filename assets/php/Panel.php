@@ -24,7 +24,7 @@ if (!isset($_SESSION["username"]) ||
     // Retornar JSON con error
     echo json_encode([
         'status' => 'error',
-        'redirect' => '/Gestion/ingreso.html?error=5'
+        'redirect' => '/Gestion/ingreso.html'
     ]);
     exit();
 }
@@ -32,7 +32,7 @@ if (!isset($_SESSION["username"]) ||
 // Si pasa todas las validaciones, se puede mostrar el contenido
 echo json_encode([
     'status' => 'success',
-    'html' => '
+    'counters' => '
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 <div class="container">
 	<div class="row">

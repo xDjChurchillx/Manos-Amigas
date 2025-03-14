@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     window.location.href = data.redirect;
                 } else if (data.status === 'success') {
                     // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
-                    document.getElementById('panel').innerHTML = data.html;
+                    document.getElementById('panel').innerHTML = data.counters;
 
                     // Llamar al contador después de que el HTML se haya cargado
                     startCounter();
