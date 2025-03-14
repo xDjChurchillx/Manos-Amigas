@@ -19,14 +19,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        // Preparar la consulta con Prepared Statements
+        // Generar el hash de la contraseña
+        $hashedPassword = password_hash($password, PASSWORD_BCRYPT);
+
+        // Llamar al procedimiento almacenado con el hash
         $stmt = $conn->prepare("CALL sp_Login(?, ?)");
         if (!$stmt) {
             header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
             exit();
         }
 
-        $stmt->bind_param("ss", $username, $password);
+        $stmt->bind_param("ss", $username, $hashedPassword);
         $stmt->execute();
         $result = $stmt->get_result();
 
@@ -35,11 +38,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        // Verificar si el usuario existe
+        // Verificar si el usuario existe y los hashes coinciden
         if ($row = $result->fetch_assoc()) {
-            $_SESSION["username"]  = $username;
-            $_SESSION["password"] = $password;
-
+            $_SESSION["username"] = $username;
             header("Location: /Gestion/panel.html"); // Redirigir a dashboard
             exit();
         } else {
