@@ -27,6 +27,9 @@
     #serviceDetail.d-block {
         display: flex; /* Mostrar cuando se active */
     }
+card {
+    border: 1px solid #98D2C0;
+}
 
 @keyframes expand {
     from {
