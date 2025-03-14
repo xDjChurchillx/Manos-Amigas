@@ -3,7 +3,7 @@
 function createServiceCard(service) {
     return `
                      <div class="col-md-6 col-lg-4">
-                         <div class="bg4color card service-card h-100" onclick="showDetails(${service.id})">
+                         <div class="card service-card h-100" onclick="showDetails(${service.id})">
                              <img src="${service.cardImage}" class="service-image card-img-top" alt="${service.title}">
                                  <div class="card-body">
                                      <h5 class="card-title">${service.title}</h5>
