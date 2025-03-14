@@ -59,7 +59,7 @@ function showDetails(serviceId) {
     list.innerHTML = Array.isArray(service.details) && service.details.length > 0
         ? service.details.map(detail => `
             <li class="list-group-item d-flex align-items-center">
-                <span class="badge bg-primary me-3"><i class="bi bi-check2"></i></span>
+                <span class="badge bg3color me-3"><i class="bi bi-check2"></i></span>
                 ${detail}
             </li>
         `).join('')
