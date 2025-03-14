@@ -33,3 +33,12 @@ document.addEventListener("DOMContentLoaded", function () {
     // Llamar a la función de verificación de sesión al cargar la página
     startSession();
 });
+$(document).ready(function () {
+
+    $('.statistic-counter').counterUp({
+        delay: 10,
+        time: 2000
+    });
+
+
+});
