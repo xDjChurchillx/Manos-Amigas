@@ -32,7 +32,10 @@ if (!isset($_SESSION["username"]) ||
 // Si pasa todas las validaciones, se puede mostrar el contenido
 echo json_encode([
     'status' => 'success',
-    'html' => '<section id="counter" class="counter">
+    'html' => '
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
+<section id="counter" class="counter">
             <div class="main_counter_area">
                 <div class="overlay p-y-3">
                     <div class="container">
