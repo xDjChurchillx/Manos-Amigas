@@ -33,6 +33,46 @@ if (!isset($_SESSION["username"]) ||
 echo json_encode([
     'status' => 'success',
     'username' => htmlspecialchars($_SESSION["username"]),
-    'html' => '<p>Bienvenido, ' . htmlspecialchars($_SESSION["username"]) . '</p>'
+    '<section id="counter" class="counter">
+            <div class="main_counter_area">
+                <div class="overlay p-y-3">
+                    <div class="container">
+                        <div class="row">
+                            <div class="main_counter_content text-center white-text wow fadeInUp">
+                                <div class="col-md-3">
+                                    <div class="single_counter p-y-2 m-t-1">
+                                        <i class="fa fa-briefcase m-b-1"></i>
+                                        <h2 class="statistic-counter">200</h2>
+                                        <span></span>
+                                        <p>Study</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="single_counter p-y-2 m-t-1">
+                                        <i class="fa fa-check m-b-1"></i>
+                                        <h2 class="statistic-counter">1000</h2>
+                                        <p>Checked</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="single_counter p-y-2 m-t-1">
+                                        <i class="fa fa-coffee m-b-1"></i>
+                                        <h2 class="statistic-counter">500</h2>
+                                        <p>Coffee </p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="single_counter p-y-2 m-t-1">
+                                        <i class="fa fa-beer m-b-1"></i>
+                                        <h2 class="statistic-counter">400</h2>
+                                        <p>Pizzas</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>'
 ]);
 ?>
