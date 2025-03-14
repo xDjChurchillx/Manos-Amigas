@@ -28,10 +28,6 @@
         display: flex; /* Mostrar cuando se active */
     }
 
-.selected-service {
-    max-width: 600px; /* Ancho máximo del card */
-    width: 100%;
-}
 @keyframes expand {
     from {
         transform: scale(0.95);
