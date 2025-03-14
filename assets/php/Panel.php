@@ -32,7 +32,9 @@ if (!isset($_SESSION["username"]) ||
 // Si pasa todas las validaciones, se puede mostrar el contenido
 echo json_encode([
     'status' => 'success',
-    'html' => '<div class="container">
+    'html' => '
+<link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
+<div class="container">
 	<div class="row">
 	    <br/>
 	   <div class="col text-center">
@@ -72,6 +74,7 @@ echo json_encode([
     </div>
               </div>
          </div>
-</div>'
+</div>
+'
 ]);
 ?>
