@@ -42,10 +42,9 @@ $cat = ["Jun", "Jul", "Aug"];
 $datos = json_decode(file_get_contents("php://input"), true);
 if ($datos === null) {
     if (isset($_SESSION["datos"])) {
-	      $_SESSION['datos'] = $datos;
-        $data1 = [20, 30, 40];
-        $data2 = [50, 60, 70];
-        $data3 = [80, 90, 100];
+        $data1 = [10, 30, 40];
+        $data2 = [10, 60, 70];
+        $data3 = [10, 90, 100];
         $cat = ["Jun", "Jul", "Aug"];
     }else{      
         $data1 = [100, 100, 100];
