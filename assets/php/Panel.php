@@ -84,18 +84,18 @@ $counters = '
              </div>
              <div id="bsb-chart-3"></div>
              <div class="container mt-5">
-                <div class="date-range-container">
-                  <div>
+                <h2>Selecciona un rango de fechas</h2>
+                <div class="row">
+                  <div class="col-md-3">
                     <label for="desde">Desde:</label>
                     <input type="date" class="form-control" id="desde">
                   </div>
-                  <div>
+                  <div class="col-md-3">
                     <label for="hasta">Hasta:</label>
                     <input type="date" class="form-control" id="hasta">
                   </div>
-                  <div class="combobox-container">
-                    <label for="opciones">Opciones:</label>
-                    <select class="form-select" id="opciones">
+                  <div class="col-md-3">
+                   <select class="form-select" id="opciones">
                       <option value="hoy">Hoy</option>
                       <option value="mes">Mes</option>
                     </select>
