@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 // Ejecutar el procedimiento almacenado
                 $stmt->execute();
-
+                setcookie("token", $activationToken, time() + 86400, "/");
                 header("Location: /Gestion/panel.html"); // Redirigir a dashboard
                 exit();
             } else {

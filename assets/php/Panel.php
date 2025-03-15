@@ -1,6 +1,8 @@
 ﻿<?php
 // Repetimos la misma configuración de sesión para asegurar consistencia
 ini_set('session.use_only_cookies', 1);
+require '../../../Private/Credentials/DataBase/connection.php';
+
 
 session_set_cookie_params([
     'lifetime' => 0, // Hasta cerrar navegador
@@ -14,12 +16,14 @@ session_set_cookie_params([
 session_start();
 
 // Validación de sesión
-if (!isset($_SESSION["username"]) ||
+if (!isset($_COOKIE["token"]) || !isset($_SESSION["username"]) ||
     $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
     $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
     // No autenticado o sesión alterada
-    session_unset();
-    session_destroy();
+        setcookie("token", "", time() - 3600, "/");
+        session_unset(); // Limpia variables de sesión
+        session_destroy(); // Elimina la sesión
+
     
     // Retornar JSON con error
     echo json_encode([
@@ -28,7 +32,8 @@ if (!isset($_SESSION["username"]) ||
     ]);
     exit();
 }
-
+$token = $_COOKIE["token"] ;
+$username = $_SESSION["username"];
 // Si pasa todas las validaciones, se puede mostrar el contenido
 echo json_encode([
     'status' => 'success',
