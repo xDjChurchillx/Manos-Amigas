@@ -83,7 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     } catch (Exception $ex) {
-        header("Location: /Gestion/ingreso.html?error=4"); // Error inesperado
+        echo $ex;
         exit();
     }
 }
