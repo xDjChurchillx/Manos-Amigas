@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     document.getElementById('panel').innerHTML = data.counters;
 
                     // Llamar al contador después de que el HTML se haya cargado
-                    startCounter();
+                    startPanel(data);
                 }
             })
             .catch(error => {
@@ -37,13 +37,38 @@ document.addEventListener("DOMContentLoaded", function () {
     startSession();
 
     // Función para inicializar el contador después de cargar el HTML
-    function startCounter() {
+    function startPanel(datos) {   
+
         // Llamar al contador solo después de que el HTML con los elementos de .timer se haya cargado
         $('.timer').each(function () {
             var $this = $(this);
             var options = $.extend({}, $this.data('countToOptions') || {});
             $this.countTo(options);
         });
+
+        const options = {
+            series: [
+                { name: "Check In", data: datos.data1 },
+                { name: "Ocupancia", data: datos.data2 },
+                { name: "Check Out", data: datos.data3 }
+            ],
+            legend: { position: "bottom" },
+            theme: { palette: "palette1" },
+            chart: { type: "bar", height: 320 },
+            plotOptions: { bar: { horizontal: false, columnWidth: "55%", endingShape: "rounded" } },
+            dataLabels: { enabled: false },
+            stroke: { show: true, width: 2, colors: ["transparent"] },
+            xaxis: { categories: datos.cat },
+            yaxis: { title: { text: "Unidades" } },
+            fill: { opacity: 1 },
+            tooltip: { y: { formatter: function (t) { return t + " en Total"; } } }
+        };
+
+        const chart = new ApexCharts(document.querySelector("#bsb-chart-3"), options);
+        chart.render();
+
+
+
     }
 });
 
