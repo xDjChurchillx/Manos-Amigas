@@ -1,16 +1,16 @@
-let chart;
+ï»¿let chart;
 // Obtener los elementos
 let desde;
 let hasta;
 let opciones;
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Función para verificar la sesión
+    // FunciÃ³n para verificar la sesiÃ³n
     function startSession() {
         // Realizar la solicitud AJAX
         fetch('../assets/php/panel.php', {
             method: 'GET',
-            credentials: 'same-origin',  // Mantener la sesión activa si es posible
+            credentials: 'same-origin',  // Mantener la sesiÃ³n activa si es posible
         })
             .then(response => {
                 // Verificamos que la respuesta sea exitosa antes de convertirla en JSON
@@ -24,30 +24,30 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .then(data => {
                 if (data.status === 'error') {
-                    // Si la sesión no es válida, redirigir al usuario
+                    // Si la sesiÃ³n no es vÃ¡lida, redirigir al usuario
                     window.location.href = data.redirect;
                 } else if (data.status === 'success') {
-                    // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
+                    // Si la sesiÃ³n es vÃ¡lida, mostrar el contenido HTML devuelto en el JSON
                     document.getElementById('navbaritems').innerHTML = data.navbar;
                     document.getElementById('panel').innerHTML = data.panel;
 
-                    // Llamar al contador después de que el HTML se haya cargado
+                    // Llamar al contador despuÃ©s de que el HTML se haya cargado
                     startPanel(data);
                 }
             })
             .catch(error => {
                 // En caso de error (fallo en la solicitud o procesamiento), mostrar el error
-                console.error('Error al verificar la sesión:', error);
+                console.error('Error al verificar la sesiÃ³n:', error);
                 // Redirigir al login en caso de un fallo
                 window.location.href = 'ingreso.html';
             });
     }
 
-    // Llamar a la función de verificación de sesión al cargar la página
+    // Llamar a la funciÃ³n de verificaciÃ³n de sesiÃ³n al cargar la pÃ¡gina
     startSession();
 });
 
-// Función para inicializar el contador después de cargar el HTML
+// FunciÃ³n para inicializar el contador despuÃ©s de cargar el HTML
 function startPanel(datos) {
 
     // Obtener los elementos
@@ -60,7 +60,7 @@ function startPanel(datos) {
     opciones.addEventListener('change', actualizarDatos);
 
 
-    // Llamar al contador solo después de que el HTML con los elementos de .timer se haya cargado
+    // Llamar al contador solo despuÃ©s de que el HTML con los elementos de .timer se haya cargado
     $('.timer').each(function () {
         var $this = $(this);
         var options = $.extend({}, $this.data('countToOptions') || {});
@@ -91,7 +91,8 @@ function startPanel(datos) {
 
 
 }
-async function actualizarDatos() {  
+
+async function actualizarDatos() {
 
     // Obtener los valores
     const fechaDesde = desde.value;
@@ -121,19 +122,19 @@ async function actualizarDatos() {
         }
 
         // Procesar la respuesta JSON
-        const datos = await response.json();
-        console.log('Respuesta del servidor:', datos);
+        const respuesta = await response.json(); // ðŸ‘ˆ Cambiado a "respuesta"
+        console.log('Respuesta del servidor:', respuesta);
 
-        // Aquí puedes manejar la respuesta del servidor
-        if (datos.status === 'success') {
+        // AquÃ­ puedes manejar la respuesta del servidor
+        if (respuesta.status === 'success') {
             chart.updateOptions({
                 series: [
-                    { name: "Visitas", data: datos.data1 },
-                    { name: "Suscripciones", data: datos.data2 },
-                    { name: "Donaciones", data: datos.data3 }
+                    { name: "Visitas", data: respuesta.data1 },
+                    { name: "Suscripciones", data: respuesta.data2 },
+                    { name: "Donaciones", data: respuesta.data3 }
                 ],
                 xaxis: {
-                    categories: datos.cat
+                    categories: respuesta.cat
                 }
             });
         } else {
