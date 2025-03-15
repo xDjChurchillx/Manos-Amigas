@@ -71,7 +71,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
 
                 // Pasar los parámetros al procedimiento almacenado
-                $stmt->bind_param("ss", $username, $activation_Token);
+                $stmt->bind_param("ss", $username, $activationToken);
 
                 // Ejecutar el procedimiento almacenado
                 $stmt->execute();
