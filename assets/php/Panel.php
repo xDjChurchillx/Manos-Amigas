@@ -34,10 +34,9 @@ if (!isset($_COOKIE["token"]) || !isset($_SESSION["username"]) ||
 }
 $token = $_COOKIE["token"] ;
 $username = $_SESSION["username"];
-// Si pasa todas las validaciones, se puede mostrar el contenido
-echo json_encode([
-    'status' => 'success',
-    'counters' => '
+
+$navbar = '';
+$counters = '
 <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
 <div class="container">
 	<div class="row">
@@ -80,6 +79,13 @@ echo json_encode([
               </div>
          </div>
 </div>
-'
+';
+
+
+// Si pasa todas las validaciones, se puede mostrar el contenido
+echo json_encode([
+    'status' => 'success',
+    'navbar' => $navbar,
+    'counters' => $counters
 ]);
 ?>
