@@ -42,7 +42,7 @@ $data3 = [80, 90, 100];
 $cat = ["Jun", "Jul", "Aug"];
 
 $navbar = '';
-$counters = '
+$panel = '
         <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
         <div class="container">
 	        <div class="row">
@@ -82,7 +82,6 @@ $counters = '
                       </div>
                   </div>
              </div>
-             <div id="bsb-chart-3"></div>
            <div class="container mt-5">
                 <div class="date-range-container">
                   <div>
@@ -101,6 +100,7 @@ $counters = '
                   </div>
                 </div>
               </div>
+             <div id="bsb-chart-3"></div>
 
 
 
@@ -113,7 +113,7 @@ $counters = '
 echo json_encode([
     'status' => 'success',
     'navbar' => $navbar,
-    'counters' => $counters,
+    'panel' => $panel,
     "data1" => $data1,
     "data2" => $data2,
     "data3" => $data3,
