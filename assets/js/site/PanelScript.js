@@ -1,8 +1,8 @@
 let chart;
 // Obtener los elementos
-let desde = document.getElementById('desde');
-let hasta = document.getElementById('hasta');
-let opciones = document.getElementById('opciones');
+let desde;
+let hasta;
+let opciones;
 
 document.addEventListener("DOMContentLoaded", function () {
     // Función para verificar la sesión
@@ -50,6 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
 // Función para inicializar el contador después de cargar el HTML
 function startPanel(datos) {
 
+    // Obtener los elementos
+    desde = document.getElementById('desde');
+    hasta = document.getElementById('hasta');
+    opciones = document.getElementById('opciones');
     // Asignar el mismo listener a los tres elementos
     desde.addEventListener('change', actualizarDatos);
     hasta.addEventListener('change', actualizarDatos);
