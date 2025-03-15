@@ -9,7 +9,10 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(response => {
                 // Verificamos que la respuesta sea exitosa antes de convertirla en JSON
                 if (!response.ok) {
-                    throw new Error('Error en la solicitud');
+                    // En caso de error (fallo en la solicitud o procesamiento), mostrar el error
+                    console.log('Error en la solicitud');
+                    // Redirigir al login en caso de un fallo
+                    window.location.href = 'ingreso.html';
                 }
                 return response.json();
             })
@@ -84,12 +87,13 @@ function startPanel(datos) {
 
 
 }
-function actualizarDatos() {
+async function actualizarDatos() {
     // Obtener los elementos
     const desde = document.getElementById('desde');
     const hasta = document.getElementById('hasta');
     const opciones = document.getElementById('opciones');
 
+    // Obtener los valores
     const fechaDesde = desde.value;
     const fechaHasta = hasta.value;
     const opcionSeleccionada = opciones.value;
@@ -98,7 +102,42 @@ function actualizarDatos() {
     console.log('Hasta:', fechaHasta);
     console.log('Opción:', opcionSeleccionada);
 
-  
+    // Crear un objeto con los datos
+    const datos = {
+        fechaDesde: fechaDesde,
+        fechaHasta: fechaHasta,
+        opcionSeleccionada: opcionSeleccionada
+    };
+
+    try {
+        // Enviar los datos al PHP usando fetch
+        const response = await fetch('../assets/php/panel.php', {
+            method: 'POST', // Usar POST para enviar los datos
+            headers: {
+                'Content-Type': 'application/json' // Indicar que el cuerpo es JSON
+            },
+            body: JSON.stringify(datos) // Convertir el objeto a JSON
+        });
+
+        // Verificar si la respuesta es exitosa
+        if (!response.ok) {
+            throw new Error('Error en la solicitud');
+        }
+
+        // Procesar la respuesta JSON
+        const data = await response.json();
+        console.log('Respuesta del servidor:', data);
+
+        // Aquí puedes manejar la respuesta del servidor
+        if (data.status === 'success') {
+            alert('Datos actualizados correctamente');
+        } else {
+            alert('Error al cargar los datos');
+        }
+    } catch (error) {
+        console.error('Error al cargar los datos:', error);
+        alert('Hubo un error al cargar los datos');
+    }
 }
 
 

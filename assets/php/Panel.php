@@ -2,7 +2,7 @@
 // Repetimos la misma configuración de sesión para asegurar consistencia
 ini_set('session.use_only_cookies', 1);
 require '../../../Private/Credentials/DataBase/connection.php';
-
+header("Content-Type: application/json; charset=UTF-8");
 
 session_set_cookie_params([
     'lifetime' => 0, // Hasta cerrar navegador
@@ -35,11 +35,24 @@ if (!isset($_COOKIE["token"]) || !isset($_SESSION["username"]) ||
 $token = $_COOKIE["token"] ;
 $username = $_SESSION["username"];
 ////////////////////////////////////////////////////////////////////////////////////////////
-
-$data1 = [20, 30, 40];
-$data2 = [50, 60, 70];
-$data3 = [80, 90, 100];
+$data1 = [0, 0, 0];
+$data2 = [0, 0, 0];
+$data3 = [0, 0, 0];
 $cat = ["Jun", "Jul", "Aug"];
+$datos = json_decode(file_get_contents("php://input"), true);
+if ($datos === null) {
+	$data1 = [100, 100, 100];
+    $data2 = [100, 100, 100];
+    $data3 = [100, 100, 100];
+    $cat = ["Jun", "Jul", "Aug"];
+}else{
+    $data1 = [20, 30, 40];
+    $data2 = [50, 60, 70];
+    $data3 = [80, 90, 100];
+    $cat = ["Jun", "Jul", "Aug"];
+}
+
+
 
 $navbar = '
         <li class="nav-item">
