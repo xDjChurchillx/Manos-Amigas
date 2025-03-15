@@ -48,18 +48,18 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const options = {
             series: [
-                { name: "Check In", data: datos.data1 },
-                { name: "Ocupancia", data: datos.data2 },
-                { name: "Check Out", data: datos.data3 }
+                { name: "Visitas", data: datos.data1 },
+                { name: "Suscripciones", data: datos.data2 },
+                { name: "Donaciones", data: datos.data3 }
             ],
             legend: { position: "bottom" },
-            theme: { palette: "palette1" },
+            theme: { palette: "palette10" },
             chart: { type: "bar", height: 320 },
             plotOptions: { bar: { horizontal: false, columnWidth: "55%", endingShape: "rounded" } },
             dataLabels: { enabled: false },
             stroke: { show: true, width: 2, colors: ["transparent"] },
             xaxis: { categories: datos.cat },
-            yaxis: { title: { text: "Unidades" } },
+            yaxis: { title: { text: "Usuarios" } },
             fill: { opacity: 1 },
             tooltip: { y: { formatter: function (t) { return t + " en Total"; } } }
         };
