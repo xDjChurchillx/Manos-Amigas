@@ -10,6 +10,34 @@
     <link rel="icon" type="image/x-icon" href="../assets/img/favicon.svg">
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg1color">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="assets/img/favicon.svg" alt="Manos Amigas" style="max-height: 40px; width: auto;">
+            </a>
+            <a class="navbar-brand" href="index.html">Inicio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Inicio</a>
+                    </li>
+                    <!-- Menú desplegable del usuario -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user"></i> <!-- Ícono de usuario de Font Awesome -->
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
+                            <li><a class="dropdown-item" href="#">Cambiar contraseña</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div id="panel">
 
     </div>
