@@ -59,6 +59,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION["user_agent"] = $_SERVER['HTTP_USER_AGENT']; // Asociar sesión al navegador
                 $_SESSION["ip_address"] = $_SERVER['REMOTE_ADDR']; // Opcional: asociar a IP
 
+
+                 // Liberar los resultados de la primera consulta
+                $result->free();
+                $stmt->close();
                  $activationToken = bin2hex(random_bytes(32));
                  $stmt = $conn->prepare("CALL sp_UpdateActivationToken(?, ?)");
                 if (!$stmt) {
