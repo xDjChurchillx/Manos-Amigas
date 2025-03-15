@@ -36,42 +36,73 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Llamar a la función de verificación de sesión al cargar la página
     startSession();
-
-    // Función para inicializar el contador después de cargar el HTML
-    function startPanel(datos) {   
-
-        // Llamar al contador solo después de que el HTML con los elementos de .timer se haya cargado
-        $('.timer').each(function () {
-            var $this = $(this);
-            var options = $.extend({}, $this.data('countToOptions') || {});
-            $this.countTo(options);
-        });
-
-        const options = {
-            series: [
-                { name: "Visitas", data: datos.data1 },
-                { name: "Suscripciones", data: datos.data2 },
-                { name: "Donaciones", data: datos.data3 }
-            ],
-            legend: { position: "bottom" },
-            theme: { palette: "palette10" },
-            chart: { type: "bar", height: 320 },
-            plotOptions: { bar: { horizontal: false, columnWidth: "55%", endingShape: "rounded" } },
-            dataLabels: { enabled: false },
-            stroke: { show: true, width: 2, colors: ["transparent"] },
-            xaxis: { categories: datos.cat },
-            yaxis: { title: { text: "Usuarios" } },
-            fill: { opacity: 1 },
-            tooltip: { y: { formatter: function (t) { return t + " en Total"; } } }
-        };
-
-        const chart = new ApexCharts(document.querySelector("#bsb-chart-3"), options);
-        chart.render();
-
-
-
-    }
 });
+
+// Función para inicializar el contador después de cargar el HTML
+function startPanel(datos) {
+
+    // Obtener los elementos
+    const desde = document.getElementById('desde');
+    const hasta = document.getElementById('hasta');
+    const opciones = document.getElementById('opciones');
+
+    // Asignar el mismo listener a los tres elementos
+    desde.addEventListener('change', actualizarDatos);
+    hasta.addEventListener('change', actualizarDatos);
+    opciones.addEventListener('change', actualizarDatos);
+
+
+
+    // Llamar al contador solo después de que el HTML con los elementos de .timer se haya cargado
+    $('.timer').each(function () {
+        var $this = $(this);
+        var options = $.extend({}, $this.data('countToOptions') || {});
+        $this.countTo(options);
+    });
+
+    const options = {
+        series: [
+            { name: "Visitas", data: datos.data1 },
+            { name: "Suscripciones", data: datos.data2 },
+            { name: "Donaciones", data: datos.data3 }
+        ],
+        legend: { position: "bottom" },
+        theme: { palette: "palette10" },
+        chart: { type: "bar", height: 320 },
+        plotOptions: { bar: { horizontal: false, columnWidth: "55%", endingShape: "rounded" } },
+        dataLabels: { enabled: false },
+        stroke: { show: true, width: 2, colors: ["transparent"] },
+        xaxis: { categories: datos.cat },
+        yaxis: { title: { text: "Usuarios" } },
+        fill: { opacity: 1 },
+        tooltip: { y: { formatter: function (t) { return t + " en Total"; } } }
+    };
+
+    const chart = new ApexCharts(document.querySelector("#bsb-chart-3"), options);
+    chart.render();
+
+
+
+}
+function actualizarDatos() {
+    // Obtener los elementos
+    const desde = document.getElementById('desde');
+    const hasta = document.getElementById('hasta');
+    const opciones = document.getElementById('opciones');
+
+    const fechaDesde = desde.value;
+    const fechaHasta = hasta.value;
+    const opcionSeleccionada = opciones.value;
+
+    console.log('Desde:', fechaDesde);
+    console.log('Hasta:', fechaHasta);
+    console.log('Opción:', opcionSeleccionada);
+
+  
+}
+
+
+
 
 (function ($) {
     $.fn.countTo = function (options) {
