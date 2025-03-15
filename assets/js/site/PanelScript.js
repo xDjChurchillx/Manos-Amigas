@@ -105,7 +105,7 @@ async function actualizarDatos() {
         fechaHasta: fechaHasta,
         opcionSeleccionada: opcionSeleccionada
     };
-
+    
     try {
         // Enviar los datos al PHP usando fetch
         const response = await fetch('../assets/php/panel.php', {
