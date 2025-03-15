@@ -1,3 +1,9 @@
+let chart;
+// Obtener los elementos
+let desde = document.getElementById('desde');
+let hasta = document.getElementById('hasta');
+let opciones = document.getElementById('opciones');
+
 document.addEventListener("DOMContentLoaded", function () {
     // Función para verificar la sesión
     function startSession() {
@@ -44,16 +50,10 @@ document.addEventListener("DOMContentLoaded", function () {
 // Función para inicializar el contador después de cargar el HTML
 function startPanel(datos) {
 
-    // Obtener los elementos
-    const desde = document.getElementById('desde');
-    const hasta = document.getElementById('hasta');
-    const opciones = document.getElementById('opciones');
-
     // Asignar el mismo listener a los tres elementos
     desde.addEventListener('change', actualizarDatos);
     hasta.addEventListener('change', actualizarDatos);
     opciones.addEventListener('change', actualizarDatos);
-
 
 
     // Llamar al contador solo después de que el HTML con los elementos de .timer se haya cargado
@@ -81,26 +81,18 @@ function startPanel(datos) {
         tooltip: { y: { formatter: function (t) { return t + " en Total"; } } }
     };
 
-    const chart = new ApexCharts(document.querySelector("#bsb-chart-3"), options);
+    chart = new ApexCharts(document.querySelector("#bsb-chart-3"), options);
     chart.render();
 
 
 
 }
-async function actualizarDatos() {
-    // Obtener los elementos
-    const desde = document.getElementById('desde');
-    const hasta = document.getElementById('hasta');
-    const opciones = document.getElementById('opciones');
+async function actualizarDatos() {  
 
     // Obtener los valores
     const fechaDesde = desde.value;
     const fechaHasta = hasta.value;
     const opcionSeleccionada = opciones.value;
-
-    console.log('Desde:', fechaDesde);
-    console.log('Hasta:', fechaHasta);
-    console.log('Opción:', opcionSeleccionada);
 
     // Crear un objeto con los datos
     const datos = {
@@ -125,12 +117,21 @@ async function actualizarDatos() {
         }
 
         // Procesar la respuesta JSON
-        const data = await response.json();
-        console.log('Respuesta del servidor:', data);
+        const datos = await response.json();
+        console.log('Respuesta del servidor:', datos);
 
         // Aquí puedes manejar la respuesta del servidor
         if (data.status === 'success') {
-            alert('Datos actualizados correctamente');
+            chart.updateOptions({
+                series: [
+                    { name: "Visitas", data: datos.data1 },
+                    { name: "Suscripciones", data: datos.data2 },
+                    { name: "Donaciones", data: datos.data3 }
+                ],
+                xaxis: {
+                    categories: datos.cat
+                }
+            });
         } else {
             alert('Error al cargar los datos');
         }
