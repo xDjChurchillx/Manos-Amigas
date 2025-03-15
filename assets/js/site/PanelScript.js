@@ -121,7 +121,7 @@ async function actualizarDatos() {
         console.log('Respuesta del servidor:', datos);
 
         // Aquí puedes manejar la respuesta del servidor
-        if (data.status === 'success') {
+        if (datos.status === 'success') {
             chart.updateOptions({
                 series: [
                     { name: "Visitas", data: datos.data1 },
