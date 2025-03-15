@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Sanitización de entrada
         $username = trim($_POST["username"]);
         $password = trim($_POST["password"]);
-
+        $activationToken = password_hash($password . rand(100000, 999999), PASSWORD_DEFAULT);
         if (empty($username) || empty($password)) {
             header("Location: /Gestion/ingreso.html?error=2"); // Campos vacíos
             exit();
@@ -58,6 +58,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $_SESSION["username"] = $username;
                 $_SESSION["user_agent"] = $_SERVER['HTTP_USER_AGENT']; // Asociar sesión al navegador
                 $_SESSION["ip_address"] = $_SERVER['REMOTE_ADDR']; // Opcional: asociar a IP
+                setcookie("token", $activationToken, time() + 86400, "/"); 
+                 // Llamar al procedimiento almacenado para actualizar el token
+                $stmt = $conn->prepare("CALL sp_UpdateActivationToken(?, ?)");
+                if ($stmt) {
+                    $stmt->bind_param("ss", $username, $activationToken);
+                    $stmt->execute();
+                }
                 header("Location: /Gestion/panel.html"); // Redirigir a dashboard
                 exit();
             } else {
