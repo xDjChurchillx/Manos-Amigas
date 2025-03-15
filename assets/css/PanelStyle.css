@@ -26,3 +26,12 @@
     display: table;
     color: #FF5E00;
 }
+.date-range-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.combobox-container {
+    margin-left: auto; /* Alinea el combobox a la derecha */
+}
