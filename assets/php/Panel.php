@@ -44,14 +44,7 @@ $cat = ["Jun", "Jul", "Aug"];
 $navbar = '';
 $panel = '
         <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
-        <div class="container">
-	        <div class="row">
-	            <br/>
-	           <div class="col text-center">
-		            <h2>Bootstrap 4 counter</h2>
-		          <p>counter to count up to a target number</p>
-		        </div>  
-	        </div>
+        <div class="container">	        
 		    <div class="row text-center">
 	            <div class="col">
 	                <div class="counter">
@@ -82,7 +75,7 @@ $panel = '
                       </div>
                   </div>
              </div>
-           <div class="container mt-5">
+           <div class="container">
                 <div class="date-range-container">
                   <div>
                     <label for="desde">Desde:</label>
