@@ -82,7 +82,7 @@ while ($row = $result->fetch_assoc()) {
     $sVoluntarios +=  $row['Voluntarios'];
     $rows[] = $row;
 }
-
+//error si no hay registros se cae
 // Calcular la diferencia en días entre las dos fechas
 $date1 = new DateTime(min(array_column($rows, 'Fecha')));
 $date2 = new DateTime(max(array_column($rows, 'Fecha')));
