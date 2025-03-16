@@ -79,9 +79,9 @@ function startPanel(datos) {
 
 
     // Asignar el mismo listener a los tres elementos
-    desde.addEventListener('change', actualizarDatos);
-    hasta.addEventListener('change', actualizarDatos);
-    opciones.addEventListener('change', actualizarDatos);
+    desde.addEventListener('change', actualizarDatos('1'));
+    hasta.addEventListener('change', actualizarDatos('1'));
+    opciones.addEventListener('change', actualizarDatos('0'));
 
     // Llamar al contador solo después de que el HTML con los elementos de .timer se haya cargado
     $('.timer').each(function () {
@@ -116,27 +116,32 @@ function startPanel(datos) {
 
 }
 
-async function actualizarDatos() {
+async function actualizarDatos(val) {
 
     // Obtener los valores
     const hoy = new Date().toISOString().split('T')[0];
     const opcion = opciones.value; 
-    switch (opcion) {
-        case 'hoy':
-            desde.value = hoy;
-            hasta.value = hoy;
-            break;
-        case 'semana':
-            desde.value = sumarDias(hoy, -7);
-            hasta.value = hoy;
-            break;
-        case 'mes': 
-            desde.value = sumarDias(hoy, -30);
-            hasta.value = hoy;
-            break;
-        default:           
-            break;
+    if (val === '0') {
+        switch (opcion) {
+            case 'hoy':
+                desde.value = hoy;
+                hasta.value = hoy;
+                break;
+            case 'semana':
+                desde.value = sumarDias(hoy, -7);
+                hasta.value = hoy;
+                break;
+            case 'mes':
+                desde.value = sumarDias(hoy, -30);
+                hasta.value = hoy;
+                break;
+            default:
+                break;
+        }
+    } else {
+      opciones.value = '';
     }
+  
     const fechaDesde = desde.value;
     const fechaHasta = hasta.value;
 
