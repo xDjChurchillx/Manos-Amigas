@@ -152,8 +152,12 @@ async function actualizarDatos(val) {
             if (new Date(desde.value) > new Date(hasta.value)) {
                 desde.value = hasta.value; // Asignar el mismo valor a 'hasta' que 'desde'
             }
-        }
-        
+        }   
+    }
+    if (desde.value == '') {
+        hasta.disabled = true;  
+    } else {
+        hasta.disabled = false; 
     }
   
     const opcion = opciones.value; 
