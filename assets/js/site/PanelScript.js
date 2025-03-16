@@ -29,7 +29,11 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
                     document.getElementById('navbaritems').innerHTML = data.navbar;
                     document.getElementById('panel').innerHTML = data.panel;
-
+                    if ('config' in objeto) {
+                        console.log('La clave existe en el objeto');
+                    } else {
+                        console.log('La clave NO existe en el objeto');
+                    }
                     // Llamar al contador después de que el HTML se haya cargado
                     startPanel(data);
                 }
@@ -52,10 +56,11 @@ function startPanel(datos) {
     // Obtener los elementos
     desde = document.getElementById('desde');
     hasta = document.getElementById('hasta');
+    opciones = document.getElementById('opciones');
     // Asignar el mismo listener a los tres elementos
     desde.addEventListener('change', actualizarDatos);
     hasta.addEventListener('change', actualizarDatos);
-
+    opciones.addEventListener('change', actualizarDatos);
 
     // Llamar al contador solo después de que el HTML con los elementos de .timer se haya cargado
     $('.timer').each(function () {
@@ -95,11 +100,12 @@ async function actualizarDatos() {
     // Obtener los valores
     const fechaDesde = desde.value;
     const fechaHasta = hasta.value;
-
+    const opcion = opciones.value; 
     // Crear un objeto con los datos
     const datos = {
         fechaDesde: fechaDesde,
-        fechaHasta: fechaHasta
+        fechaHasta: fechaHasta,
+        opcion: opcion
     };
     
     try {
