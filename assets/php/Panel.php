@@ -139,8 +139,45 @@ if ($diasDiferencia <= 7) {
         }
     }
 } elseif ($diasDiferencia <= 90) {
-    // Si la diferencia es mayor a 7 días pero menor o igual a 3 meses, asignar test1, test2, test3
-    $cat = ['test1', 'test2', 'test3'];
+    // Rango mayor a 7 y menor o igual a 90 - dividir en 7 categorías
+
+    $numCategorias = 7; // Quieres 7 bloques
+    $minFecha = min(array_column($rows, 'Fecha'));
+    $maxFecha = max(array_column($rows, 'Fecha'));
+
+    // Convertir fechas a timestamps
+    $minTimestamp = strtotime($minFecha);
+    $maxTimestamp = strtotime($maxFecha);
+
+    // Calcular tamaño de cada bloque
+    $rangoDias = ($maxTimestamp - $minTimestamp) / $numCategorias;
+
+    // Crear etiquetas de las categorías (ej: "Del 01-01 al 07-01", etc.)
+    $categorias = [];
+    for ($i = 0; $i < $numCategorias; $i++) {
+        $inicio = date('d-m', $minTimestamp + ($rangoDias * $i));
+        $fin = date('d-m', $minTimestamp + ($rangoDias * ($i + 1) - 1));
+        $categorias[] = "Del $inicio al $fin";
+    }
+
+    // Inicializar datos por cada categoría
+    $data1 = array_fill(0, $numCategorias, 0);
+    $data2 = array_fill(0, $numCategorias, 0);
+    $data3 = array_fill(0, $numCategorias, 0);
+    $data4 = array_fill(0, $numCategorias, 0);
+    $cat = $categorias;
+
+    // Recorrer filas y sumar datos a cada categoría según corresponda
+    foreach ($rows as $row) {
+        $fechaActual = strtotime($row['Fecha']);
+        $index = floor(($fechaActual - $minTimestamp) / $rangoDias);
+        if ($index >= $numCategorias) $index = $numCategorias - 1; // Ajuste por redondeo final
+
+        $data1[$index] += $row['Visitas'];
+        $data2[$index] += $row['Suscripciones'];
+        $data3[$index] += $row['Donaciones'];
+        $data4[$index] += $row['Voluntarios'];
+    }
 } else {
     // Si la diferencia es mayor a 3 meses, asignar los nombres de los 3 meses correspondientes
     $cat = [
