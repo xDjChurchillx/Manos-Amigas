@@ -37,7 +37,6 @@ $token = $_COOKIE["token"] ;
 $username = $_SESSION["username"];
 $inicio;
 $final;
-$opcion = 0;
 
 $data1 = [0, 0, 0];
 $data2 = [0, 0, 0];
@@ -67,7 +66,7 @@ if ($datos === null) {
     $data3 = [80, 90, 100];
     $cat = ["Jun", "Jul", "Aug"];
 }
-$stmt = $conn->prepare("CALL sp_ObtenerEstadisticas(?,?,?,?,?)");
+$stmt = $conn->prepare("CALL sp_ObtenerEstadisticas(?,?,?,?)");
 if (!$stmt) {
      echo json_encode([
         'status' => 'error',
@@ -76,7 +75,7 @@ if (!$stmt) {
     exit();
 }
 
-$stmt->bind_param("sssss", $username,$token,$datos['opcion'],$datos['fechaDesde'],$datos['fechaHasta']);
+$stmt->bind_param("ssss", $username,$token,$datos['fechaDesde'],$datos['fechaHasta']);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -126,28 +125,28 @@ $panel = '
 	                <div class="counter">
                          <i class="fa fa-code fa-2x"></i>
                          <h2 class="timer count-title count-number" data-to="100" data-speed="1500"></h2>
-                          <p class="count-text ">Our Customer</p>
+                          <p class="count-text ">Visitas</p>
                      </div>
 	            </div>
                 <div class="col">
                    <div class="counter">
                          <i class="fa fa-coffee fa-2x"></i>
                           <h2 class="timer count-title count-number" data-to="1700" data-speed="1500"></h2>
-                         <p class="count-text ">Happy Clients</p>
+                         <p class="count-text ">Suscripciones</p>
                    </div>
                 </div>
                 <div class="col">
                      <div class="counter">
                        <i class="fa fa-lightbulb-o fa-2x"></i>
                        <h2 class="timer count-title count-number" data-to="11900" data-speed="1500"></h2>
-                       <p class="count-text ">Project Complete</p>
+                       <p class="count-text ">Donaciones</p>
                       </div>
                  </div>
                  <div class="col">
                       <div class="counter">
                          <i class="fa fa-bug fa-2x"></i>
                          <h2 class="timer count-title count-number" data-to="157" data-speed="1500"></h2>
-                         <p class="count-text ">Coffee With Clients</p>
+                         <p class="count-text ">Voluntarios</p>
                       </div>
                   </div>
              </div>
@@ -163,7 +162,9 @@ $panel = '
                   </div>
                   <div class="combobox-container">
                     <select class="form-select" id="opciones">
+                      <option value=""></option>
                       <option value="hoy">Hoy</option>
+                      <option value="semana">Hoy</option>
                       <option value="mes">Mes</option>
                     </select>
                   </div>

@@ -3,7 +3,6 @@
 let desde;
 let hasta;
 let opciones;
-
 document.addEventListener("DOMContentLoaded", function () {
     // Función para verificar la sesión
     function startSession() {
@@ -53,11 +52,9 @@ function startPanel(datos) {
     // Obtener los elementos
     desde = document.getElementById('desde');
     hasta = document.getElementById('hasta');
-    opciones = document.getElementById('opciones');
     // Asignar el mismo listener a los tres elementos
     desde.addEventListener('change', actualizarDatos);
     hasta.addEventListener('change', actualizarDatos);
-    opciones.addEventListener('change', actualizarDatos);
 
 
     // Llamar al contador solo después de que el HTML con los elementos de .timer se haya cargado
@@ -98,13 +95,11 @@ async function actualizarDatos() {
     // Obtener los valores
     const fechaDesde = desde.value;
     const fechaHasta = hasta.value;
-    const opcionSeleccionada = opciones.value;
 
     // Crear un objeto con los datos
     const datos = {
         fechaDesde: fechaDesde,
-        fechaHasta: fechaHasta,
-        opcion: opcionSeleccionada
+        fechaHasta: fechaHasta
     };
     
     try {
