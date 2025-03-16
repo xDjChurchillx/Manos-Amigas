@@ -158,7 +158,7 @@ $panel = '
                   </div>
                   <div>
                     <label for="hasta">Hasta:</label>
-                    <input type="date" class="form-control" id="hasta">
+                    <input type="date" class="form-control" id="hasta" disabled>
                   </div>
                   <div class="combobox-container">
                     <select class="form-select" id="opciones">
