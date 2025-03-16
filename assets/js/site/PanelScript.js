@@ -125,9 +125,8 @@ async function actualizarDatos(val) {
         month: '2-digit',
         day: '2-digit'
     });
-    const opcion = opciones.value; 
     if (val === '0') {
-        switch (opcion) {
+        switch (opciones.value) {
             case 'hoy':
                 desde.value = hoy;
                 hasta.value = hoy;
@@ -144,9 +143,13 @@ async function actualizarDatos(val) {
                 break;
         }
     } else {
-      opciones.value = '';
+        opciones.value = '';
+        if (new Date(desde.value) > new Date(hasta.value)) {
+            hasta.value = desde.value; // Asignar el mismo valor a 'hasta' que 'desde'
+        }
     }
   
+    const opcion = opciones.value; 
     const fechaDesde = desde.value;
     const fechaHasta = hasta.value;
 
