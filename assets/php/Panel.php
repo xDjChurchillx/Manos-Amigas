@@ -36,11 +36,11 @@ if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
 $token = $_COOKIE['token'] ;
 $username = $_SESSION['username'];
 
-$data1 = [0, 0, 0];
-$data2 = [0, 0, 0];
-$data3 = [0, 0, 0];
-$data4 = [0, 0, 0];
-$cat = ['Jun', 'Jul', 'Aug'];
+$data1 = [];
+$data2 = [];
+$data3 = [];
+$data4 = [];
+$cat = [];
 $sVisitas = 0;
 $sSuscripciones = 0;
 $sDonaciones = 0;
@@ -95,8 +95,49 @@ while ($row = $result->fetch_assoc()) {
 }
 // Lógica para asignar valores a $cat según la diferencia de días
 if ($diasDiferencia <= 7) {
-    // Si la diferencia es menor o igual a 7 días, asignar días de la semana
-    $cat = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+    // Si la diferencia es menor o igual a 7 días, asignar días de la semana   
+    foreach ($rows as $row) {
+         $fecha = strtotime($row['Fecha']);
+         // Obtener el día de la semana (1 = lunes, 2 = martes, etc.)
+        $diaSemana = date('N', $fecha);
+    
+        // Agregar el día de la semana al arreglo $cat solo si no está ya presente
+        $diaNombre = date('l', $fecha); // 'l' te da el nombre completo del día (por ejemplo, "Monday" o "Martes")
+    
+        // Si quieres los días en español puedes usar esta asignación:
+        switch ($diaSemana) {
+            case 1:
+                $diaNombre = 'Lunes';
+                break;
+            case 2:
+                $diaNombre = 'Martes';
+                break;
+            case 3:
+                $diaNombre = 'Miércoles';
+                break;
+            case 4:
+                $diaNombre = 'Jueves';
+                break;
+            case 5:
+                $diaNombre = 'Viernes';
+                break;
+            case 6:
+                $diaNombre = 'Sábado';
+                break;
+            case 7:
+                $diaNombre = 'Domingo';
+                break;
+        }
+
+        // Agregar el nombre del día al arreglo $cat
+        if (!in_array($diaNombre, $cat)) {
+            $data1 = $row['Visitas'];
+            $data2 = $row['Suscripciones'];
+            $data3 = $row['Donaciones'];
+            $data4 = $row['Voluntarios'];
+            $cat[] = $diaNombre;
+        }
+    }
 } elseif ($diasDiferencia <= 90) {
     // Si la diferencia es mayor a 7 días pero menor o igual a 3 meses, asignar test1, test2, test3
     $cat = ['test1', 'test2', 'test3'];
