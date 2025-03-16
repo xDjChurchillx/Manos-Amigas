@@ -2,7 +2,7 @@
 // Repetimos la misma configuración de sesión para asegurar consistencia
 ini_set('session.use_only_cookies', 1);
 require '../../../Private/Credentials/DataBase/connection.php';
-header("Content-Type: application/json; charset=UTF-8");
+header('Content-Type: application/json; charset=UTF-8');
 
 session_set_cookie_params([
     'lifetime' => 0, // Hasta cerrar navegador
@@ -16,11 +16,11 @@ session_set_cookie_params([
 session_start();
 
 // Validación de sesión
-if (!isset($_COOKIE["token"]) || !isset($_SESSION["username"]) ||
+if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
     $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
     $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
     // No autenticado o sesión alterada
-        setcookie("token", "", time() - 3600, "/");
+        setcookie('token', '', time() - 3600, '/');
         session_unset(); // Limpia variables de sesión
         session_destroy(); // Elimina la sesión
 
@@ -33,8 +33,8 @@ if (!isset($_COOKIE["token"]) || !isset($_SESSION["username"]) ||
     exit();
 }
 ////////////////////////////////////////////////////////////////////////////////////////////
-$token = $_COOKIE["token"] ;
-$username = $_SESSION["username"];
+$token = $_COOKIE['token'] ;
+$username = $_SESSION['username'];
 $inicio;
 $final;
 
@@ -42,20 +42,20 @@ $data1 = [0, 0, 0];
 $data2 = [0, 0, 0];
 $data3 = [0, 0, 0];
 $data4 = [0, 0, 0];
-$cat = ["Jun", "Jul", "Aug"];
-$datos = json_decode(file_get_contents("php://input"), true);
+$cat = ['Jun', 'Jul', 'Aug'];
+$datos = json_decode(file_get_contents('php://input'), true);
 if ($datos === null) {
-    if (isset($_SESSION["datos"])) {
-        $datos = $_SESSION["datos"];
+    if (isset($_SESSION['datos'])) {
+        $datos = $_SESSION['datos'];
         $data1 = [10, 30, 40];
         $data2 = [10, 60, 70];
         $data3 = [10, 90, 100];
-        $cat = ["Jun", "Jul", "Aug"];
+        $cat = ['Jun', 'Jul', 'Aug'];
     }else{      
         $data1 = [100, 100, 100];
         $data2 = [100, 100, 100];
         $data3 = [100, 100, 100];
-        $cat = ["Jun", "Jul", "Aug"];
+        $cat = ['Jun', 'Jul', 'Aug'];
     }
 	
 }else{
@@ -64,9 +64,9 @@ if ($datos === null) {
     $data1 = [20, 30, 40];
     $data2 = [50, 60, 70];
     $data3 = [80, 90, 100];
-    $cat = ["Jun", "Jul", "Aug"];
+    $cat = ['Jun', 'Jul', 'Aug'];
 }
-$stmt = $conn->prepare("CALL sp_ObtenerEstadisticas(?,?,?,?)");
+$stmt = $conn->prepare('CALL sp_ObtenerEstadisticas(?,?,?,?)');
 if (!$stmt) {
      echo json_encode([
         'status' => 'error',
@@ -75,7 +75,7 @@ if (!$stmt) {
     exit();
 }
 
-$stmt->bind_param("ssss", $username,$token,$datos['fechaDesde'],$datos['fechaHasta']);
+$stmt->bind_param('ssss', $username,$token,$datos['fechaDesde'],$datos['fechaHasta']);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -164,7 +164,7 @@ $panel = '
                     <select class="form-select" id="opciones">
                       <option value=""></option>
                       <option value="hoy">Hoy</option>
-                      <option value="semana">Hoy</option>
+                      <option value="semana">Semana</option>
                       <option value="mes">Mes</option>
                     </select>
                   </div>
@@ -184,11 +184,12 @@ echo json_encode([
     'status' => 'success',
     'navbar' => $navbar,
     'panel' => $panel,
-    "data1" => $data1,
-    "data2" => $data2,
-    "data3" => $data3,
-    "data4" => $data4,
-    "cat" => $cat,
-    "rows"=> $rows
+    'config' => $datos,
+    'data1' => $data1,
+    'data2' => $data2,
+    'data3' => $data3,
+    'data4' => $data4,
+    'cat' => $cat,
+    'rows'=> $rows
 ]);
 ?>
