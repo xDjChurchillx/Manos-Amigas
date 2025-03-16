@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 if (data.status === 'error') {
                     // Si la sesión no es válida, redirigir al usuario
-                    window.location.href = data.redirect;
+                 //   window.location.href = data.redirect;
                 } else if (data.status === 'success') {
                     // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
                     document.getElementById('navbaritems').innerHTML = data.navbar;
@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // En caso de error (fallo en la solicitud o procesamiento), mostrar el error
                 console.error('Error al verificar la sesión:', error);
                 // Redirigir al login en caso de un fallo
-                window.location.href = 'ingreso.html';
+              //  window.location.href = 'ingreso.html';
             });
     }
 
