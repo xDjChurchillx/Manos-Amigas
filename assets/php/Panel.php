@@ -131,10 +131,10 @@ if ($diasDiferencia <= 7) {
 
         // Agregar el nombre del día al arreglo $cat
         if (!in_array($diaNombre, $cat)) {
-            $data1 = $row['Visitas'];
-            $data2 = $row['Suscripciones'];
-            $data3 = $row['Donaciones'];
-            $data4 = $row['Voluntarios'];
+            $data1[] = $row['Visitas'];
+            $data2[] = $row['Suscripciones'];
+            $data3[] = $row['Donaciones'];
+            $data4[] = $row['Voluntarios'];
             $cat[] = $diaNombre;
         }
     }
