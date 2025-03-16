@@ -179,36 +179,7 @@ if ($diasDiferencia <= 7) {
         $data4[$index] += $row['Voluntarios'];
     }
 } else {
-  $periodo = new DatePeriod(
-        new DateTime($date1->format('Y-m-01')),
-        new DateInterval('P1M'),
-        (new DateTime($date2->format('Y-m-01')))->modify('+1 month') // Incluir el mes final
-    );
-
-    // Crear categorías (meses)
-    foreach ($periodo as $fecha) {
-        $cat[] = $fecha->format('M'); // Ej: Jan, Feb, Mar
-    }
-
-    // Inicializar datos
-    $numCategorias = count($cat);
-    $data1 = array_fill(0, $numCategorias, 0);
-    $data2 = array_fill(0, $numCategorias, 0);
-    $data3 = array_fill(0, $numCategorias, 0);
-    $data4 = array_fill(0, $numCategorias, 0);
-
-    // Sumar datos por mes
-    foreach ($rows as $row) {
-        $fechaRow = new DateTime($row['Fecha']);
-        $mesRow = $fechaRow->format('M'); // Mes en formato abreviado
-        $index = array_search($mesRow, $cat);
-        if ($index !== false) {
-            $data1[$index] += $row['Visitas'];
-            $data2[$index] += $row['Suscripciones'];
-            $data3[$index] += $row['Donaciones'];
-            $data4[$index] += $row['Voluntarios'];
-        }
-    }
+ 
 }
 $navbar = '
         <li class="nav-item">
