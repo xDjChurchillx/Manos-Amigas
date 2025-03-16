@@ -29,6 +29,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
                     document.getElementById('navbaritems').innerHTML = data.navbar;
                     document.getElementById('panel').innerHTML = data.panel;
+                    console.log(data);
                     if ('config' in data) {
                         console.log('La clave existe en el objeto');
                     } else {
