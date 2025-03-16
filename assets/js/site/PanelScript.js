@@ -119,7 +119,12 @@ function startPanel(datos) {
 async function actualizarDatos(val) {
 
     // Obtener los valores
-    const hoy = obtenerFechaCR();
+    const hoy = new Date().toLocaleDateString('en-CA', {
+        timeZone: 'America/Costa_Rica',
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    });
     const opcion = opciones.value; 
     if (val === '0') {
         switch (opcion) {
@@ -192,17 +197,7 @@ async function actualizarDatos(val) {
         alert('Hubo un error al cargar los datos');
     }
 }
-function obtenerFechaCR() {
-    const fecha = new Date();
 
-    // Ajustar manualmente a GMT-6 (Costa Rica)
-    const offsetCR = -6; // Horario de Costa Rica
-    const utc = fecha.getTime() + (fecha.getTimezoneOffset() * 60000); // Pasar a UTC
-    const fechaCR = new Date(utc + (3600000 * offsetCR)); // Ajustar a GMT-6
-
-    // Formato YYYY-MM-DD
-    return fechaCR.toISOString().split('T')[0];
-}
 function sumarDias(fecha, dias) {
     const date = new Date(fecha);
     date.setDate(date.getDate() + dias);
