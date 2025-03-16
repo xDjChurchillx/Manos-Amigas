@@ -187,7 +187,11 @@ async function actualizarDatos() {
         alert('Hubo un error al cargar los datos');
     }
 }
-
+function sumarDias(fecha, dias) {
+    const date = new Date(fecha);
+    date.setDate(date.getDate() + dias);
+    return date.toISOString().split('T')[0];
+}
 
 
 
