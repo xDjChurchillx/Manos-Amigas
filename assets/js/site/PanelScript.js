@@ -80,7 +80,7 @@ function startPanel(datos) {
 
     // Asignar el mismo listener a los tres elementos
     desde.addEventListener('change', function () { actualizarDatos('1'); });
-    hasta.addEventListener('change', function () { actualizarDatos('1'); });
+    hasta.addEventListener('change', function () { actualizarDatos('2'); });
     opciones.addEventListener('change', function () { actualizarDatos('0'); });
 
     // Llamar al contador solo después de que el HTML con los elementos de .timer se haya cargado
@@ -144,9 +144,16 @@ async function actualizarDatos(val) {
         }
     } else {
         opciones.value = '';
-        if (new Date(desde.value) > new Date(hasta.value)) {
-            hasta.value = desde.value; // Asignar el mismo valor a 'hasta' que 'desde'
+        if (val === '1') {
+            if (new Date(desde.value) > new Date(hasta.value)) {
+                hasta.value = desde.value; // Asignar el mismo valor a 'hasta' que 'desde'
+            }
+        } else {
+            if (new Date(desde.value) > new Date(hasta.value)) {
+                desde.value = hasta.value; // Asignar el mismo valor a 'hasta' que 'desde'
+            }
         }
+        
     }
   
     const opcion = opciones.value; 
