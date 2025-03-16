@@ -178,9 +178,7 @@ if ($diasDiferencia <= 7) {
         $data3[$index] += $row['Donaciones'];
         $data4[$index] += $row['Voluntarios'];
     }
-} else {
- 
-}
+} 
 $navbar = '
         <li class="nav-item">
             <a class="nav-link" href="Panel.html">Panel</a>
