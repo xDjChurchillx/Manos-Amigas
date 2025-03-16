@@ -71,10 +71,11 @@ function startPanel(datos) {
         series: [
             { name: "Visitas", data: datos.data1 },
             { name: "Suscripciones", data: datos.data2 },
-            { name: "Donaciones", data: datos.data3 }
+            { name: "Donaciones", data: datos.data3 },
+            { name: "Voluntarios", data: datos.data4 }
         ],
         legend: { position: "bottom" },
-        theme: { palette: "palette10" },
+        theme: { palette: "palette4" },
         chart: { type: "bar", height: 320 },
         plotOptions: { bar: { horizontal: false, columnWidth: "55%", endingShape: "rounded" } },
         dataLabels: { enabled: false },
@@ -131,7 +132,8 @@ async function actualizarDatos() {
                 series: [
                     { name: "Visitas", data: respuesta.data1 },
                     { name: "Suscripciones", data: respuesta.data2 },
-                    { name: "Donaciones", data: respuesta.data3 }
+                    { name: "Donaciones", data: respuesta.data3 },
+                    { name: "Voluntarios", data: respuesta.data4 }
                 ],
                 xaxis: {
                     categories: respuesta.cat

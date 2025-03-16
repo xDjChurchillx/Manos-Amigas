@@ -42,6 +42,7 @@ $opcion = 0;
 $data1 = [0, 0, 0];
 $data2 = [0, 0, 0];
 $data3 = [0, 0, 0];
+$data4 = [0, 0, 0];
 $cat = ["Jun", "Jul", "Aug"];
 $datos = json_decode(file_get_contents("php://input"), true);
 if ($datos === null) {
@@ -185,6 +186,7 @@ echo json_encode([
     "data1" => $data1,
     "data2" => $data2,
     "data3" => $data3,
+    "data4" => $data4,
     "cat" => $cat,
     "rows"=> $rows
 ]);
