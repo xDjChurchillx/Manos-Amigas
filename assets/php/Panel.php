@@ -179,10 +179,10 @@ if ($diasDiferencia <= 7) {
         $data4[$index] += $row['Voluntarios'];
     }
 } else {
-   $periodo = new DatePeriod(
-        new DateTime($fechaInicio->format('Y-m-01')),
+  $periodo = new DatePeriod(
+        new DateTime($date1->format('Y-m-01')),
         new DateInterval('P1M'),
-        (new DateTime($fechaFin->format('Y-m-01')))->modify('+1 month') // Incluir el mes final
+        (new DateTime($date2->format('Y-m-01')))->modify('+1 month') // Incluir el mes final
     );
 
     // Crear categorías (meses)
