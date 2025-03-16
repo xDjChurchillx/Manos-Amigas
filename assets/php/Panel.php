@@ -179,8 +179,12 @@ if ($diasDiferencia <= 7) {
         $data4[$index] += $row['Voluntarios'];
     }
 } else {
-  // Caso 3: Más de 90 días - Por meses
-    
+    // Si la diferencia es mayor a 3 meses, asignar los nombres de los 3 meses correspondientes
+    $cat = [
+        $date1->format('M'), // Mes inicial
+        $date1->modify('+1 month')->format('M'), // Mes siguiente
+        $date1->modify('+1 month')->format('M') // Mes siguiente
+    ];
 }
 $navbar = '
         <li class="nav-item">
