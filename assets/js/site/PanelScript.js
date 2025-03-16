@@ -103,7 +103,7 @@ async function actualizarDatos() {
     const datos = {
         fechaDesde: fechaDesde,
         fechaHasta: fechaHasta,
-        opcionSeleccionada: opcionSeleccionada
+        opcion: opcionSeleccionada
     };
     
     try {

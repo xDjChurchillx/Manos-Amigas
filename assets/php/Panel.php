@@ -32,9 +32,13 @@ if (!isset($_COOKIE["token"]) || !isset($_SESSION["username"]) ||
     ]);
     exit();
 }
+////////////////////////////////////////////////////////////////////////////////////////////
 $token = $_COOKIE["token"] ;
 $username = $_SESSION["username"];
-////////////////////////////////////////////////////////////////////////////////////////////
+$inicio;
+$final;
+$opcion = 0;
+
 $data1 = [0, 0, 0];
 $data2 = [0, 0, 0];
 $data3 = [0, 0, 0];
@@ -42,6 +46,7 @@ $cat = ["Jun", "Jul", "Aug"];
 $datos = json_decode(file_get_contents("php://input"), true);
 if ($datos === null) {
     if (isset($_SESSION["datos"])) {
+        $datos = $_SESSION["datos"];
         $data1 = [10, 30, 40];
         $data2 = [10, 60, 70];
         $data3 = [10, 90, 100];
@@ -54,14 +59,37 @@ if ($datos === null) {
     }
 	
 }else{
+
     $_SESSION['datos'] = $datos;
     $data1 = [20, 30, 40];
     $data2 = [50, 60, 70];
     $data3 = [80, 90, 100];
     $cat = ["Jun", "Jul", "Aug"];
 }
+$stmt = $conn->prepare("CALL sp_ObtenerEstadisticas(?,?,?,?,?)");
+if (!$stmt) {
+     echo json_encode([
+        'status' => 'error',
+        'redirect' => '/Gestion/ingreso.html'
+    ]);
+    exit();
+}
 
+$stmt->bind_param("sssss", $username,$token,$datos['opcion'],$datos['fechaDesde'],$datos['fechaHasta']);
+$stmt->execute();
+$result = $stmt->get_result();
 
+if ($result === false) {
+     echo json_encode([
+        'status' => 'error',
+        'redirect' => '/Gestion/ingreso.html'
+    ]);
+    exit();
+}
+$rows = [];
+while ($row = $result->fetch_assoc()) {
+    $rows[] = $row;
+}
 
 $navbar = '
         <li class="nav-item">
@@ -157,6 +185,7 @@ echo json_encode([
     "data1" => $data1,
     "data2" => $data2,
     "data3" => $data3,
-    "cat" => $cat
+    "cat" => $cat,
+    "rows"=> $rows
 ]);
 ?>
