@@ -76,7 +76,12 @@ function startPanel(datos) {
         }
 
     }
-
+    if (desde.value == '') {
+        hasta.disabled = true;
+        hasta.value = '';
+    } else {
+        hasta.disabled = false;
+    }
 
     // Asignar el mismo listener a los tres elementos
     desde.addEventListener('change', function () { actualizarDatos('1'); });
@@ -155,7 +160,8 @@ async function actualizarDatos(val) {
         }   
     }
     if (desde.value == '') {
-        hasta.disabled = true;  
+        hasta.disabled = true; 
+        hasta.value = '';
     } else {
         hasta.disabled = false; 
     }
