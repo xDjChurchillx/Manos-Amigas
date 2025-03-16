@@ -79,9 +79,9 @@ function startPanel(datos) {
 
 
     // Asignar el mismo listener a los tres elementos
-    desde.addEventListener('change', actualizarDatos('1'));
-    hasta.addEventListener('change', actualizarDatos('1'));
-    opciones.addEventListener('change', actualizarDatos('0'));
+    desde.addEventListener('change', function () { actualizarDatos('1'); });
+    hasta.addEventListener('change', function () { actualizarDatos('1'); });
+    opciones.addEventListener('change', function () { actualizarDatos('0'); });
 
     // Llamar al contador solo después de que el HTML con los elementos de .timer se haya cargado
     $('.timer').each(function () {
