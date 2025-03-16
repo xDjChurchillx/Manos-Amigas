@@ -26,6 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Si la sesión no es válida, redirigir al usuario
                  //   window.location.href = data.redirect;
                 } else if (data.status === 'success') {
+                    console.log(data);
                     // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
                     document.getElementById('navbaritems').innerHTML = data.navbar;
                     document.getElementById('panel').innerHTML = data.panel;
