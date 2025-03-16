@@ -119,9 +119,27 @@ function startPanel(datos) {
 async function actualizarDatos() {
 
     // Obtener los valores
+    const hoy = new Date().toISOString().split('T')[0];
+    const opcion = opciones.value; 
+    switch (opcion) {
+        case 'hoy':
+            desde.value = hoy;
+            hasta.value = hoy;
+            break;
+        case 'semana':
+            desde.value = sumarDias(hoy, -7);
+            hasta.value = hoy;
+            break;
+        case 'mes': 
+            desde.value = sumarDias(hoy, -30);
+            hasta.value = hoy;
+            break;
+        default:           
+            break;
+    }
     const fechaDesde = desde.value;
     const fechaHasta = hasta.value;
-    const opcion = opciones.value; 
+
     // Crear un objeto con los datos
     const datos = {
         fechaDesde: fechaDesde,
