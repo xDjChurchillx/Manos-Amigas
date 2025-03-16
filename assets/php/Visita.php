@@ -18,7 +18,7 @@ try {
         exit(); // Salir correctamente
     }
 } catch (Exception $ex) {  
-    echo '3';
+    echo $ex;
     exit();
 }
 ?>
