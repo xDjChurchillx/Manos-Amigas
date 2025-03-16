@@ -29,12 +29,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
                     document.getElementById('navbaritems').innerHTML = data.navbar;
                     document.getElementById('panel').innerHTML = data.panel;
-                    console.log(data);
-                    if ('config' in data) {
-                        console.log('La clave existe en el objeto');
-                    } else {
-                        console.log('La clave NO existe en el objeto');
-                    }
                     // Llamar al contador después de que el HTML se haya cargado
                     startPanel(data);
                 }
@@ -54,10 +48,36 @@ document.addEventListener("DOMContentLoaded", function () {
 // Función para inicializar el contador después de cargar el HTML
 function startPanel(datos) {
 
+    console.log(datos);  
+
     // Obtener los elementos
     desde = document.getElementById('desde');
     hasta = document.getElementById('hasta');
     opciones = document.getElementById('opciones');
+
+    if ('config' in datos) {
+
+        // Verificar y asignar 'fechaDesde'
+        if ('fechaDesde' in datos.config) {
+            console.log('La clave "fechaDesde" existe en el objeto');
+            desde.value = datos.config['fechaDesde'];
+        }
+
+        // Verificar y asignar 'fechaHasta'
+        if ('fechaHasta' in datos.config) {
+            console.log('La clave "fechaHasta" existe en el objeto');
+            hasta.value = datos.config['fechaHasta'];
+        }
+
+        // Verificar y asignar 'opcion'
+        if ('opcion' in datos.config) {
+            console.log('La clave "opcion" existe en el objeto');
+            opciones.value = datos.config['opcion'];
+        }
+
+    }
+
+
     // Asignar el mismo listener a los tres elementos
     desde.addEventListener('change', actualizarDatos);
     hasta.addEventListener('change', actualizarDatos);
