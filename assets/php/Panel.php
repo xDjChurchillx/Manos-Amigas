@@ -35,37 +35,36 @@ if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
 ////////////////////////////////////////////////////////////////////////////////////////////
 $token = $_COOKIE['token'] ;
 $username = $_SESSION['username'];
-$inicio;
-$final;
 
 $data1 = [0, 0, 0];
 $data2 = [0, 0, 0];
 $data3 = [0, 0, 0];
 $data4 = [0, 0, 0];
 $cat = ['Jun', 'Jul', 'Aug'];
+$sVisitas = 0;
+$sSuscripciones = 0;
+$sDonaciones = 0;
+$sVoluntarios = 0;
 $datos = json_decode(file_get_contents('php://input'), true);
 if ($datos === null) {
     if (isset($_SESSION['datos'])) {
         $datos = $_SESSION['datos'];
-        $data1 = [10, 30, 40];
-        $data2 = [10, 60, 70];
-        $data3 = [10, 90, 100];
-        $cat = ['Jun', 'Jul', 'Aug'];
-    }else{      
-        $data1 = [100, 100, 100];
-        $data2 = [100, 100, 100];
-        $data3 = [100, 100, 100];
-        $cat = ['Jun', 'Jul', 'Aug'];
-    }
-	
+    }	
 }else{
-
     $_SESSION['datos'] = $datos;
-    $data1 = [20, 30, 40];
-    $data2 = [50, 60, 70];
-    $data3 = [80, 90, 100];
-    $cat = ['Jun', 'Jul', 'Aug'];
 }
+
+// Validar y establecer las fechas de inicio y fin
+$fechaDesde = isset($datos['fechaDesde']) && $datos['fechaDesde'] != '0000-00-00' ? $datos['fechaDesde'] : date('Y-m-d', strtotime('-7 days'));
+$fechaHasta = isset($datos['fechaHasta']) && $datos['fechaHasta'] != '0000-00-00' ? $datos['fechaHasta'] : date('Y-m-d');
+
+// Calcular la diferencia en días entre las dos fechas
+$date1 = new DateTime($fechaDesde);
+$date2 = new DateTime($fechaHasta);
+$diff = $date1->diff($date2);
+$diasDiferencia = $diff->days;
+
+
 $stmt = $conn->prepare('CALL sp_ObtenerEstadisticas(?,?,?,?)');
 if (!$stmt) {
      echo json_encode([
@@ -88,9 +87,27 @@ if ($result === false) {
 }
 $rows = [];
 while ($row = $result->fetch_assoc()) {
+    $sVisitas +=  $row['Visitas'];
+    $sSuscripciones +=  $row['Suscripciones'];
+    $sDonaciones +=  $row['Donaciones'];
+    $sVoluntarios +=  $row['Voluntarios'];
     $rows[] = $row;
 }
-
+// Lógica para asignar valores a $cat según la diferencia de días
+if ($diasDiferencia <= 7) {
+    // Si la diferencia es menor o igual a 7 días, asignar días de la semana
+    $cat = ['Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado', 'Domingo'];
+} elseif ($diasDiferencia <= 90) {
+    // Si la diferencia es mayor a 7 días pero menor o igual a 3 meses, asignar test1, test2, test3
+    $cat = ['test1', 'test2', 'test3'];
+} else {
+    // Si la diferencia es mayor a 3 meses, asignar los nombres de los 3 meses correspondientes
+    $cat = [
+        $date1->format('M'), // Mes inicial
+        $date1->modify('+1 month')->format('M'), // Mes siguiente
+        $date1->modify('+1 month')->format('M') // Mes siguiente
+    ];
+}
 $navbar = '
         <li class="nav-item">
             <a class="nav-link" href="Panel.html">Panel</a>
@@ -124,28 +141,28 @@ $panel = '
 	            <div class="col">
 	                <div class="counter">
                          <i class="fa fa-code fa-2x"></i>
-                         <h2 class="timer count-title count-number" data-to="100" data-speed="1500"></h2>
+                         <h2 class="timer count-title count-number" data-to="'.$sVisitas.'" data-speed="1500"></h2>
                           <p class="count-text ">Visitas</p>
                      </div>
 	            </div>
                 <div class="col">
                    <div class="counter">
                          <i class="fa fa-coffee fa-2x"></i>
-                          <h2 class="timer count-title count-number" data-to="1700" data-speed="1500"></h2>
+                          <h2 class="timer count-title count-number" data-to="'.$sSuscripciones.'" data-speed="1500"></h2>
                          <p class="count-text ">Suscripciones</p>
                    </div>
                 </div>
                 <div class="col">
                      <div class="counter">
                        <i class="fa fa-lightbulb-o fa-2x"></i>
-                       <h2 class="timer count-title count-number" data-to="11900" data-speed="1500"></h2>
+                       <h2 class="timer count-title count-number" data-to="'.$sDonaciones.'" data-speed="1500"></h2>
                        <p class="count-text ">Donaciones</p>
                       </div>
                  </div>
                  <div class="col">
                       <div class="counter">
                          <i class="fa fa-bug fa-2x"></i>
-                         <h2 class="timer count-title count-number" data-to="157" data-speed="1500"></h2>
+                         <h2 class="timer count-title count-number" data-to="'.$sVoluntarios.'" data-speed="1500"></h2>
                          <p class="count-text ">Voluntarios</p>
                       </div>
                   </div>
