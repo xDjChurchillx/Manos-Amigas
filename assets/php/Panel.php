@@ -212,7 +212,7 @@ $panel = '
                       </div>
                   </div>
              </div>
-           <div class="container">
+           <div class="container m-4">
                 <div class="date-range-container">
                   <div>
                     <label for="desde">Desde:</label>
