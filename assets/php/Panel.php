@@ -3,7 +3,7 @@
 ini_set('session.use_only_cookies', 1);
 require '../../../Private/Credentials/DataBase/connection.php';
 header('Content-Type: application/json; charset=UTF-8');
-try
+try{
 session_set_cookie_params([
     'lifetime' => 0, // Hasta cerrar navegador
     'path' => '/',
