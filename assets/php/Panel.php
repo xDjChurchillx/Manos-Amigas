@@ -55,7 +55,7 @@ if ($datos === null) {
 }
 // Establecer fechas predeterminadas si no se proporcionan
 if (empty($datos['fechaDesde'])) {
-    $datos['fechaDesde'] = date('Y-m-d', strtotime('-7 days'));
+    $datos['fechaDesde'] = date('Y-m-d', strtotime('-6 days'));
 }
 if (empty($datos['fechaHasta'])) {
     $datos['fechaHasta'] = date('Y-m-d');
