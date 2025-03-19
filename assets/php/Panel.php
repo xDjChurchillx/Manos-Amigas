@@ -237,6 +237,7 @@ echo json_encode([
     'navbar' => $navbar,
     'panel' => $panel,
     'config' => $datos,
+     'config2' => $diasDiferencia,
     'data1' => $data1,
     'data2' => $data2,
     'data3' => $data3,
