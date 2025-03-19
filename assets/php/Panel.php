@@ -248,7 +248,6 @@ echo json_encode([
     'navbar' => $navbar,
     'panel' => $panel,
     'config' => $datos,
-     'config2' => $sSuscripciones,
     'sumas' => $sumas,
     'data1' => $data1,
     'data2' => $data2,
