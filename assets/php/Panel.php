@@ -187,7 +187,7 @@ $panel = '
 	            <div class="col">
 	                <div class="counter">
                          <i class="fa fa-code fa-2x"></i>
-                         <h2 class="timer count-title count-number" data-to="'.$sumas['visitas'].'" data-speed="1500"></h2>
+                         <h2 id="visitas" class="timer count-title count-number" data-to="'.$sumas['visitas'].'" data-speed="1500"></h2>
                           <p class="count-text ">Visitas</p>
                      </div>
 	            </div>
