@@ -108,8 +108,12 @@ if ($diasDiferencia <= 7) {
     $numBloques = 7;
     $intervalo = ($date2->getTimestamp() - $date1->getTimestamp()) / $numBloques;
     for ($i = 0; $i < $numBloques; $i++) {
-        $inicio = date('d/m', $date1->getTimestamp() + $intervalo * $i);
-        $fin = date('d/m', $date1->getTimestamp() + $intervalo * ($i + 1) - 1);
+         $inicio = date('d/m', $date1->getTimestamp() + $intervalo * $i); 
+        if ($i == $numBloques - 1) {
+            $fin = date('d/m', $date2->getTimestamp()); 
+        } else {
+            $fin = date('d/m', $date1->getTimestamp() + $intervalo * ($i + 1));
+        }    
         $cat[] = "Del $inicio al $fin";
     }
 } else {
