@@ -25,11 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if (data.status === 'error') {
                     // Si la sesión no es válida, redirigir al usuario
                  //   window.location.href = data.redirect;
-                } else if (data.status === 'success') {
-                    console.log(data);
-                    // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
-                    document.getElementById('navbaritems').innerHTML = data.navbar;
-                    document.getElementById('panel').innerHTML = data.panel;
+                } else if (data.status === 'success') {                 
                     // Llamar al contador después de que el HTML se haya cargado
                     startPanel(data);
                 }
@@ -50,7 +46,9 @@ document.addEventListener("DOMContentLoaded", function () {
 function startPanel(datos) {
 
     console.log(datos);  
-
+    // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
+    document.getElementById('navbaritems').innerHTML = datos.navbar;
+    document.getElementById('panel').innerHTML = datos.panel;
     // Obtener los elementos
     desde = document.getElementById('desde');
     hasta = document.getElementById('hasta');
@@ -60,19 +58,16 @@ function startPanel(datos) {
 
         // Verificar y asignar 'fechaDesde'
         if ('fechaDesde' in datos.config) {
-            console.log('La clave "fechaDesde" existe en el objeto');
             desde.value = datos.config['fechaDesde'];
         }
 
         // Verificar y asignar 'fechaHasta'
         if ('fechaHasta' in datos.config) {
-            console.log('La clave "fechaHasta" existe en el objeto');
             hasta.value = datos.config['fechaHasta'];
         }
 
         // Verificar y asignar 'opcion'
         if ('opcion' in datos.config) {
-            console.log('La clave "opcion" existe en el objeto');
             opciones.value = datos.config['opcion'];
         }
 
@@ -199,6 +194,7 @@ async function actualizarDatos(val) {
 
         // Aquí puedes manejar la respuesta del servidor
         if (respuesta.status === 'success') {
+            document.getElementById('panel').innerHTML = respuesta.panel;
             chart.updateOptions({
                 series: [
                     { name: "Visitas", data: respuesta.data1 },
