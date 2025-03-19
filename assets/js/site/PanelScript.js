@@ -194,7 +194,6 @@ async function actualizarDatos(val) {
 
         // Aquí puedes manejar la respuesta del servidor
         if (respuesta.status === 'success') {
-            document.getElementById('panel').innerHTML = respuesta.panel;
             chart.updateOptions({
                 series: [
                     { name: "Visitas", data: respuesta.data1 },
@@ -206,6 +205,7 @@ async function actualizarDatos(val) {
                     categories: respuesta.cat
                 }
             });
+            document.getElementById('panel').innerHTML = respuesta.panel;
         } else {
             alert('Error al cargar los datos');
         }
