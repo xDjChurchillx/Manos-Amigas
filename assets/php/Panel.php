@@ -97,11 +97,10 @@ $diff = $date1->diff($date2);
 $diasDiferencia = $diff->days + 1;
 
 if ($diasDiferencia <= 7) {
-    // Mostrar el nombre del día en lugar de la fecha
+   $diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
     $period = new DatePeriod($date1, new DateInterval('P1D'), $date2->modify('+1 day'));
     foreach ($period as $date) {
-        setlocale(LC_TIME, 'es_ES.UTF-8'); // Asegurar que los nombres de los días sean en español
-        $cat[] = strftime('%A', $date->getTimestamp()); // Nombre del día
+        $cat[] = $diasSemana[$date->format('w')]; // Obtener el nombre en español
     }
 } elseif ($diasDiferencia <= 90) {
     // Bloques de tiempo
