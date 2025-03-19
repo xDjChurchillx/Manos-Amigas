@@ -3,7 +3,7 @@
 ini_set('session.use_only_cookies', 1);
 require '../../../Private/Credentials/DataBase/connection.php';
 header('Content-Type: application/json; charset=UTF-8');
-
+try
 session_set_cookie_params([
     'lifetime' => 0, // Hasta cerrar navegador
     'path' => '/',
@@ -53,7 +53,16 @@ if ($datos === null) {
 }else{
     $_SESSION['datos'] = $datos;
 }
+// Establecer fechas predeterminadas si no se proporcionan
+if (empty($datos['fechaDesde'])) {
+    $datos['fechaDesde'] = date('Y-m-d', strtotime('-7 days'));
+}
+if (empty($datos['fechaHasta'])) {
+    $datos['fechaHasta'] = date('Y-m-d');
+}
 
+$date1 = new DateTime($datos['fechaDesde']);
+$date2 = new DateTime($datos['fechaHasta']);
 $stmt = $conn->prepare('CALL sp_ObtenerEstadisticas(?,?,?,?)');
 if (!$stmt) {
      echo json_encode([
@@ -84,128 +93,54 @@ while ($row = $result->fetch_assoc()) {
 }
 //error si no hay registros se cae
 // Calcular la diferencia en días entre las dos fechas
-$date1 = new DateTime(min(array_column($rows, 'Fecha')));
-$date2 = new DateTime(max(array_column($rows, 'Fecha')));
 $diff = $date1->diff($date2);
 $diasDiferencia = $diff->days;
 
-
-
-// Lógica para asignar valores a $cat según la diferencia de días
 if ($diasDiferencia <= 7) {
-    // Si la diferencia es menor o igual a 7 días, asignar días de la semana   
-    foreach ($rows as $row) {
-         $fecha = strtotime($row['Fecha']);
-         // Obtener el día de la semana (1 = lunes, 2 = martes, etc.)
-        $diaSemana = date('N', $fecha);
-    
-        // Agregar el día de la semana al arreglo $cat solo si no está ya presente
-        $diaNombre = date('l', $fecha); // 'l' te da el nombre completo del día (por ejemplo, "Monday" o "Martes")
-    
-        // Si quieres los días en español puedes usar esta asignación:
-        switch ($diaSemana) {
-            case 1:
-                $diaNombre = 'Lunes';
-                break;
-            case 2:
-                $diaNombre = 'Martes';
-                break;
-            case 3:
-                $diaNombre = 'Miércoles';
-                break;
-            case 4:
-                $diaNombre = 'Jueves';
-                break;
-            case 5:
-                $diaNombre = 'Viernes';
-                break;
-            case 6:
-                $diaNombre = 'Sábado';
-                break;
-            case 7:
-                $diaNombre = 'Domingo';
-                break;
-        }
-
-        // Agregar el nombre del día al arreglo $cat
-        if (!in_array($diaNombre, $cat)) {
-            $data1[] = $row['Visitas'];
-            $data2[] = $row['Suscripciones'];
-            $data3[] = $row['Donaciones'];
-            $data4[] = $row['Voluntarios'];
-            $cat[] = $diaNombre;
-        }
+    // Por día
+    $period = new DatePeriod($date1, new DateInterval('P1D'), $date2->modify('+1 day'));
+    foreach ($period as $date) {
+        $cat[] = $date->format('d-m');
     }
 } elseif ($diasDiferencia <= 90) {
-    // Rango mayor a 7 y menor o igual a 90 - dividir en 7 categorías
+    // Bloques de tiempo
+    $numBloques = 7;
+    $intervalo = ($date2->getTimestamp() - $date1->getTimestamp()) / $numBloques;
+    for ($i = 0; $i < $numBloques; $i++) {
+        $inicio = date('d/m', $date1->getTimestamp() + $intervalo * $i);
+        $fin = date('d/m', $date1->getTimestamp() + $intervalo * ($i + 1) - 1);
+        $cat[] = "Del $inicio al $fin";
+    }
+} else {
+    // Por mes
+    $period = new DatePeriod($date1, new DateInterval('P1M'), $date2->modify('+1 month'));
+    foreach ($period as $date) {
+        $cat[] = $date->format('M Y');
+    }
+}
+// Inicializar datos con ceros
+$data1 = array_fill(0, count($cat), 0);
+$data2 = array_fill(0, count($cat), 0);
+$data3 = array_fill(0, count($cat), 0);
+$data4 = array_fill(0, count($cat), 0);
+foreach ($rows as $row) {
+    $fecha = new DateTime($row['Fecha']);
+    $index = null;
 
-    $numCategorias = 7; // Quieres 7 bloques
-    $minFecha = min(array_column($rows, 'Fecha'));
-    $maxFecha = max(array_column($rows, 'Fecha'));
-
-    // Convertir fechas a timestamps
-    $minTimestamp = strtotime($minFecha);
-    $maxTimestamp = strtotime($maxFecha);
-
-    // Calcular tamaño de cada bloque
-    $rangoDias = ($maxTimestamp - $minTimestamp) / $numCategorias;
-
-    // Crear etiquetas de las categorías (ej: "Del 01-01 al 07-01", etc.)
-    $categorias = [];
-    for ($i = 0; $i < $numCategorias; $i++) {
-        $inicio = date('d-m', $minTimestamp + ($rangoDias * $i));
-        $fin = date('d-m', $minTimestamp + ($rangoDias * ($i + 1) - 1));
-        $categorias[] = "Del $inicio al $fin";
+    if ($diasDiferencia <= 7) {
+        $index = array_search($fecha->format('d-m'), $cat);
+    } elseif ($diasDiferencia <= 90) {
+        $timestamp = $fecha->getTimestamp();
+        $index = floor(($timestamp - $date1->getTimestamp()) / $intervalo);
+    } else {
+        $index = array_search($fecha->format('M Y'), $cat);
     }
 
-    // Inicializar datos por cada categoría
-    $data1 = array_fill(0, $numCategorias, 0);
-    $data2 = array_fill(0, $numCategorias, 0);
-    $data3 = array_fill(0, $numCategorias, 0);
-    $data4 = array_fill(0, $numCategorias, 0);
-    $cat = $categorias;
-
-    // Recorrer filas y sumar datos a cada categoría según corresponda
-    foreach ($rows as $row) {
-        $fechaActual = strtotime($row['Fecha']);
-        $index = floor(($fechaActual - $minTimestamp) / $rangoDias);
-        if ($index >= $numCategorias) $index = $numCategorias - 1; // Ajuste por redondeo final
-
+    if ($index !== false && isset($data1[$index])) {
         $data1[$index] += $row['Visitas'];
         $data2[$index] += $row['Suscripciones'];
         $data3[$index] += $row['Donaciones'];
         $data4[$index] += $row['Voluntarios'];
-    }
-} else {
-  $periodo = new DatePeriod(
-        new DateTime($date1->format('Y-m-01')),
-        new DateInterval('P1M'),
-        (new DateTime($date2->format('Y-m-01')))->modify('+1 month') // Incluir el mes final
-    );
-
-    // Crear categorías (meses)
-    foreach ($periodo as $fecha) {
-        $cat[] = $fecha->format('M'); // Ej: Jan, Feb, Mar
-    }
-
-    // Inicializar datos
-    $numCategorias = count($cat);
-    $data1 = array_fill(0, $numCategorias, 0);
-    $data2 = array_fill(0, $numCategorias, 0);
-    $data3 = array_fill(0, $numCategorias, 0);
-    $data4 = array_fill(0, $numCategorias, 0);
-
-    // Sumar datos por mes
-    foreach ($rows as $row) {
-        $fechaRow = new DateTime($row['Fecha']);
-        $mesRow = $fechaRow->format('M'); // Mes en formato abreviado
-        $index = array_search($mesRow, $cat);
-        if ($index !== false) {
-            $data1[$index] += $row['Visitas'];
-            $data2[$index] += $row['Suscripciones'];
-            $data3[$index] += $row['Donaciones'];
-            $data4[$index] += $row['Voluntarios'];
-        }
     }
 }
 $navbar = '
@@ -309,4 +244,12 @@ echo json_encode([
     'cat' => $cat,
     'rows'=> $rows
 ]);
+} catch (Exception $ex) {
+     echo json_encode([
+        'status' => 'error',
+         'ex' => $ex,
+        'redirect' => ''
+    ]);
+    exit();
+}
 ?>
