@@ -17,6 +17,10 @@
 .c4 {
     background-color: #fd6a6a;
 }
+.icono {
+    width: 40px; /* Ajusta el tamaño de la imagen según sea necesario */
+    height: auto;
+}
 .count-title {
     font-size: 40px;
     font-weight: normal;

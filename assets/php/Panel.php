@@ -186,7 +186,7 @@ $panel = '
 		    <div class="row text-center">
 	            <div class="col">
 	                <div class="counter c1">
-                        <img src="../assets/img/iconos/ojo.svg" alt="Imagen" class="animated-image">
+                        <img class="icono" src="../assets/img/iconos/ojo.svg" alt="Imagen" class="animated-image">
                          <h2 id="visitas" class="timer count-title count-number" data-to="'.$sumas['visitas'].'" data-speed="1500"></h2>
                           <p class="count-text ">Visitas</p>
                      </div>
