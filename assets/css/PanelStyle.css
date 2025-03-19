@@ -1,9 +1,19 @@
 ﻿.counter {
-    background-color: #f5f5f5;
     padding: 20px 0;
     border-radius: 5px;
 }
-
+.c1 {
+    background-color: #4ecdc4;
+}
+.c2 {
+    background-color: #c7f464;
+}
+.c3 {
+    background-color: #81d4fa;
+}
+.c4 {
+    background-color: #fd6a6a;
+}
 .count-title {
     font-size: 40px;
     font-weight: normal;
