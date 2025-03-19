@@ -94,13 +94,14 @@ while ($row = $result->fetch_assoc()) {
 //error si no hay registros se cae
 // Calcular la diferencia en días entre las dos fechas
 $diff = $date1->diff($date2);
-$diasDiferencia = $diff->days;
+$diasDiferencia = $diff->days + 1;
 
 if ($diasDiferencia <= 7) {
-    // Por día
+    // Mostrar el nombre del día en lugar de la fecha
     $period = new DatePeriod($date1, new DateInterval('P1D'), $date2->modify('+1 day'));
     foreach ($period as $date) {
-        $cat[] = $date->format('d-m');
+        setlocale(LC_TIME, 'es_ES.UTF-8'); // Asegurar que los nombres de los días sean en español
+        $cat[] = strftime('%A', $date->getTimestamp()); // Nombre del día
     }
 } elseif ($diasDiferencia <= 90) {
     // Bloques de tiempo
