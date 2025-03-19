@@ -91,7 +91,6 @@ while ($row = $result->fetch_assoc()) {
     $sVoluntarios +=  $row['Voluntarios'];
     $rows[] = $row;
 }
-//error si no hay registros se cae
 // Calcular la diferencia en días entre las dos fechas
 $diff = $date1->diff($date2);
 $diasDiferencia = $diff->days + 1;
@@ -132,12 +131,17 @@ foreach ($rows as $row) {
     $index = null;
 
     if ($diasDiferencia <= 7) {
-        $index = array_search($fecha->format('d-m'), $cat);
+        // Calcular diferencia de días desde fechaDesde
+        $diffRow = $date1->diff($fecha);
+        $index = $diffRow->days; 
     } elseif ($diasDiferencia <= 90) {
         $timestamp = $fecha->getTimestamp();
         $index = floor(($timestamp - $date1->getTimestamp()) / $intervalo);
+        // Asegurar que el índice no exceda el número de bloques
+        $index = min($index, $numBloques - 1);
     } else {
-        $index = array_search($fecha->format('M Y'), $cat);
+        $monthYear = $fecha->format('M Y');
+        $index = array_search($monthYear, $cat);
     }
 
     if ($index !== false && isset($data1[$index])) {
