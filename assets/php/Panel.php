@@ -181,8 +181,8 @@ $navbar = '
 ';
 
 $panel = '
-        <div class="container">	        
-		    <div class="row text-center">
+      <div class="container">	        
+		    <div class="row text-center mtop">
 	            <div class="col">
 	                <div class="counter c1">
                         <img class="icono" src="../assets/img/iconos/ojo.svg" alt="icono" class="animated-image">
@@ -211,7 +211,7 @@ $panel = '
                          <p class="count-text ">Voluntarios</p>
                       </div>
                   </div>
-             </div>
+            </div>
            <div class="container m-4">
                 <div class="date-range-container">
                   <div>
@@ -233,11 +233,7 @@ $panel = '
                 </div>
               </div>
              <div id="bsb-chart-3"></div>
-
-
-
-
-        </div>
+      </div>
 ';
 
 
