@@ -194,21 +194,21 @@ $panel = '
                 <div class="col">
                    <div class="counter">
                          <i class="fa fa-coffee fa-2x"></i>
-                          <h2 class="timer count-title count-number" data-to="'.$sumas['suscripciones'].'" data-speed="1500"></h2>
+                          <h2 id="suscripciones" class="timer count-title count-number" data-to="'.$sumas['suscripciones'].'" data-speed="1500"></h2>
                          <p class="count-text ">Suscripciones</p>
                    </div>
                 </div>
                 <div class="col">
                      <div class="counter">
                        <i class="fa fa-lightbulb-o fa-2x"></i>
-                       <h2 class="timer count-title count-number" data-to="'.$sumas['donaciones'].'" data-speed="1500"></h2>
+                       <h2 id="donaciones" class="timer count-title count-number" data-to="'.$sumas['donaciones'].'" data-speed="1500"></h2>
                        <p class="count-text ">Donaciones</p>
                       </div>
                  </div>
                  <div class="col">
                       <div class="counter">
                          <i class="fa fa-bug fa-2x"></i>
-                         <h2 class="timer count-title count-number" data-to="'.$sumas['voluntarios'].'" data-speed="1500"></h2>
+                         <h2 id="voluntarios" class="timer count-title count-number" data-to="'.$sumas['voluntarios'].'" data-speed="1500"></h2>
                          <p class="count-text ">Voluntarios</p>
                       </div>
                   </div>

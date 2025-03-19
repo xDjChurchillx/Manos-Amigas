@@ -194,10 +194,10 @@ async function actualizarDatos(val) {
 
         // Aquí puedes manejar la respuesta del servidor
         if (respuesta.status === 'success') {
-            document.querySelector(".counter:nth-child(1) .count-number").innerText = respuesta.sumas.visitas;
-            document.querySelector(".counter:nth-child(2) .count-number").innerText = respuesta.sumas.suscripciones;
-            document.querySelector(".counter:nth-child(3) .count-number").innerText = respuesta.sumas.donaciones;
-            document.querySelector(".counter:nth-child(4) .count-number").innerText = respuesta.sumas.voluntarios;
+            document.getElementById("visitas").innerText = respuesta.sumas.visitas;
+            document.getElementById("suscripciones").innerText = respuesta.sumas.suscripciones;
+            document.getElementById("donaciones").innerText = respuesta.sumas.donaciones;
+            document.getElementById("voluntarios").innerText = respuesta.sumas.voluntarios;
             chart.updateOptions({
                 series: [
                     { name: "Visitas", data: respuesta.data1 },
