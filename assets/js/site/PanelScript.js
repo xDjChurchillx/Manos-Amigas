@@ -138,7 +138,7 @@ async function actualizarDatos(val) {
                 hasta.value = hoy;
                 break;
             case 'semana':
-                desde.value = sumarDias(hoy, -7);
+                desde.value = sumarDias(hoy, -6);
                 hasta.value = hoy;
                 break;
             case 'mes':
