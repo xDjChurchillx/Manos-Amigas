@@ -41,10 +41,12 @@ $data2 = [];
 $data3 = [];
 $data4 = [];
 $cat = [];
-$sVisitas = 0;
-$sSuscripciones = 0;
-$sDonaciones = 0;
-$sVoluntarios = 0;
+$sumas = [
+    'visitas' => 0,
+    'suscripciones' => 0,
+    'donaciones' => 0,
+    'voluntarios' => 0
+];
 $datos = json_decode(file_get_contents('php://input'), true);
 if ($datos === null) {
     if (isset($_SESSION['datos'])) {
@@ -85,10 +87,10 @@ if ($result === false) {
 }
 $rows = [];
 while ($row = $result->fetch_assoc()) {
-    $sVisitas +=  $row['Visitas'];
-    $sSuscripciones +=  $row['Suscripciones'];
-    $sDonaciones +=  $row['Donaciones'];
-    $sVoluntarios +=  $row['Voluntarios'];
+    $sumas['visitas'] += $row['Visitas'];
+    $sumas['suscripciones'] += $row['Suscripciones'];
+    $sumas['donaciones'] += $row['Donaciones'];
+    $sumas['voluntarios'] += $row['Voluntarios'];
     $rows[] = $row;
 }
 // Calcular la diferencia en días entre las dos fechas
@@ -177,6 +179,7 @@ $navbar = '
             </ul>
         </li>
 ';
+
 $panel = '
         <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css">
         <div class="container">	        
@@ -184,28 +187,28 @@ $panel = '
 	            <div class="col">
 	                <div class="counter">
                          <i class="fa fa-code fa-2x"></i>
-                         <h2 class="timer count-title count-number" data-to="'.$sVisitas.'" data-speed="1500"></h2>
+                         <h2 class="timer count-title count-number" data-to="'.$sumas['visitas'].'" data-speed="1500"></h2>
                           <p class="count-text ">Visitas</p>
                      </div>
 	            </div>
                 <div class="col">
                    <div class="counter">
                          <i class="fa fa-coffee fa-2x"></i>
-                          <h2 class="timer count-title count-number" data-to="'.$sSuscripciones.'" data-speed="1500"></h2>
+                          <h2 class="timer count-title count-number" data-to="'.$sumas['suscripciones'].'" data-speed="1500"></h2>
                          <p class="count-text ">Suscripciones</p>
                    </div>
                 </div>
                 <div class="col">
                      <div class="counter">
                        <i class="fa fa-lightbulb-o fa-2x"></i>
-                       <h2 class="timer count-title count-number" data-to="'.$sDonaciones.'" data-speed="1500"></h2>
+                       <h2 class="timer count-title count-number" data-to="'.$sumas['donaciones'].'" data-speed="1500"></h2>
                        <p class="count-text ">Donaciones</p>
                       </div>
                  </div>
                  <div class="col">
                       <div class="counter">
                          <i class="fa fa-bug fa-2x"></i>
-                         <h2 class="timer count-title count-number" data-to="'.$sVoluntarios.'" data-speed="1500"></h2>
+                         <h2 class="timer count-title count-number" data-to="'.$sumas['voluntarios'].'" data-speed="1500"></h2>
                          <p class="count-text ">Voluntarios</p>
                       </div>
                   </div>
@@ -246,6 +249,7 @@ echo json_encode([
     'panel' => $panel,
     'config' => $datos,
      'config2' => $sSuscripciones,
+    'sumas' => $sumas,
     'data1' => $data1,
     'data2' => $data2,
     'data3' => $data3,
