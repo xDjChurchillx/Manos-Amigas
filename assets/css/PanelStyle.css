@@ -37,12 +37,6 @@
     text-align: center;
 }
 
-.fa-2x {
-    margin: 0 auto;
-    float: none;
-    display: table;
-    color: #FF5E00;
-}
 .date-range-container {
     display: flex;
     align-items: center;
