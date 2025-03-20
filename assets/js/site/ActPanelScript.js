@@ -1,6 +1,4 @@
-﻿const { data } = require("jquery");
-
-document.addEventListener("DOMContentLoaded", function () {
+﻿document.addEventListener("DOMContentLoaded", function () {
     // Función para verificar la sesión
     function startSession() {
         // Realizar la solicitud AJAX
