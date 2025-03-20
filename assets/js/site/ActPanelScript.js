@@ -60,6 +60,11 @@ function create() {
     document.getElementById('creatediv').classList.remove('d-none');
     document.getElementById('listpanel').classList.add('d-none');
 }
+function closeDiv() {
+    console.log('create');
+    document.getElementById('creatediv').classList.add('d-none');
+    document.getElementById('listpanel').classList.remove('d-none');
+}
 function search() {
     console.log('create');
 }
