@@ -49,7 +49,32 @@ function startPanel(datos) {
     // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
     document.getElementById('navbaritems').innerHTML = datos.navbar;
     document.getElementById('panel').innerHTML = datos.panel;
-   
+
+    document.getElementById("actividadForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Evita el postback
+
+        let formData = new FormData(this); // Captura los datos del formulario
+
+        fetch("../assets/php/AddAct.php", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("respuesta").innerHTML = `<p>${data.message}</p>`;
+                if (data.status === "success") {
+                    document.getElementById("actividadForm").reset(); // Limpia el formulario
+                    closeDiv();
+                } else {
+                    if ("ex" in data) {
+                        alert(data.ex);
+					} else {
+						alert("Error al agregar la actividad.");
+					}
+                }
+            })
+            .catch(error => console.error("Error:", error));
+    });
  
 }
 function edit(id) {

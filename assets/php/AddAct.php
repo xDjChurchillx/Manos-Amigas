@@ -43,13 +43,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Validación de datos
         if (empty($nombreActividad) || empty($descripcion) || empty($fecha)) {
-            echo json_encode(["status" => "error", "message" => "Todos los campos son obligatorios."]);
+            echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
             exit();
         }
 
         // Validar si hay imágenes antes de procesarlas
         if (!isset($_FILES['imagenes']) || empty($_FILES['imagenes']['name'][0])) {
-            echo json_encode(["status" => "error", "message" => "Debe subir al menos una imagen."]);
+            echo json_encode(["status" => "error", "ex" => "Debe subir al menos una imagen."]);
             exit();
         }
 
@@ -70,13 +70,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Validar tipo de archivo
             if (!in_array($extension, $allowedExtensions)) {
-                echo json_encode(["status" => "error", "message" => "Formato de imagen no permitido ($extension)."]);
+                echo json_encode(["status" => "error", "ex" => "Formato de imagen no permitido ($extension)."]);
                 exit();
             }
 
             // Validar tamaño de archivo
             if ($_FILES['imagenes']['size'][$index] > $maxFileSize) {
-                echo json_encode(["status" => "error", "message" => "El archivo {$fileName} excede el tamaño permitido (5 MB)."]);
+                echo json_encode(["status" => "error", "ex" => "El archivo {$fileName} excede el tamaño permitido (5 MB)."]);
                 exit();
             }
 
@@ -95,34 +95,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Insertar en la base de datos
         $stmt = $conn->prepare('CALL sp_CrearActividad(?, ?, ?, ?, ?, ?)');
         if (!$stmt) {
-            echo json_encode(['status' => 'error', 'message' => 'Error en la base de datos']);
+            echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
             exit();
         }
 
         $stmt->bind_param('ssssss', $username, $token, $nombreActividad, $descripcion, $fecha, $imageJson);
 
         if ($stmt->execute()) {
-            echo json_encode(["status" => "success", "message" => "Actividad creada correctamente."]);
+          echo json_encode([
+                'status' => 'success'
+            ]);
         } else {
-            echo json_encode(["status" => "error", "message" => "Error al guardar en la base de datos."]);
+          echo json_encode([
+                'status' => 'error'
+            ]);
         }
 
         $stmt->close();
         $conn->close();
 }
 
-
-
-
-
-
-
-// Si pasa todas las validaciones, se puede mostrar el contenido
-echo json_encode([
-    'status' => 'success',
-    'navbar' => $navbar,
-    'panel' => $panel
-]);
 } catch (Exception $ex) {
      echo json_encode([
         'status' => 'error',
