@@ -89,7 +89,7 @@ $navbar = '
 
  $panel = '
         <div class="container mt-4">
-            <h2 class="mb-4">Listado de Actividades</h2>
+            <h2 class="mb-4">Actividades</h2>
             <a href="CrearActividad.html" class="btn btn-primary mb-3">Crear Actividad</a>
             <table class="table table-striped">
                 <thead class="table-dark">
@@ -109,8 +109,8 @@ $navbar = '
                         <td>' . htmlspecialchars($actividad['Nombre']) . '</td>
                         <td>' . htmlspecialchars($actividad['Descripcion']) . '</td>
                         <td>
-                            <a href="EditarActividad.php?id=' . urlencode($actividad['Codigo']) . '" class="btn btn-warning btn-sm">Editar</a>
-                            <a href="EliminarActividad.php?id=' . urlencode($actividad['Codigo']) . '" class="btn btn-danger btn-sm">Eliminar</a>
+                            <button class="btn btn-primary btn-sm" onclick="editarActividad(' . htmlspecialchars($row['Codigo']) . ')">Editar</button>
+                            <button class="btn btn-danger btn-sm" onclick="eliminarActividad(' . htmlspecialchars($row['Codigo']) . ')">Eliminar</button>
                         </td>
                     </tr>';
     }

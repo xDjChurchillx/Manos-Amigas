@@ -52,7 +52,30 @@ function startPanel(datos) {
    
  
 }
+function editarActividad(id) {
+    //  window.location.href = "EditarActividad.html?id=" + id;
+	console.log(id);
+}
 
+function eliminarActividad(id) {
+    if (confirm("¿Seguro que deseas eliminar esta actividad?")) {
+        fetch("/Gestion/EliminarActividad.php", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ id: id })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "success") {
+                    alert("Actividad eliminada correctamente.");
+                    location.reload();
+                } else {
+                    alert("Error al eliminar la actividad.");
+                }
+            })
+            .catch(error => console.error("Error:", error));
+    }
+}
 async function actualizarDatos(val) {
  
     try {
