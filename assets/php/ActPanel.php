@@ -37,32 +37,28 @@ $token = $_COOKIE['token'] ;
 $username = $_SESSION['username'];
 
 
-//$stmt = $conn->prepare('CALL sp_ObtenerEstadisticas(?,?,?,?)');
-//if (!$stmt) {
-//     echo json_encode([
-//        'status' => 'error',
-//         'ex' => 'database error',
-//        'redirect' => ''
-//    ]);
-//    exit();
-//}
+$stmt = $conn->prepare('CALL sp_ListarActividades()');
+if (!$stmt) {
+     echo json_encode([
+        'status' => 'error',
+         'ex' => 'database error'
+    ]);
+    exit();
+}
+$stmt->execute();
+$result = $stmt->get_result();
 
-//$stmt->bind_param('ssss', $username,$token,$datos['fechaDesde'],$datos['fechaHasta']);
-//$stmt->execute();
-//$result = $stmt->get_result();
-
-//if ($result === false) {
-//     echo json_encode([
-//        'status' => 'error',
-//         'ex' => 'database error',
-//        'redirect' => ''
-//    ]);
-//    exit();
-//}
-//$rows = [];
-//while ($row = $result->fetch_assoc()) {
-//    $rows[] = $row;
-//}
+if ($result === false) {
+     echo json_encode([
+        'status' => 'error',
+         'ex' => 'database error'
+    ]);
+    exit();
+}
+$rows = [];
+while ($row = $result->fetch_assoc()) {
+    $rows[] = $row;
+}
 
 $navbar = '
         <li class="nav-item">
@@ -91,12 +87,38 @@ $navbar = '
         </li>
 ';
 
-$panel = '
-      <div class="container">	        
-		  
-      </div>
-';
+ $panel = '
+        <div class="container mt-4">
+            <h2 class="mb-4">Listado de Actividades</h2>
+            <a href="CrearActividad.html" class="btn btn-primary mb-3">Crear Actividad</a>
+            <table class="table table-striped">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Nombre</th>
+                        <th>Descripción</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>';
 
+    foreach ($rows as $actividad) {
+        $panel .= '
+                    <tr>
+                        <td>' . htmlspecialchars($actividad['Fecha']) . '</td>
+                        <td>' . htmlspecialchars($actividad['Nombre']) . '</td>
+                        <td>' . htmlspecialchars($actividad['Descripcion']) . '</td>
+                        <td>
+                            <a href="EditarActividad.php?id=' . urlencode($actividad['Codigo']) . '" class="btn btn-warning btn-sm">Editar</a>
+                            <a href="EliminarActividad.php?id=' . urlencode($actividad['Codigo']) . '" class="btn btn-danger btn-sm">Eliminar</a>
+                        </td>
+                    </tr>';
+    }
+
+    $panel .= '
+                </tbody>
+            </table>
+        </div>';
 
 // Si pasa todas las validaciones, se puede mostrar el contenido
 echo json_encode([
