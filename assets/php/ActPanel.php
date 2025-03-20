@@ -90,7 +90,19 @@ $navbar = '
 $panel = '
     <div class="container mt-4">
         <h2 class="mb-4">Actividades</h2>
-        <button class="btn btn-primary mb-3" onclick="create()">Crear Actividad</button>';
+       <div class="d-flex justify-content-between align-items-center">
+          <!-- Botón Crear Actividad a la izquierda -->
+          <button class="btn btn-primary mb-3" onclick="create()">Crear Actividad</button>
+  
+          <!-- Contenedor para el TextBox y el botón de buscar a la derecha -->
+          <div class="d-flex">
+            <input type="text" class="form-control me-2" placeholder="Buscar...">
+            <button class="btn btn-outline-secondary">
+              <i class="bi bi-search"></i> <!-- Icono de búsqueda -->
+            </button>
+          </div>
+        </div>
+';
 
 if (empty($rows)) {
     // Si no hay actividades, mostrar el mensaje
