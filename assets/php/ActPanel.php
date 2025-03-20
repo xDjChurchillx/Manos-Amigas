@@ -98,7 +98,7 @@ $panel = '
           <div class="d-flex">
             <input type="text" class="form-control me-2" placeholder="Buscar...">
             <button class="btn btn-outline-secondary">
-              <i class="bi bi-search"></i> <!-- Icono de búsqueda -->
+               <img src="../assets/img/iconos/ojo.svg" alt="Buscar" class="icono">
             </button>
           </div>
         </div>
