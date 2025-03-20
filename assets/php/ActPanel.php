@@ -88,7 +88,7 @@ $navbar = '
 ';
 
 $panel = '
-    <div class="container mt-4">
+    <div class="container text-center mt-4">
         <h2 class="mb-4">Actividades</h2>
        <div class="d-flex justify-content-between align-items-center">
           <!-- Botón Crear Actividad a la izquierda -->
@@ -97,7 +97,7 @@ $panel = '
           <!-- Contenedor para el TextBox y el botón de buscar a la derecha -->
           <div class="d-flex">
             <input type="text" class="form-control me-2" placeholder="Buscar...">
-            <button class="btn btn-outline-secondary">
+            <button class="btn btn-outline-secondary" onclick="search()">
                <img src="../assets/img/iconos/buscar.svg" alt="Buscar" class="icono">
             </button>
           </div>

@@ -60,6 +60,10 @@ function create() {
     //  window.location.href = "EditarActividad.html?id=" + id;
     console.log('create');
 }
+function search() {
+    //  window.location.href = "EditarActividad.html?id=" + id;
+    console.log('create');
+}
 function del(id) {
     if (confirm("¿Seguro que deseas eliminar esta actividad?")) {
         fetch("/Gestion/EliminarActividad.php", {
