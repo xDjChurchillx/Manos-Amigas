@@ -151,10 +151,18 @@ $panel .= '</div>
   </button>
     <h2>Crear Actividad</h2>
    <form id="actividadForm" enctype="multipart/form-data">
-        <input type="text" name="nombre" id="nombre" placeholder="Nombre de la actividad" required>
-        <textarea name="descripcion" id="descripcion" placeholder="Descripción" required></textarea>
-        <input type="datetime-local" name="fecha" id="fecha">
-        <input type="file" name="imagenes[]" id="imagenes" multiple accept="image/*">
+        <div class="mb-3">
+            <input type="text" name="nombre" id="nombre" placeholder="Nombre de la actividad" required>
+        <div/>
+        <div class="mb-3">
+            <textarea name="descripcion" id="descripcion" placeholder="Descripción" required></textarea>
+        <div/>
+        <div class="mb-3">
+             <input type="datetime-local" name="fecha" id="fecha">
+        <div/>
+        <div class="mb-3">
+            <input type="file" name="imagenes[]" id="imagenes" multiple accept="image/*">
+        <div/>  
         <span id="respuesta" class="text-danger"></span>
         <button type="submit">Crear Actividad</button>
     </form>
