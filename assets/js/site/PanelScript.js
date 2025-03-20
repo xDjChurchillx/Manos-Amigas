@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     if ("ex" in data) {
                         alert(data.ex);
                     }
-                    if ("ex" in redirect) {
+                    if ("redirect" in data) {
                         window.location.href = data.redirect;
                     }                   
                 } else if (data.status === 'success') {                 
@@ -219,7 +219,7 @@ async function actualizarDatos(val) {
             if ("ex" in data) {
                 alert(data.ex);
             }
-            if ("ex" in redirect) {
+            if ("redirect" in data) {
                 window.location.href = data.redirect;
             }
         }

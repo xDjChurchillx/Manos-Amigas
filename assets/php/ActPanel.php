@@ -28,7 +28,7 @@ if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
     // Retornar JSON con error
     echo json_encode([
         'status' => 'error',
-        'redirect' => '/Gestion/ingreso.html'
+        'redirect' => '/Gestion/ingreso.html?error=1'
     ]);
     exit();
 }

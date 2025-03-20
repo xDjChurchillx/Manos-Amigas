@@ -1,4 +1,6 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿const { data } = require("jquery");
+
+document.addEventListener("DOMContentLoaded", function () {
     // Función para verificar la sesión
     function startSession() {
         // Realizar la solicitud AJAX
@@ -22,7 +24,7 @@
                     if ("ex" in data) {
                         alert(data.ex);
                     }
-                    if ("ex" in redirect) {
+                    if ("redirect" in data) {
                     //    window.location.href = data.redirect;
                     }
                 } else if (data.status === 'success') {                 
@@ -81,7 +83,7 @@ async function actualizarDatos(val) {
             if ("ex" in data) {
                 alert(data.ex);
             }
-            if ("ex" in redirect) {
+            if ("redirect" in data) {
                 window.location.href = data.redirect;
             }
         }
