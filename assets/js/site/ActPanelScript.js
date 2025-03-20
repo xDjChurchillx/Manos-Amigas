@@ -53,16 +53,13 @@ function startPanel(datos) {
  
 }
 function edit(id) {
-    //  window.location.href = "EditarActividad.html?id=" + id;
 	console.log(id);
 }
 function create() {
-    //  window.location.href = "EditarActividad.html?id=" + id;
     console.log('create');
-    document.getElementById('creatediv').style.display = 'block';
+    document.getElementById('creatediv').classList.remove('d-none');
 }
 function search() {
-    //  window.location.href = "EditarActividad.html?id=" + id;
     console.log('create');
 }
 function del(id) {
