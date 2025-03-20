@@ -58,6 +58,7 @@ function edit(id) {
 function create() {
     console.log('create');
     document.getElementById('creatediv').classList.remove('d-none');
+    document.getElementById('listpanel').classList.add('d-none');
 }
 function search() {
     console.log('create');

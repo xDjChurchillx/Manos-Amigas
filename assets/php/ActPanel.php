@@ -88,7 +88,7 @@ $navbar = '
 ';
 
 $panel = '
-    <div class="container text-center mt-4">
+    <div id="listpanel" class="container text-center mt-4">
         <h2 class="mb-4">Actividades</h2>
        <div class="d-flex justify-content-between align-items-center">
           <!-- Botón Crear Actividad a la izquierda -->
