@@ -168,7 +168,7 @@ $panel .= '</div>
             <input type="file" name="imagenes[]" id="imagenes" class="form-control" multiple accept="image/*">
         </div>  
         <span id="respuesta" class="text-danger"></span>
-        <button type="submit" class="btn btn-primary w-100">Crear Actividad</button>
+        <button type="submit" class="btn btn-primary">Crear Actividad</button>
     </form>
 
 
