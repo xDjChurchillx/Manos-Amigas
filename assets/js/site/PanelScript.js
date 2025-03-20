@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // Función para verificar la sesión
     function startSession() {
         // Realizar la solicitud AJAX
-        fetch('../assets/php/panel.php', {
+        fetch('../assets/php/Panel.php', {
             method: 'GET',
             credentials: 'same-origin',  // Mantener la sesión activa si es posible
         })
@@ -24,7 +24,12 @@ document.addEventListener("DOMContentLoaded", function () {
             .then(data => {
                 if (data.status === 'error') {
                     // Si la sesión no es válida, redirigir al usuario
-                 //   window.location.href = data.redirect;
+                    if ("ex" in data) {
+                        alert(data.ex);
+                    }
+                    if ("ex" in redirect) {
+                        window.location.href = data.redirect;
+                    }                   
                 } else if (data.status === 'success') {                 
                     // Llamar al contador después de que el HTML se haya cargado
                     startPanel(data);
@@ -34,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 // En caso de error (fallo en la solicitud o procesamiento), mostrar el error
                 console.error('Error al verificar la sesión:', error);
                 // Redirigir al login en caso de un fallo
-              //  window.location.href = 'ingreso.html';
+                window.location.href = 'ingreso.html?error=3';
             });
     }
 
@@ -210,7 +215,13 @@ async function actualizarDatos(val) {
                 }
             });
         } else {
-            alert('Error al cargar los datos');
+            console.log('Error al actualizar los datos');
+            if ("ex" in data) {
+                alert(data.ex);
+            }
+            if ("ex" in redirect) {
+                window.location.href = data.redirect;
+            }
         }
     } catch (error) {
         console.error('Error al cargar los datos:', error);
