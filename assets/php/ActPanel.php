@@ -155,7 +155,7 @@ $panel .= '</div>
         <textarea name="descripcion" id="descripcion" placeholder="Descripción" required></textarea>
         <input type="datetime-local" name="fecha" id="fecha">
         <input type="file" name="imagenes[]" id="imagenes" multiple accept="image/*">
-        <span id="respuesta" class="text-danger" id="passwordError"></span>
+        <span id="respuesta" class="text-danger"></span>
         <button type="submit">Crear Actividad</button>
     </form>
 
