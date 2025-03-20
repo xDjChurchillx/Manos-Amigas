@@ -109,8 +109,8 @@ $navbar = '
                         <td>' . htmlspecialchars($actividad['Nombre']) . '</td>
                         <td>' . htmlspecialchars($actividad['Descripcion']) . '</td>
                         <td>
-                            <button class="btn btn-primary btn-sm" onclick="editarActividad("' . htmlspecialchars($actividad['Codigo']) . '")">Editar</button>
-                            <button class="btn btn-danger btn-sm" onclick="eliminarActividad("' . htmlspecialchars($actividad['Codigo']) . '")">Eliminar</button>
+                            <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($actividad['Codigo']) . '\')">Editar</button>
+                            <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($actividad['Codigo']) . '\')">Eliminar</button>
                         </td>
                     </tr>';
     }

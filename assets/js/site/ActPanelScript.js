@@ -52,12 +52,12 @@ function startPanel(datos) {
    
  
 }
-function editarActividad(id) {
+function edit(id) {
     //  window.location.href = "EditarActividad.html?id=" + id;
 	console.log(id);
 }
 
-function eliminarActividad(id) {
+function del(id) {
     if (confirm("¿Seguro que deseas eliminar esta actividad?")) {
         fetch("/Gestion/EliminarActividad.php", {
             method: "POST",
