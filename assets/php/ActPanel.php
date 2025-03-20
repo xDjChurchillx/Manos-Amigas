@@ -152,10 +152,6 @@ $panel .= '</div>
     <h2>Crear Actividad</h2>
     <form action="../assets/php/AddAct.php" method="POST" enctype="multipart/form-data">
       <div class="mb-3">
-        <label for="codigo" class="form-label">Código de Actividad</label>
-        <input type="datetime-local" class="form-control" id="codigo" name="codigo" required>
-      </div>
-      <div class="mb-3">
         <label for="nombre" class="form-label">Nombre de la Actividad</label>
         <input type="text" class="form-control" id="nombre" name="nombre" required>
       </div>
