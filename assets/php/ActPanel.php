@@ -143,9 +143,9 @@ if (empty($rows)) {
 
 $panel .= '</div>
 
-<div class="container mt-5 ">
-    <h2>Editar Actividad</h2>
-    <form action="procesar_edicion.php" method="POST" enctype="multipart/form-data">
+<div id="creatediv" class="container d-none mt-5 ">
+    <h2>Crear Actividad</h2>
+    <form action="../assets/php/AddAct.php" method="POST" enctype="multipart/form-data">
       <div class="mb-3">
         <label for="codigo" class="form-label">Código de Actividad</label>
         <input type="datetime-local" class="form-control" id="codigo" name="codigo" required>

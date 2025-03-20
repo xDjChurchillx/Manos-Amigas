@@ -59,6 +59,7 @@ function edit(id) {
 function create() {
     //  window.location.href = "EditarActividad.html?id=" + id;
     console.log('create');
+    document.getElementById('creatediv').style.display = 'block';
 }
 function search() {
     //  window.location.href = "EditarActividad.html?id=" + id;
