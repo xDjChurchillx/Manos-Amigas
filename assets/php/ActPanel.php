@@ -87,38 +87,48 @@ $navbar = '
         </li>
 ';
 
- $panel = '
-        <div class="container mt-4">
-            <h2 class="mb-4">Actividades</h2>
-            <a href="CrearActividad.html" class="btn btn-primary mb-3">Crear Actividad</a>
-            <table class="table table-striped">
-                <thead class="table-dark">
-                    <tr>
-                        <th>Fecha</th>
-                        <th>Nombre</th>
-                        <th>Descripción</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>';
+$panel = '
+    <div class="container mt-4">
+        <h2 class="mb-4">Actividades</h2>
+        <a href="CrearActividad.html" class="btn btn-primary mb-3">Crear Actividad</a>';
+
+if (empty($rows)) {
+    // Si no hay actividades, mostrar el mensaje
+    $panel .= '
+        <p>No hay actividades disponibles en este momento.</p>';
+} else {
+    // Si hay actividades, crear la tabla con los datos
+    $panel .= '
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>Fecha</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>';
 
     foreach ($rows as $actividad) {
         $panel .= '
-                    <tr>
-                        <td>' . htmlspecialchars($actividad['Fecha']) . '</td>
-                        <td>' . htmlspecialchars($actividad['Nombre']) . '</td>
-                        <td>' . htmlspecialchars($actividad['Descripcion']) . '</td>
-                        <td>
-                            <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($actividad['Codigo']) . '\')">Editar</button>
-                            <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($actividad['Codigo']) . '\')">Eliminar</button>
-                        </td>
-                    </tr>';
+            <tr>
+                <td>' . htmlspecialchars($actividad['Fecha']) . '</td>
+                <td>' . htmlspecialchars($actividad['Nombre']) . '</td>
+                <td>' . htmlspecialchars($actividad['Descripcion']) . '</td>
+                <td>
+                    <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($actividad['Codigo']) . '\')">Editar</button>
+                    <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($actividad['Codigo']) . '\')">Eliminar</button>
+                </td>
+            </tr>';
     }
 
     $panel .= '
-                </tbody>
-            </table>
-        </div>';
+            </tbody>
+        </table>';
+}
+
+$panel .= '</div>';
 
 // Si pasa todas las validaciones, se puede mostrar el contenido
 echo json_encode([
