@@ -23,7 +23,7 @@
                         alert(data.ex);
                     }
                     if ("ex" in redirect) {
-                        window.location.href = data.redirect;
+                    //    window.location.href = data.redirect;
                     }
                 } else if (data.status === 'success') {                 
                     // Llamar al contador después de que el HTML se haya cargado
