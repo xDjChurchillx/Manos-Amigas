@@ -67,7 +67,7 @@ function startPanel(datos) {
                     closeDiv();
                 } else {
                     if ("ex" in data) {
-                        alert(data.ex);
+                        document.getElementById("respuesta").innerHTML = `<p>${data.message}</p>`;
 					} else {
 						alert("Error al agregar la actividad.");
 					}
