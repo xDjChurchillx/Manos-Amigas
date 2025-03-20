@@ -12,7 +12,7 @@
                     // En caso de error (fallo en la solicitud o procesamiento), mostrar el error
                     console.log('Error en la solicitud');
                     // Redirigir al login en caso de un fallo
-                    window.location.href = 'ingreso.html';
+                 //   window.location.href = 'ingreso.html';
                 }
                 return response.json();
             })
@@ -34,7 +34,7 @@
                 // En caso de error (fallo en la solicitud o procesamiento), mostrar el error
                 console.error('Error al verificar la sesión:', error);
                 // Redirigir al login en caso de un fallo
-                window.location.href = 'ingreso.html?error=3';
+               // window.location.href = 'ingreso.html?error=1';
             });
     }
 
