@@ -90,7 +90,7 @@ $navbar = '
 $panel = '
     <div class="container mt-4">
         <h2 class="mb-4">Actividades</h2>
-        <button class="btn btn-primary mb-3" onclick="create()">Crear</button>';
+        <button class="btn btn-primary mb-3" onclick="create()">Crear Actividad</button>';
 
 if (empty($rows)) {
     // Si no hay actividades, mostrar el mensaje
