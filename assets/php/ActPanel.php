@@ -93,57 +93,7 @@ $navbar = '
 
 $panel = '
       <div class="container">	        
-		    <div class="row text-center mtop">
-	            <div class="col">
-	                <div class="counter c1">
-                        <img class="icono" src="../assets/img/iconos/ojo.svg" alt="icono" class="animated-image">
-                         <h2 id="visitas" class="timer count-title count-number" data-to="'.$sumas['visitas'].'" data-speed="1500"></h2>
-                          <p class="count-text ">Visitas</p>
-                     </div>
-	            </div>
-                <div class="col">
-                   <div class="counter c2">
-                         <img class="icono" src="../assets/img/iconos/suscribir.svg" alt="icono" class="animated-image">
-                          <h2 id="suscripciones" class="timer count-title count-number" data-to="'.$sumas['suscripciones'].'" data-speed="1500"></h2>
-                         <p class="count-text ">Suscripciones</p>
-                   </div>
-                </div>
-                <div class="col">
-                     <div class="counter c3">
-                       <img class="icono" src="../assets/img/iconos/dinero.svg" alt="icono" class="animated-image">
-                       <h2 id="donaciones" class="timer count-title count-number" data-to="'.$sumas['donaciones'].'" data-speed="1500"></h2>
-                       <p class="count-text ">Donaciones</p>
-                      </div>
-                 </div>
-                 <div class="col">
-                      <div class="counter c4">
-                         <img class="icono" src="../assets/img/iconos/voluntario.svg" alt="icono" class="animated-image">
-                         <h2 id="voluntarios" class="timer count-title count-number" data-to="'.$sumas['voluntarios'].'" data-speed="1500"></h2>
-                         <p class="count-text ">Voluntarios</p>
-                      </div>
-                  </div>
-            </div>
-           <div class="container m-4">
-                <div class="date-range-container">
-                  <div>
-                    <label for="desde">Desde:</label>
-                    <input type="date" class="form-control" id="desde">
-                  </div>
-                  <div>
-                    <label for="hasta">Hasta:</label>
-                    <input type="date" class="form-control" id="hasta" disabled>
-                  </div>
-                  <div class="combobox-container">
-                    <select class="form-select" id="opciones">
-                      <option value=""></option>
-                      <option value="hoy">Hoy</option>
-                      <option value="semana">Semana</option>
-                      <option value="mes">Mes</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-             <div id="bsb-chart-3"></div>
+		  
       </div>
 ';
 
@@ -157,8 +107,7 @@ echo json_encode([
 } catch (Exception $ex) {
      echo json_encode([
         'status' => 'error',
-         'ex' => $ex,
-        'redirect' => ''
+         'ex' => $ex
     ]);
     exit();
 }
