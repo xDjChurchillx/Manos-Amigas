@@ -102,6 +102,7 @@ $panel = '
             </button>
           </div>
         </div>
+
 ';
 
 if (empty($rows)) {
@@ -140,7 +141,38 @@ if (empty($rows)) {
         </table>';
 }
 
-$panel .= '</div>';
+$panel .= '</div>
+
+<div class="container mt-5 ">
+    <h2>Editar Actividad</h2>
+    <form action="procesar_edicion.php" method="POST" enctype="multipart/form-data">
+      <div class="mb-3">
+        <label for="codigo" class="form-label">Código de Actividad</label>
+        <input type="datetime-local" class="form-control" id="codigo" name="codigo" required>
+      </div>
+      <div class="mb-3">
+        <label for="nombre" class="form-label">Nombre de la Actividad</label>
+        <input type="text" class="form-control" id="nombre" name="nombre" required>
+      </div>
+      <div class="mb-3">
+        <label for="descripcion" class="form-label">Descripción</label>
+        <textarea class="form-control" id="descripcion" name="descripcion" rows="4" required></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="fecha" class="form-label">Fecha de la Actividad</label>
+        <input type="datetime-local" class="form-control" id="fecha" name="fecha" required>
+      </div>
+      <div class="mb-3">
+        <label for="imagenes" class="form-label">Imágenes</label>
+        <input type="file" class="form-control" id="imagenes" name="imagenes[]" multiple>
+        <small class="text-muted">Selecciona varias imágenes si es necesario.</small>
+      </div>     
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </form>
+  </div>
+
+
+';
 
 // Si pasa todas las validaciones, se puede mostrar el contenido
 echo json_encode([
