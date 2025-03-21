@@ -102,7 +102,7 @@ function del(id) {
     if (confirm("¿Seguro que deseas eliminar esta actividad?")) {
         fetch('../php/DelAct.php', {
             method: 'POST',
-            credentials: 'same-origin', 
+            credentials: 'same-origin',
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -110,22 +110,27 @@ function del(id) {
                 codigo: id
             })
         })
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 'success') {
-                    //alert(data.mensaje); // Actividad eliminada exitosamente
-                } else {
-                    if ("ex" in data) {
-                        alert("Error:"+ data.ex);
-                       
+            .then(response => response.text()) // Primero obtenemos el texto en bruto
+            .then(text => {
+                try {
+                    let data = JSON.parse(text); // Intentamos convertir el texto a JSON
+                    if (data.status === 'success') {
+                        //alert(data.mensaje); // Actividad eliminada exitosamente
                     } else {
-                        alert("Error al eliminar");
+                        if ("ex" in data) {
+                            alert("Error: " + data.ex);
+                        } else {
+                            alert("Error al eliminar");
+                        }
                     }
+                } catch (error) {
+                    console.error('La respuesta no es JSON:', text); // Imprime el texto antes de que falle
+                    alert('Error inesperado: ' + text); // Mostrar el error en un alert
                 }
             })
             .catch(error => {
-                console.error('Error:', error);
-                alert('Error: ' + data.mensaje); // Mostrar error
+                console.error('Error en la solicitud:', error);
+                alert('Error: Ocurrió un problema al procesar la solicitud');
             });
     }
 }
