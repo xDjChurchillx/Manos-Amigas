@@ -139,16 +139,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmt->bind_param('ssssss', $username, $token, $nombreActividad, $descripcion, $fecha, $imageJson);
 
-        if ($stmt->execute()) {
-          echo json_encode([
-                'status' => 'success'
+       $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        if ($row['Error'] === '-1') {
+            echo json_encode([
+                'status' => 'error',
+                'ex' => 'Usuario o token inválido.'
             ]);
         } else {
-          echo json_encode([
-                'status' => 'error'
+            echo json_encode([
+                'status' => 'success',
+                'mensaje' => $row['Mensaje']
             ]);
         }
-
         $stmt->close();
         $conn->close();
 }
