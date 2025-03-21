@@ -100,21 +100,33 @@ function search() {
 }
 function del(id) {
     if (confirm("¿Seguro que deseas eliminar esta actividad?")) {
-        fetch("/Gestion/EliminarActividad.php", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ id: id })
+        fetch('../php/DelAct.php', {
+            method: 'POST',
+            credentials: 'same-origin', 
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                codigo: id
+            })
         })
             .then(response => response.json())
             .then(data => {
-                if (data.status === "success") {
-                    alert("Actividad eliminada correctamente.");
-                    location.reload();
+                if (data.status === 'success') {
+                    //alert(data.mensaje); // Actividad eliminada exitosamente
                 } else {
-                    alert("Error al eliminar la actividad.");
+                    if ("ex" in data) {
+                        alert("Error:"+ data.ex);
+                       
+                    } else {
+                        alert("Error al eliminar");
+                    }
                 }
             })
-            .catch(error => console.error("Error:", error));
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error: ' + data.mensaje); // Mostrar error
+            });
     }
 }
 async function actualizarDatos(val) {
