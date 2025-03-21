@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $imagePaths = [];
-        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif']; // Extensiones permitidas
+        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp']; // Extensiones permitidas (incluyendo WebP)
         $maxFileSize = 5 * 1024 * 1024; // 5 MB
 
         foreach ($_FILES['imagenes']['name'] as $index => $fileName) {
@@ -81,33 +81,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             // Guardar imagen con nombre único
-            $newFileName = $nombreActividad . "_" . ($index + 1) . "." . $extension;
+            $newFileName = $nombreActividad . "_" . ($index + 1) . ".webp"; // Siempre guardamos como WebP
             $filePath = $uploadDir . $newFileName;
-             $tmpPath = $_FILES['imagenes']['tmp_name'][$index];
 
-            // Convertir la imagen a WebP
-            $image = null;
-            switch ($extension) {
-                case 'jpg':
-                case 'jpeg':
-                    $image = imagecreatefromjpeg($tmpPath);
-                    break;
-                case 'png':
-                    $image = imagecreatefrompng($tmpPath);
-                    imagepalettetotruecolor($image); // Convertir a true color para evitar errores de transparencia
-                    imagealphablending($image, true);
-                    imagesavealpha($image, true);
-                    break;
-                case 'gif':
-                    $image = imagecreatefromgif($tmpPath);
-                    break;
+            // Mover el archivo subido a la carpeta temporal
+            $tmpFilePath = $_FILES['imagenes']['tmp_name'][$index];
+
+            // Convertir a WebP si no lo es
+            if ($extension !== 'webp') {
+                // Cargar la imagen según su formato original
+                switch ($extension) {
+                    case 'jpg':
+                    case 'jpeg':
+                        $image = imagecreatefromjpeg($tmpFilePath);
+                        break;
+                    case 'png':
+                        $image = imagecreatefrompng($tmpFilePath);
+                        break;
+                    case 'gif':
+                        $image = imagecreatefromgif($tmpFilePath);
+                        break;
+                    default:
+                        echo json_encode(["status" => "error", "ex" => "Formato de imagen no soportado para conversión."]);
+                        exit();
+                }
+
+                // Convertir y guardar como WebP
+                if ($image !== false) {
+                    imagewebp($image, $filePath, 80); // Calidad 80 (ajustable)
+                    imagedestroy($image); // Liberar memoria
+                } else {
+                    echo json_encode(["status" => "error", "ex" => "Error al procesar la imagen."]);
+                    exit();
+                }
+            } else {
+                // Si ya es WebP, simplemente mover el archivo
+                if (!move_uploaded_file($tmpFilePath, $filePath)) {
+                    echo json_encode(["status" => "error", "ex" => "Error al mover el archivo WebP."]);
+                    exit();
+                }
             }
 
-            if ($image) {
-                imagewebp($image, $filePath, 80); // Guardar como WebP con calidad 80%
-                imagedestroy($image); // Liberar memoria
-                $imagePaths[] = $filePath;
-            }
+            $imagePaths[] = $filePath;
         }
 
         // Convertir rutas de imágenes a JSON
