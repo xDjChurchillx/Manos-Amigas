@@ -88,6 +88,11 @@ $navbar = '
 ';
 
 $panel = '
+
+    <div id="alerta" class="alert alert-danger d-none" role="alert">
+      
+    </div>
+
     <div id="listpanel" class="container text-center mt-4">
         <h2 class="mb-4">Actividades</h2>
        <div class="d-flex justify-content-between align-items-center">

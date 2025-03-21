@@ -20,7 +20,7 @@
                 if (data.status === 'error') {
                     // Si la sesión no es válida, redirigir al usuario
                     if ("ex" in data) {
-                        alert(data.ex);
+                        Alerta(data.ex);
                     }
                     if ("redirect" in data) {
                     //    window.location.href = data.redirect;
@@ -70,17 +70,25 @@ function startPanel(datos) {
                         if ("ex" in data) {
                             document.getElementById("respuesta").innerHTML = data.ex;
                         } else {
-                            alert("Error al agregar la actividad.");
+                            Alerta("Error al agregar la actividad.");
                         }
                     }
                 } catch (error) {
                     console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
-                    alert("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+                    Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
                 }
             })
             .catch(error => console.error("Error en la solicitud:", error));
     });
  
+}
+function Alerta(mensaje) {
+    const alertaDiv = document.getElementById('alerta');
+    alertaDiv.textContent = mensaje;
+    alertaDiv.classList.remove('d-none');
+    setTimeout(() => {
+        alertaDiv.classList.add('d-none');
+    }, 5000);
 }
 function edit(id) {
 	console.log(id);
@@ -115,22 +123,22 @@ function del(id) {
                 try {
                     let data = JSON.parse(text); // Intentamos convertir el texto a JSON
                     if (data.status === 'success') {
-                        //alert(data.mensaje); // Actividad eliminada exitosamente
+                        Alerta(data.mensaje); // Actividad eliminada exitosamente
                     } else {
                         if ("ex" in data) {
-                            alert("Error: " + data.ex);
+                            Alerta("Error: " + data.ex);
                         } else {
-                            alert("Error al eliminar");
+                            Alerta("Error al eliminar");
                         }
                     }
                 } catch (error) {
                     console.error('La respuesta no es JSON:', text); // Imprime el texto antes de que falle
-                    alert('Error inesperado: ' + text); // Mostrar el error en un alert
+                    Alerta('Error inesperado: ' + text); // Mostrar el error en un alert
                 }
             })
             .catch(error => {
                 console.error('Error en la solicitud:', error);
-                alert('Error: Ocurrió un problema al procesar la solicitud');
+                Alerta('Error: Ocurrió un problema al procesar la solicitud');
             });
     }
 }
@@ -160,7 +168,7 @@ async function actualizarDatos(val) {
           //  alert('Datos correctamente');
         } else {
             if ("ex" in data) {
-                alert(data.ex);
+                Alerta(data.ex);
             }
             if ("redirect" in data) {
                 window.location.href = data.redirect;
@@ -168,6 +176,6 @@ async function actualizarDatos(val) {
         }
     } catch (error) {
         console.error('Error al cargar los datos:', error);
-        alert('Hubo un error al cargar los datos');
+        Alerta('Hubo un error al cargar los datos');
     }
 }
