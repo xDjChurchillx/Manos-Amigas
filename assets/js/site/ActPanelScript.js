@@ -107,40 +107,50 @@ function search() {
     console.log('create');
 }
 function del(id) {
-    if (confirm("¿Seguro que deseas eliminar esta actividad?")) {
-        fetch('../assets/php/DelAct.php', {
-            method: 'POST',
-            credentials: 'same-origin',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                codigo: id
-            })
-        })
-            .then(response => response.text()) // Primero obtenemos el texto en bruto
-            .then(text => {
-                try {
-                    let data = JSON.parse(text); // Intentamos convertir el texto a JSON
-                    if (data.status === 'success') {
-                        Alerta(data.mensaje); // Actividad eliminada exitosamente
-                    } else {
-                        if ("ex" in data) {
-                            Alerta("Error: " + data.ex);
-                        } else {
-                            Alerta("Error al eliminar");
+
+    $.confirm({
+        title: 'Eliminar Actividad?',
+        content: 'Actividad:'+id,
+        buttons: {
+            confirm: function () {
+                fetch('../assets/php/DelAct.php', {
+                    method: 'POST',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        codigo: id
+                    })
+                })
+                    .then(response => response.text()) // Primero obtenemos el texto en bruto
+                    .then(text => {
+                        try {
+                            let data = JSON.parse(text); // Intentamos convertir el texto a JSON
+                            if (data.status === 'success') {
+                                //    Alerta(data.mensaje); // Actividad eliminada exitosamente
+                            } else {
+                                if ("ex" in data) {
+                                    Alerta("Error: " + data.ex);
+                                } else {
+                                    Alerta("Error al eliminar");
+                                }
+                            }
+                        } catch (error) {
+                            console.error('La respuesta no es JSON:', text); // Imprime el texto antes de que falle
+                            Alerta('Error inesperado: ' + text); // Mostrar el error en un alert
                         }
-                    }
-                } catch (error) {
-                    console.error('La respuesta no es JSON:', text); // Imprime el texto antes de que falle
-                    Alerta('Error inesperado: ' + text); // Mostrar el error en un alert
-                }
-            })
-            .catch(error => {
-                console.error('Error en la solicitud:', error);
-                Alerta('Error: Ocurrió un problema al procesar la solicitud');
-            });
-    }
+                    })
+                    .catch(error => {
+                        console.error('Error en la solicitud:', error);
+                        Alerta('Error: Ocurrió un problema al procesar la solicitud');
+                    });
+            },
+            cancel: function () {
+               
+            }
+        }
+    });
 }
 async function actualizarDatos(val) {
  
