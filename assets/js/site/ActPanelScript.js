@@ -59,21 +59,26 @@ function startPanel(datos) {
             method: "POST",
             body: formData
         })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById("respuesta").innerHTML = `<p>${data.message}</p>`;
-                if (data.status === "success") {
-                    document.getElementById("actividadForm").reset(); // Limpia el formulario
-                    closeDiv();
-                } else {
-                    if ("ex" in data) {
-                        document.getElementById("respuesta").innerHTML = data.ex;
-					} else {
-						alert("Error al agregar la actividad.");
-					}
+            .then(response => response.text()) // Primero obtenemos el texto en bruto
+            .then(text => {
+                try {
+                    let data = JSON.parse(text); // Intentamos convertirlo a JSON
+                    if (data.status === "success") {
+                        document.getElementById("actividadForm").reset(); // Limpia el formulario
+                        closeDiv();
+                    } else {
+                        if ("ex" in data) {
+                            document.getElementById("respuesta").innerHTML = data.ex;
+                        } else {
+                            alert("Error al agregar la actividad.");
+                        }
+                    }
+                } catch (error) {
+                    console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                    alert("Error inesperado: " + text); // Opcional: mostrar el error en un alert
                 }
             })
-            .catch(error => console.error("Error:", error));
+            .catch(error => console.error("Error en la solicitud:", error));
     });
  
 }
