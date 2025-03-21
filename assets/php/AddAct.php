@@ -71,6 +71,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit();
             }
         }
+
           // Crear carpeta aleatoria para las imágenes
         $randomFolderName = bin2hex(random_bytes(8));
         $uploadDir = "../img/{$randomFolderName}/";
