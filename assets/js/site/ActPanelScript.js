@@ -100,7 +100,7 @@ function search() {
 }
 function del(id) {
     if (confirm("¿Seguro que deseas eliminar esta actividad?")) {
-        fetch('../php/DelAct.php', {
+        fetch('../assets/php/DelAct.php', {
             method: 'POST',
             credentials: 'same-origin',
             headers: {
