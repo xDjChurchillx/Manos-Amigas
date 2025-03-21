@@ -83,8 +83,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Guardar imagen con nombre único
             $newFileName = $nombreActividad . "_" . ($index + 1) . "." . $extension;
             $filePath = $uploadDir . $newFileName;
+             $tmpPath = $_FILES['imagenes']['tmp_name'][$index];
 
-            if (move_uploaded_file($_FILES['imagenes']['tmp_name'][$index], $filePath)) {
+            // Convertir la imagen a WebP
+            $image = null;
+            switch ($extension) {
+                case 'jpg':
+                case 'jpeg':
+                    $image = imagecreatefromjpeg($tmpPath);
+                    break;
+                case 'png':
+                    $image = imagecreatefrompng($tmpPath);
+                    imagepalettetotruecolor($image); // Convertir a true color para evitar errores de transparencia
+                    imagealphablending($image, true);
+                    imagesavealpha($image, true);
+                    break;
+                case 'gif':
+                    $image = imagecreatefromgif($tmpPath);
+                    break;
+            }
+
+            if ($image) {
+                imagewebp($image, $filePath, 80); // Guardar como WebP con calidad 80%
+                imagedestroy($image); // Liberar memoria
                 $imagePaths[] = $filePath;
             }
         }
