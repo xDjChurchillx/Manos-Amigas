@@ -143,7 +143,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
 
-        if ($row['Error'] === '-1') {
+        if (array_key_exists('Error', $row)) {
             echo json_encode([
                 'status' => 'error',
                 'ex' => 'Usuario o token inválido.'
