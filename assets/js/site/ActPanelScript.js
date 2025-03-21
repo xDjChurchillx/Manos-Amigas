@@ -106,11 +106,11 @@ function closeDiv() {
 function search() {
     console.log('create');
 }
-function del(id) {
+function del(id,nombre) {
 
     $.confirm({
         title: 'Eliminar Actividad?',
-        content: 'Actividad:'+id,
+        content: 'Actividad: '+nombre,
         buttons: {
             confirm: function () {
                 fetch('../assets/php/DelAct.php', {
