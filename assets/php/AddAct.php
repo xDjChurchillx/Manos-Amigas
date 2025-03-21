@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Convertir y guardar como WebP
                 if ($image !== false) {
-                    imagewebp($image, $filePath, 80); // Calidad 80 (ajustable)
+                    imagewebp($image, $filePath, 100); // Calidad 80 (ajustable)
                     imagedestroy($image); // Liberar memoria
                 } else {
                     echo json_encode(["status" => "error", "ex" => "Error al procesar la imagen."]);
