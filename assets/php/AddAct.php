@@ -51,20 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!isset($_FILES['imagenes']) || empty($_FILES['imagenes']['name'][0])) {
             echo json_encode(["status" => "error", "ex" => "Debe subir al menos una imagen."]);
             exit();
-        }
-
-        // Crear carpeta aleatoria para las imágenes
-        $randomFolderName = bin2hex(random_bytes(8));
-        $uploadDir = "../img/{$randomFolderName}/";
-
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
+        }            
 
         $imagePaths = [];
         $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp']; // Extensiones permitidas (incluyendo WebP)
         $maxFileSize = 5 * 1024 * 1024; // 5 MB
-
         foreach ($_FILES['imagenes']['name'] as $index => $fileName) {
             $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
@@ -79,7 +70,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["status" => "error", "ex" => "El archivo {$fileName} excede el tamaño permitido (5 MB)."]);
                 exit();
             }
+        }
+          // Crear carpeta aleatoria para las imágenes
+        $randomFolderName = bin2hex(random_bytes(8));
+        $uploadDir = "../img/{$randomFolderName}/";
 
+        if (!file_exists($uploadDir)) {
+            mkdir($uploadDir, 0777, true);
+        }
+        foreach ($_FILES['imagenes']['name'] as $index => $fileName) {
+            $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+          
             // Guardar imagen con nombre único
             $newFileName = $nombreActividad . "_" . ($index + 1) . ".webp"; // Siempre guardamos como WebP
             $filePath = $uploadDir . $newFileName;
