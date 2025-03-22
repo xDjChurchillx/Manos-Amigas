@@ -45,6 +45,13 @@ function startPanel(datos) {
     document.getElementById('navbaritems').innerHTML = datos.navbar;
     document.getElementById('panel').innerHTML = datos.panel;
 
+    datos.filas.forEach(function (item) {
+        console.log(item);
+    });
+
+
+
+
     document.getElementById("crearForm").addEventListener("submit", function (event) {
         event.preventDefault(); // Evita el postback
 
@@ -91,6 +98,46 @@ function edit(id) {
     console.log(id);
     document.getElementById('editdiv').classList.remove('d-none');
     document.getElementById('listpanel').classList.add('d-none');
+
+    document.getElementById('nombreE').value = jsonData.nombre;
+    document.getElementById('descripcionE').value = jsonData.descripcion;
+    document.getElementById('fechaE').value = jsonData.fecha;
+
+    // Cargar imágenes en el div #listImg
+    const listImg = document.getElementById('listImg');
+    listImg.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevas imágenes
+
+    jsonData.imagenes.forEach(imagen => {
+        const div = document.createElement('div');
+        div.className = 'form-check';
+
+        const input = document.createElement('input');
+        input.type = 'checkbox';
+        input.className = 'form-check-input';
+        input.name = 'imgE[]';
+        input.value = imagen.id;
+        input.id = `imagen${imagen.id}`;
+
+        const label = document.createElement('label');
+        label.className = 'form-check-label';
+        label.htmlFor = `imagen${imagen.id}`;
+
+        const img = document.createElement('img');
+        img.src = imagen.url;
+        img.alt = `Imagen ${imagen.id}`;
+        img.className = 'img-thumbnail';
+        img.style.width = '100px';
+
+        label.appendChild(img);
+        div.appendChild(input);
+        div.appendChild(label);
+        listImg.appendChild(div);
+    });
+
+
+
+
+
 }
 function create() {
     console.log('create');
