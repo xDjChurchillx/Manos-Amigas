@@ -38,7 +38,7 @@ $username = $_SESSION['username'];
 
 $data = json_decode(file_get_contents('php://input'), true);
 $codigo = $data['codigo'] ?? '';
-// Insertar en la base de datos
+// eliminar en la base de datos
 $stmt = $conn->prepare('CALL sp_EliminarActividad(?, ?, ?)');
 if (!$stmt) {
     echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);

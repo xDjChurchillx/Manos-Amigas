@@ -51,11 +51,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (!isset($_FILES['imagenes']) || empty($_FILES['imagenes']['name'][0])) {
             echo json_encode(["status" => "error", "ex" => "Debe subir al menos una imagen."]);
             exit();
-        }            
+        }
 
         $imagePaths = [];
         $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp']; // Extensiones permitidas (incluyendo WebP)
         $maxFileSize = 5 * 1024 * 1024; // 5 MB
+
+        // Crear carpeta temporal para las imágenes
+        $tempDir = "../img/temp/";
+
+        // Si la carpeta temporal ya existe, eliminarla y crearla de nuevo en blanco
+        if (file_exists($tempDir)) {
+            // Eliminar todos los archivos dentro de la carpeta temporal
+            $files = glob($tempDir . '*'); // Obtener todos los archivos
+            foreach ($files as $file) {
+                if (is_file($file)) {
+                    unlink($file); // Eliminar cada archivo
+                }
+            }
+            rmdir($tempDir); // Eliminar la carpeta temporal
+        }
+
+        // Crear la carpeta temporal en blanco
+        mkdir($tempDir, 0777, true);
+
         foreach ($_FILES['imagenes']['name'] as $index => $fileName) {
             $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
@@ -70,21 +89,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 echo json_encode(["status" => "error", "ex" => "El archivo {$fileName} excede el tamaño permitido (5 MB)."]);
                 exit();
             }
-        }
 
-          // Crear carpeta aleatoria para las imágenes
-        $randomFolderName = bin2hex(random_bytes(8));
-        $uploadDir = "../img/{$randomFolderName}/";
-
-        if (!file_exists($uploadDir)) {
-            mkdir($uploadDir, 0777, true);
-        }
-        foreach ($_FILES['imagenes']['name'] as $index => $fileName) {
-            $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-          
-            // Guardar imagen con nombre único
             $newFileName = $nombreActividad . "_" . ($index + 1) . ".webp"; // Siempre guardamos como WebP
-            $filePath = $uploadDir . $newFileName;
+            $filePath = $tempDir . $newFileName;
 
             // Mover el archivo subido a la carpeta temporal
             $tmpFilePath = $_FILES['imagenes']['tmp_name'][$index];
@@ -110,7 +117,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 // Convertir y guardar como WebP
                 if ($image !== false) {
-                    imagewebp($image, $filePath, 100); // Calidad 80 (ajustable)
+                    imagewebp($image, $filePath, 100); // Calidad 100 (ajustable)
                     imagedestroy($image); // Liberar memoria
                 } else {
                     echo json_encode(["status" => "error", "ex" => "Error al procesar la imagen."]);
@@ -124,11 +131,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
 
-            $imagePaths[] = $filePath;
+            $imagePaths[] = $newFileName; // Solo guardamos el nombre de la imagen
         }
 
         // Convertir rutas de imágenes a JSON
-        $imageJson = json_encode(["name" => $randomFolderName, "imgs" => $imagePaths], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $imageJson = json_encode($imagePaths, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         // Insertar en la base de datos
         $stmt = $conn->prepare('CALL sp_CrearActividad(?, ?, ?, ?, ?, ?)');
@@ -139,7 +146,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $stmt->bind_param('ssssss', $username, $token, $nombreActividad, $descripcion, $fecha, $imageJson);
 
-       $stmt->execute();
+        $stmt->execute();
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
 
@@ -149,11 +156,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'ex' => 'Usuario o token inválido.'
             ]);
         } else {
-            echo json_encode([
-                'status' => 'success',
-                'mensaje' => $row['Mensaje']
-            ]);
+            if (array_key_exists('Codigo', $row)) {
+                $codigoActividad = $row['Codigo'];
+
+                // Crear carpeta con el nombre del código de la actividad
+                $finalDir = "../img/{$codigoActividad}/";
+                if (!file_exists($finalDir)) {
+                    mkdir($finalDir, 0777, true);
+                }
+
+                // Mover las imágenes de la carpeta temporal a la carpeta final
+                foreach ($imagePaths as $imageName) {
+                    rename($tempDir . $imageName, $finalDir . $imageName);
+                }
+
+                // Eliminar la carpeta temporal
+                if (file_exists($tempDir)) {
+                    $files = glob($tempDir . '*'); // Obtener todos los archivos
+                    foreach ($files as $file) {
+                        if (is_file($file)) {
+                            unlink($file); // Eliminar cada archivo
+                        }
+                    }
+                    rmdir($tempDir); // Eliminar la carpeta temporal
+                }
+
+                echo json_encode([
+                    'status' => 'success',
+                    'codigo' => $codigoActividad,
+                    'imagenes' => $imagePaths
+                ]);
+            } else {
+                echo json_encode([
+                    'status' => 'error',
+                    'ex' => 'Error en base de datos'
+                ]);
+            }
         }
+
         $stmt->close();
         $conn->close();
 }
