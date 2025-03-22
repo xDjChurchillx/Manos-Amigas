@@ -45,7 +45,7 @@ function startPanel(datos) {
     document.getElementById('navbaritems').innerHTML = datos.navbar;
     document.getElementById('panel').innerHTML = datos.panel;
 
-    document.getElementById("actividadForm").addEventListener("submit", function (event) {
+    document.getElementById("crearForm").addEventListener("submit", function (event) {
         event.preventDefault(); // Evita el postback
 
         let formData = new FormData(this); // Captura los datos del formulario
@@ -88,7 +88,9 @@ function Alerta(mensaje) {
     }, 5000);
 }
 function edit(id) {
-	console.log(id);
+    console.log(id);
+    document.getElementById('editdiv').classList.remove('d-none');
+    document.getElementById('listpanel').classList.add('d-none');
 }
 function create() {
     console.log('create');
@@ -96,12 +98,12 @@ function create() {
     document.getElementById('listpanel').classList.add('d-none');
 }
 function closeDiv() {
-    console.log('create');
+    console.log('close');
     document.getElementById('creatediv').classList.add('d-none');
     document.getElementById('listpanel').classList.remove('d-none');
 }
 function search() {
-    console.log('create');
+    console.log('search');
 }
 function del(id,nombre) {
 
@@ -152,41 +154,4 @@ function del(id,nombre) {
             }
         }
     });
-}
-async function actualizarDatos(val) {
- 
-    try {
-        // Enviar los datos al PHP usando fetch
-        const response = await fetch('../assets/php/panel.php', {
-            method: 'POST', // Usar POST para enviar los datos
-            headers: {
-                'Content-Type': 'application/json' // Indicar que el cuerpo es JSON
-            },
-            body: JSON.stringify(datos) // Convertir el objeto a JSON
-        });
-
-        // Verificar si la respuesta es exitosa
-        if (!response.ok) {
-            throw new Error('Error en la solicitud');
-        }
-
-        // Procesar la respuesta JSON
-        const respuesta = await response.json(); // 👈 Cambiado a "respuesta"
-        console.log('Respuesta del servidor:', respuesta);
-
-        // Aquí puedes manejar la respuesta del servidor
-        if (respuesta.status === 'success') {
-          //  alert('Datos correctamente');
-        } else {
-            if ("ex" in data) {
-                Alerta(data.ex);
-            }
-            if ("redirect" in data) {
-                window.location.href = data.redirect;
-            }
-        }
-    } catch (error) {
-        console.error('Error al cargar los datos:', error);
-        Alerta('Hubo un error al cargar los datos');
-    }
 }
