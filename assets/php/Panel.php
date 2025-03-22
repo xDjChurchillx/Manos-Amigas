@@ -181,6 +181,9 @@ try{
     ';
 
     $panel = '
+          <div id="alerta" class="alert alert-danger d-none" role="alert">
+      
+          </div>
           <div class="container">	        
 		        <div class="row text-center mtop">
 	                <div class="col">

@@ -66,6 +66,9 @@ function startPanel(datos) {
                         } else {
                             Alerta("Error al agregar la actividad.");
                         }
+                        if ("redirect" in data) {
+                            window.location.href = data.redirect;
+                        }
                     }
                 } catch (error) {
                     console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
@@ -129,6 +132,9 @@ function del(id,nombre) {
                                     Alerta("Error: " + data.ex);
                                 } else {
                                     Alerta("Error al eliminar");
+                                }
+                                if ("redirect" in data) {
+                                    window.location.href = data.redirect;
                                 }
                             }
                         } catch (error) {
