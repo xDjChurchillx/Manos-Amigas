@@ -4,53 +4,43 @@ let desde;
 let hasta;
 let opciones;
 document.addEventListener("DOMContentLoaded", function () {
-    // Función para verificar la sesión
-    function startSession() {
-
-
-
-
-        // Realizar la solicitud AJAX
-        fetch('../assets/php/Panel.php', {
-            method: 'GET',
-            credentials: 'same-origin',  // Mantener la sesión activa si es posible
-        })
-            .then(response => {
-                // Verificamos que la respuesta sea exitosa antes de convertirla en JSON
-                if (!response.ok) {
-                    // En caso de error (fallo en la solicitud o procesamiento), mostrar el error
-                    console.log('Error en la solicitud');
-                    // Redirigir al login en caso de un fallo
-                    window.location.href = 'ingreso.html';
-                }
-                return response.json();
-            })
-            .then(data => {
-                if (data.status === 'error') {
-                    // Si la sesión no es válida, redirigir al usuario
-                    if ("ex" in data) {
-                        alert(data.ex);
-                    }
-                    if ("redirect" in data) {
-                        window.location.href = data.redirect;
-                    }                   
-                } else if (data.status === 'success') {                 
-                    // Llamar al contador después de que el HTML se haya cargado
-                    startPanel(data);
-                }
-            })
-            .catch(error => {
-                // En caso de error (fallo en la solicitud o procesamiento), mostrar el error
-                console.error('Error al verificar la sesión:', error);
-                // Redirigir al login en caso de un fallo
-                window.location.href = 'ingreso.html?error=1';
-            });
-    }
-
     // Llamar a la función de verificación de sesión al cargar la página
     startSession();
 });
-
+// Función para verificar la sesión
+function startSession() {
+    fetch("../assets/php/Panel.php", {
+        method: 'GET',
+        credentials: 'same-origin'
+    })
+        .then(response => response.text()) // Primero obtenemos el texto en bruto
+        .then(text => {
+            try {
+                let data = JSON.parse(text); // Intentamos convertirlo a JSON
+                if (data.status === "success") {
+                    startPanel(data);
+                } else {
+                    if ("ex" in data) {
+                        Alerta(data.ex)
+                    } else {
+                        Alerta("Error");
+                    }
+                    if ("redirect" in data) {
+                        window.location.href = data.redirect;
+                    }
+                }
+            } catch (error) {
+                console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+            }
+        })
+        .catch(error => {
+            // En caso de error (fallo en la solicitud o procesamiento), mostrar el error
+            console.error('Error al verificar la sesión:', error);
+            // Redirigir al login en caso de un fallo
+            window.location.href = 'ingreso.html?error=1';
+        });
+}
 // Función para inicializar el contador después de cargar el HTML
 function startPanel(datos) {
 
