@@ -133,13 +133,14 @@ function edit(id) {
         input.name = 'imgE[]';
         input.value = index; // Usar el índice como valor (o puedes usar un ID único si lo tienes)
         input.id = `imagen${index}`;
+        input.checked = true; // Marcar el checkbox por defecto
 
         const label = document.createElement('label');
         label.className = 'form-check-label';
         label.htmlFor = `imagen${index}`;
 
         const img = document.createElement('img');
-        img.src = `../assets/img/${imagen}`; // Ajusta la ruta según tu estructura de archivos
+        img.src = `../assets/img/${id.replace(/\D/g, '')}/${imagen}`; // Ajusta la ruta según tu estructura de archivos
         img.alt = `Imagen ${index}`;
         img.className = 'img-thumbnail';
         img.style.width = '100px';
