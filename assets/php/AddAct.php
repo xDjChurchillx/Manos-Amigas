@@ -158,7 +158,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } else {
             if (array_key_exists('Codigo', $row)) {
                 $codigoActividad = $row['Codigo'];
-
+                $codigoActividad = preg_replace('/[^0-9a-zA-Z\s]/', '', $codigoActividad);
                 // Crear carpeta con el nombre del código de la actividad
                 $finalDir = "../img/{$codigoActividad}/";
                 if (!file_exists($finalDir)) {
