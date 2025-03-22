@@ -56,10 +56,31 @@ if (array_key_exists('Error', $row)) {
         'ex' => 'Usuario o token inválido.'
     ]);
 } else {
-    echo json_encode([
-        'status' => 'success',
-        'mensaje' => $row['Mensaje']
+   
+    if(array_key_exists('Mensaje',$row)){
+                $codigoActividad = preg_replace('/\D/', '', $codigo);
+                // Crear carpeta con el nombre del código de la actividad
+                $finalDir = "../img/{$codigoActividad}/"; 
+                // Eliminar la carpeta temporal
+                if (file_exists($finalDir)) {
+                    $files = glob($finalDir . '*'); // Obtener todos los archivos
+                    foreach ($files as $file) {
+                        if (is_file($file)) {
+                            unlink($file); // Eliminar cada archivo
+                        }
+                    }
+                    rmdir($finalDir); // Eliminar la carpeta temporal
+                }
+                  echo json_encode([
+                    'status' => 'success',
+                    'mensaje' => $row['Mensaje']
+                ]);
+    }else {
+	    echo json_encode([
+        'status' => 'error',
+        'ex' => 'Error en base de datos'
     ]);
+    }  
 }
 $stmt->close();
 $conn->close();
