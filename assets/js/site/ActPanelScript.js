@@ -64,8 +64,7 @@ function startPanel(datos) {
                 try {
                     let data = JSON.parse(text); // Intentamos convertirlo a JSON
                     if (data.status === "success") {
-                        document.getElementById("actividadForm").reset(); // Limpia el formulario
-                        closeDiv();
+                        location.reload();
                     } else {
                         if ("ex" in data) {
                             document.getElementById("respuesta").innerHTML = data.ex;
@@ -129,6 +128,7 @@ function del(id,nombre) {
                             let data = JSON.parse(text); // Intentamos convertir el texto a JSON
                             if (data.status === 'success') {
                                 //    Alerta(data.mensaje); // Actividad eliminada exitosamente
+                                location.reload();
                             } else {
                                 if ("ex" in data) {
                                     Alerta("Error: " + data.ex);
