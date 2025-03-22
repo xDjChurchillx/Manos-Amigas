@@ -104,12 +104,13 @@ function edit(id) {
     document.getElementById('listpanel').classList.add('d-none');
 
     // Obtener los datos del item usando el id desde la variable global
-    const item = globalData[id];
+    const item = listaActividades[id];
 
     if (!item) {
         console.error("No se encontró el item con el ID:", id);
         return;
     }
+    console.log();
 
     // Rellenar los campos del formulario con los datos del item
     document.getElementById('nombreE').value = item.Nombre;
@@ -163,6 +164,7 @@ function create() {
 function closeDiv() {
     console.log('close');
     document.getElementById('creatediv').classList.add('d-none');
+    document.getElementById('editdiv').classList.add('d-none');
     document.getElementById('listpanel').classList.remove('d-none');
 }
 function search() {
