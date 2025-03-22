@@ -112,7 +112,7 @@ function del(id,nombre) {
         title: 'Eliminar Actividad?',
         content: 'Actividad: '+nombre,
         buttons: {
-            confirm: function () {
+            confirmar: function () {
                 fetch('../assets/php/DelAct.php', {
                     method: 'POST',
                     credentials: 'same-origin',
@@ -146,7 +146,7 @@ function del(id,nombre) {
                         Alerta('Error: Ocurrió un problema al procesar la solicitud');
                     });
             },
-            cancel: function () {
+            cancelar: function () {
                
             }
         }
