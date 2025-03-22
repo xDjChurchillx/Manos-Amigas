@@ -110,7 +110,6 @@ function edit(id) {
         console.error("No se encontró el item con el ID:", id);
         return;
     }
-    console.log();
 
     // Rellenar los campos del formulario con los datos del item
     document.getElementById('nombreE').value = item.Nombre;
