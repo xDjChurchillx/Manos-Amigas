@@ -115,16 +115,14 @@ function startPanel(datos) {
 
 
 }
-
 async function actualizarDatos(val) {
-
-    // Obtener los valores
     const hoy = new Date().toLocaleDateString('en-CA', {
         timeZone: 'America/Costa_Rica',
         year: 'numeric',
         month: '2-digit',
         day: '2-digit'
     });
+
     if (val === '0') {
         switch (opciones.value) {
             case 'hoy':
@@ -144,78 +142,66 @@ async function actualizarDatos(val) {
         }
     } else {
         opciones.value = '';
-        if (val === '1') {
-            if (new Date(desde.value) > new Date(hasta.value)) {
-                hasta.value = desde.value; // Asignar el mismo valor a 'hasta' que 'desde'
-            }
-        } else {
-            if (new Date(desde.value) > new Date(hasta.value)) {
-                desde.value = hasta.value; // Asignar el mismo valor a 'hasta' que 'desde'
+        if (new Date(desde.value) > new Date(hasta.value)) {
+            if (val === '1') {
+                hasta.value = desde.value;
+            } else {
+                desde.value = hasta.value;
             }
         }
     }
-    if (desde.value == '') {
-        hasta.disabled = true;
+
+    hasta.disabled = !desde.value;
+    if (!desde.value) {
         hasta.value = '';
-    } else {
-        hasta.disabled = false;
     }
 
-    const opcion = opciones.value;
-    const fechaDesde = desde.value;
-    const fechaHasta = hasta.value;
-
-    // Crear un objeto con los datos
     const datos = {
-        fechaDesde: fechaDesde,
-        fechaHasta: fechaHasta,
-        opcion: opcion
+        fechaDesde: desde.value,
+        fechaHasta: hasta.value,
+        opcion: opciones.value
     };
 
     try {
-
         const response = await fetch("../assets/php/panel.php", {
-            method: 'POST'
-        })
-            .then(response => response.text()) // Primero obtenemos el texto en bruto
-            .then(text => {
-                try {
-                    let data = JSON.parse(text); // Intentamos convertirlo a JSON
-                    if (data.status === "success") {
-                        document.getElementById("visitas").innerText = data.sumas.visitas;
-                        document.getElementById("suscripciones").innerText = data.sumas.suscripciones;
-                        document.getElementById("donaciones").innerText = data.sumas.donaciones;
-                        document.getElementById("voluntarios").innerText = data.sumas.voluntarios;
-                        chart.updateOptions({
-                            series: [
-                                { name: "Visitas", data: data.data1 },
-                                { name: "Suscripciones", data: data.data2 },
-                                { name: "Donaciones", data: data.data3 },
-                                { name: "Voluntarios", data: data.data4 }
-                            ],
-                            xaxis: {
-                                categories: data.cat
-                            }
-                        });
-                    } else {
-                        if ("ex" in data) {
-                            Alerta(data.ex);
-                        }
-                        if ("redirect" in data) {
-                            window.location.href = data.redirect;
-                        }
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datos)
+        });
+
+        const text = await response.text();
+        try {
+            const data = JSON.parse(text);
+            if (data.status === "success") {
+                document.getElementById("visitas").innerText = data.sumas.visitas;
+                document.getElementById("suscripciones").innerText = data.sumas.suscripciones;
+                document.getElementById("donaciones").innerText = data.sumas.donaciones;
+                document.getElementById("voluntarios").innerText = data.sumas.voluntarios;
+                chart.updateOptions({
+                    series: [
+                        { name: "Visitas", data: data.data1 },
+                        { name: "Suscripciones", data: data.data2 },
+                        { name: "Donaciones", data: data.data3 },
+                        { name: "Voluntarios", data: data.data4 }
+                    ],
+                    xaxis: {
+                        categories: data.cat
                     }
-                } catch (error) {
-                    console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
-                    Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+                });
+            } else {
+                if ("ex" in data) {
+                    Alerta(data.ex);
                 }
-            })
-            .catch(error => console.error("Error en la solicitud:", error));
-
-
-
-
-
+                if ("redirect" in data) {
+                    window.location.href = data.redirect;
+                }
+            }
+        } catch (error) {
+            console.error("La respuesta no es JSON:", text);
+            Alerta("Error inesperado: " + text);
+        }
     } catch (error) {
         console.error('Error al cargar los datos:', error);
         Alerta('Hubo un error al cargar los datos');
