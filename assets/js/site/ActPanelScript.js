@@ -89,7 +89,38 @@ function startPanel(datos) {
             .catch(error => console.error("Error en la solicitud:", error));
     });
 
-   
+    document.getElementById("editForm").addEventListener("submit", function (event) {
+        event.preventDefault(); // Evita el postback
+
+        let formData = new FormData(this); // Captura los datos del formulario
+
+        fetch("../assets/php/UpdAct.php", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.text()) // Primero obtenemos el texto en bruto
+            .then(text => {
+                try {
+                    let data = JSON.parse(text); // Intentamos convertirlo a JSON
+                    if (data.status === "success") {
+                        location.reload();
+                    } else {
+                        if ("ex" in data) {
+                            document.getElementById("respuestaE").innerHTML = data.ex;
+                        } else {
+                            Alerta("Error al actualizar la actividad.");
+                        }
+                        if ("redirect" in data) {
+                            window.location.href = data.redirect;
+                        }
+                    }
+                } catch (error) {
+                    console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                    Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+                }
+            })
+            .catch(error => console.error("Error en la solicitud:", error));
+    });
  
 }
 function Alerta(mensaje) {
