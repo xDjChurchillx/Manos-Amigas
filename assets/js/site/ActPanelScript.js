@@ -1,4 +1,7 @@
-﻿document.addEventListener("DOMContentLoaded", function () {
+﻿// Objeto global para almacenar los datos
+let listaActividades = {};
+
+document.addEventListener("DOMContentLoaded", function () {
    // Llamar a la función de verificación de sesión al cargar la página
     startSession();
 });
@@ -47,6 +50,7 @@ function startPanel(datos) {
 
     datos.filas.forEach(function (item) {
         console.log(item);
+        listaActividades[item.Codigo] = item;
     });
 
 
@@ -99,15 +103,27 @@ function edit(id) {
     document.getElementById('editdiv').classList.remove('d-none');
     document.getElementById('listpanel').classList.add('d-none');
 
-    document.getElementById('nombreE').value = jsonData.nombre;
-    document.getElementById('descripcionE').value = jsonData.descripcion;
-    document.getElementById('fechaE').value = jsonData.fecha;
+    // Obtener los datos del item usando el id desde la variable global
+    const item = globalData[id];
+
+    if (!item) {
+        console.error("No se encontró el item con el ID:", id);
+        return;
+    }
+
+    // Rellenar los campos del formulario con los datos del item
+    document.getElementById('nombreE').value = item.Nombre;
+    document.getElementById('descripcionE').value = item.Descripcion;
+    document.getElementById('fechaE').value = item.Fecha;
 
     // Cargar imágenes en el div #listImg
     const listImg = document.getElementById('listImg');
     listImg.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevas imágenes
 
-    jsonData.imagenes.forEach(imagen => {
+    // Parsear el campo Img (que es un string JSON) a un array de imágenes
+    const imagenes = JSON.parse(item.Img);
+
+    imagenes.forEach((imagen, index) => {
         const div = document.createElement('div');
         div.className = 'form-check';
 
@@ -115,16 +131,16 @@ function edit(id) {
         input.type = 'checkbox';
         input.className = 'form-check-input';
         input.name = 'imgE[]';
-        input.value = imagen.id;
-        input.id = `imagen${imagen.id}`;
+        input.value = index; // Usar el índice como valor (o puedes usar un ID único si lo tienes)
+        input.id = `imagen${index}`;
 
         const label = document.createElement('label');
         label.className = 'form-check-label';
-        label.htmlFor = `imagen${imagen.id}`;
+        label.htmlFor = `imagen${index}`;
 
         const img = document.createElement('img');
-        img.src = imagen.url;
-        img.alt = `Imagen ${imagen.id}`;
+        img.src = `ruta/a/tus/imagenes/${imagen}`; // Ajusta la ruta según tu estructura de archivos
+        img.alt = `Imagen ${index}`;
         img.className = 'img-thumbnail';
         img.style.width = '100px';
 
