@@ -180,10 +180,7 @@ try{
             </li>
     ';
 
-    $panel = '
-          <div id="alerta" class="alert alert-danger d-none" role="alert">
-      
-          </div>
+    $panel = '         
           <div class="container">	        
 		        <div class="row text-center mtop">
 	                <div class="col">
