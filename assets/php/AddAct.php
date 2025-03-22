@@ -36,166 +36,157 @@ if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
 $token = $_COOKIE['token'] ;
 $username = $_SESSION['username'];
 
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $nombreActividad = trim($_POST['nombre'] ?? '');
-        $descripcion = trim($_POST['descripcion'] ?? '');
-        $fecha = trim($_POST['fecha'] ?? date('Y-m-d H:i:s'));
+    $codigoActividad = trim($_POST['codigoE'] ?? '');
+    $nombreActividad = trim($_POST['nombreE'] ?? '');
+    $descripcion = trim($_POST['descripcionE'] ?? '');
+    $fecha = trim($_POST['fechaE'] ?? date('Y-m-d H:i:s'));
+    $imagenesExistentes = $_POST['imgE'] ?? [];
+    $nuevasImagenes = $_FILES['newimgE'] ?? [];
 
-        // Validación de datos
-        if (empty($nombreActividad) || empty($descripcion) || empty($fecha)) {
-            echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
-            exit();
-        }
+    // Validación de datos
+    if (empty($codigoActividad) || empty($nombreActividad) || empty($descripcion) || empty($fecha)) {
+        echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
+        exit();
+    }
 
-        // Validar si hay imágenes antes de procesarlas
-        if (!isset($_FILES['imagenes']) || empty($_FILES['imagenes']['name'][0])) {
-            echo json_encode(["status" => "error", "ex" => "Debe subir al menos una imagen."]);
-            exit();
-        }
+    // Validar si hay imágenes existentes o nuevas
+    if (empty($imagenesExistentes) && empty($nuevasImagenes['name'][0])) {
+        echo json_encode(["status" => "error", "ex" => "Debe haber al menos una imagen."]);
+        exit();
+    }
 
-        $imagePaths = [];
-        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp']; // Extensiones permitidas (incluyendo WebP)
-        $maxFileSize = 5 * 1024 * 1024; // 5 MB
+    // Procesar imágenes existentes
+    $imagenesActualizadas = [];
+    foreach ($imagenesExistentes as $imagen) {
+        $imagenesActualizadas[] = $imagen;
+    }
 
-        // Crear carpeta temporal para las imágenes
-        $tempDir = "../img/temp/";
+    // Procesar nuevas imágenes
+    $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+    $maxFileSize = 5 * 1024 * 1024; // 5 MB
+    $tempDir = "../img/temp/";
 
-        // Si la carpeta temporal ya existe, eliminarla y crearla de nuevo en blanco
-        if (file_exists($tempDir)) {
-            // Eliminar todos los archivos dentro de la carpeta temporal
-            $files = glob($tempDir . '*'); // Obtener todos los archivos
-            foreach ($files as $file) {
-                if (is_file($file)) {
-                    unlink($file); // Eliminar cada archivo
-                }
-            }
-            rmdir($tempDir); // Eliminar la carpeta temporal
-        }
-
-        // Crear la carpeta temporal en blanco
+    if (!file_exists($tempDir)) {
         mkdir($tempDir, 0777, true);
+    }
 
-        foreach ($_FILES['imagenes']['name'] as $index => $fileName) {
-            $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+    foreach ($nuevasImagenes['name'] as $index => $fileName) {
+        $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
-            // Validar tipo de archivo
-            if (!in_array($extension, $allowedExtensions)) {
-                echo json_encode(["status" => "error", "ex" => "Formato de imagen no permitido ($extension)."]);
-                exit();
-            }
-
-            // Validar tamaño de archivo
-            if ($_FILES['imagenes']['size'][$index] > $maxFileSize) {
-                echo json_encode(["status" => "error", "ex" => "El archivo {$fileName} excede el tamaño permitido (5 MB)."]);
-                exit();
-            }
-
-            $newFileName = $nombreActividad . "_" . ($index + 1) . ".webp"; // Siempre guardamos como WebP
-            $filePath = $tempDir . $newFileName;
-
-            // Mover el archivo subido a la carpeta temporal
-            $tmpFilePath = $_FILES['imagenes']['tmp_name'][$index];
-
-            // Convertir a WebP si no lo es
-            if ($extension !== 'webp') {
-                // Cargar la imagen según su formato original
-                switch ($extension) {
-                    case 'jpg':
-                    case 'jpeg':
-                        $image = imagecreatefromjpeg($tmpFilePath);
-                        break;
-                    case 'png':
-                        $image = imagecreatefrompng($tmpFilePath);
-                        break;
-                    case 'gif':
-                        $image = imagecreatefromgif($tmpFilePath);
-                        break;
-                    default:
-                        echo json_encode(["status" => "error", "ex" => "Formato de imagen no soportado para conversión."]);
-                        exit();
-                }
-
-                // Convertir y guardar como WebP
-                if ($image !== false) {
-                    imagewebp($image, $filePath, 100); // Calidad 100 (ajustable)
-                    imagedestroy($image); // Liberar memoria
-                } else {
-                    echo json_encode(["status" => "error", "ex" => "Error al procesar la imagen."]);
-                    exit();
-                }
-            } else {
-                // Si ya es WebP, simplemente mover el archivo
-                if (!move_uploaded_file($tmpFilePath, $filePath)) {
-                    echo json_encode(["status" => "error", "ex" => "Error al mover el archivo WebP."]);
-                    exit();
-                }
-            }
-
-            $imagePaths[] = $newFileName; // Solo guardamos el nombre de la imagen
-        }
-
-        // Convertir rutas de imágenes a JSON
-        $imageJson = json_encode($imagePaths, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-
-        // Insertar en la base de datos
-        $stmt = $conn->prepare('CALL sp_CrearActividad(?, ?, ?, ?, ?, ?)');
-        if (!$stmt) {
-            echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
+        if (!in_array($extension, $allowedExtensions)) {
+            echo json_encode(["status" => "error", "ex" => "Formato de imagen no permitido ($extension)."]);
             exit();
         }
 
-        $stmt->bind_param('ssssss', $username, $token, $nombreActividad, $descripcion, $fecha, $imageJson);
+        if ($nuevasImagenes['size'][$index] > $maxFileSize) {
+            echo json_encode(["status" => "error", "ex" => "El archivo {$fileName} excede el tamaño permitido (5 MB)."]);
+            exit();
+        }
 
-        $stmt->execute();
-        $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
+        $newFileName = "img_" . (count($imagenesActualizadas) + 1) . ".webp";
+        $filePath = $tempDir . $newFileName;
 
-        if (array_key_exists('Error', $row)) {
-            echo json_encode([
-                'status' => 'error',
-                'ex' => 'Usuario o token inválido.'
-            ]);
+        $tmpFilePath = $nuevasImagenes['tmp_name'][$index];
+
+        if ($extension !== 'webp') {
+            switch ($extension) {
+                case 'jpg':
+                case 'jpeg':
+                    $image = imagecreatefromjpeg($tmpFilePath);
+                    break;
+                case 'png':
+                    $image = imagecreatefrompng($tmpFilePath);
+                    break;
+                case 'gif':
+                    $image = imagecreatefromgif($tmpFilePath);
+                    break;
+                default:
+                    echo json_encode(["status" => "error", "ex" => "Formato de imagen no soportado para conversión."]);
+                    exit();
+            }
+
+            if ($image !== false) {
+                imagewebp($image, $filePath, 100);
+                imagedestroy($image);
+            } else {
+                echo json_encode(["status" => "error", "ex" => "Error al procesar la imagen."]);
+                exit();
+            }
         } else {
-            if (array_key_exists('Codigo', $row)) {
-                $codigoActividad = $row['Codigo'];
-                $codigoActividad = preg_replace('/\D/', '', $codigoActividad);
-                // Crear carpeta con el nombre del código de la actividad
-                $finalDir = "../img/{$codigoActividad}/";
-                if (!file_exists($finalDir)) {
-                    mkdir($finalDir, 0777, true);
-                }
+            if (!move_uploaded_file($tmpFilePath, $filePath)) {
+                echo json_encode(["status" => "error", "ex" => "Error al mover el archivo WebP."]);
+                exit();
+            }
+        }
 
-                // Mover las imágenes de la carpeta temporal a la carpeta final
-                foreach ($imagePaths as $imageName) {
+        $imagenesActualizadas[] = $newFileName;
+    }
+
+    // Convertir rutas de imágenes a JSON
+    $imageJson = json_encode($imagenesActualizadas, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+
+    // Actualizar en la base de datos
+    $stmt = $conn->prepare('CALL sp_ActualizarActividad(?, ?, ?, ?, ?, ?, ?)');
+    if (!$stmt) {
+        echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
+        exit();
+    }
+
+    $stmt->bind_param('sssssss', $username, $token, $codigoActividad, $nombreActividad, $descripcion, $fecha, $imageJson);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    if (array_key_exists('Error', $row)) {
+        echo json_encode([
+            'status' => 'error',
+            'ex' => 'Usuario o token inválido.'
+        ]);
+    } else {
+        if (array_key_exists('Codigo', $row)) {
+            $codigoActividad = $row['Codigo'];
+            $codigoActividad = preg_replace('/\D/', '', $codigoActividad);
+            $finalDir = "../img/{$codigoActividad}/";
+
+            if (!file_exists($finalDir)) {
+                mkdir($finalDir, 0777, true);
+            }
+
+            // Mover las imágenes de la carpeta temporal a la carpeta final
+            foreach ($imagenesActualizadas as $imageName) {
+                if (file_exists($tempDir . $imageName)) {
                     rename($tempDir . $imageName, $finalDir . $imageName);
                 }
-
-                // Eliminar la carpeta temporal
-                if (file_exists($tempDir)) {
-                    $files = glob($tempDir . '*'); // Obtener todos los archivos
-                    foreach ($files as $file) {
-                        if (is_file($file)) {
-                            unlink($file); // Eliminar cada archivo
-                        }
-                    }
-                    rmdir($tempDir); // Eliminar la carpeta temporal
-                }
-
-                echo json_encode([
-                    'status' => 'success'
-                ]);
-            } else {
-                echo json_encode([
-                    'status' => 'error',
-                    'ex' => 'Error en base de datos'
-                ]);
             }
+
+            // Eliminar la carpeta temporal
+            if (file_exists($tempDir)) {
+                $files = glob($tempDir . '*');
+                foreach ($files as $file) {
+                    if (is_file($file)) {
+                        unlink($file);
+                    }
+                }
+                rmdir($tempDir);
+            }
+
+            echo json_encode([
+                'status' => 'success'
+            ]);
+        } else {
+            echo json_encode([
+                'status' => 'error',
+                'ex' => 'Error en base de datos'
+            ]);
         }
+    }
 
-        $stmt->close();
-        $conn->close();
+    $stmt->close();
+    $conn->close();
 }
-
 } catch (Exception $ex) {
      echo json_encode([
         'status' => 'error',

@@ -185,6 +185,10 @@ $panel .= '</div>
         <h2>Editar Actividad</h2>
         <form id="editarActividadForm" enctype="multipart/form-data">
             <div class="mb-3">
+                <label for="codigoE" class="form-label">Fecha de creacion</label>
+                <input type="text" name="codigoE" id="codigoE" class="form-control" value="Codigo" required readonly>
+            </div>
+            <div class="mb-3">
                 <label for="nombreE" class="form-label">Nombre de la actividad</label>
                 <input type="text" name="nombreE" id="nombreE" class="form-control" value="Nombre de la actividad" required>
             </div>
@@ -199,7 +203,18 @@ $panel .= '</div>
             <div class="mb-3">
                 <label class="form-label">Imágenes existentes</label>
                <div id="listImg">
-                    
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="imgE[]" value="1" id="imagen1">
+                        <label class="form-check-label" for="imagen1">
+                            <img src="ruta/a/imagen1.jpg" alt="Imagen 1" class="img-thumbnail" style="width: 100px;">
+                        </label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="imgE[]" value="2" id="imagen2">
+                        <label class="form-check-label" for="imagen2">
+                            <img src="ruta/a/imagen2.jpg" alt="Imagen 2" class="img-thumbnail" style="width: 100px;">
+                        </label>
+                    </div>
                </div>
               
                 
@@ -208,7 +223,7 @@ $panel .= '</div>
                 <label for="newimgE" class="form-label">Añadir nuevas imágenes</label>
                 <input type="file" name="newimgE[]" id="newimgE" class="form-control" multiple accept="image/*">
             </div>
-            <span id="respuesta" class="text-danger"></span>
+            <span id="respuestaE" class="text-danger"></span>
             <button type="submit" class="btn btn-primary">Guardar Cambios</button>
         </form>
     </div>
