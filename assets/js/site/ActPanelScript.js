@@ -139,7 +139,7 @@ function edit(id) {
         label.htmlFor = `imagen${index}`;
 
         const img = document.createElement('img');
-        img.src = `ruta/a/tus/imagenes/${imagen}`; // Ajusta la ruta según tu estructura de archivos
+        img.src = `../assets/img/${imagen}`; // Ajusta la ruta según tu estructura de archivos
         img.alt = `Imagen ${index}`;
         img.className = 'img-thumbnail';
         img.style.width = '100px';
