@@ -152,16 +152,16 @@ async function actualizarDatos(val) {
             if (new Date(desde.value) > new Date(hasta.value)) {
                 desde.value = hasta.value; // Asignar el mismo valor a 'hasta' que 'desde'
             }
-        }   
+        }
     }
     if (desde.value == '') {
-        hasta.disabled = true; 
+        hasta.disabled = true;
         hasta.value = '';
     } else {
-        hasta.disabled = false; 
+        hasta.disabled = false;
     }
-  
-    const opcion = opciones.value; 
+
+    const opcion = opciones.value;
     const fechaDesde = desde.value;
     const fechaHasta = hasta.value;
 
@@ -171,55 +171,54 @@ async function actualizarDatos(val) {
         fechaHasta: fechaHasta,
         opcion: opcion
     };
-    
+
     try {
-        // Enviar los datos al PHP usando fetch
-        const response = await fetch('../assets/php/panel.php', {
-            method: 'POST', // Usar POST para enviar los datos
-            headers: {
-                'Content-Type': 'application/json' // Indicar que el cuerpo es JSON
-            },
-            body: JSON.stringify(datos) // Convertir el objeto a JSON
-        });
 
-        // Verificar si la respuesta es exitosa
-        if (!response.ok) {
-            throw new Error('Error en la solicitud');
-        }
-
-        // Procesar la respuesta JSON
-        const respuesta = await response.json(); // 👈 Cambiado a "respuesta"
-        console.log('Respuesta del servidor:', respuesta);
-
-        // Aquí puedes manejar la respuesta del servidor
-        if (respuesta.status === 'success') {
-            document.getElementById("visitas").innerText = respuesta.sumas.visitas;
-            document.getElementById("suscripciones").innerText = respuesta.sumas.suscripciones;
-            document.getElementById("donaciones").innerText = respuesta.sumas.donaciones;
-            document.getElementById("voluntarios").innerText = respuesta.sumas.voluntarios;
-            chart.updateOptions({
-                series: [
-                    { name: "Visitas", data: respuesta.data1 },
-                    { name: "Suscripciones", data: respuesta.data2 },
-                    { name: "Donaciones", data: respuesta.data3 },
-                    { name: "Voluntarios", data: respuesta.data4 }
-                ],
-                xaxis: {
-                    categories: respuesta.cat
+        const response = await fetch("../assets/php/panel.php", {
+            method: 'POST'
+        })
+            .then(response => response.text()) // Primero obtenemos el texto en bruto
+            .then(text => {
+                try {
+                    let data = JSON.parse(text); // Intentamos convertirlo a JSON
+                    if (data.status === "success") {
+                        document.getElementById("visitas").innerText = data.sumas.visitas;
+                        document.getElementById("suscripciones").innerText = data.sumas.suscripciones;
+                        document.getElementById("donaciones").innerText = data.sumas.donaciones;
+                        document.getElementById("voluntarios").innerText = data.sumas.voluntarios;
+                        chart.updateOptions({
+                            series: [
+                                { name: "Visitas", data: data.data1 },
+                                { name: "Suscripciones", data: data.data2 },
+                                { name: "Donaciones", data: data.data3 },
+                                { name: "Voluntarios", data: data.data4 }
+                            ],
+                            xaxis: {
+                                categories: data.cat
+                            }
+                        });
+                    } else {
+                        if ("ex" in data) {
+                            Alerta(data.ex);
+                        }
+                        if ("redirect" in data) {
+                            window.location.href = data.redirect;
+                        }
+                    }
+                } catch (error) {
+                    console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                    Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
                 }
-            });
-        } else {
-            console.log('Error al actualizar los datos');
-            if ("ex" in data) {
-                alert(data.ex);
-            }
-            if ("redirect" in data) {
-                window.location.href = data.redirect;
-            }
-        }
+            })
+            .catch(error => console.error("Error en la solicitud:", error));
+
+
+
+
+
     } catch (error) {
         console.error('Error al cargar los datos:', error);
-        alert('Hubo un error al cargar los datos');
+        Alerta('Hubo un error al cargar los datos');
     }
 }
 
