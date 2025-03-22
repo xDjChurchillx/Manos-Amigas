@@ -6,6 +6,10 @@ let opciones;
 document.addEventListener("DOMContentLoaded", function () {
     // Función para verificar la sesión
     function startSession() {
+
+
+
+
         // Realizar la solicitud AJAX
         fetch('../assets/php/Panel.php', {
             method: 'GET',
