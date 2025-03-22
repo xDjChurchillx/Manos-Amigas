@@ -89,7 +89,7 @@ function startPanel(datos) {
             .catch(error => console.error("Error en la solicitud:", error));
     });
 
-    document.getElementById("crearForm").addEventListener("submit", function (event) {
+    document.getElementById("editForm").addEventListener("submit", function (event) {
         event.preventDefault(); // Evita el postback
 
         let formData = new FormData(this); // Captura los datos del formulario
