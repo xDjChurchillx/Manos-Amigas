@@ -22,7 +22,7 @@ function startSession() {
                         Alerta("Error");
                     }
                     if ("redirect" in data) {
-                        window.location.href = data.redirect;
+                       // window.location.href = data.redirect;
                     }
                 }
             } catch (error) {
