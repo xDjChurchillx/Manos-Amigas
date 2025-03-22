@@ -183,7 +183,7 @@ $panel .= '</div>
             </svg>
          </button>
         <h2>Editar Actividad</h2>
-        <form id="editarActividadForm" enctype="multipart/form-data">
+        <form id="editarForm" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="codigoE" class="form-label">Fecha de creacion</label>
                 <input type="text" name="codigoE" id="codigoE" class="form-control" value="Codigo" required readonly>
