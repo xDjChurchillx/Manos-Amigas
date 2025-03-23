@@ -166,7 +166,7 @@ function edit(id) {
         input.type = 'checkbox';
         input.className = 'form-check-input';
         input.name = 'imgE[]';
-        input.value = index; // Usar el índice como valor (o puedes usar un ID único si lo tienes)
+        input.value = item.Img[index]; // Usar el índice como valor (o puedes usar un ID único si lo tienes)
         input.id = `imagen${index}`;
         input.checked = true; // Marcar el checkbox por defecto
 
