@@ -125,22 +125,21 @@ if (empty($rows)) {
                     <th>Fecha</th>
                     <th>Nombre</th>
                     <th>Descripción</th>
+                    <th>Visibilidad</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>';
 
-   foreach ($rows as $actividad) {
-        $checked = $actividad['Visible'] ? 'checked' : ''; // Verifica si el checkbox debe estar marcado
+    foreach ($rows as $actividad) {
+         $visibilidad = $actividad['Visible'] ? 'True' : 'False'; // Manejo de visibilidad
         $panel .= '
             <tr>
                 <td>' . htmlspecialchars($actividad['Fecha']) . '</td>
                 <td>' . htmlspecialchars($actividad['Nombre']) . '</td>
                 <td>' . htmlspecialchars($actividad['Descripcion']) . '</td>
-                <td class="d-flex justify-content-center gap-2">
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" ' . $checked . ' disabled>
-                    </div>
+                <td>' . $visibilidad . '</td>
+                <td class="d-flex justify-content-center gap-2">                   
                     <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($actividad['Codigo']) . '\')">Editar</button>
                     <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($actividad['Codigo']) . '\',\''. htmlspecialchars($actividad['Nombre']) .'\')">Eliminar</button>
                 </td>
