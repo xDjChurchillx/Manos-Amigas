@@ -134,6 +134,3 @@ function hideDetails() {
     document.getElementById('detailList').innerHTML = '';
 }
 
-
-// Cargar servicios al iniciar
-loadActivitys();
