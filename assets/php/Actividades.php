@@ -1,37 +1,49 @@
 ﻿<?php
-header('Content-Type: application/json');
+require '../../../Private/Credentials/DataBase/connection.php';
+header('Content-Type: application/json; charset=UTF-8');
+try{
+    $buscar = isset($_GET['buscar']) ? $_GET['buscar'] : '';
+    // sanitizar
+    $buscar = trim($buscar);
+    $buscar = filter_var($buscar, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+    $buscar = htmlspecialchars($buscar, ENT_QUOTES, 'UTF-8');
 
-// Simular "base de datos" de servicios/actividades
-$activitys = [
-    [
-        "id" => 1,
-        "title" => "Tour en Montaña",
-        "description" => "Disfruta de una caminata por la montaña con guías expertos.",
-        "cardImage" => "assets/images/montana.jpg",
-        "image" => "assets/images/montana_grande.jpg",
-        "details" => [
-            "Guías certificados",
-            "Duración de 3 horas",
-            "Incluye refrigerio",
-            "Paisajes espectaculares"
-        ]
-    ],
-    [
-        "id" => 2,
-        "title" => "Paseo en Kayak",
-        "description" => "Navega por los ríos y disfruta de la naturaleza.",
-        "cardImage" => "assets/images/kayak.jpg",
-        "image" => "assets/images/kayak_grande.jpg",
-        "details" => [
-            "Equipos incluidos",
-            "Guías profesionales",
-            "Apto para principiantes",
-            "Seguro incluido"
-        ]
-    ],
-    // Agrega más actividades según sea necesario
-];
 
-// Devolver como JSON
-echo json_encode(["activitys" => $activitys], JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
+    $stmt = $conn->prepare("CALL sp_ListarActividades(?)");
+    $stmt->bind_param('s', $buscar);
+    if (!$stmt) {
+         echo json_encode([
+            'status' => 'error',
+             'ex' => 'database error'
+        ]);
+        exit();
+    }
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result === false) {
+         echo json_encode([
+            'status' => 'error',
+             'ex' => 'database error'
+        ]);
+        exit();
+    }
+    $rows = [];
+    while ($row = $result->fetch_assoc()) {
+        $rows[] = $row;
+    }
+
+    // Si pasa todas las validaciones, se puede mostrar el contenido
+    echo json_encode([
+        'status' => 'success',
+        'filas' => $rows,
+        'b'=> $buscar
+    ]);
+} catch (Exception $ex) {
+     echo json_encode([
+        'status' => 'error',
+         'ex' => $ex
+    ]);
+    exit();
+}
 ?>
