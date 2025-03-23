@@ -158,7 +158,7 @@ function edit(id) {
 
     // Parsear el campo Img (que es un string JSON) a un array de imágenes
     const imagenes = JSON.parse(item.Img);
-
+    console.log(imagenes);
     imagenes.forEach((imagen, index) => {
         const div = document.createElement('div');
         div.className = 'form-check';
