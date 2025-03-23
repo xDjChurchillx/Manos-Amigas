@@ -115,7 +115,7 @@ $panel = '
 if (empty($rows)) {
     // Si no hay actividades, mostrar el mensaje
     $panel .= '
-        <p>No hay actividades para mostrar.</p>';
+        <p>No hay actividades .</p>';
 } else {
     // Si hay actividades, crear la tabla con los datos
     $panel .= '
@@ -170,13 +170,6 @@ $panel .= '</div>
             <label for="fecha" class="form-label">Fecha</label>
             <input type="datetime-local" name="fecha" id="fecha" class="form-control">
         </div>
-
-
-        <div class="form-check form-switch mb-3">
-          <input class="form-check-input" name="visible" type="checkbox" id="visible">
-          <label class="form-check-label" for="visible">Visibilidad</label>
-        </div>
-
         <div class="mb-3">
             <label for="imagenes" class="form-label">Subir imágenes</label>
             <input type="file" name="imagenes[]" id="imagenes" class="form-control" multiple accept="image/*">
