@@ -173,7 +173,11 @@ $username = $_SESSION['username'];
                 }
 
                 echo json_encode([
-                    'status' => 'success'
+                    'status' => 'success',
+                    'a'=> $codigoActividad,
+                    'b'=> $nombreActividad,
+                    'c'=> $descripcion,
+                    'd'=> $fecha
                 ]);
             } else {
                 echo json_encode([
