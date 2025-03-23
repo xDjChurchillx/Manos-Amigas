@@ -11,7 +11,5 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => {
             // En caso de error (fallo en la solicitud o procesamiento), mostrar el error
             console.error('Error al generar vista:', error);
-            // Redirigir al login en caso de un fallo
-            // window.location.href = 'ingreso.html?error=1';
         });
 });
