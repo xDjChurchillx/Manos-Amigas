@@ -37,8 +37,14 @@ $token = $_COOKIE['token'] ;
 $username = $_SESSION['username'];
 
 $buscar = isset($_GET['buscar']) ? $_GET['buscar'] : '';
+// sanitizar
+$buscar = trim($buscar);
+$buscar = filter_var($buscar, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+$buscar = htmlspecialchars($buscar, ENT_QUOTES, 'UTF-8');
+
 
 $stmt = $conn->prepare('CALL sp_ListarActividades()');
+$stmt->bind_param('s', $buscar);
 if (!$stmt) {
      echo json_encode([
         'status' => 'error',

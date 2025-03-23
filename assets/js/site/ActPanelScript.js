@@ -207,10 +207,10 @@ function search() {
     console.log('search');
     const input = document.getElementById('buscar').value;
 
-    // Actualizar la URL sin recargar la página
+    // Actualizar la URL y recargar la página
     const url = new URL(window.location);
     url.searchParams.set('buscar', input);
-    window.history.pushState({}, '', url);
+    window.location.href = url;
 }
 function del(id,nombre) {
 
