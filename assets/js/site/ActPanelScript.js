@@ -49,7 +49,6 @@ function startPanel(datos) {
     document.getElementById('panel').innerHTML = datos.panel;
 
     datos.filas.forEach(function (item) {
-        console.log(item);
         listaActividades[item.Codigo] = item;
     });
 
