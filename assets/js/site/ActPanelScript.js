@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
 // Función para verificar la sesión
 function startSession() {
     const urlParams = new URLSearchParams(window.location.search);
-    const buscar = urlParams.get('buscar');
+    let buscar = urlParams.get('buscar');
     if (!buscar) {
         buscar = '';
     }
