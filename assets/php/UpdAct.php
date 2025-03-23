@@ -75,7 +75,7 @@ $username = $_SESSION['username'];
             $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
             if (!in_array($extension, $allowedExtensions)) {
-                echo json_encode(["status" => "error", "ex" => "Formato de imagen no permitido ($extension)."]);
+                echo json_encode(["status" => "error","a"=> $imagenesExistentes,"b"=> $nuevasImagenes, "ex" => "Formato de imagen no permitido ($extension)."]);
                 exit();
             }
 
