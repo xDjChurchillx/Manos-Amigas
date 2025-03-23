@@ -115,7 +115,7 @@ $panel = '
 if (empty($rows)) {
     // Si no hay actividades, mostrar el mensaje
     $panel .= '
-        <p>No hay actividades disponibles en este momento.</p>';
+        <p>No hay actividades para mostrar.</p>';
 } else {
     // Si hay actividades, crear la tabla con los datos
     $panel .= '
