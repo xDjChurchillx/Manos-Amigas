@@ -203,18 +203,7 @@ $panel .= '</div>
             <div class="mb-3">
                 <label class="form-label">Imágenes existentes</label>
                <div id="listImg">
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="imgE[]" value="1" id="imagen1">
-                        <label class="form-check-label" for="imagen1">
-                            <img src="ruta/a/imagen1.jpg" alt="Imagen 1" class="img-thumbnail" style="width: 100px;">
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="checkbox" name="imgE[]" value="2" id="imagen2">
-                        <label class="form-check-label" for="imagen2">
-                            <img src="ruta/a/imagen2.jpg" alt="Imagen 2" class="img-thumbnail" style="width: 100px;">
-                        </label>
-                    </div>
+                   
                </div>
               
                 
