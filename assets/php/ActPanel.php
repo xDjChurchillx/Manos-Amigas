@@ -36,6 +36,7 @@ if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
 $token = $_COOKIE['token'] ;
 $username = $_SESSION['username'];
 
+$buscar = isset($_GET['buscar']) ? $_GET['buscar'] : '';
 
 $stmt = $conn->prepare('CALL sp_ListarActividades()');
 if (!$stmt) {
@@ -96,7 +97,7 @@ $panel = '
   
           <!-- Contenedor para el TextBox y el botón de buscar a la derecha -->
           <div class="d-flex">
-            <input type="text" class="form-control me-2" placeholder="Buscar...">
+            <input id="buscar" type="text" class="form-control me-2" placeholder="Buscar...">
             <button class="btn btn-outline-secondary" onclick="search()">
                <img src="../assets/img/iconos/buscar.svg" alt="Buscar" class="icono">
             </button>
