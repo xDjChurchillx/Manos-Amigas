@@ -71,7 +71,7 @@ $username = $_SESSION['username'];
             mkdir($tempDir, 0777, true);
         }
 
-        foreach ($_FILES['imagenes']['name'] 1as $index => $fileName) {
+        foreach ($_FILES['imagenes']['name'] as $index => $fileName) {
             $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
             if (!in_array($extension, $allowedExtensions)) {
