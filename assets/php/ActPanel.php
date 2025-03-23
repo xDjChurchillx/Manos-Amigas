@@ -137,9 +137,6 @@ if (empty($rows)) {
                 <td>' . htmlspecialchars($actividad['Nombre']) . '</td>
                 <td>' . htmlspecialchars($actividad['Descripcion']) . '</td>
                 <td>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" >
-                    </div>
                     <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($actividad['Codigo']) . '\')">Editar</button>
                     <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($actividad['Codigo']) . '\',\''. htmlspecialchars($actividad['Nombre']) .'\')">Eliminar</button>
                 </td>
