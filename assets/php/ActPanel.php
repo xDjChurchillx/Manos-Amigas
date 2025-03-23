@@ -130,15 +130,16 @@ if (empty($rows)) {
             </thead>
             <tbody>';
 
-    foreach ($rows as $actividad) {
+   foreach ($rows as $actividad) {
+        $checked = $actividad['Visible'] ? 'checked' : ''; // Verifica si el checkbox debe estar marcado
         $panel .= '
             <tr>
                 <td>' . htmlspecialchars($actividad['Fecha']) . '</td>
                 <td>' . htmlspecialchars($actividad['Nombre']) . '</td>
                 <td>' . htmlspecialchars($actividad['Descripcion']) . '</td>
-                <td>
+                <td class="d-flex justify-content-center gap-2">
                     <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" >
+                      <input class="form-check-input" type="checkbox" ' . $checked . ' disabled>
                     </div>
                     <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($actividad['Codigo']) . '\')">Editar</button>
                     <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($actividad['Codigo']) . '\',\''. htmlspecialchars($actividad['Nombre']) .'\')">Eliminar</button>
