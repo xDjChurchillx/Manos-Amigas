@@ -63,7 +63,7 @@ $username = $_SESSION['username'];
             $imagenesActualizadas[] = $imagen;
             $num = preg_replace('/\D/', '', $imagen); 
             if($num >= $aux){
-              aux$ = $num + 1;
+              $aux = $num + 1;
             }
         }
 
