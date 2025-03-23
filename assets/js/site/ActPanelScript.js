@@ -101,6 +101,7 @@ function startPanel(datos) {
             .then(response => response.text()) // Primero obtenemos el texto en bruto
             .then(text => {
                 try {
+                    console.log(text);
                     let data = JSON.parse(text); // Intentamos convertirlo a JSON
                     if (data.status === "success") {
                         location.reload();
