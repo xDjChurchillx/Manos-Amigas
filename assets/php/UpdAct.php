@@ -82,7 +82,7 @@ $username = $_SESSION['username'];
             mkdir($tempDir, 0777, true);
         }
 
-        foreach ($_FILES['newimgE']['name'] as $index => $fileName) {
+        foreach ($nuevasImagenes['name'] as $index => $fileName) {
             $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
             if (!in_array($extension, $allowedExtensions)) {
