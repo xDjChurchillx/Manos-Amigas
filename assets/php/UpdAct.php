@@ -41,9 +41,9 @@ $username = $_SESSION['username'];
         $nombreActividad = trim($_POST['nombreE'] ?? '');
         $descripcion = trim($_POST['descripcionE'] ?? '');
         $fecha = trim($_POST['fechaE'] ?? date('Y-m-d H:i:s'));
+        $visible = isset($_POST['visibleE']) ? 1 : 0; 
         $imagenesExistentes = $_POST['imgE'] ?? [];
         $nuevasImagenes = $_FILES['newimgE'] ?? [];
-
         // Validación de datos
         if (empty($codigoActividad) || empty($nombreActividad) || empty($descripcion) || empty($fecha)) {
             echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
@@ -134,13 +134,13 @@ $username = $_SESSION['username'];
         $imageJson = json_encode($imagenesActualizadas, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
          
         // Actualizar en la base de datos
-        $stmt = $conn->prepare('CALL sp_ActualizarActividad(?, ?, ?, ?, ?, ?, ?)');
+        $stmt = $conn->prepare('CALL sp_ActualizarActividad(?, ?, ?, ?, ?,?, ?, ?)');
         if (!$stmt) {
             echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
             exit();
         }
 
-        $stmt->bind_param('sssssss', $username, $token, $codigoActividad, $nombreActividad, $descripcion, $fecha, $imageJson);
+        $stmt->bind_param('ssssssss', $username, $token, $codigoActividad, $nombreActividad, $descripcion, $fecha, $imageJson,$visible);
 
         $stmt->execute();
         $result = $stmt->get_result();

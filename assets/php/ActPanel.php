@@ -221,6 +221,10 @@ $panel .= '</div>
                 <label for="fechaE" class="form-label">Fecha</label>
                 <input type="datetime-local" name="fechaE" id="fechaE" class="form-control" value="2023-10-01T12:00">
             </div>
+            <div class="form-check form-switch mb-3">
+              <input class="form-check-input" name="visibleE" type="checkbox" id="visibleE">
+              <label class="form-check-label" for="visibleE">Visibilidad</label>
+            </div>
             <div class="mb-3">
                 <label class="form-label">Imágenes existentes</label>
                <div id="listImg">
