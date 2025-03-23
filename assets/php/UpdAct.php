@@ -88,7 +88,7 @@ $username = $_SESSION['username'];
                     exit();
                 }
 
-                $newFileName = "img_" . (count($imagenesActualizadas) + 1) . ".webp";
+                $newFileName = "img_" . $aux . ".webp";
                 $filePath = $tempDir . $newFileName;
 
                 $tmpFilePath = $nuevasImagenes['tmp_name'][$index];
