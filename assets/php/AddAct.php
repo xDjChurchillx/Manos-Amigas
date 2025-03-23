@@ -40,7 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $nombreActividad = trim($_POST['nombre'] ?? '');
         $descripcion = trim($_POST['descripcion'] ?? '');
         $fecha = trim($_POST['fecha'] ?? date('Y-m-d H:i:s'));
-
+        $visible = isset($_POST['visible']) ? 1 : 0; 
         // Validación de datos
         if (empty($nombreActividad) || empty($descripcion) || empty($fecha)) {
             echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
@@ -138,13 +138,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $imageJson = json_encode($imagePaths, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         // Insertar en la base de datos
-        $stmt = $conn->prepare('CALL sp_CrearActividad(?, ?, ?, ?, ?, ?)');
+        $stmt = $conn->prepare('CALL sp_CrearActividad(?, ?,?, ?, ?, ?, ?)');
         if (!$stmt) {
             echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
             exit();
         }
 
-        $stmt->bind_param('ssssss', $username, $token, $nombreActividad, $descripcion, $fecha, $imageJson);
+        $stmt->bind_param('sssssss', $username, $token, $nombreActividad, $descripcion, $fecha, $imageJson,$visible);
 
         $stmt->execute();
         $result = $stmt->get_result();
