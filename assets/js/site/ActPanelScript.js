@@ -158,7 +158,7 @@ function edit(id) {
     document.getElementById('nombreE').value = item.Nombre;
     document.getElementById('descripcionE').value = item.Descripcion;
     document.getElementById('fechaE').value = item.Fecha;
-    if (item.Visible) {
+    if (item.Visible === 1) {
         document.getElementById('visibleE').checked = true;
     } else {
         document.getElementById('visibleE').checked = false;
