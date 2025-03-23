@@ -41,12 +41,15 @@ function startPanel(datos) {
     
     const urlParams = new URLSearchParams(window.location.search);
     const buscar = urlParams.get('buscar');
+    const activitysGrid = document.getElementById('activitysGrid');
+
     if (buscar) {
         document.getElementById('buscar').value = buscar;
     }
     datos.filas.forEach(function (item) {
         listaActividades[item.Codigo] = item;
-        createActivityCard(item);
+        activitysGrid.innerHTML = + createActivityCard(item);
+        
     });
 }
 function Alerta(mensaje) {
