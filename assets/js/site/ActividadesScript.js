@@ -83,10 +83,11 @@ function search() {
 // Función para crear las tarjetas de actividades
 function createActivityCard(activity) {
     const imagen = `../assets/img/${activity.Codigo.replace(/\D/g, '')}/${activity.Img[0]}`;
+    console.log(imagen);
     return `
                      <div class="col-md-6 col-lg-4">
                          <div class="card activity-card h-100" onclick="showDetails(${activity.Codigo})">
-                             <img src="${activity.cardImage}" class="activity-image card-img-top" alt="${activity.title}">
+                             <img src="${imagen}" class="activity-image card-img-top" alt="${activity.Codigo}">
                                  <div class="card-body">
                                      <h5 class="card-title">${activity.Nombre}</h5>
                                      <p class="card-text">${activity.Descripcion}</p>
