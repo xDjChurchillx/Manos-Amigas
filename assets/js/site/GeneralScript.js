@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
         method: 'GET',
         credentials: 'same-origin'
     })
-        .then(response => response.text()) // Primero obtenemos el texto en bruto
+        .then(response => response.text()) 
         .then(text => {
             console.log('visita='+text);
         })

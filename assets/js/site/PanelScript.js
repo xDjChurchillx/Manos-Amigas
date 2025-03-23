@@ -13,10 +13,10 @@ function startSession() {
         method: 'GET',
         credentials: 'same-origin'
     })
-        .then(response => response.text()) // Primero obtenemos el texto en bruto
+        .then(response => response.text()) 
         .then(text => {
             try {
-                let data = JSON.parse(text); // Intentamos convertirlo a JSON
+                let data = JSON.parse(text); 
                 if (data.status === "success") {
                     startPanel(data);
                 } else {

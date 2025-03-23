@@ -7,7 +7,7 @@ const errorMessage = document.getElementById('error-message');
 
 if (error) {
     errorMessage.style.display = 'block';
-    errorMessage.style.color = 'red'; // Opcional: darle color al texto
+    errorMessage.style.color = 'red'; 
     switch (error) {
         case '1':
             errorMessage.textContent = 'Credenciales invalidas.';

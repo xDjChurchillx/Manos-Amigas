@@ -1,50 +1,104 @@
+// Objeto global para almacenar los datos
+let listaActividades = {};
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Llamar a la función de verificación de sesión al cargar la página
+    startSession();
+});
+// Función para verificar la sesión
+function startSession() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let buscar = urlParams.get('buscar');
+    if (!buscar) {
+        buscar = '';
+    }
+    // Realizar la solicitud AJAX
+    fetch("../assets/php/Actividades.php?buscar=" + buscar, {
+        method: 'GET'
+    })
+        .then(response => response.text()) 
+        .then(text => {
+            try {
+                let data = JSON.parse(text); 
+                if (data.status === "success") {
+                    startPanel(data);
+                } else {
+                        Alerta("Error al cargar actividades");                    
+                }
+            } catch (error) {
+                console.error("Respuesta:", text); // Imprime el texto antes de que falle
+                Alerta("Error al cargar actividades");  
+            }
+        })
+        .catch(error => {          
+            Alerta("Main Error al cargar actividades");  
+        });
+}
+// Función para inicializar el contador después de cargar el HTML
+function startPanel(datos) {
+
+    console.log(datos);
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const buscar = urlParams.get('buscar');
+    if (buscar) {
+        document.getElementById('buscar').value = buscar;
+    }
+    datos.filas.forEach(function (item) {
+        listaActividades[item.Codigo] = item;
+        createActivityCard(item);
+    });
+}
+function Alerta(mensaje) {
+    const alertaDiv = document.getElementById('alerta');
+    alertaDiv.textContent = mensaje;
+    alertaDiv.classList.remove('d-none');
+    setTimeout(() => {
+        alertaDiv.classList.add('d-none');
+    }, 5000);
+}
+
+function search() {
+    console.log('search');
+    const input = document.getElementById('buscar').value;
+
+    // Actualizar la URL y recargar la página
+    const url = new URL(window.location);
+    url.searchParams.set('buscar', input);
+    window.location.href = url;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 // JavaScript source code
 // Función para crear las tarjetas de actividades
 function createActivityCard(activity) {
     return `
                      <div class="col-md-6 col-lg-4">
-                         <div class="card activity-card h-100" onclick="showDetails(${activity.id})">
+                         <div class="card activity-card h-100" onclick="showDetails(${activity.Codigo})">
                              <img src="${activity.cardImage}" class="activity-image card-img-top" alt="${activity.title}">
                                  <div class="card-body">
-                                     <h5 class="card-title">${activity.title}</h5>
-                                     <p class="card-text">${activity.description}</p>
+                                     <h5 class="card-title">${activity.Nombre}</h5>
+                                     <p class="card-text">${activity.Descripcion}</p>
                                  </div>
                          </div>
                      </div>
                      `;
 }
 
-// Función para cargar los servicios
-// Función para cargar los servicios desde PHP
-async function loadActivitys() {
-    try {
-        const response = await fetch('assets/php/Actividades.php');
-        const data = await response.json();
-        const activitysGrid = document.getElementById('activitysGrid');
 
-        // Generar tarjetas
-        activitysGrid.innerHTML = data.activitys.map(activity =>
-            createActivityCard(activity)
-        ).join('');
-
-        // Guardar servicios en variable global
-        window.activitys = data.activitys.reduce((acc, activity) => {
-            acc[activity.id] = activity;
-            return acc;
-        }, {});
-
-    } catch (error) {
-        console.error('Error cargando servicios:', error);
-        activitysGrid.innerHTML = `
-                 <div class="alert alert-danger">
-                     Error cargando los servicios. Por favor intenta nuevamente más tarde.
-                 </div>
-                 `;
-    }
-}
 // Función para mostrar detalles (modificada para usar la variable global)
 function showDetails(activityId) {
-    const activity = window.activitys[activityId];
+    const activity = listaActividades[activityId];
     if (!activity) return;
 
     document.getElementById('title').classList.add('d-none');

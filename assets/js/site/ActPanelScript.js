@@ -17,10 +17,10 @@ function startSession() {
         method: 'GET',
         credentials: 'same-origin'
     })
-        .then(response => response.text()) // Primero obtenemos el texto en bruto
+        .then(response => response.text()) 
         .then(text => {
             try {
-                let data = JSON.parse(text); // Intentamos convertirlo a JSON
+                let data = JSON.parse(text); 
                 if (data.status === "success") {
                     startPanel(data);
                 } else {
@@ -73,10 +73,10 @@ function startPanel(datos) {
             method: "POST",
             body: formData
         })
-            .then(response => response.text()) // Primero obtenemos el texto en bruto
+            .then(response => response.text()) 
             .then(text => {
                 try {
-                    let data = JSON.parse(text); // Intentamos convertirlo a JSON
+                    let data = JSON.parse(text); 
                     if (data.status === "success") {
                         location.reload();
                     } else {
@@ -106,11 +106,11 @@ function startPanel(datos) {
             method: "POST",
             body: formData
         })
-            .then(response => response.text()) // Primero obtenemos el texto en bruto
+            .then(response => response.text()) 
             .then(text => {
                 try {
                     console.log(text);
-                    let data = JSON.parse(text); // Intentamos convertirlo a JSON
+                    let data = JSON.parse(text); 
                     if (data.status === "success") {
                         location.reload();
                     } else {
@@ -242,10 +242,10 @@ function del(id,nombre) {
                         codigo: id
                     })
                 })
-                    .then(response => response.text()) // Primero obtenemos el texto en bruto
+                    .then(response => response.text()) 
                     .then(text => {
                         try {
-                            let data = JSON.parse(text); // Intentamos convertir el texto a JSON
+                            let data = JSON.parse(text); 
                             if (data.status === 'success') {
                                 //    Alerta(data.mensaje); // Actividad eliminada exitosamente
                                 location.reload();
