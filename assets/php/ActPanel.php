@@ -115,7 +115,7 @@ $panel = '
 if (empty($rows)) {
     // Si no hay actividades, mostrar el mensaje
     $panel .= '
-        <p>No hay actividades .</p>';
+        <p>No hay actividades para mostrar.</p>';
 } else {
     // Si hay actividades, crear la tabla con los datos
     $panel .= '
@@ -137,6 +137,9 @@ if (empty($rows)) {
                 <td>' . htmlspecialchars($actividad['Nombre']) . '</td>
                 <td>' . htmlspecialchars($actividad['Descripcion']) . '</td>
                 <td>
+                    <div class="form-check form-switch">
+                      <input class="form-check-input" type="checkbox" >
+                    </div>
                     <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($actividad['Codigo']) . '\')">Editar</button>
                     <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($actividad['Codigo']) . '\',\''. htmlspecialchars($actividad['Nombre']) .'\')">Eliminar</button>
                 </td>
@@ -170,6 +173,13 @@ $panel .= '</div>
             <label for="fecha" class="form-label">Fecha</label>
             <input type="datetime-local" name="fecha" id="fecha" class="form-control">
         </div>
+
+
+        <div class="form-check form-switch mb-3">
+          <input class="form-check-input" name="visible" type="checkbox" id="visible">
+          <label class="form-check-label" for="visible">Visibilidad</label>
+        </div>
+
         <div class="mb-3">
             <label for="imagenes" class="form-label">Subir imágenes</label>
             <input type="file" name="imagenes[]" id="imagenes" class="form-control" multiple accept="image/*">
