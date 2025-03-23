@@ -51,17 +51,6 @@ $username = $_SESSION['username'];
         }
 
         // Validar si hay imágenes existentes o nuevas
-          if (!isset($_FILES['imagenes']) || empty($_FILES['imagenes']['name'][0])) {
-           if (condition) {
-	          
-            }
-
-        }
-
-
-
-
-
         if (empty($imagenesExistentes) && empty($nuevasImagenes['name'][0])) {
             echo json_encode(["status" => "error", "ex" => "Debe haber al menos una imagen."]);
             exit();
@@ -82,7 +71,7 @@ $username = $_SESSION['username'];
             mkdir($tempDir, 0777, true);
         }
 
-        foreach ($nuevasImagenes['name'] as $index => $fileName) {
+        foreach ($_FILES['imagenes']['name'] 1as $index => $fileName) {
             $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
             if (!in_array($extension, $allowedExtensions)) {
