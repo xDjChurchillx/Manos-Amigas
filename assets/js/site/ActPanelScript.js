@@ -155,6 +155,7 @@ function edit(id) {
     const listImg = document.getElementById('listImg');
     listImg.innerHTML = ''; // Limpiar el contenedor antes de agregar nuevas imágenes
 
+
     // Parsear el campo Img (que es un string JSON) a un array de imágenes
     const imagenes = JSON.parse(item.Img);
 
