@@ -240,7 +240,8 @@ echo json_encode([
     'status' => 'success',
     'navbar' => $navbar,
     'panel' => $panel,
-    'filas' => $rows
+    'filas' => $rows,
+    'b'=> $buscar
 ]);
 } catch (Exception $ex) {
      echo json_encode([
