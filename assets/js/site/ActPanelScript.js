@@ -7,8 +7,13 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 // Función para verificar la sesión
 function startSession() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const buscar = urlParams.get('buscar');
+    if (!buscar) {
+        buscar = '';
+    }
     // Realizar la solicitud AJAX
-    fetch("../assets/php/ActPanel.php", {
+    fetch("../assets/php/ActPanel.php?buscar="+buscar, {
         method: 'GET',
         credentials: 'same-origin'
     })
@@ -47,7 +52,11 @@ function startPanel(datos) {
     // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
     document.getElementById('navbaritems').innerHTML = datos.navbar;
     document.getElementById('panel').innerHTML = datos.panel;
-
+    const urlParams = new URLSearchParams(window.location.search);
+    const buscar = urlParams.get('buscar');
+    if (buscar) {
+        document.getElementById('buscar').value = buscar;
+    }
     datos.filas.forEach(function (item) {
         listaActividades[item.Codigo] = item;
     });
