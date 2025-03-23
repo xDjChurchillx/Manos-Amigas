@@ -48,7 +48,7 @@ function startPanel(datos) {
     }
     datos.filas.forEach(function (item) {
         listaActividades[item.Codigo] = item;
-        activitysGrid.innerHTML = + createActivityCard(item);
+        activitysGrid.innerHTML += createActivityCard(item);
         
     });
 }
