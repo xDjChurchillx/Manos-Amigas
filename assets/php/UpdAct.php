@@ -57,28 +57,32 @@ $username = $_SESSION['username'];
         }
 
         // Procesar imágenes existentes
+        $aux = 1;
         $imagenesActualizadas = [];
         foreach ($imagenesExistentes as $imagen) {
             $imagenesActualizadas[] = $imagen;
+            $num = preg_replace('/\D/', '', $imagen); 
+            if($num >= $aux){
+              aux$ = $num + 1;
+            }
         }
 
         // Procesar nuevas imágenes
         $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
         $maxFileSize = 5 * 1024 * 1024; // 5 MB
         $tempDir = "../img/temp/";
-
         if (!file_exists($tempDir)) {
             mkdir($tempDir, 0777, true);
         }
         if(!empty($nuevasImagenes['name'][0])){
              foreach ($nuevasImagenes['name'] as $index => $fileName) {
                 $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-
+                // Validar tipo de archivo
                 if (!in_array($extension, $allowedExtensions)) {
                     echo json_encode(["status" => "error","a"=> $imagenesExistentes,"b"=> $nuevasImagenes, "ex" => "Formato de imagen no permitido ($extension)."]);
                     exit();
                 }
-
+                 // Validar tamaño de archivo
                 if ($nuevasImagenes['size'][$index] > $maxFileSize) {
                     echo json_encode(["status" => "error", "ex" => "El archivo {$fileName} excede el tamaño permitido (5 MB)."]);
                     exit();
@@ -121,9 +125,10 @@ $username = $_SESSION['username'];
                 }
 
                 $imagenesActualizadas[] = $newFileName;
+                $aux = $aux + 1;
               }
         }
-         echo json_encode(["status" => "error","a"=> $imagenesExistentes,"b"=> $nuevasImagenes, "ex" => "err"]);
+         echo json_encode(["status" => "error","a"=> $imagenesExistentes,"b"=> $aux, "ex" => "err"]);
                     exit();
 
         // Convertir rutas de imágenes a JSON
