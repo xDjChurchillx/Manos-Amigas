@@ -70,58 +70,61 @@ $username = $_SESSION['username'];
         if (!file_exists($tempDir)) {
             mkdir($tempDir, 0777, true);
         }
+        if(!empty($nuevasImagenes['name'][0])){
+             foreach ($nuevasImagenes['name'] as $index => $fileName) {
+                $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
-        foreach ($_FILES['newimgE']['name'] as $index => $fileName) {
-            $extension = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+                if (!in_array($extension, $allowedExtensions)) {
+                    echo json_encode(["status" => "error","a"=> $imagenesExistentes,"b"=> $nuevasImagenes, "ex" => "Formato de imagen no permitido ($extension)."]);
+                    exit();
+                }
 
-            if (!in_array($extension, $allowedExtensions)) {
-                echo json_encode(["status" => "error","a"=> $imagenesExistentes,"b"=> $nuevasImagenes, "ex" => "Formato de imagen no permitido ($extension)."]);
-                exit();
-            }
+                if ($nuevasImagenes['size'][$index] > $maxFileSize) {
+                    echo json_encode(["status" => "error", "ex" => "El archivo {$fileName} excede el tamaño permitido (5 MB)."]);
+                    exit();
+                }
 
-            if ($nuevasImagenes['size'][$index] > $maxFileSize) {
-                echo json_encode(["status" => "error", "ex" => "El archivo {$fileName} excede el tamaño permitido (5 MB)."]);
-                exit();
-            }
+                $newFileName = "img_" . (count($imagenesActualizadas) + 1) . ".webp";
+                $filePath = $tempDir . $newFileName;
 
-            $newFileName = "img_" . (count($imagenesActualizadas) + 1) . ".webp";
-            $filePath = $tempDir . $newFileName;
+                $tmpFilePath = $nuevasImagenes['tmp_name'][$index];
 
-            $tmpFilePath = $nuevasImagenes['tmp_name'][$index];
+                if ($extension !== 'webp') {
+                    switch ($extension) {
+                        case 'jpg':
+                        case 'jpeg':
+                            $image = imagecreatefromjpeg($tmpFilePath);
+                            break;
+                        case 'png':
+                            $image = imagecreatefrompng($tmpFilePath);
+                            break;
+                        case 'gif':
+                            $image = imagecreatefromgif($tmpFilePath);
+                            break;
+                        default:
+                            echo json_encode(["status" => "error", "ex" => "Formato de imagen no soportado para conversión."]);
+                            exit();
+                    }
 
-            if ($extension !== 'webp') {
-                switch ($extension) {
-                    case 'jpg':
-                    case 'jpeg':
-                        $image = imagecreatefromjpeg($tmpFilePath);
-                        break;
-                    case 'png':
-                        $image = imagecreatefrompng($tmpFilePath);
-                        break;
-                    case 'gif':
-                        $image = imagecreatefromgif($tmpFilePath);
-                        break;
-                    default:
-                        echo json_encode(["status" => "error", "ex" => "Formato de imagen no soportado para conversión."]);
+                    if ($image !== false) {
+                        imagewebp($image, $filePath, 100);
+                        imagedestroy($image);
+                    } else {
+                        echo json_encode(["status" => "error", "ex" => "Error al procesar la imagen."]);
                         exit();
-                }
-
-                if ($image !== false) {
-                    imagewebp($image, $filePath, 100);
-                    imagedestroy($image);
+                    }
                 } else {
-                    echo json_encode(["status" => "error", "ex" => "Error al procesar la imagen."]);
-                    exit();
+                    if (!move_uploaded_file($tmpFilePath, $filePath)) {
+                        echo json_encode(["status" => "error", "ex" => "Error al mover el archivo WebP."]);
+                        exit();
+                    }
                 }
-            } else {
-                if (!move_uploaded_file($tmpFilePath, $filePath)) {
-                    echo json_encode(["status" => "error", "ex" => "Error al mover el archivo WebP."]);
-                    exit();
-                }
-            }
 
-            $imagenesActualizadas[] = $newFileName;
+                $imagenesActualizadas[] = $newFileName;
+              }
         }
+         echo json_encode(["status" => "error","a"=> $imagenesExistentes,"b"=> $nuevasImagenes, "ex" => "err"]);
+                    exit();
 
         // Convertir rutas de imágenes a JSON
         $imageJson = json_encode($imagenesActualizadas, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
