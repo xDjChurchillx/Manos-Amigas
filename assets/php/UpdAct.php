@@ -132,8 +132,7 @@ $username = $_SESSION['username'];
 
         // Convertir rutas de imágenes a JSON
         $imageJson = json_encode($imagenesActualizadas, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-          echo json_encode(["status" => "error","a"=> $imagenesExistentes,"b"=> $imageJson, "ex" => "err"]);
-                    exit();
+         
         // Actualizar en la base de datos
         $stmt = $conn->prepare('CALL sp_ActualizarActividad(?, ?, ?, ?, ?, ?, ?)');
         if (!$stmt) {
@@ -161,6 +160,31 @@ $username = $_SESSION['username'];
                 if (!file_exists($finalDir)) {
                     mkdir($finalDir, 0777, true);
                 }
+
+                if (is_dir($finalDir)) {
+                    // Obtener todos los archivos del directorio
+                    $archivosEnDirectorio = scandir($finalDir);
+    
+                    // Filtrar archivos válidos (excluyendo "." y "..")
+                    foreach ($archivosEnDirectorio as $archivo) {
+                        if ($archivo !== "." && $archivo !== "..") {
+                            // Verificar si el archivo está en $imagenesActualizadas
+                            if (!in_array($archivo, $imagenesActualizadas)) {
+                                $rutaArchivo = $finalDir . $archivo;
+                
+                                // Intentar eliminar el archivo
+                                if (!unlink($rutaArchivo)) {
+                                    echo json_encode([
+                                            'status' => 'error',
+                                            'ex' => 'Error borrando archivo pasado'
+                                        ]);
+                                } 
+                            }
+                        }
+                    }
+                }
+
+
 
                 // Mover las imágenes de la carpeta temporal a la carpeta final
                 foreach ($imagenesActualizadas as $imageName) {
