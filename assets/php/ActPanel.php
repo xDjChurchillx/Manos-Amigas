@@ -43,7 +43,7 @@ $buscar = filter_var($buscar, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 $buscar = htmlspecialchars($buscar, ENT_QUOTES, 'UTF-8');
 
 
-$stmt = $conn->prepare('CALL sp_ListarActividades()');
+$stmt = $conn->prepare("CALL sp_ListarActividades(?)");
 $stmt->bind_param('s', $buscar);
 if (!$stmt) {
      echo json_encode([
