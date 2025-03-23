@@ -145,6 +145,7 @@ function edit(id) {
     }
 
     // Rellenar los campos del formulario con los datos del item
+    document.getElementById('codigoE').value = id;
     document.getElementById('nombreE').value = item.Nombre;
     document.getElementById('descripcionE').value = item.Descripcion;
     document.getElementById('fechaE').value = item.Fecha;
