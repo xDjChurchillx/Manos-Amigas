@@ -128,12 +128,12 @@ $username = $_SESSION['username'];
                 $aux = $aux + 1;
               }
         }
-         echo json_encode(["status" => "error","a"=> $imagenesExistentes,"b"=> $aux, "ex" => "err"]);
-                    exit();
+       
 
         // Convertir rutas de imágenes a JSON
         $imageJson = json_encode($imagenesActualizadas, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-
+          echo json_encode(["status" => "error","a"=> $imagenesExistentes,"b"=> $imageJson, "ex" => "err"]);
+                    exit();
         // Actualizar en la base de datos
         $stmt = $conn->prepare('CALL sp_ActualizarActividad(?, ?, ?, ?, ?, ?, ?)');
         if (!$stmt) {
