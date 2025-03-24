@@ -15,11 +15,7 @@ function startPage() {
         .then(text => {
             try {
                 let data = JSON.parse(text);
-                if (data.status === "success") {
-                    startPanel(data);
-                } else {
-                    Alerta("Error al cargar Servicios");
-                }
+                startPanel(data);              
             } catch (error) {
                 console.error("Respuesta:", text); // Imprime el texto antes de que falle
                 Alerta("Error al cargar Servicios");
