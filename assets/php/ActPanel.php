@@ -64,6 +64,13 @@ if ($result === false) {
 }
 $rows = [];
 while ($row = $result->fetch_assoc()) {
+    if (array_key_exists('Error', $row)) {
+            echo json_encode([
+            'status' => 'error',
+            'redirect' => '/Gestion/ingreso.html?error=1'
+        ]);
+        exit();
+    }
     $rows[] = $row;
 }
 

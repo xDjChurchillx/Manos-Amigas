@@ -88,10 +88,11 @@ try{
     $rows = [];
     while ($row = $result->fetch_assoc()) {
          if (array_key_exists('Error', $row)) {
-            echo json_encode([
+             echo json_encode([
                 'status' => 'error',
-                'ex' => 'Usuario o token inválido.'
+                'redirect' => '/Gestion/ingreso.html?error=1'
             ]);
+            exit();
         }
         $sumas['visitas'] += $row['Visitas'];
         $sumas['suscripciones'] += $row['Suscripciones'];
