@@ -117,6 +117,5 @@ function hideDetails() {
     document.getElementById('detailTitle').textContent = '';
     document.getElementById('detailText').textContent = '';
     document.getElementById('detailImage').src = '';
-    document.getElementById('detailList').innerHTML = '';
 }
 
