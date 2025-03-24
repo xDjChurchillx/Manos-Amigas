@@ -124,7 +124,6 @@ function showDetails(activityId) {
         interval: 2000, // Cambiar de imagen cada 2 segundos
         ride: 'carousel' // Autoplay
     });
-
 }
 
 // Función hideDetails se mantiene igual
