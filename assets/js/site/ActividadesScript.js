@@ -112,7 +112,8 @@ function showDetails(activityId) {
 
         const imgElement = document.createElement('img');
         imgElement.src = imagePath + img;
-        imgElement.classList.add('d-block', 'w-100');
+        imgElement.classList.add('d-block');
+        imgElement.style = 'width: 800px;';
         imgElement.alt = img;
 
         carouselItem.appendChild(imgElement);
