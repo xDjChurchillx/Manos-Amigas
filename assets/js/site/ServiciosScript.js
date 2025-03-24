@@ -80,6 +80,7 @@ function createServiceCard(service) {
 function showDetails(service) {
     document.getElementById('modalTitle').textContent = service.title || '';
     document.getElementById('serviceDescription').textContent = service.description || '';
+    document.getElementById('serviceImage').src = service.image || '';
 
     const list = document.getElementById('serviceBenefits');
     list.innerHTML = Array.isArray(service.details) && service.details.length > 0
