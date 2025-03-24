@@ -102,14 +102,27 @@ function showDetails(activityId) {
 
     document.getElementById('detailTitle').textContent = activity.Nombre || '';
     document.getElementById('detailText').textContent = activity.Descripcion || '';
-    imagenes.forEach(img => {
+    // Agregar las imágenes al carrusel
+    imagenes.forEach((img, index) => {
+        const carouselItem = document.createElement('div');
+        carouselItem.classList.add('carousel-item');
+        if (index === 0) {
+            carouselItem.classList.add('active'); // La primera imagen estará activa
+        }
 
-        console.log(img);
-        document.getElementById('detailImgs').innerHTML += `
-                                                               <div class="carousel-item active" data-bs-interval="2000">
-                                                                    <img src="${imagePath + img}" class="d-block w-100" alt="${img}">
-                                                                </div>
-                                                            `;
+        const imgElement = document.createElement('img');
+        imgElement.src = imagePath + img;
+        imgElement.classList.add('d-block', 'w-100');
+        imgElement.alt = img;
+
+        carouselItem.appendChild(imgElement);
+        detailImgs.appendChild(carouselItem);
+    });
+
+    // Inicializar el carrusel manualmente
+    const carousel = new bootstrap.Carousel(document.getElementById('carousel'), {
+        interval: 2000, // Cambiar de imagen cada 2 segundos
+        ride: 'carousel' // Autoplay
     });
 
 }
