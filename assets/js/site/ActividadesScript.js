@@ -34,9 +34,8 @@ function startPage() {
             Alerta("Main Error al cargar actividades");  
         });
 
-    document.getElementById('susAct').addEventListener('submit', function (e) {
-        e.preventDefault(); // Evita recargar la página
-        const email = e.target.querySelector('input').value;
+    document.getElementById('susAct').addEventListener('click', function (e) {
+        const email = document.getElementById('correo').value;
         alert(`¡Gracias! Tu correo (${email}) ha sido registrado.`);
         // Aquí podrías añadir lógica AJAX/Fetch para enviar el dato a tu backend
     });
