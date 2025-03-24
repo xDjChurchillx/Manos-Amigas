@@ -72,10 +72,8 @@ function search() {
 }
 
 function createActivityCard(activity) {
-    console.log(activity);
     const imagenes = JSON.parse(activity.Img);
     const imagen = `../assets/img/${activity.Codigo.replace(/\D/g, '')}/${imagenes[0]}`;
-    console.log(imagen);
     return `
             <div class="col-md-6 col-lg-4">
                 <div class="card activity-card h-100" onclick="showDetails('${activity.Codigo}')">
