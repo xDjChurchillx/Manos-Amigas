@@ -49,6 +49,7 @@
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
+    background-color: rgba(0, 0, 0, 1);
     filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.9)); /* Sombra más oscura */
 }
 
