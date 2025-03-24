@@ -42,6 +42,8 @@
             <div id="activitysGrid" class="row g-4 mb-5">
                 <!-- Los servicios se cargarán aquí dinámicamente -->
             </div>
+
+            <!-- Sección de Detalle -->
             <div id="activityDetail" class="d-none">
                 <div class="card selected-activity mx-auto shadow-sm">
                     <div class="card-header bg2color text-white d-flex justify-content-between align-items-center">
@@ -52,25 +54,26 @@
                             </svg>
                         </button>
                     </div>
-                    <div id="carousel" class="carousel slide" data-bs-ride="carousel">
-                        <div id="detailImgs" class="carousel-inner">
-                            <!-- Aquí se agregarán las imágenes dinámicamente -->
+                    <div class="carousel-container" style="width: 100%; overflow: hidden;">
+                        <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+                            <div id="detailImgs" class="carousel-inner">
+                                <!-- Las imágenes o contenido del carrusel van aquí -->
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Anterior</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Siguiente</span>
+                            </button>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Anterior</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Siguiente</span>
-                        </button>
-                    </div>
+                    </div>                 
                     <div class="card-body">
                         <p id="detailText" class="lead"></p>
                     </div>
                 </div>
             </div>
-
         </div>
     </main>
 
