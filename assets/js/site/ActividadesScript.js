@@ -92,7 +92,7 @@ function createActivityCard(activity) {
 
 // Función para mostrar detalles (modificada para usar la variable global)
 function showDetails(activityId) {
-    const activity = listaActividades[activityId];
+    const activity = listaActividades[activityId.toString()];
     const imagenes = JSON.parse(activity.Img);
     const imagePath = `../assets/img/${activity.Codigo.replace(/\D/g, '')}/`;
     if (!activity) return;
