@@ -100,7 +100,14 @@ function showDetails(activityId) {
 
     document.getElementById('detailTitle').textContent = activity.Nombre || '';
     document.getElementById('detailText').textContent = activity.Descripcion || '';
-    document.getElementById('detailImage').src = imagePath + imagenes[0];  
+    imagenes.forEach(img => {
+        document.getElementById('detailImgs').innerHTML += `
+                                                                <div class="carousel-item active" data-bs-interval="2000">
+                                                                    <img src="${imagePath + img}" class="d-block w-100" alt="...">
+                                                                </div>
+                                                            `;
+    });
+
 }
 
 // Función hideDetails se mantiene igual
