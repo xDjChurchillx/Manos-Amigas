@@ -1,18 +1,4 @@
-﻿body, html {
-    height: 100%; /* Asegura que el body y html ocupen todo el espacio vertical */
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-}
-
-main {
-    flex-grow: 1; /* Hace que el contenido principal ocupe todo el espacio restante */
-}
-
-
-
+﻿
 .activity-card {
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
