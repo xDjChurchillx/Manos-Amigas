@@ -136,6 +136,6 @@ function hideDetails() {
     // Limpiar contenido del detalle
     document.getElementById('detailTitle').textContent = '';
     document.getElementById('detailText').textContent = '';
-    document.getElementById('detailImgs').innerHTML += ``;
+    document.getElementById('detailImgs').innerHTML = ``;
 }
 
