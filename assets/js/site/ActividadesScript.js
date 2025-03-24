@@ -125,6 +125,7 @@ function showDetails(activity) {
     document.getElementById('activityDescription').textContent = activity.Descripcion || '';
 
     const detailImgs = document.getElementById('modalImgs');
+    detailImgs.innerHTML = '';
     // Agregar las imágenes al carrusel
     imagenes.forEach((img, index) => {
         const carouselItem = document.createElement('div');
