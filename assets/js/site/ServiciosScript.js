@@ -78,88 +78,10 @@ function createServiceCard(service) {
 
 // Función para mostrar detalles (modificada para usar la variable global)
 function showDetails(service) {
+    document.getElementById('modalTitle').textContent = service.title || '';
+    document.getElementById('serviceDescription').textContent = service.description || '';
 
-    const imagenes = JSON.parse(service.Img);
-    const imagePath = `../assets/img/${service.Codigo.replace(/\D/g, '')}/`;
-    console.log(service);
-    console.log(imagenes);
-    document.getElementById('modalTitle').textContent = service.Nombre || '';
-    document.getElementById('serviceDescription').textContent = service.Descripcion || '';
-
-    const detailImgs = document.getElementById('modalImgs');
-    detailImgs.innerHTML = '';
-    // Agregar las imágenes al carrusel
-    imagenes.forEach((img, index) => {
-        const carouselItem = document.createElement('div');
-        carouselItem.classList.add('carousel-item');
-        if (index === 0) {
-            carouselItem.classList.add('active'); // La primera imagen estará activa
-        }
-
-        const imgElement = document.createElement('img');
-        imgElement.src = imagePath + img;
-        imgElement.classList.add('d-block', 'w-100');
-        imgElement.alt = img;
-
-        carouselItem.appendChild(imgElement);
-        detailImgs.appendChild(carouselItem);
-    });
-
-    
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function showDetails(serviceId) {
-    const service = window.services[serviceId];
-    if (!service) return;
-
-    document.getElementById('title').classList.add('d-none');
-    document.getElementById('servicesGrid').classList.add('d-none');
-    document.getElementById('serviceDetail').classList.remove('d-none');
-
-    document.getElementById('detailTitle').textContent = service.title || '';
-    document.getElementById('detailText').textContent = service.description || '';
-    document.getElementById('detailImage').src = service.image || '';
-
-    const list = document.getElementById('detailList');
+    const list = document.getElementById('serviceBenefits');
     list.innerHTML = Array.isArray(service.details) && service.details.length > 0
         ? service.details.map(detail => `
             <li class="list-group-item d-flex align-items-center">
@@ -168,5 +90,9 @@ function showDetails(serviceId) {
             </li>
         `).join('')
         : '';
+
+    
 }
+
+
 
