@@ -94,7 +94,6 @@ function showDetails(activityId) {
     const imagePath = `../assets/img/${activity.Codigo.replace(/\D/g, '')}/`;
     console.log(activity);
     console.log(imagenes);
-    console.log();
     if (!activity) return;
 
     document.getElementById('title').classList.add('d-none');
@@ -104,6 +103,8 @@ function showDetails(activityId) {
     document.getElementById('detailTitle').textContent = activity.Nombre || '';
     document.getElementById('detailText').textContent = activity.Descripcion || '';
     imagenes.forEach(img => {
+
+        console.log(img);
         document.getElementById('detailImgs').innerHTML += `
                                                                 <div class="carousel-item active" data-bs-interval="2000">
                                                                     <img src="${imagePath + img}" class="d-block w-100" alt="...">
