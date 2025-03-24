@@ -92,6 +92,9 @@ function showDetails(activityId) {
     const activity = listaActividades[activityId.toString()];
     const imagenes = JSON.parse(activity.Img);
     const imagePath = `../assets/img/${activity.Codigo.replace(/\D/g, '')}/`;
+    console.log(activity);
+    console.log(imagenes);
+    console.log();
     if (!activity) return;
 
     document.getElementById('title').classList.add('d-none');
