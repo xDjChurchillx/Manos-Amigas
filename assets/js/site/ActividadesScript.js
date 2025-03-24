@@ -36,7 +36,7 @@ function startPage() {
 
     document.getElementById('susAct').addEventListener('click', function (e) {
         const email = document.getElementById('correo').value;
-        alert(`¡Gracias! Tu correo (${email}) ha sido registrado.`);
+        alert(`Tu correo (${email}) ha sido suscrito.`);
         // Aquí podrías añadir lógica AJAX/Fetch para enviar el dato a tu backend
     });
 
