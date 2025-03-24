@@ -37,3 +37,25 @@
     object-fit: cover;
     max-height: 300px;
 }
+.carousel-control-prev,
+.carousel-control-next {
+    background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro y semitransparente */
+    border-radius: 50%; /* Bordes redondeados */
+    width: 40px; /* Ancho */
+    height: 40px; /* Alto */
+    top: 50%; /* Centrar verticalmente */
+    transform: translateY(-50%); /* Ajuste fino para centrar */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.9)); /* Sombra más oscura */
+}
+
+.carousel-control-prev {
+    left: 15px; /* Posición desde la izquierda */
+}
+
+.carousel-control-next {
+    right: 15px; /* Posición desde la derecha */
+}
