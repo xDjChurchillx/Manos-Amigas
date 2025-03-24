@@ -121,8 +121,7 @@ function showDetails(activityId) {
 
     // Inicializar el carrusel manualmente
     const carousel = new bootstrap.Carousel(document.getElementById('carousel'), {
-        interval: 4000, // Cambiar de imagen cada 2 segundos
-        ride: 'carousel' // Autoplay
+        ride: 'carousel' 
     });
 }
 
