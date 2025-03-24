@@ -51,6 +51,19 @@ function startPanel(datos) {
         activitysGrid.innerHTML += createActivityCard(item);
         
     });
+
+
+    var activityModal = document.getElementById('activityModal');
+
+    activityModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var activityId = button.getAttribute('data-activity');
+        const activity = listaActividades[activityId.toString()];     
+        if (!activity) return;
+        showDetails(activity);
+    });
+
+
 }
 function Alerta(mensaje) {
     const alertaDiv = document.getElementById('alerta');
@@ -75,7 +88,7 @@ function createActivityCard(activity) {
     const imagenes = JSON.parse(activity.Img);
     return `
             <div class="col-md-6 col-lg-4">
-                <div class="card activity-card h-100" data-bs-toggle="modal" data-bs-target="#activityModal">
+                <div class="card activity-card h-100" data-bs-toggle="modal" data-bs-target="#activityModal" data-activity="${activity.Codigo}">
                     <img src="../assets/img/${activity.Codigo.replace(/\D/g, '')}/${imagenes[0]}" class="activity-image card-img-top" alt="${activity.Codigo}">
                     <div class="card-body">
                         <h5 class="card-title">${activity.Nombre}</h5>
@@ -88,20 +101,16 @@ function createActivityCard(activity) {
 
 
 // Función para mostrar detalles (modificada para usar la variable global)
-function showDetails(activityId) {
-    const activity = listaActividades[activityId.toString()];
+function showDetails(activity) {
+
     const imagenes = JSON.parse(activity.Img);
     const imagePath = `../assets/img/${activity.Codigo.replace(/\D/g, '')}/`;
     console.log(activity);
     console.log(imagenes);
-    if (!activity) return;
+    document.getElementById('modalTitle').textContent = activity.Nombre || '';
+    document.getElementById('activityDescription').textContent = activity.Descripcion || '';
 
-    document.getElementById('title').classList.add('d-none');
-    document.getElementById('activitysGrid').classList.add('d-none');
-    document.getElementById('activityDetail').classList.remove('d-none');
-
-    document.getElementById('detailTitle').textContent = activity.Nombre || '';
-    document.getElementById('detailText').textContent = activity.Descripcion || '';
+    const detailImgs = document.getElementById('modalImgs');
     // Agregar las imágenes al carrusel
     imagenes.forEach((img, index) => {
         const carouselItem = document.createElement('div');
@@ -112,7 +121,7 @@ function showDetails(activityId) {
 
         const imgElement = document.createElement('img');
         imgElement.src = imagePath + img;
-        imgElement.classList.add('d-block', 'w-100','custom-img','img-fluid');
+        imgElement.classList.add('d-block', 'w-100');
         imgElement.alt = img;
 
         carouselItem.appendChild(imgElement);
@@ -120,21 +129,11 @@ function showDetails(activityId) {
     });
 
     // Inicializar el carrusel manualmente
-    const carousel = new bootstrap.Carousel(document.getElementById('carousel'), {
-        ride: 'carousel' 
+    const carousel = new bootstrap.Carousel(document.getElementById('activityCarousel'), {
+        ride: 'carousel'
     });
+   
 }
 
-// Función hideDetails se mantiene igual
-function hideDetails() {
-    // Mostrar nuevamente los títulos y tarjetas
-    document.getElementById('title').classList.remove('d-none');
-    document.getElementById('activitysGrid').classList.remove('d-none');
-    document.getElementById('activityDetail').classList.add('d-none');
 
-    // Limpiar contenido del detalle
-    document.getElementById('detailTitle').textContent = '';
-    document.getElementById('detailText').textContent = '';
-    document.getElementById('detailImgs').innerHTML = ``;
-}
 

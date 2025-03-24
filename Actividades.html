@@ -49,27 +49,14 @@
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="modalTitle">Detalles de la Actividad</h5>
+                            <h5 class="modal-title" id="modalTitle">Actividad</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <!-- Carrusel de imágenes -->
                             <div id="activityCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
-                                <div class="carousel-indicators">
-                                    <button type="button" data-bs-target="#activityCarousel" data-bs-slide-to="0" class="active"></button>
-                                    <button type="button" data-bs-target="#activityCarousel" data-bs-slide-to="1"></button>
-                                    <button type="button" data-bs-target="#activityCarousel" data-bs-slide-to="2"></button>
-                                </div>
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <img src="https://deportesernesto.com/img/cms/actividades_1.jpg" class="d-block w-100" alt="Imagen 1">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="https://deportesernesto.com/img/cms/actividades_1.jpg" class="d-block w-100" alt="Imagen 2">
-                                    </div>
-                                    <div class="carousel-item">
-                                        <img src="https://deportesernesto.com/img/cms/actividades_1.jpg" class="d-block w-100" alt="Imagen 3">
-                                    </div>
+                                <div id="modalImgs" class="carousel-inner">
+                                 
                                 </div>
                                 <button class="carousel-control-prev" type="button" data-bs-target="#activityCarousel" data-bs-slide="prev">
                                     <span class="carousel-control-prev-icon"></span>
@@ -79,27 +66,7 @@
                                 </button>
                             </div>
 
-                            <h4 id="activityName">Nombre de la Actividad</h4>
-                            <p id="activityDescription">Descripción detallada de la actividad. Aquí puedes incluir información sobre horarios, requisitos, equipamiento necesario, niveles disponibles, precios y cualquier otro detalle relevante para los participantes.</p>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <h5>Horarios</h5>
-                                    <ul>
-                                        <li>Lunes y Miércoles: 9:00 - 10:30</li>
-                                        <li>Martes y Jueves: 18:00 - 19:30</li>
-                                        <li>Sábados: 11:00 - 12:30</li>
-                                    </ul>
-                                </div>
-                                <div class="col-md-6">
-                                    <h5>Requisitos</h5>
-                                    <ul>
-                                        <li>Ropa deportiva adecuada</li>
-                                        <li>Botella de agua</li>
-                                        <li>Toalla</li>
-                                    </ul>
-                                </div>
-                            </div>
+                            <p id="activityDescription">Descripción detallada de la actividad.</p>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
