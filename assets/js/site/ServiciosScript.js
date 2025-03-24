@@ -1,9 +1,77 @@
-﻿
-// Función para crear las tarjetas de servicio
+﻿// Objeto global para almacenar los datos
+let listaActividades = {};
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Llamar a la función de verificación de sesión al cargar la página
+    startPage();
+});
+// Función para verificar la sesión
+function startPage() {
+    // Realizar la solicitud AJAX
+    fetch("../assets/json/Servicios.json", {
+        method: 'GET'
+    })
+        .then(response => response.text())
+        .then(text => {
+            try {
+                let data = JSON.parse(text);
+                if (data.status === "success") {
+                    startPanel(data);
+                } else {
+                    Alerta("Error al cargar Servicios");
+                }
+            } catch (error) {
+                console.error("Respuesta:", text); // Imprime el texto antes de que falle
+                Alerta("Error al cargar Servicios");
+            }
+        })
+        .catch(error => {
+            Alerta("Main Error al cargar Servicios");
+        });
+
+}
+
+// Función para inicializar el contador después de cargar el HTML
+function startPanel(datos) {
+
+    console.log(datos);
+
+    const servicesGrid = document.getElementById('servicesGrid');
+
+    if (buscar) {
+        document.getElementById('buscar').value = buscar;
+    }
+    datos.filas.forEach(function (item) {
+        listaActividades[item.id] = item;
+        servicesGrid.innerHTML += createActivityCard(item);
+    });
+
+
+    var serviceModal = document.getElementById('serviceModal');
+
+    serviceModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        var serviceId = button.getAttribute('data-service');
+        const service = listaActividades[serviceId.toString()];
+        if (!service) return;
+        showDetails(service);
+    });
+
+
+}
+function Alerta(mensaje) {
+    const alertaDiv = document.getElementById('alerta');
+    alertaDiv.textContent = mensaje;
+    alertaDiv.classList.remove('d-none');
+    setTimeout(() => {
+        alertaDiv.classList.add('d-none');
+    }, 5000);
+}
+
 function createServiceCard(service) {
     return `
                      <div class="col-md-6 col-lg-4">
-                         <div class="card service-card h-100" onclick="showDetails(${service.id})">
+                         <div class="card service-card h-100" data-bs-toggle="modal" data-bs-target="#serviceModal" data-service="${service.id}">
                              <img src="${service.cardImage}" class="service-image card-img-top" alt="${service.title}">
                                  <div class="card-body">
                                      <h5 class="card-title">${service.title}</h5>
@@ -14,35 +82,77 @@ function createServiceCard(service) {
                      `;
 }
 
-// Función para cargar los servicios
-async function loadServices() {
-    try {
-        const response = await fetch('assets/json/Servicios.json');
-        const data = await response.json();
-        const servicesGrid = document.getElementById('servicesGrid');
+// Función para mostrar detalles (modificada para usar la variable global)
+function showDetails(service) {
 
-        // Generar tarjetas
-        servicesGrid.innerHTML = data.services.map(service =>
-            createServiceCard(service)
-        ).join('');
+    const imagenes = JSON.parse(service.Img);
+    const imagePath = `../assets/img/${service.Codigo.replace(/\D/g, '')}/`;
+    console.log(service);
+    console.log(imagenes);
+    document.getElementById('modalTitle').textContent = service.Nombre || '';
+    document.getElementById('serviceDescription').textContent = service.Descripcion || '';
 
-        // Guardar servicios en variable global
-        window.services = data.services.reduce((acc, service) => {
-            acc[service.id] = service;
-            return acc;
-        }, {});
+    const detailImgs = document.getElementById('modalImgs');
+    detailImgs.innerHTML = '';
+    // Agregar las imágenes al carrusel
+    imagenes.forEach((img, index) => {
+        const carouselItem = document.createElement('div');
+        carouselItem.classList.add('carousel-item');
+        if (index === 0) {
+            carouselItem.classList.add('active'); // La primera imagen estará activa
+        }
 
-    } catch (error) {
-        console.error('Error cargando servicios:', error);
-        servicesGrid.innerHTML = `
-                 <div class="alert alert-danger">
-                     Error cargando los servicios. Por favor intenta nuevamente más tarde.
-                 </div>
-                 `;
-    }
+        const imgElement = document.createElement('img');
+        imgElement.src = imagePath + img;
+        imgElement.classList.add('d-block', 'w-100');
+        imgElement.alt = img;
+
+        carouselItem.appendChild(imgElement);
+        detailImgs.appendChild(carouselItem);
+    });
+
+    
 }
 
-// Función para mostrar detalles (modificada para usar la variable global)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 function showDetails(serviceId) {
     const service = window.services[serviceId];
     if (!service) return;
@@ -66,20 +176,3 @@ function showDetails(serviceId) {
         : '';
 }
 
-// Función hideDetails se mantiene igual
-function hideDetails() {
-    // Mostrar nuevamente los títulos y tarjetas
-    document.getElementById('title').classList.remove('d-none');
-    document.getElementById('servicesGrid').classList.remove('d-none');
-    document.getElementById('serviceDetail').classList.add('d-none');
-
-    // Limpiar contenido del detalle
-    document.getElementById('detailTitle').textContent = '';
-    document.getElementById('detailText').textContent = '';
-    document.getElementById('detailImage').src = '';
-    document.getElementById('detailList').innerHTML = '';
-}
-
-
-// Cargar servicios al iniciar
-loadServices();

@@ -34,6 +34,9 @@
     <!-- Contenido -->
     <!-- Contenido Principal -->
     <main class="flex-grow-1">
+        <div id="alerta" class="alert alert-danger d-none" role="alert">
+
+        </div>
         <div class="container py-5">
             <h1 id="title" class="text-center mb-5 display-4 fw-bold c2color">Nuestros Servicios</h1>
 
@@ -41,6 +44,50 @@
             <div id="servicesGrid" class="row g-4">
                 <!-- Los servicios se cargarán aquí dinámicamente -->
             </div>
+
+            <!-- Modal de detalles -->
+            <div class="modal fade" id="serviceModal" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="modal-header justify-content-center bg2color">
+                            <!-- Agregar justify-content-center aquí -->
+                            <h5 class="modal-title text-center w-100 text-light" id="modalTitle">Actividad</h5> <!-- Agregar w-100 para ancho completo -->
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <!-- Carrusel de imágenes -->
+                            <div id="serviceCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+                                <div id="modalImgs" class="carousel-inner">
+
+                                </div>
+                                <button class="carousel-control-prev" type="button" data-bs-target="#serviceCarousel" data-bs-slide="prev">
+                                    <span class="carousel-control-prev-icon"></span>
+                                </button>
+                                <button class="carousel-control-next" type="button" data-bs-target="#serviceCarousel" data-bs-slide="next">
+                                    <span class="carousel-control-next-icon"></span>
+                                </button>
+                            </div>
+
+                            <p id="serviceDescription">Descripción detallada de la actividad.</p>
+
+                            <ul id="detailList" class="list-group list-group-flush"></ul>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="d-flex justify-content-center">
+                                <input id="correo" type="email" class="form-control" placeholder="correo" required aria-label="Correo electrónico">
+                                <button id="susAct" type="button" class="btn btn-primary">Suscribirse</button>
+                            </div>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
 
             <!-- Sección de Detalle -->
             <div id="serviceDetail" class="d-none">
@@ -56,7 +103,7 @@
                     <img id="detailImage" class="card-img-top service-image" alt="Detalle servicio">
                     <div class="card-body">
                         <p id="detailText" class="lead"></p>
-                        <ul id="detailList" class="list-group list-group-flush"></ul>
+
                     </div>
                 </div>
             </div>
