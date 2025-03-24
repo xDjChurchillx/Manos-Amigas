@@ -71,19 +71,6 @@ function search() {
     window.location.href = url;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-// JavaScript source code
-// Función para crear las tarjetas de actividades
 function createActivityCard(activity) {
     console.log(activity);
     const imagenes = JSON.parse(activity.Img);
@@ -106,25 +93,17 @@ function createActivityCard(activity) {
 // Función para mostrar detalles (modificada para usar la variable global)
 function showDetails(activityId) {
     const activity = listaActividades[activityId];
+    const imagenes = JSON.parse(activity.Img);
+    const imagePath = `../assets/img/${activity.Codigo.replace(/\D/g, '')}/`;
     if (!activity) return;
 
     document.getElementById('title').classList.add('d-none');
     document.getElementById('activitysGrid').classList.add('d-none');
     document.getElementById('activityDetail').classList.remove('d-none');
 
-    document.getElementById('detailTitle').textContent = activity.title || '';
-    document.getElementById('detailText').textContent = activity.description || '';
-    document.getElementById('detailImage').src = activity.image || '';
-
-    const list = document.getElementById('detailList');
-    list.innerHTML = Array.isArray(activity.details) && activity.details.length > 0
-        ? activity.details.map(detail => `
-            <li class="list-group-item d-flex align-items-center">
-                <span class="badge bg3color me-3"><i class="bi bi-check2"></i></span>
-                ${detail}
-            </li>
-        `).join('')
-        : '';
+    document.getElementById('detailTitle').textContent = activity.Nombre || '';
+    document.getElementById('detailText').textContent = activity.Descripcion || '';
+    document.getElementById('detailImage').src = imagePath + imagenes[0];  
 }
 
 // Función hideDetails se mantiene igual
