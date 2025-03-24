@@ -87,6 +87,12 @@ try{
     }
     $rows = [];
     while ($row = $result->fetch_assoc()) {
+         if (array_key_exists('Error', $row)) {
+            echo json_encode([
+                'status' => 'error',
+                'ex' => 'Usuario o token inválido.'
+            ]);
+        }
         $sumas['visitas'] += $row['Visitas'];
         $sumas['suscripciones'] += $row['Suscripciones'];
         $sumas['donaciones'] += $row['Donaciones'];
