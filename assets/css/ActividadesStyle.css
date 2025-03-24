@@ -39,7 +39,7 @@
 }
 
 .carousel-inner img {
-    max-height: 400px; /* Ajusta según necesidad */
+    max-height: 550px; /* Ajusta según necesidad */
     object-fit: contain; /* Recorta la imagen en lugar de distorsionarla */
 }
 .carousel-control-prev,
