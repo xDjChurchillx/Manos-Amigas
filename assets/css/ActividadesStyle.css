@@ -37,9 +37,10 @@
     object-fit: cover;
     max-height: 300px;
 }
+
 .carousel-inner img {
     max-height: 400px; /* Ajusta según necesidad */
-    object-fit: cover; /* Recorta la imagen en lugar de distorsionarla */
+    object-fit: contain; /* Recorta la imagen en lugar de distorsionarla */
 }
 .carousel-control-prev,
 .carousel-control-next {
