@@ -37,7 +37,7 @@ function startPanel(datos) {
     
     datos.services.forEach(function (item) {
         listaActividades[item.id] = item;
-        servicesGrid.innerHTML += createActivityCard(item);
+        servicesGrid.innerHTML += createServiceCard(item);
     });
 
 
