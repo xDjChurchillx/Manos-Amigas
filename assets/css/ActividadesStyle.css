@@ -39,7 +39,7 @@
 }
 .carousel-control-prev,
 .carousel-control-next {
-    background-color: rgba(0, 0, 0, 0.7); /* Fondo más oscuro y semitransparente */
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo más oscuro y semitransparente */
     border-radius: 50%; /* Bordes redondeados */
     width: 40px; /* Ancho */
     height: 40px; /* Alto */
@@ -49,7 +49,6 @@
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-    background-color: rgba(0, 0, 0, 1);
     filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.9)); /* Sombra más oscura */
 }
 
