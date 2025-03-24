@@ -3,10 +3,10 @@ let listaActividades = {};
 
 document.addEventListener("DOMContentLoaded", function () {
     // Llamar a la función de verificación de sesión al cargar la página
-    startSession();
+    startPage();
 });
 // Función para verificar la sesión
-function startSession() {
+function startPage() {
     const urlParams = new URLSearchParams(window.location.search);
     let buscar = urlParams.get('buscar');
     if (!buscar) {
@@ -33,7 +33,22 @@ function startSession() {
         .catch(error => {          
             Alerta("Main Error al cargar actividades");  
         });
+
+    document.getElementById('susAct').addEventListener('submit', function (e) {
+        e.preventDefault(); // Evita recargar la página
+        const email = e.target.querySelector('input').value;
+        alert(`¡Gracias! Tu correo (${email}) ha sido registrado.`);
+        // Aquí podrías añadir lógica AJAX/Fetch para enviar el dato a tu backend
+    });
+
+
+
 }
+
+
+
+
+
 // Función para inicializar el contador después de cargar el HTML
 function startPanel(datos) {
 
