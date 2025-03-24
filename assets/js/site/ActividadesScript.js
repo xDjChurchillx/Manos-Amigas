@@ -106,8 +106,8 @@ function showDetails(activityId) {
 
         console.log(img);
         document.getElementById('detailImgs').innerHTML += `
-                                                                <div class="carousel-item active" data-bs-interval="2000">
-                                                                    <img src="${imagePath + img}" class="d-block w-100" alt="...">
+                                                               <div class="carousel-item active" data-bs-interval="2000">
+                                                                    <img src="${imagePath + img}" class="d-block w-100" alt="${img}">
                                                                 </div>
                                                             `;
     });
