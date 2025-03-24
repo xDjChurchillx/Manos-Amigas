@@ -34,9 +34,6 @@ function startPanel(datos) {
 
     const servicesGrid = document.getElementById('servicesGrid');
 
-    if (buscar) {
-        document.getElementById('buscar').value = buscar;
-    }
     datos.filas.forEach(function (item) {
         listaActividades[item.id] = item;
         servicesGrid.innerHTML += createActivityCard(item);
