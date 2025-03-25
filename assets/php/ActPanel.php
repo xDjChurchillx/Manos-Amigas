@@ -151,7 +151,7 @@ if (empty($rows)) {
                 <td>' . htmlspecialchars($actividad['Nombre']) . '</td>
                 <td>' . htmlspecialchars($actividad['Descripcion']) . '</td>
                 <td>' . $visibilidad . '</td>
-                <td class="d-flex justify-content-center gap-2">                   
+                <td>                   
                     <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($actividad['Codigo']) . '\')">Editar</button>
                     <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($actividad['Codigo']) . '\',\''. htmlspecialchars($actividad['Nombre']) .'\')">Eliminar</button>
                 </td>
