@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fecha = trim($_POST['fecha'] ?? date('Y-m-d H:i:s'));
         $visible = isset($_POST['visible']) ? 1 : 0; 
         // Validación de datos
-        if (empty($nombreActividad) || empty($descripcion) || empty($fecha)) {
+        if (empty($nombreActividad) || empty($descripcion)) {
             echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
             exit();
         }
