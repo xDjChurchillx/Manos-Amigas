@@ -100,18 +100,33 @@ function search() {
 
 function createActivityCard(activity) {
     const imagenes = JSON.parse(activity.Img);
+    let fechaHTML = ''; // Variable para la parte del calendario
 
-    // Extraer datos de la fecha manualmente
-    const fechaPartes = activity.Fecha.split(" ");
-    const fecha = fechaPartes[0].split("-"); // ["2025", "03", "23"]
-    const horaPartes = fechaPartes[1].split(":"); // ["07", "05", "00"]
+    if (activity.Fecha) {
+        // Extraer datos de la fecha manualmente
+        const fechaPartes = activity.Fecha.split(" ");
+        const fecha = fechaPartes[0].split("-"); // ["2025", "03", "23"]
+        const horaPartes = fechaPartes[1].split(":"); // ["07", "05", "00"]
 
-    // Meses en español
-    const mesesAbrev = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
-    const mesAbrev = mesesAbrev[parseInt(fecha[1]) - 1]; // Convertir el mes a índice del array
-    const dia = fecha[2];
-    const hora = horaPartes[0];
-    const minutos = horaPartes[1];
+        // Meses en español
+        const mesesAbrev = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+        const mesAbrev = mesesAbrev[parseInt(fecha[1], 10) - 1]; // Convertir el mes a índice del array
+        const dia = fecha[2];
+        const hora = horaPartes[0];
+        const minutos = horaPartes[1];
+
+        // Construir la parte del calendario
+        fechaHTML = `
+            <div class="minimal-calendar">
+                <div class="minimal-calendar-header">${mesAbrev}</div>
+                <div class="minimal-calendar-day">${dia}</div>
+                <div class="minimal-calendar-time">
+                    <span class="minimal-clock-icon">🕒</span>
+                    <span>${hora}:${minutos}</span>
+                </div>
+            </div>
+        `;
+    }
 
     return `
         <div class="col-md-6 col-lg-4">
@@ -119,19 +134,13 @@ function createActivityCard(activity) {
                 <img src="../assets/img/${activity.Codigo.replace(/\D/g, '')}/${imagenes[0]}" class="activity-image card-img-top" alt="${activity.Codigo}">            
                 <div class="card-header bg-white">
                     <h3 class="card-title">${activity.Nombre}</h3>
-                    <div class="minimal-calendar">
-                        <div class="minimal-calendar-header">${mesAbrev}</div>
-                        <div class="minimal-calendar-day">${dia}</div>
-                        <div class="minimal-calendar-time">
-                            <span class="minimal-clock-icon">🕒</span>
-                            <span>${hora}:${minutos}</span>
-                        </div>
-                    </div>
+                    ${fechaHTML} <!-- Se agrega solo si hay fecha -->
                 </div>
             </div>
         </div>  
     `;
 }
+
 
 
 
@@ -144,6 +153,23 @@ function showDetails(activity) {
     console.log(imagenes);
     document.getElementById('modalTitle').textContent = activity.Nombre || '';
     document.getElementById('activityDescription').textContent = activity.Descripcion || '';
+
+    if (activity.Fecha) {
+        const [fecha, hora] = activity.Fecha.split(' '); // Separar la fecha y la hora
+        const [anio, mes, dia] = fecha.split('-'); // Extraer año, mes y día
+        const [horas, minutos] = hora.split(':'); // Extraer horas y minutos
+
+        // Meses en español
+        const meses = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+        const fechaFormateada = `${dia} de ${meses[parseInt(mes, 10) - 1]} de ${anio}`;
+        const horaFormateada = `${horas}:${minutos}`;
+
+        document.getElementById('modalDateTime').textContent = `${fechaFormateada} - ${horaFormateada}`;
+    } else {
+        document.getElementById('modalDateTime').textContent = '';
+    }
+
 
     const detailImgs = document.getElementById('modalImgs');
     detailImgs.innerHTML = '';
