@@ -93,7 +93,15 @@ body {
         border-color: var(--secondary);
     }
 
+.whatsapp-btn {
+    background-color: #25D366;
+    color: white;
+}
 
+    .whatsapp-btn:hover {
+        background-color: #128C7E;
+        color: white;
+    }
 .toast-position {
     position: fixed;
     top: 20px;
