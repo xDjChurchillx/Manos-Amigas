@@ -53,33 +53,25 @@
 
 /* Estilos para la card */
 .simple-card {
-    width: 300px;
-    border-radius: 10px;
-    overflow: hidden;
-    background: white;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-    font-family: 'Segoe UI', Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%; /* Para que se ajuste al contenedor */
 }
 
-.card-image-placeholder {
-    width: 100%;
-    height: 300px;
-    background-color: #5dade2;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-size: 18px;
-    font-weight: bold;
-}
+    .simple-card img {
+        object-fit: cover;
+        width: 100%;
+        height: 180px; /* Ajusta según necesidad */
+    }
 
 .card-header {
-    padding: 15px;
+    flex-grow: 1;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: space-between;
-    border-bottom: 1px solid #f0f0f0;
 }
+
 
 .card-title {
     font-size: 18px;
