@@ -100,11 +100,12 @@ function search() {
 
 function createActivityCard(activity) {
     const imagenes = JSON.parse(activity.Img);
+    console.log(activity.Fecha);
     return `
             <div class="col-md-6 col-lg-4">
                 <div class="simple-card" data-bs-toggle="modal" data-bs-target="#activityModal" data-activity="${activity.Codigo}">               
                     <img src="../assets/img/${activity.Codigo.replace(/\D/g, '')}/${imagenes[0]}" class="activity-image card-img-top" alt="${activity.Codigo}">            
-                    <div class="card-header">
+                    <div class="card-header bg-white">
                         <h3 class="card-title">${activity.Nombre}</h3>
                         <div class="minimal-calendar">
                             <div class="minimal-calendar-header">Jun</div>

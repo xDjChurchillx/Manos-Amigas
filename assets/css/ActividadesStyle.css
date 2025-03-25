@@ -1,4 +1,32 @@
-﻿
+﻿/* Estilos para la card */
+.simple-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%; /* Para que se ajuste al contenedor */
+}
+
+    .simple-card img {
+        object-fit: cover;
+        width: 100%;
+        height: 180px; /* Ajusta según necesidad */
+    }
+
+.card-header {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    padding-right: 10px;
+}
 .minimal-calendar {
     display: inline-flex;
     flex-direction: column;
@@ -50,38 +78,6 @@
     margin-right: 3px;
     font-size: 9px;
 }
-
-/* Estilos para la card */
-.simple-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%; /* Para que se ajuste al contenedor */
-}
-
-    .simple-card img {
-        object-fit: cover;
-        width: 100%;
-        height: 180px; /* Ajusta según necesidad */
-    }
-
-.card-header {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-}
-
-
-.card-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #2c3e50;
-    margin: 0;
-    padding-right: 10px;
-}
-
-
 
 
 
