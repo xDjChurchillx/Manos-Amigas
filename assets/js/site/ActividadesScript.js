@@ -154,7 +154,7 @@ function showDetails(activity) {
     document.getElementById('modalTitle').textContent = activity.Nombre || '';
     document.getElementById('activityDescription').textContent = activity.Descripcion || '';
 
-    if (activity.Fecha) {
+    if (activity.Fecha != '0000-00-00 00:00:00') {
         const [fecha, hora] = activity.Fecha.split(' '); // Separar la fecha y la hora
         const [anio, mes, dia] = fecha.split('-'); // Extraer año, mes y día
         const [horas, minutos] = hora.split(':'); // Extraer horas y minutos
