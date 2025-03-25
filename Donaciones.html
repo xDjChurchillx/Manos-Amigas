@@ -6,6 +6,7 @@
     <title>Página con Navbar y Footer</title>
     <link href="assets/js/bootstrap-5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/GeneralStyle.css" rel="stylesheet">
+    <link href="assets/css/DonacionesStyle.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="assets/img/iconos/favicon.svg">
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -31,10 +32,149 @@
     </nav>
 
     <!-- Contenido -->
-    <div class="container mt-4">
-        <h1 class="text-center">Donaciones</h1>
-        <h1 class="text-center">Bienvenido a mi Página</h1>
-        <p class="text-center">Este es un ejemplo de una página con Bootstrap.</p>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="donation-header card-header py-4">
+                        <h2 class="text-center mb-0">Donaciones al Hogar de Ancianos</h2>
+                        <p class="text-center mb-0">Tu apoyo hace la diferencia en la vida de nuestros residentes</p>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <form id="donationForm">
+                            <!-- Sección 1: Métodos de Pago -->
+                            <div class="mb-5">
+                                <h3 class="section-title">1. Método de Donación</h3>
+                                <p class="text-muted mb-4">Selecciona cómo deseas realizar tu donación:</p>
+
+                                <div class="payment-option active" id="ibanOption">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="ibanMethod" value="iban" checked>
+                                        <label class="form-check-label fw-bold" for="ibanMethod">
+                                            Transferencia Bancaria (IBAN)
+                                        </label>
+                                    </div>
+                                    <div class="mt-2 ps-4" id="ibanDetails">
+                                        <p class="mb-1"><strong>Número de cuenta:</strong> CR1234567890</p>
+                                        <p class="mb-1"><strong>Banco:</strong> Banco Nacional</p>
+                                        <p class="mb-1"><strong>Nombre:</strong> Hogar de Ancianos Vida Plena</p>
+                                        <p class="mb-0"><small class="text-muted">(Cuenta IBAN de 10 dígitos)</small></p>
+                                    </div>
+                                </div>
+
+                                <div class="payment-option" id="sinpeOption">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="sinpeMethod" value="sinpe">
+                                        <label class="form-check-label fw-bold" for="sinpeMethod">
+                                            SINPE Móvil
+                                        </label>
+                                    </div>
+                                    <div class="mt-2 ps-4" id="sinpeDetails" style="display: none;">
+                                        <p class="mb-1"><strong>Número:</strong> 8888-7777</p>
+                                        <p class="mb-1"><strong>Nombre:</strong> Asociación Hogar Ancianos</p>
+                                        <p class="mb-0"><small class="text-muted">(Número de 8 dígitos)</small></p>
+                                    </div>
+                                </div>
+
+                                <div class="payment-option" id="paypalOption">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paypalMethod" value="paypal">
+                                        <label class="form-check-label fw-bold" for="paypalMethod">
+                                            PayPal
+                                        </label>
+                                    </div>
+                                    <div class="mt-2 ps-4" id="paypalDetails" style="display: none;">
+                                        <p class="mb-1"><strong>Correo:</strong> donaciones@hogarancianos.org</p>
+                                        <p class="mb-0"><small class="text-muted">Serás redirigido al sitio seguro de PayPal</small></p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sección 2: Destino de la Donación (versión compacta) -->
+                            <div class="mb-5">
+                                <h3 class="section-title">2. Destino de tu Donación</h3>
+                                <p class="text-muted mb-3">Elige cómo deseas que se utilice tu contribución:</p>
+
+                                <div class="d-flex flex-wrap gap-2">
+                                    <div class="destination-btn active" id="foodDestination">
+                                        <i class="fas fa-utensils destination-icon"></i>
+                                        <span>Alimentos</span>
+                                        <input type="radio" name="donationDestination" value="alimentos" checked style="display: none;">
+                                    </div>
+                                    <div class="destination-btn" id="infraDestination">
+                                        <i class="fas fa-home destination-icon"></i>
+                                        <span>Infraestructura</span>
+                                        <input type="radio" name="donationDestination" value="infraestructura" style="display: none;">
+                                    </div>
+                                    <div class="destination-btn" id="medicineDestination">
+                                        <i class="fas fa-pills destination-icon"></i>
+                                        <span>Medicina</span>
+                                        <input type="radio" name="donationDestination" value="medicina" style="display: none;">
+                                    </div>
+                                </div>
+
+                                <div class="mt-2">
+                                    <small class="text-muted">
+                                        <i class="fas fa-info-circle me-1"></i>
+                                        Alimentos: Comida nutritiva | Infraestructura: Mejoras en instalaciones | Medicina: Medicamentos y atención
+                                    </small>
+                                </div>
+                            </div>
+
+                            <!-- Sección 3: Mensaje y Contacto -->
+                            <div class="mb-4">
+                                <h3 class="section-title">3. Mensaje y Contacto</h3>
+
+                                <div class="mb-3">
+                                    <label for="donorMessage" class="form-label">Mensaje personal (opcional)</label>
+                                    <textarea class="form-control" id="donorMessage" rows="3" placeholder="Escribe un mensaje de apoyo o dedicatoria para nuestros ancianos"></textarea>
+                                </div>
+
+                                <div class="row g-2">
+                                    <div class="col-md-6">
+                                        <label for="donorName" class="form-label">Tu nombre (opcional)</label>
+                                        <input type="text" class="form-control" id="donorName" placeholder="Para saber a quién agradecer">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="donorEmail" class="form-label">Correo electrónico (opcional)</label>
+                                        <input type="email" class="form-control" id="donorEmail" placeholder="Si deseas recibir nuestro agradecimiento">
+                                    </div>
+                                </div>
+
+                                <div class="alert alert-info mt-4">
+                                    <h5 class="alert-heading">¿Prefieres contactarnos directamente?</h5>
+                                    <div class="d-flex flex-wrap gap-2 mt-2">
+                                        <a href="https://wa.me/50612345678" class="btn whatsapp-btn">
+                                            <i class="fab fa-whatsapp me-2"></i> WhatsApp
+                                        </a>
+                                        <a href="contacto.html" class="btn btn-outline-primary">
+                                            <i class="fas fa-envelope me-2"></i> Contacto
+                                        </a>
+                                        <a href="visitas.html" class="btn btn-outline-primary">
+                                            <i class="fas fa-map-marker-alt me-2"></i> Visítanos
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg py-3">
+                                    <i class="fas fa-heart me-2"></i> Confirmar Donación
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-footer text-center py-3 bg-light">
+                        <small class="text-muted">
+                            <i class="fas fa-lock me-1"></i> Todas las donaciones son seguras y deducibles de impuestos.
+                            <br>© 2023 Hogar de Ancianos Vida Plena. Todos los derechos reservados.
+                        </small>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
@@ -48,5 +188,6 @@
 
     <script src="assets/js/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="assets/js/site/GeneralScript.js"></script>
+    <script src="assets/js/site/DonacionesScript.js"></script>
 </body>
 </html>
