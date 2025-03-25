@@ -102,7 +102,7 @@ function createActivityCard(activity) {
     const imagenes = JSON.parse(activity.Img);
     let fechaHTML = ''; // Variable para la parte del calendario
 
-    if (activity.Fecha) {
+    if (activity.Fecha != '0000-00-00 00:00:00') {
         // Extraer datos de la fecha manualmente
         const fechaPartes = activity.Fecha.split(" ");
         const fecha = fechaPartes[0].split("-"); // ["2025", "03", "23"]
