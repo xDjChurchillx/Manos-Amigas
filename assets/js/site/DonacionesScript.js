@@ -1,23 +1,32 @@
-// JavaScript source code
-document.querySelectorAll('.payment-option').forEach(option => {
-    option.addEventListener('click', function () {
-        document.querySelectorAll('.payment-option').forEach(opt => {
-            opt.classList.remove('active');
-            const detailsId = opt.id.replace('Option', 'Details');
-            document.getElementById(detailsId).style.display = 'none';
-        });
+// Mostrar/ocultar toast
+const copyToast = new bootstrap.Toast(document.getElementById('copyToast'));
 
-        this.classList.add('active');
-        const detailsId = this.id.replace('Option', 'Details');
-        document.getElementById(detailsId).style.display = 'block';
+// Función para copiar al portapapeles
+function copyToClipboard(text) {
+    navigator.clipboard.writeText(text).then(() => {
+        copyToast.show();
+    });
+}
 
-        // Marcar el radio button correspondiente
-        const radioId = this.id.replace('Option', 'Method');
-        document.getElementById(radioId).checked = true;
+// Manejar clic en botones de copiar
+document.querySelectorAll('.copy-btn').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        const textToCopy = this.previousElementSibling.textContent.trim();
+        copyToClipboard(textToCopy);
     });
 });
 
-// Manejo de los destinos de donación (versión compacta)
+// Copiar al hacer clic en los detalles de IBAN o SINPE
+document.querySelectorAll('.payment-details p:first-child').forEach(detail => {
+    detail.style.cursor = 'pointer';
+    detail.addEventListener('click', function () {
+        const textToCopy = this.querySelector('.copy-text').textContent.trim();
+        copyToClipboard(textToCopy);
+    });
+});
+
+// Manejo de los destinos de donación
 document.querySelectorAll('.destination-btn').forEach(btn => {
     btn.addEventListener('click', function () {
         document.querySelectorAll('.destination-btn').forEach(b => {
@@ -25,7 +34,6 @@ document.querySelectorAll('.destination-btn').forEach(btn => {
         });
         this.classList.add('active');
 
-        // Marcar el radio button correspondiente
         const radio = this.querySelector('input[type="radio"]');
         radio.checked = true;
     });
