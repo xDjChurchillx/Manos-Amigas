@@ -43,54 +43,50 @@
 
                     <div class="card-body p-4">
                         <form id="donationForm">
-                            <!-- Sección 1: Métodos de Pago -->
-                            <div class="mb-5">
+                            <!-- Sección 1: Métodos de Pago Simplificados -->
+                            <div class="mb-4">
                                 <h3 class="section-title">1. Método de Donación</h3>
-                                <p class="text-muted mb-4">Selecciona cómo deseas realizar tu donación:</p>
 
-                                <div class="payment-option active" id="ibanOption">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="paymentMethod" id="ibanMethod" value="iban" checked>
-                                        <label class="form-check-label fw-bold" for="ibanMethod">
-                                            Transferencia Bancaria (IBAN)
-                                        </label>
-                                    </div>
-                                    <div class="mt-2 ps-4" id="ibanDetails">
-                                        <p class="mb-1"><strong>Número de cuenta:</strong> CR1234567890</p>
-                                        <p class="mb-1"><strong>Banco:</strong> Banco Nacional</p>
-                                        <p class="mb-1"><strong>Nombre:</strong> Hogar de Ancianos Vida Plena</p>
-                                        <p class="mb-0"><small class="text-muted">(Cuenta IBAN de 10 dígitos)</small></p>
+                                <div class="form-check payment-method">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="ibanMethod" value="iban" checked>
+                                    <label class="form-check-label fw-bold" for="ibanMethod">
+                                        Transferencia Bancaria (IBAN)
+                                    </label>
+                                    <div class="payment-details">
+                                        <p class="mb-1">
+                                            <span class="copy-text">CR1234567890</span>
+                                            <i class="fas fa-copy copy-btn ms-2" title="Copiar al portapapeles"></i>
+                                        </p>
+                                        <p class="mb-1"><small>Banco Nacional</small></p>
+                                        <p class="mb-1"><small>Hogar de Ancianos Vida Plena</small></p>
                                     </div>
                                 </div>
 
-                                <div class="payment-option" id="sinpeOption">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="paymentMethod" id="sinpeMethod" value="sinpe">
-                                        <label class="form-check-label fw-bold" for="sinpeMethod">
-                                            SINPE Móvil
-                                        </label>
-                                    </div>
-                                    <div class="mt-2 ps-4" id="sinpeDetails" style="display: none;">
-                                        <p class="mb-1"><strong>Número:</strong> 8888-7777</p>
-                                        <p class="mb-1"><strong>Nombre:</strong> Asociación Hogar Ancianos</p>
-                                        <p class="mb-0"><small class="text-muted">(Número de 8 dígitos)</small></p>
+                                <div class="form-check payment-method">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="sinpeMethod" value="sinpe">
+                                    <label class="form-check-label fw-bold" for="sinpeMethod">
+                                        SINPE Móvil
+                                    </label>
+                                    <div class="payment-details">
+                                        <p class="mb-1">
+                                            <span class="copy-text">88887777</span>
+                                            <i class="fas fa-copy copy-btn ms-2" title="Copiar al portapapeles"></i>
+                                        </p>
+                                        <p class="mb-1"><small>Asociación Hogar Ancianos</small></p>
                                     </div>
                                 </div>
 
-                                <div class="payment-option" id="paypalOption">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paypalMethod" value="paypal">
-                                        <label class="form-check-label fw-bold" for="paypalMethod">
-                                            PayPal
-                                        </label>
-                                    </div>
-                                    <div class="mt-2 ps-4" id="paypalDetails" style="display: none;">
-                                        <p class="mb-1"><strong>Correo:</strong> donaciones@hogarancianos.org</p>
-                                        <p class="mb-0"><small class="text-muted">Serás redirigido al sitio seguro de PayPal</small></p>
+                                <div class="form-check payment-method">
+                                    <input class="form-check-input" type="radio" name="paymentMethod" id="paypalMethod" value="paypal">
+                                    <label class="form-check-label fw-bold" for="paypalMethod">
+                                        PayPal
+                                    </label>
+                                    <div class="payment-details">
+                                        <p class="mb-1"><small>donaciones@hogarancianos.org</small></p>
+                                        <p class="mb-1"><small>Serás redirigido al sitio seguro de PayPal</small></p>
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Sección 2: Destino de la Donación (versión compacta) -->
                             <div class="mb-5">
                                 <h3 class="section-title">2. Destino de tu Donación</h3>

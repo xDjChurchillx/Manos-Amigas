@@ -9,6 +9,11 @@
     height: auto;
 }
 
+body {
+    background-color: #f8f9fa;
+    color: #333;
+}
+
 .donation-header {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     color: white;
@@ -21,29 +26,38 @@
     margin-bottom: 20px;
 }
 
-.payment-option {
-    border: 2px solid var(--accent);
-    border-radius: 8px;
-    padding: 15px;
-    margin-bottom: 15px;
+/* Estilos para los métodos de pago */
+.payment-method {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-left: 4px solid var(--accent);
     transition: all 0.3s;
-    cursor: pointer;
 }
 
-    .payment-option:hover, .payment-option.active {
-        border-color: var(--primary);
+    .payment-method:hover {
         background-color: rgba(152, 210, 192, 0.1);
     }
 
-    .payment-option.active {
-        background-color: var(--light);
+.payment-details {
+    padding-left: 28px;
+    margin-top: 5px;
+}
+
+.copy-btn {
+    cursor: pointer;
+    color: var(--secondary);
+    transition: all 0.2s;
+}
+
+    .copy-btn:hover {
+        color: var(--primary);
     }
 
 /* Estilos compactos para los botones de destino */
 .destination-btn {
     border: 2px solid var(--accent);
     border-radius: 6px;
-    padding: 10px 12px;
+    padding: 8px 12px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s;
@@ -52,6 +66,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
+    font-size: 0.9rem;
 }
 
     .destination-btn:hover, .destination-btn.active {
@@ -64,7 +79,7 @@
     }
 
 .destination-icon {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: var(--secondary);
 }
 
@@ -78,32 +93,10 @@
         border-color: var(--secondary);
     }
 
-.btn-outline-primary {
-    color: var(--primary);
-    border-color: var(--primary);
+
+.toast-position {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1100;
 }
-
-    .btn-outline-primary:hover {
-        background-color: var(--primary);
-        color: white;
-    }
-
-.form-control:focus, .form-select:focus, .form-check-input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 0.25rem rgba(79, 149, 157, 0.25);
-}
-
-.form-check-input:checked {
-    background-color: var(--primary);
-    border-color: var(--primary);
-}
-
-.whatsapp-btn {
-    background-color: #25D366;
-    color: white;
-}
-
-    .whatsapp-btn:hover {
-        background-color: #128C7E;
-        color: white;
-    }
