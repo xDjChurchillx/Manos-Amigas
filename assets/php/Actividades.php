@@ -30,6 +30,16 @@ try{
     }
     $rows = [];
     while ($row = $result->fetch_assoc()) {
+        // Verificar si existe el campo Visible y su valor es 0
+        if (isset($row['Visible']) && $row['Visible'] == 0) {
+            continue; // Saltar este registro (no se agrega al array)
+        }
+        
+        // Si el registro es visible, eliminamos solo la columna Visible
+        if (isset($row['Visible'])) {
+            unset($row['Visible']);
+        }
+        
         $rows[] = $row;
     }
 
