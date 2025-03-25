@@ -1,10 +1,12 @@
 // Mostrar/ocultar toast
-const copyToast = new bootstrap.Toast(document.getElementById('copyToast'));
+
 
 // Función para copiar al portapapeles
 function copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
-        copyToast.show();
+        console.log("Texto copiado al portapapeles");
+    }).catch(err => {
+        console.error("Error al copiar: ", err);
     });
 }
 
