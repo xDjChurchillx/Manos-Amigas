@@ -10,23 +10,7 @@ function copyToClipboard(text) {
     });
 }
 
-// Manejar clic en botones de copiar
-document.querySelectorAll('.copy-btn').forEach(btn => {
-    btn.addEventListener('click', function (e) {
-        e.stopPropagation();
-        const textToCopy = this.previousElementSibling.textContent.trim();
-        copyToClipboard(textToCopy);
-    });
-});
 
-// Copiar al hacer clic en los detalles de IBAN o SINPE
-document.querySelectorAll('.payment-details p:first-child').forEach(detail => {
-    detail.style.cursor = 'pointer';
-    detail.addEventListener('click', function () {
-        const textToCopy = this.querySelector('.copy-text').textContent.trim();
-        copyToClipboard(textToCopy);
-    });
-});
 
 // Manejo de los destinos de donación
 document.querySelectorAll('.destination-btn').forEach(btn => {
