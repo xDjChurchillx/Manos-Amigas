@@ -45,7 +45,7 @@ $username = $_SESSION['username'];
         $imagenesExistentes = $_POST['imgE'] ?? [];
         $nuevasImagenes = $_FILES['newimgE'] ?? [];
         // Validación de datos
-        if (empty($codigoActividad) || empty($nombreActividad) || empty($descripcion) || empty($fecha)) {
+        if (empty($codigoActividad) || empty($nombreActividad) || empty($descripcion)) {
             echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
             exit();
         }
