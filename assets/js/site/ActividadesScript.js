@@ -100,27 +100,39 @@ function search() {
 
 function createActivityCard(activity) {
     const imagenes = JSON.parse(activity.Img);
-    console.log(activity.Fecha);
+
+    // Extraer datos de la fecha manualmente
+    const fechaPartes = activity.Fecha.split(" ");
+    const fecha = fechaPartes[0].split("-"); // ["2025", "03", "23"]
+    const horaPartes = fechaPartes[1].split(":"); // ["07", "05", "00"]
+
+    // Meses en español
+    const mesesAbrev = ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
+    const mesAbrev = mesesAbrev[parseInt(fecha[1]) - 1]; // Convertir el mes a índice del array
+    const dia = fecha[2];
+    const hora = horaPartes[0];
+    const minutos = horaPartes[1];
+
     return `
-            <div class="col-md-6 col-lg-4">
-                <div class="simple-card" data-bs-toggle="modal" data-bs-target="#activityModal" data-activity="${activity.Codigo}">               
-                    <img src="../assets/img/${activity.Codigo.replace(/\D/g, '')}/${imagenes[0]}" class="activity-image card-img-top" alt="${activity.Codigo}">            
-                    <div class="card-header bg-white">
-                        <h3 class="card-title">${activity.Nombre}</h3>
-                        <div class="minimal-calendar">
-                            <div class="minimal-calendar-header">Jun</div>
-                            <div class="minimal-calendar-day">15</div>
-                            <div class="minimal-calendar-time">
-                                <span class="minimal-clock-icon">🕒</span>
-                                <span>14:30</span>
-                            </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="simple-card" data-bs-toggle="modal" data-bs-target="#activityModal" data-activity="${activity.Codigo}">               
+                <img src="../assets/img/${activity.Codigo.replace(/\D/g, '')}/${imagenes[0]}" class="activity-image card-img-top" alt="${activity.Codigo}">            
+                <div class="card-header bg-white">
+                    <h3 class="card-title">${activity.Nombre}</h3>
+                    <div class="minimal-calendar">
+                        <div class="minimal-calendar-header">${mesAbrev}</div>
+                        <div class="minimal-calendar-day">${dia}</div>
+                        <div class="minimal-calendar-time">
+                            <span class="minimal-clock-icon">🕒</span>
+                            <span>${hora}:${minutos}</span>
                         </div>
                     </div>
                 </div>
-            </div>  
-
-        `;
+            </div>
+        </div>  
+    `;
 }
+
 
 
 // Función para mostrar detalles (modificada para usar la variable global)
