@@ -3,6 +3,7 @@
 
 // Función para copiar al portapapeles
 function copyToClipboard(text) {
+    console.log("Copiando al portapapeles: ", text);
     navigator.clipboard.writeText(text).then(() => {
         console.log("Texto copiado al portapapeles");
     }).catch(err => {
