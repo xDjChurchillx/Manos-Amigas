@@ -4,7 +4,10 @@
     --accent: #98D2C0;
     --light: #F6F8D5;
 }
-
+.icono {
+    width: 24px;
+    height: auto;
+}
 
 .donation-header {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
