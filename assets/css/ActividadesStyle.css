@@ -1,43 +1,98 @@
 ﻿
-.activity-card {
-    cursor: pointer;
-    transition: transform 0.3s, box-shadow 0.3s;
-    background-color: white;
+.minimal-calendar {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    width: 80px;
+    font-family: 'Arial', sans-serif;
+    margin-left: auto; /* Alinea a la derecha */
 }
 
-    .activity-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
-    }
-
-.selected-activity {
-    animation: expand 0.5s ease-in-out;
-}
-/* Agrega esto en tu archivo CSS (assets/css/ServiciosStyle.css) */
-#activityDetail {
-    margin-top: 30px;
+.minimal-calendar-header {
+    background: #3498db;
+    color: white;
+    padding: 5px 0;
+    font-weight: bold;
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 10px;
 }
 
-@media (max-width: 768px) {
-    #activityDetail {
-        max-height: 400px;
-    }
-
-        #activityDetail .card {
-            width: 100%;
-        }
+.minimal-calendar-day {
+    font-size: 20px;
+    padding: 6px 0;
+    font-weight: bold;
+    color: #333;
 }
 
-.selected-activity .card-header {
-    position: sticky;
-    top: 0;
-    z-index: 1;
+.minimal-calendar-time {
+    padding: 5px 0;
+    width: 100%;
+    text-align: center;
+    background: white;
+    font-family: 'Courier New', monospace;
+    font-size: 10px;
+    color: #333;
+    font-weight: 600;
+    border-top: 1px dashed #e0e0e0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.activity-image {
-    object-fit: cover;
-    max-height: 300px;
+.minimal-clock-icon {
+    margin-right: 3px;
+    font-size: 9px;
 }
+
+/* Estilos para la card */
+.simple-card {
+    width: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+.card-image-placeholder {
+    width: 100%;
+    height: 300px;
+    background-color: #5dade2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.card-header {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+    padding-right: 10px;
+}
+
+
+
+
+
 
 .carousel-inner img {
     max-height: 550px; /* Ajusta según necesidad */

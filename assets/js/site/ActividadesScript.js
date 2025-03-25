@@ -1,11 +1,11 @@
-// Objeto global para almacenar los datos
+ï»¿// Objeto global para almacenar los datos
 let listaActividades = {};
 
 document.addEventListener("DOMContentLoaded", function () {
-    // Llamar a la función de verificación de sesión al cargar la página
+    // Llamar a la funciÃ³n de verificaciÃ³n de sesiÃ³n al cargar la pÃ¡gina
     startPage();
 });
-// Función para verificar la sesión
+// FunciÃ³n para verificar la sesiÃ³n
 function startPage() {
     const urlParams = new URLSearchParams(window.location.search);
     let buscar = urlParams.get('buscar');
@@ -37,7 +37,7 @@ function startPage() {
     document.getElementById('susAct').addEventListener('click', function (e) {
         const email = document.getElementById('correo').value;
         alert(`Tu correo (${email}) ha sido suscrito.`);
-        // Aquí podrías añadir lógica AJAX/Fetch para enviar el dato a tu backend
+        // AquÃ­ podrÃ­as aÃ±adir lÃ³gica AJAX/Fetch para enviar el dato a tu backend
     });
 
 
@@ -48,7 +48,7 @@ function startPage() {
 
 
 
-// Función para inicializar el contador después de cargar el HTML
+// FunciÃ³n para inicializar el contador despuÃ©s de cargar el HTML
 function startPanel(datos) {
 
     console.log(datos);
@@ -92,7 +92,7 @@ function search() {
     console.log('search');
     const input = document.getElementById('buscar').value;
 
-    // Actualizar la URL y recargar la página
+    // Actualizar la URL y recargar la pÃ¡gina
     const url = new URL(window.location);
     url.searchParams.set('buscar', input);
     window.location.href = url;
@@ -102,19 +102,27 @@ function createActivityCard(activity) {
     const imagenes = JSON.parse(activity.Img);
     return `
             <div class="col-md-6 col-lg-4">
-                <div class="card activity-card h-100" data-bs-toggle="modal" data-bs-target="#activityModal" data-activity="${activity.Codigo}">
-                    <img src="../assets/img/${activity.Codigo.replace(/\D/g, '')}/${imagenes[0]}" class="activity-image card-img-top" alt="${activity.Codigo}">
-                    <div class="card-body">
-                        <h5 class="card-title">${activity.Nombre}</h5>
-                        <p class="card-text">${activity.Descripcion}</p>
+                <div class="simple-card" data-bs-toggle="modal" data-bs-target="#activityModal" data-activity="${activity.Codigo}">               
+                    <img src="../assets/img/${activity.Codigo.replace(/\D/g, '')}/${imagenes[0]}" class="activity-image card-img-top" alt="${activity.Codigo}">            
+                    <div class="card-header">
+                        <h3 class="card-title">${activity.Nombre}</h3>
+                        <div class="minimal-calendar">
+                            <div class="minimal-calendar-header">Jun</div>
+                            <div class="minimal-calendar-day">15</div>
+                            <div class="minimal-calendar-time">
+                                <span class="minimal-clock-icon">ðŸ•’</span>
+                                <span>14:30</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div>  
+
         `;
 }
 
 
-// Función para mostrar detalles (modificada para usar la variable global)
+// FunciÃ³n para mostrar detalles (modificada para usar la variable global)
 function showDetails(activity) {
 
     const imagenes = JSON.parse(activity.Img);
@@ -126,12 +134,12 @@ function showDetails(activity) {
 
     const detailImgs = document.getElementById('modalImgs');
     detailImgs.innerHTML = '';
-    // Agregar las imágenes al carrusel
+    // Agregar las imÃ¡genes al carrusel
     imagenes.forEach((img, index) => {
         const carouselItem = document.createElement('div');
         carouselItem.classList.add('carousel-item');
         if (index === 0) {
-            carouselItem.classList.add('active'); // La primera imagen estará activa
+            carouselItem.classList.add('active'); // La primera imagen estarÃ¡ activa
         }
 
         const imgElement = document.createElement('img');
