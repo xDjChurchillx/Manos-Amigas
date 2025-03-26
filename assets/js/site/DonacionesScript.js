@@ -3,6 +3,10 @@
 
 // Función para copiar al portapapeles
 function copyToClipboard(text) {
+    if (!navigator.clipboard) {
+        console.error("Clipboard API no disponible");
+        return;
+    }
     console.log("Copiando al portapapeles: ", text);
     navigator.clipboard.writeText(text).then(() => {
         console.log("Texto copiado al portapapeles");
