@@ -5,6 +5,7 @@
     <title>Voluntariado - Manos Amigas</title>
     <link href="assets/js/bootstrap-5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="assets/css/GeneralStyle.css" rel="stylesheet">
+    <link href="assets/css/VoluntariadoStyle.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="assets/img/iconos/favicon.svg">
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -30,27 +31,168 @@
     </nav>
 
     <!-- Contenido -->
-    <div class="container mt-4">
-        <h2 class="text-center">Formulario de Voluntariado</h2>
-        <form>
-            <div class="mb-3">
-                <label for="nombreCompleto" class="form-label">Nombre Completo</label>
-                <input type="text" class="form-control" id="nombreCompleto" placeholder="Ingresa tu nombre completo" required>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow">
+                    <div class="volunteer-header card-header py-4">
+                        <h2 class="text-center mb-0">Formulario de Voluntariado</h2>
+                        <p class="text-center mb-0">Contribuye con tu tiempo y habilidades</p>
+                    </div>
+
+                    <div class="card-body p-4">
+                        <form id="volunteerForm">
+                            <!-- Sección 1: Información Personal -->
+                            <div class="mb-5">
+                                <h3 class="section-title">Información Personal</h3>
+
+                                <div class="form-card">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="fullName" class="form-label">Nombre completo <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="fullName" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="email" class="form-label">Correo electrónico <span class="text-danger">*</span></label>
+                                            <input type="email" class="form-control" id="email" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="phone" class="form-label">Teléfono <span class="text-danger">*</span></label>
+                                            <input type="tel" class="form-control" id="phone" required>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sección 2: Información Académica -->
+                            <div class="mb-5">
+                                <h3 class="section-title">Información Académica</h3>
+
+                                <div class="form-card">
+                                    <div class="row g-3">
+                                        <div class="col-md-6">
+                                            <label for="institution" class="form-label">Universidad o Institución <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" id="institution" required>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label for="career" class="form-label">Carrera o área de estudio</label>
+                                            <input type="text" class="form-control" id="career" placeholder="(Opcional)">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sección 3: Propuesta de Voluntariado -->
+                            <div class="mb-4">
+                                <h3 class="section-title">Propuesta de Voluntariado</h3>
+
+                                <div class="form-card">
+                                    <div class="mb-3">
+                                        <label class="form-label">Selecciona el tipo de actividad que te interesa <span class="text-danger">*</span></label>
+
+                                        <div class="activity-option">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="activityType" id="activityCompanion" value="companion" required>
+                                                <label class="form-check-label" for="activityCompanion">
+                                                    Acompañamiento y conversación con los ancianos
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="activity-option">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="activityType" id="activityWorkshop" value="workshop">
+                                                <label class="form-check-label" for="activityWorkshop">
+                                                    Talleres o actividades recreativas (música, arte, manualidades)
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="activity-option">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="activityType" id="activityTherapy" value="therapy">
+                                                <label class="form-check-label" for="activityTherapy">
+                                                    Apoyo en terapias o ejercicios
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="activity-option">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="activityType" id="activityOther" value="other">
+                                                <label class="form-check-label" for="activityOther">
+                                                    Otra actividad (especificar abajo)
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label for="activityDescription" class="form-label">Describe tu propuesta o habilidades específicas</label>
+                                            <textarea class="form-control" id="activityDescription" rows="3" placeholder="Ej: Soy músico y puedo ofrecer conciertos, tengo experiencia en fisioterapia, etc."></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Sección 4: Horario del Centro -->
+                            <div class="mb-4">
+                                <h3 class="section-title">Horario del Centro</h3>
+
+                                <div class="form-card">
+                                    <h5 class="mb-3">Horarios disponibles para voluntariado:</h5>
+
+                                    <table class="schedule-table mb-3">
+                                        <thead>
+                                            <tr>
+                                                <th>Día</th>
+                                                <th>Horario</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Lunes a Viernes</td>
+                                                <td>9:00 AM - 12:00 PM<br>2:00 PM - 5:00 PM</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Sábados</td>
+                                                <td>9:00 AM - 1:00 PM</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Domingos</td>
+                                                <td>10:00 AM - 12:00 PM</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <p class="schedule-note">
+                                        <i class="fas fa-info-circle"></i> Por favor considera estos horarios al planificar tu disponibilidad para voluntariado.
+                                    </p>
+
+                                    <div class="form-check mt-3">
+                                        <input class="form-check-input" type="checkbox" id="scheduleAgreement" required>
+                                        <label class="form-check-label" for="scheduleAgreement">
+                                            Confirmo que he revisado el horario del centro y puedo adaptarme a estos horarios <span class="text-danger">*</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-volunteer btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i> Enviar Solicitud
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="card-footer text-center py-3 bg-light">
+                        <small class="text-muted">
+                            <i class="fas fa-info-circle me-1"></i> Revisaremos tu propuesta y nos pondremos en contacto contigo.
+                        </small>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="universidad" class="form-label">Universidad o Institución</label>
-                <input type="text" class="form-control" id="universidad" placeholder="Ingresa el nombre de tu universidad o institución" required>
-            </div>
-            <div class="mb-3">
-                <label for="carrera" class="form-label">Carrera</label>
-                <input type="text" class="form-control" id="carrera" placeholder="Ingresa tu carrera" required>
-            </div>
-            <div class="mb-3">
-                <label for="propuesta" class="form-label">Propuesta</label>
-                <textarea class="form-control" id="propuesta" rows="4" placeholder="Describe tu propuesta de voluntariado" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Enviar</button>
-        </form>
+        </div>
     </div>
 
 

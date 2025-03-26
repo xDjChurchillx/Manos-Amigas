@@ -1,0 +1,76 @@
+﻿:root {
+    --primary: #205781;
+    --secondary: #4F959D;
+    --accent: #98D2C0;
+    --light: #F6F8D5;
+}
+
+
+
+.volunteer-header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+}
+
+.section-title {
+    color: var(--primary);
+    border-bottom: 2px solid var(--accent);
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+}
+
+.form-card {
+    border: 2px solid var(--accent);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    transition: all 0.3s;
+}
+
+    .form-card:hover {
+        border-color: var(--primary);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+.btn-volunteer {
+    background-color: var(--primary);
+    color: white;
+    padding: 12px 30px;
+    font-weight: 600;
+    transition: all 0.3s;
+}
+
+    .btn-volunteer:hover {
+        background-color: var(--secondary);
+        color: white;
+    }
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 0.25rem rgba(79, 149, 157, 0.25);
+}
+
+.activity-option {
+    margin-bottom: 10px;
+}
+
+.schedule-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+    .schedule-table th, .schedule-table td {
+        border: 1px solid var(--accent);
+        padding: 8px;
+        text-align: center;
+    }
+
+    .schedule-table th {
+        background-color: var(--light);
+    }
+
+.schedule-note {
+    font-size: 0.9rem;
+    color: var(--secondary);
+    margin-top: 10px;
+}
