@@ -1,4 +1,46 @@
-﻿.service-card {
+﻿.improved-header {
+    color: white;
+    padding: 35px 0 60px;
+    position: relative;
+    margin-top: -1px; /* Elimina espacio blanco */
+    margin-bottom: 30px;
+}
+
+/* Efecto de onda para separación visual */
+.wave-separator {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+}
+
+    .wave-separator svg {
+        position: relative;
+        display: block;
+        width: calc(100% + 1.3px);
+        height: 40px;
+    }
+
+    .wave-separator .shape-fill {
+        fill: #f8f9fa; /* Color del fondo de la página */
+    }
+
+.header-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+}
+
+.header-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 700px;
+    margin: 0 auto;
+}   
+.service-card {
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
     background-color: white;  
