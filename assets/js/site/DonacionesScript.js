@@ -1,17 +1,32 @@
-// Mostrar/ocultar toast
+async function copyToClipboard(text) {
+    try {
+        // Método moderno (navegadores modernos)
+        await navigator.clipboard.writeText(text);
+        console.log("Texto copiado al portapapeles: " + text);
 
+        // Opcional: Mostrar feedback visual (ej: tooltip, cambio de ícono)
+        alert("¡Copiado: " + text + "!"); 
+    } catch (err) {
+        console.error("Error al copiar (usando fallback):", err);
 
-// Función para copiar al portapapeles
-function copyToClipboard(text) {
-    if (!navigator.clipboard) {
-        fallbackCopyTextToClipboard(text);
-        return;
+        // Fallback para navegadores antiguos
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.style.position = 'fixed'; // Evitar scroll
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+            document.execCommand('copy');
+            console.log("Texto copiado (fallback): " + text);
+            alert("¡Copiado: " + text + "!"); // Feedback para el fallback
+        } catch (fallbackErr) {
+            console.error("Fallback fallido:", fallbackErr);
+            alert("No se pudo copiar. Por favor, selecciona el texto y usa Ctrl+C.");
+        } finally {
+            document.body.removeChild(textarea);
+        }
     }
-    navigator.clipboard.writeText(text).then(function () {
-        console.log('Async: Copying to clipboard was successful!');
-    }, function (err) {
-        console.error('Async: Could not copy text: ', err);
-    });
 }
 
 
