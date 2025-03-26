@@ -4,14 +4,13 @@
 // Función para copiar al portapapeles
 function copyToClipboard(text) {
     if (!navigator.clipboard) {
-        console.error("Clipboard API no disponible");
+        fallbackCopyTextToClipboard(text);
         return;
     }
-    console.log("Copiando al portapapeles: ", text);
-    navigator.clipboard.writeText(text).then(() => {
-        console.log("Texto copiado al portapapeles");
-    }).catch(err => {
-        console.error("Error al copiar: ", err);
+    navigator.clipboard.writeText(text).then(function () {
+        console.log('Async: Copying to clipboard was successful!');
+    }, function (err) {
+        console.error('Async: Could not copy text: ', err);
     });
 }
 
