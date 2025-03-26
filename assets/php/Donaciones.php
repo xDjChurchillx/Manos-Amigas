@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
     // Redirigir a una página de agradecimiento
-    echo "<script>alert(".$data.");</script>";
+    echo $data;
     exit;
 } else {
     // Si alguien intenta acceder directamente al script sin enviar el formulario
