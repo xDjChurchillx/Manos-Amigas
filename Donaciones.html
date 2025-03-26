@@ -47,44 +47,59 @@
                             <div class="mb-4">
                                 <h3 class="section-title">1. Método de Donación</h3>
 
-                                <div class="form-check payment-method">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="ibanMethod" value="iban" checked>
-                                    <label class="form-check-label fw-bold" for="ibanMethod">
-                                        Transferencia Bancaria (IBAN)
+                                <div class="form-check payment-method p-0">
+                                    <input class="form-check-input d-none" type="radio" name="paymentMethod" id="ibanMethod" value="iban" checked>
+                                    <label class="form-check-label w-100 p-3 m-0 cursor-pointer" for="ibanMethod">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1">
+                                                <span class="fw-bold">Transferencia Bancaria (IBAN)</span>
+                                                <div class="payment-details mt-2">
+                                                    <p class="mb-1" onclick="copyToClipboard('CR1234567890', event)">
+                                                        <span class="copy-text cursor-pointer">CR1234567890</span>
+                                                        <svg class="icono cursor-pointer ms-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M17 3H7C5.346 3 4 4.346 4 6v12c0 1.654 1.346 3 3 3h10c1.654 0 3-1.346 3-3V6c0-1.654-1.346-3-3-3zM9 5h6v1c0 .551-.449 1-1 1h-4c-.551 0-1-.449-1-1V5zm9 13c0 .551-.449 1-1 1H7c-.551 0-1-.449-1-1V6c0-.551.449-1 1-1h1v1c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2V5h1c.551 0 1 .449 1 1v12zm-2-1H8a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1zm0-3H8a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1zm0-3H8a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1z" /></svg>
+                                                    </p>
+                                                    <p class="mb-1"><small>Banco Nacional</small></p>
+                                                    <p class="mb-1"><small>Hogar de Ancianos Vida Plena</small></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-check-input-replacement"></div>
+                                        </div>
                                     </label>
-                                    <div class="payment-details">
-                                        <p class="mb-1" onclick="copyToClipboard('CR1234567890')">
-                                            <span class="copy-text cursor-pointer">CR1234567890</span>
-                                            <svg class="icono cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M17 3H7C5.346 3 4 4.346 4 6v12c0 1.654 1.346 3 3 3h10c1.654 0 3-1.346 3-3V6c0-1.654-1.346-3-3-3zM9 5h6v1c0 .551-.449 1-1 1h-4c-.551 0-1-.449-1-1V5zm9 13c0 .551-.449 1-1 1H7c-.551 0-1-.449-1-1V6c0-.551.449-1 1-1h1v1c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2V5h1c.551 0 1 .449 1 1v12zm-2-1H8a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1zm0-3H8a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1zm0-3H8a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1z" /></svg>
-                                        </p>
-                                        <p class="mb-1"><small>Banco Nacional</small></p>
-                                        <p class="mb-1"><small>Hogar de Ancianos Vida Plena</small></p>
-                                    </div>
                                 </div>
 
-                                <div class="form-check payment-method">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="sinpeMethod" value="sinpe">
-                                    <label class="form-check-label fw-bold" for="sinpeMethod">
-                                        SINPE Móvil
+                                <div class="form-check payment-method p-0">
+                                    <input class="form-check-input d-none" type="radio" name="paymentMethod" id="sinpeMethod" value="sinpe">
+                                    <label class="form-check-label w-100 p-3 m-0 cursor-pointer" for="sinpeMethod">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1">
+                                                <span class="fw-bold">SINPE Móvil</span>
+                                                <div class="payment-details mt-2">
+                                                    <p class="mb-1" onclick="copyToClipboard('88887777', event)">
+                                                        <span class="copy-text cursor-pointer">88887777</span>
+                                                        <svg class="icono cursor-pointer ms-2" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24"><path fill="currentColor" d="M17 3H7C5.346 3 4 4.346 4 6v12c0 1.654 1.346 3 3 3h10c1.654 0 3-1.346 3-3V6c0-1.654-1.346-3-3-3zM9 5h6v1c0 .551-.449 1-1 1h-4c-.551 0-1-.449-1-1V5zm9 13c0 .551-.449 1-1 1H7c-.551 0-1-.449-1-1V6c0-.551.449-1 1-1h1v1c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2V5h1c.551 0 1 .449 1 1v12zm-2-1H8a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1zm0-3H8a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1zm0-3H8a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1z" /></svg>
+                                                    </p>
+                                                    <p class="mb-1"><small>Asociación Hogar Ancianos</small></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-check-input-replacement"></div>
+                                        </div>
                                     </label>
-                                    <div class="payment-details">
-                                        <p class="mb-1" onclick="copyToClipboard('88887777')">
-                                            <span class="copy-text cursor-pointer">88887777</span>
-                                            <svg class="icono cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M17 3H7C5.346 3 4 4.346 4 6v12c0 1.654 1.346 3 3 3h10c1.654 0 3-1.346 3-3V6c0-1.654-1.346-3-3-3zM9 5h6v1c0 .551-.449 1-1 1h-4c-.551 0-1-.449-1-1V5zm9 13c0 .551-.449 1-1 1H7c-.551 0-1-.449-1-1V6c0-.551.449-1 1-1h1v1c0 1.1.9 2 2 2h4c1.1 0 2-.9 2-2V5h1c.551 0 1 .449 1 1v12zm-2-1H8a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1zm0-3H8a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1zm0-3H8a.5.5 0 0 1 0-1h8a.5.5 0 0 1 0 1z" /></svg>
-                                        </p>
-                                        <p class="mb-1"><small>Asociación Hogar Ancianos</small></p>
-                                    </div>
                                 </div>
 
-                                <div class="form-check payment-method">
-                                    <input class="form-check-input" type="radio" name="paymentMethod" id="paypalMethod" value="paypal">
-                                    <label class="form-check-label fw-bold" for="paypalMethod">
-                                        PayPal
+                                <div class="form-check payment-method p-0">
+                                    <input class="form-check-input d-none" type="radio" name="paymentMethod" id="paypalMethod" value="paypal">
+                                    <label class="form-check-label w-100 p-3 m-0 cursor-pointer" for="paypalMethod">
+                                        <div class="d-flex align-items-center">
+                                            <div class="flex-grow-1">
+                                                <span class="fw-bold">PayPal</span>
+                                                <div class="payment-details mt-2">
+                                                    <p class="mb-1"><small>donaciones@hogarancianos.org</small></p>
+                                                    <p class="mb-1"><small>Serás redirigido al sitio seguro de PayPal</small></p>
+                                                </div>
+                                            </div>
+                                            <div class="form-check-input-replacement"></div>
+                                        </div>
                                     </label>
-                                    <div class="payment-details">
-                                        <p class="mb-1"><small>donaciones@hogarancianos.org</small></p>
-                                        <p class="mb-1"><small>Serás redirigido al sitio seguro de PayPal</small></p>
-                                    </div>
                                 </div>
                             </div>
                             <!-- Sección 2: Destino de la Donación (versión compacta) -->
