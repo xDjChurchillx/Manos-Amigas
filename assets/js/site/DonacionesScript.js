@@ -40,9 +40,17 @@ document.querySelectorAll('.destination-btn').forEach(btn => {
 
 // Manejo del envío del formulario
 document.getElementById('donationForm').addEventListener('submit', function (e) {
-   // e.preventDefault();
-
-    
-
+    const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked');
+    const selectedDestination = document.querySelector('input[name="donationDestination"]:checked');
+    const errorPayment = document.getElementById('errPayment');
+    const errorDestination = document.getElementById('errDestination');
+    if (!selectedPayment) {
+         errorPayment.textContent = 'Por favor, selecciona un metodo para tu donación.';
+        e.preventDefault();
+    }
+    if (!selectedDestination ) {
+        errorDestination.textContent =  'Por favor, selecciona un destino para tu donación.';
+        e.preventDefault();
+    }
    
 });
