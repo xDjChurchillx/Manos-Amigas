@@ -37,6 +37,9 @@ body {
 .bg1gradient {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
 }
+.bg2gradient {
+    background: linear-gradient(135deg, var(--secondary), var(--accent));
+}
 .c1color {
     color: #205781;
 }
