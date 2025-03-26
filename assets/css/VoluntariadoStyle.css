@@ -1,10 +1,4 @@
-﻿:root {
-    --primary: #205781;
-    --secondary: #4F959D;
-    --accent: #98D2C0;
-    --light: #F6F8D5;
-}
-
+﻿
 
 .volunteer-header {
     background: linear-gradient(135deg, var(--primary), var(--secondary));

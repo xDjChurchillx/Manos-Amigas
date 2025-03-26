@@ -1,9 +1,4 @@
-:root {
-    --primary: #205781;
-    --secondary: #4F959D;
-    --accent: #98D2C0;
-    --light: #F6F8D5;
-}
+
 .cursor-pointer {
     cursor: pointer !important;
 }
