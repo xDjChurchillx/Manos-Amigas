@@ -40,7 +40,7 @@ document.querySelectorAll('.destination-btn').forEach(btn => {
 
 // Manejo del envío del formulario
 document.getElementById('donationForm').addEventListener('submit', function (e) {
-    e.preventDefault();
+   // e.preventDefault();
 
     
 
