@@ -6,6 +6,7 @@
     padding: 35px 0 60px;
     position: relative;
     margin-top: -1px; /* Elimina espacio blanco */
+    margin-bottom: 30px;
 }
 
 /* Efecto de onda para separación visual */
