@@ -13,10 +13,7 @@
     height: auto;
 }
 
-body {
-    background-color: #f8f9fa;
-    color: #333;
-}
+
 
 .donation-header {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
