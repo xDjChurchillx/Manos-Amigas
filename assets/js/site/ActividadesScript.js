@@ -118,7 +118,7 @@ function createActivityCard(activity) {
         // Construir la parte del calendario
         fechaHTML = `
             <div class="minimal-calendar">
-                <div class="minimal-calendar-header">${mesAbrev}</div>
+                <div class="minimal-calendar-header bg1gradient">${mesAbrev}</div>
                 <div class="minimal-calendar-day">${dia}</div>
                 <div class="minimal-calendar-time">
                     <span class="minimal-clock-icon">🕒</span>
