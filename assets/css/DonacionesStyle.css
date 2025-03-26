@@ -4,6 +4,9 @@
     --accent: #98D2C0;
     --light: #F6F8D5;
 }
+.cursor-pointer {
+    cursor: pointer !important;
+}
 .icono {
     width: 24px;
     height: auto;
