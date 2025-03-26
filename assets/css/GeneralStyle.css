@@ -34,6 +34,9 @@ body {
 .bg4color {
     background-color: #F6F8D5;
 }
+.bg1gradient {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+}
 .c1color {
     color: #205781;
 }
