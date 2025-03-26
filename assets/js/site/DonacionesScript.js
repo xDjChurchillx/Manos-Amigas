@@ -1,14 +1,8 @@
 async function copyToClipboard(text) {
-    try {
-        // Método moderno (navegadores modernos)
+    if (navigator.clipboard) {
         await navigator.clipboard.writeText(text);
         console.log("Texto copiado al portapapeles: " + text);
-
-        // Opcional: Mostrar feedback visual (ej: tooltip, cambio de ícono)
-        alert("¡Copiado: " + text + "!"); 
-    } catch (err) {
-        console.error("Error al copiar (usando fallback):", err);
-
+    } else {
         // Fallback para navegadores antiguos
         const textarea = document.createElement('textarea');
         textarea.value = text;
@@ -18,8 +12,7 @@ async function copyToClipboard(text) {
 
         try {
             document.execCommand('copy');
-            console.log("Texto copiado (fallback): " + text);
-            alert("¡Copiado: " + text + "!"); // Feedback para el fallback
+            console.log("Texto copiado (fallback): " + text);=
         } catch (fallbackErr) {
             console.error("Fallback fallido:", fallbackErr);
             alert("No se pudo copiar. Por favor, selecciona el texto y usa Ctrl+C.");
@@ -27,6 +20,7 @@ async function copyToClipboard(text) {
             document.body.removeChild(textarea);
         }
     }
+  
 }
 
 
