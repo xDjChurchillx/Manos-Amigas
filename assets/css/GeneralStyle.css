@@ -1,8 +1,19 @@
 body {
     background-color: #F6F8D5;
 }
+.icono {
+    width: 24px;
+    height: auto;
+}
 
-
+.icono-small {
+    width: 15px;
+    height: auto;
+}
+.icono-big {
+    width: 40px;
+    height: auto;
+}
 .bg1color {
     background-color: #205781;
 }
