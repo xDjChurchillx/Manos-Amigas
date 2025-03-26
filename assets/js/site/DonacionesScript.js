@@ -42,13 +42,7 @@ document.querySelectorAll('.destination-btn').forEach(btn => {
 document.getElementById('donationForm').addEventListener('submit', function (e) {
     e.preventDefault();
 
-    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-    const destination = document.querySelector('input[name="donationDestination"]:checked').value;
+    
 
-    if (paymentMethod === 'paypal') {
-        alert('Serás redirigido a PayPal para completar tu donación para ' + destination + '.');
-        // window.location.href = 'https://www.paypal.com/donate?hosted_button_id=...';
-    } else {
-        alert(`Gracias por tu donación para ${destination}. Por favor completa la transferencia con los datos proporcionados.`);
-    }
+   
 });
