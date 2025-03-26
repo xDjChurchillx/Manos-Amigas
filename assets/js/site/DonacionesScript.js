@@ -44,6 +44,8 @@ document.getElementById('donationForm').addEventListener('submit', function (e) 
     const selectedDestination = document.querySelector('input[name="donationDestination"]:checked');
     const errorPayment = document.getElementById('errPayment');
     const errorDestination = document.getElementById('errDestination');
+    errorPayment.textContent = '';
+    errorDestination.textContent = '';
     if (!selectedPayment) {
          errorPayment.textContent = 'Por favor, selecciona un metodo para tu donación.';
         e.preventDefault();
