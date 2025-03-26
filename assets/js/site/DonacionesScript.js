@@ -12,7 +12,7 @@ async function copyToClipboard(text) {
 
         try {
             document.execCommand('copy');
-            console.log("Texto copiado (fallback): " + text);=
+            console.log("Texto copiado (fallback): " + text);
         } catch (fallbackErr) {
             console.error("Fallback fallido:", fallbackErr);
             alert("No se pudo copiar. Por favor, selecciona el texto y usa Ctrl+C.");
