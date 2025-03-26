@@ -29,14 +29,19 @@
             </div>
         </div>
     </nav>
-
+    <header class="header text-center bg1gradient">
+        <div class="container">
+            <h1 class="display-4 mb-3">Nuestras Actividades</h1>
+            <p class="lead">Programas diseñados para el bienestar y disfrute de nuestros residentes</p>
+        </div>
+    </header>
     <!-- Contenido Principal -->
     <main>
         <div id="alerta" class="alert alert-danger d-none" role="alert">
 
         </div>
         <div class="container">
-            <h1 id="title" class="text-center py-3 display-4 fw-bold c2color">Actividades</h1>
+
 
             <!-- Grid de Servicios -->
             <div id="activitysGrid" class="row g-4 mb-5">
@@ -67,15 +72,15 @@
                                 </button>
                             </div>
                             <div class="text-center mb-3">
-                                <p id="modalDateTime" class="text-muted">-</p> 
+                                <p id="modalDateTime" class="text-muted">-</p>
                             </div>
                             <p id="activityDescription">Descripción detallada de la actividad.</p>
                         </div>
                         <div class="modal-footer">
                             <div class="d-flex justify-content-center">
-                                <input id="correo" type="email"  class="form-control"  placeholder="correo" required aria-label="Correo electrónico">
+                                <input id="correo" type="email" class="form-control" placeholder="correo" required aria-label="Correo electrónico">
                                 <button id="susAct" type="button" class="btn btn-primary">Suscribirse</button>
-                            </div>                            
+                            </div>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
                         </div>
                     </div>

@@ -1,4 +1,12 @@
 ﻿/* Estilos para la card */
+
+.header {
+    color: white;
+    padding: 60px 0;
+    margin-bottom: 40px;
+}
+        
+
 .simple-card {
     display: flex;
     flex-direction: column;
