@@ -63,20 +63,16 @@ const error = urlParams.get('error');
 const url = new URL(window.location.href);
 url.searchParams.delete('error');
 window.history.replaceState({}, document.title, url);
-Alerta('test');
 if (error) {
     switch (error) {
+        case '0':
+          
+            break;
         case '1':
-           
+            Alerta('Los campos obligatorios no fueron completados');
             break;
         case '2':
-           
-            break;
-        case '3':
-          
-            break;
-        case '4':
-          
+            Alerta('Error en servidor');
             break;
         default:
           
