@@ -47,89 +47,94 @@ function startSession() {
 }
 // Función para inicializar el contador después de cargar el HTML
 function startPanel(datos) {
+    try {
+        console.log(datos);
+        // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
+        document.getElementById('navbaritems').innerHTML = datos.navbar;
+        document.getElementById('panel').innerHTML = datos.panel;
+        const urlParams = new URLSearchParams(window.location.search);
+        const buscar = urlParams.get('buscar');
+        if (buscar) {
+            document.getElementById('buscar').value = buscar;
+        }
+        datos.filas.forEach(function (item) {
+            listaActividades[item.Codigo] = item;
+        });
 
-    console.log(datos);  
-    // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
-    document.getElementById('navbaritems').innerHTML = datos.navbar;
-    document.getElementById('panel').innerHTML = datos.panel;
-    const urlParams = new URLSearchParams(window.location.search);
-    const buscar = urlParams.get('buscar');
-    if (buscar) {
-        document.getElementById('buscar').value = buscar;
+
+
+
+        document.getElementById("crearForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Evita el postback
+
+            let formData = new FormData(this); // Captura los datos del formulario
+
+            fetch("../assets/php/AddAct.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.text())
+                .then(text => {
+                    try {
+                        let data = JSON.parse(text);
+                        if (data.status === "success") {
+                            location.reload();
+                        } else {
+                            if ("ex" in data) {
+                                document.getElementById("respuesta").innerHTML = data.ex;
+                            } else {
+                                Alerta("Error al agregar la actividad.");
+                            }
+                            if ("redirect" in data) {
+                                window.location.href = data.redirect;
+                            }
+                        }
+                    } catch (error) {
+                        console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                        Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+                    }
+                })
+                .catch(error => console.error("Error en la solicitud:", error));
+        });
+
+        document.getElementById("editarForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Evita el postback
+
+            let formData = new FormData(this); // Captura los datos del formulario
+
+            fetch("../assets/php/UpdAct.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.text())
+                .then(text => {
+                    try {
+                        console.log(text);
+                        let data = JSON.parse(text);
+                        if (data.status === "success") {
+                            location.reload();
+                        } else {
+                            if ("ex" in data) {
+                                document.getElementById("respuestaE").innerHTML = data.ex;
+                            } else {
+                                Alerta("Error al actualizar la actividad.");
+                            }
+                            if ("redirect" in data) {
+                                window.location.href = data.redirect;
+                            }
+                        }
+                    } catch (error) {
+                        console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                        Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+                    }
+                })
+                .catch(error => console.error("Error en la solicitud:", error));
+        });
+    } catch (e) {
+        console.error("Error iniciando panel:", e); // Imprime el texto antes de que falle
+
     }
-    datos.filas.forEach(function (item) {
-        listaActividades[item.Codigo] = item;
-    });
-
-
-
-
-    document.getElementById("crearForm").addEventListener("submit", function (event) {
-        event.preventDefault(); // Evita el postback
-
-        let formData = new FormData(this); // Captura los datos del formulario
-
-        fetch("../assets/php/AddAct.php", {
-            method: "POST",
-            body: formData
-        })
-            .then(response => response.text()) 
-            .then(text => {
-                try {
-                    let data = JSON.parse(text); 
-                    if (data.status === "success") {
-                        location.reload();
-                    } else {
-                        if ("ex" in data) {
-                            document.getElementById("respuesta").innerHTML = data.ex;
-                        } else {
-                            Alerta("Error al agregar la actividad.");
-                        }
-                        if ("redirect" in data) {
-                            window.location.href = data.redirect;
-                        }
-                    }
-                } catch (error) {
-                    console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
-                    Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
-                }
-            })
-            .catch(error => console.error("Error en la solicitud:", error));
-    });
-
-    document.getElementById("editarForm").addEventListener("submit", function (event) {
-        event.preventDefault(); // Evita el postback
-
-        let formData = new FormData(this); // Captura los datos del formulario
-
-        fetch("../assets/php/UpdAct.php", {
-            method: "POST",
-            body: formData
-        })
-            .then(response => response.text()) 
-            .then(text => {
-                try {
-                    console.log(text);
-                    let data = JSON.parse(text); 
-                    if (data.status === "success") {
-                        location.reload();
-                    } else {
-                        if ("ex" in data) {
-                            document.getElementById("respuestaE").innerHTML = data.ex;
-                        } else {
-                            Alerta("Error al actualizar la actividad.");
-                        }
-                        if ("redirect" in data) {
-                            window.location.href = data.redirect;
-                        }
-                    }
-                } catch (error) {
-                    console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
-                    Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
-                }
-            })
-            .catch(error => console.error("Error en la solicitud:", error));
-    });
+   
  
 }
 function edit(id) {

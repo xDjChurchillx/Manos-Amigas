@@ -43,77 +43,78 @@ function startSession() {
 }
 // Función para inicializar el contador después de cargar el HTML
 function startPanel(datos) {
+    try {
+        console.log(datos);
+        // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
+        document.getElementById('navbaritems').innerHTML = datos.navbar;
+        document.getElementById('panel').innerHTML = datos.panel;
+        // Obtener los elementos
+        desde = document.getElementById('desde');
+        hasta = document.getElementById('hasta');
+        opciones = document.getElementById('opciones');
 
-    console.log(datos);  
-    // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
-    document.getElementById('navbaritems').innerHTML = datos.navbar;
-    document.getElementById('panel').innerHTML = datos.panel;
-    // Obtener los elementos
-    desde = document.getElementById('desde');
-    hasta = document.getElementById('hasta');
-    opciones = document.getElementById('opciones');
+        if ('config' in datos) {
 
-    if ('config' in datos) {
+            // Verificar y asignar 'fechaDesde'
+            if ('fechaDesde' in datos.config) {
+                desde.value = datos.config['fechaDesde'];
+            }
 
-        // Verificar y asignar 'fechaDesde'
-        if ('fechaDesde' in datos.config) {
-            desde.value = datos.config['fechaDesde'];
+            // Verificar y asignar 'fechaHasta'
+            if ('fechaHasta' in datos.config) {
+                hasta.value = datos.config['fechaHasta'];
+            }
+
+            // Verificar y asignar 'opcion'
+            if ('opcion' in datos.config) {
+                opciones.value = datos.config['opcion'];
+            }
+
+        }
+        if (desde.value == '') {
+            hasta.disabled = true;
+            hasta.value = '';
+        } else {
+            hasta.disabled = false;
         }
 
-        // Verificar y asignar 'fechaHasta'
-        if ('fechaHasta' in datos.config) {
-            hasta.value = datos.config['fechaHasta'];
-        }
+        // Asignar el mismo listener a los tres elementos
+        desde.addEventListener('change', function () { actualizarDatos('1'); });
+        hasta.addEventListener('change', function () { actualizarDatos('2'); });
+        opciones.addEventListener('change', function () { actualizarDatos('0'); });
 
-        // Verificar y asignar 'opcion'
-        if ('opcion' in datos.config) {
-            opciones.value = datos.config['opcion'];
-        }
+        // Llamar al contador solo después de que el HTML con los elementos de .timer se haya cargado
+        $('.timer').each(function () {
+            var $this = $(this);
+            var options = $.extend({}, $this.data('countToOptions') || {});
+            $this.countTo(options);
+        });
+
+        const options = {
+            series: [
+                { name: "Visitas", data: datos.data1 },
+                { name: "Suscripciones", data: datos.data2 },
+                { name: "Donaciones", data: datos.data3 },
+                { name: "Voluntarios", data: datos.data4 }
+            ],
+            legend: { position: "bottom" },
+            theme: { palette: "palette4" },
+            chart: { type: "bar", height: 320 },
+            plotOptions: { bar: { horizontal: false, columnWidth: "55%", endingShape: "rounded" } },
+            dataLabels: { enabled: false },
+            stroke: { show: true, width: 2, colors: ["transparent"] },
+            xaxis: { categories: datos.cat },
+            yaxis: { title: { text: "Usuarios" } },
+            fill: { opacity: 1 },
+            tooltip: { y: { formatter: function (t) { return t + " en Total"; } } }
+        };
+
+        chart = new ApexCharts(document.querySelector("#bsb-chart-3"), options);
+        chart.render();
+    } catch (e) {
+        console.error("Error iniciando panel:", e); // Imprime el texto antes de que falle
 
     }
-    if (desde.value == '') {
-        hasta.disabled = true;
-        hasta.value = '';
-    } else {
-        hasta.disabled = false;
-    }
-
-    // Asignar el mismo listener a los tres elementos
-    desde.addEventListener('change', function () { actualizarDatos('1'); });
-    hasta.addEventListener('change', function () { actualizarDatos('2'); });
-    opciones.addEventListener('change', function () { actualizarDatos('0'); });
-
-    // Llamar al contador solo después de que el HTML con los elementos de .timer se haya cargado
-    $('.timer').each(function () {
-        var $this = $(this);
-        var options = $.extend({}, $this.data('countToOptions') || {});
-        $this.countTo(options);
-    });
-
-    const options = {
-        series: [
-            { name: "Visitas", data: datos.data1 },
-            { name: "Suscripciones", data: datos.data2 },
-            { name: "Donaciones", data: datos.data3 },
-            { name: "Voluntarios", data: datos.data4 }
-        ],
-        legend: { position: "bottom" },
-        theme: { palette: "palette4" },
-        chart: { type: "bar", height: 320 },
-        plotOptions: { bar: { horizontal: false, columnWidth: "55%", endingShape: "rounded" } },
-        dataLabels: { enabled: false },
-        stroke: { show: true, width: 2, colors: ["transparent"] },
-        xaxis: { categories: datos.cat },
-        yaxis: { title: { text: "Usuarios" } },
-        fill: { opacity: 1 },
-        tooltip: { y: { formatter: function (t) { return t + " en Total"; } } }
-    };
-
-    chart = new ApexCharts(document.querySelector("#bsb-chart-3"), options);
-    chart.render();
-
-
-
 }
 async function actualizarDatos(val) {
     const hoy = new Date().toLocaleDateString('en-CA', {
