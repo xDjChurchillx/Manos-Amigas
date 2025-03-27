@@ -43,8 +43,8 @@ $buscar = filter_var($buscar, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 $buscar = htmlspecialchars($buscar, ENT_QUOTES, 'UTF-8');
 
 
-$stmt = $conn->prepare("CALL sp_ListarDonaciones(?)");
-$stmt->bind_param('s', $buscar);
+$stmt = $conn->prepare("CALL sp_ListarDonaciones(?,?,?)");
+$stmt->bind_param('sss',$username,$token, $buscar);
 if (!$stmt) {
      echo json_encode([
         'status' => 'error',
@@ -103,11 +103,9 @@ $navbar = '
 
 $panel = '
     <div id="listpanel" class="container text-center mt-4">
-        <h2 class="mb-4">Actividades</h2>
+        <h2 class="mb-4">Donaciones</h2>
        <div class="d-flex justify-content-between align-items-center">
-          <!-- Botón Crear Actividad a la izquierda -->
-          <button class="btn btn-primary mb-3" onclick="create()">Crear Actividad</button>
-  
+           
           <!-- Contenedor para el TextBox y el botón de buscar a la derecha -->
           <div class="d-flex">
             <input id="buscar" type="text" class="form-control me-2" placeholder="Buscar...">
@@ -120,41 +118,42 @@ $panel = '
 ';
 
 if (empty($rows)) {
-    // Si no hay actividades, mostrar el mensaje
+    // Si no hay Donaciones, mostrar el mensaje
     $panel .= '
-        <p>No hay actividades para mostrar.</p>';
+        <p>No hay donaciones para mostrar.</p>';
 } else {
     // Si hay actividades, crear la tabla con los datos
     $panel .= '
         <table class="table table-striped">
             <thead class="table-dark">
                 <tr>
+                    <th>Codigo</th>
                     <th>Fecha</th>
+                    <th>Metodo</th>
+                    <th>Destino</th>
                     <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Visibilidad</th>
-                    <th>Acciones</th>
+                    <th>Contacto</th>
+                    <th>Mensaje</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>';
 
-    foreach ($rows as $actividad) {
-         $visibilidad = $actividad['Visible'] ? '
-            <svg height="24" version="1.1" width="24" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><g transform="translate(0 -1028.4)"><path d="m22 12c0 5.523-4.477 10-10 10-5.5228 0-10-4.477-10-10 0-5.5228 4.4772-10 10-10 5.523 0 10 4.4772 10 10z" fill="#27ae60" transform="translate(0 1029.4)"/><path d="m22 12c0 5.523-4.477 10-10 10-5.5228 0-10-4.477-10-10 0-5.5228 4.4772-10 10-10 5.523 0 10 4.4772 10 10z" fill="#2ecc71" transform="translate(0 1028.4)"/><path d="m16 1037.4-6 6-2.5-2.5-2.125 2.1 2.5 2.5 2 2 0.125 0.1 8.125-8.1-2.125-2.1z" fill="#27ae60"/><path d="m16 1036.4-6 6-2.5-2.5-2.125 2.1 2.5 2.5 2 2 0.125 0.1 8.125-8.1-2.125-2.1z" fill="#ecf0f1"/></g></svg>
-            ' : '
-            <svg height="24" version="1.1" width="24" xmlns="http://www.w3.org/2000/svg" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"><g transform="translate(0 -1028.4)"><path d="m22 12c0 5.523-4.477 10-10 10-5.5228 0-10-4.477-10-10 0-5.5228 4.4772-10 10-10 5.523 0 10 4.4772 10 10z" fill="#c0392b" transform="translate(0 1029.4)"/><path d="m22 12c0 5.523-4.477 10-10 10-5.5228 0-10-4.477-10-10 0-5.5228 4.4772-10 10-10 5.523 0 10 4.4772 10 10z" fill="#e74c3c" transform="translate(0 1028.4)"/><path d="m7.0503 1037.8 3.5357 3.6-3.5357 3.5 1.4142 1.4 3.5355-3.5 3.536 3.5 1.414-1.4-3.536-3.5 3.536-3.6-1.414-1.4-3.536 3.5-3.5355-3.5-1.4142 1.4z" fill="#c0392b"/><path d="m7.0503 1036.8 3.5357 3.6-3.5357 3.5 1.4142 1.4 3.5355-3.5 3.536 3.5 1.414-1.4-3.536-3.5 3.536-3.6-1.414-1.4-3.536 3.5-3.5355-3.5-1.4142 1.4z" fill="#ecf0f1"/></g></svg>
-              '; 
-        $fecha = ($actividad['Fecha'] === '0000-00-00 00:00:00') ? 'No definida' : htmlspecialchars($actividad['Fecha']);
+    foreach ($rows as $Donacion) {
+       
         $panel .= '
             <tr>
-                <td>' . $fecha . '</td>
-                <td>' . htmlspecialchars($actividad['Nombre']) . '</td>
-                <td>' . htmlspecialchars($actividad['Descripcion']) . '</td>
-                <td>' . $visibilidad . '</td>
+                <td>' . htmlspecialchars($Donacion['Codigo']) . '</td>
+                <td>' . htmlspecialchars($Donacion['Fecha']) . '</td>
+                <td>' . htmlspecialchars($Donacion['Metodo']) . '</td>
+                <td>' . htmlspecialchars($Donacion['Destino']) . '</td>
+                <td>' . htmlspecialchars($Donacion['Nombre']) . '</td>
+                <td>' . htmlspecialchars($Donacion['Contacto']) . '</td>
+                 <td>' . htmlspecialchars($Donacion['Mensaje']) . '</td>
                 <td>    
                     <div class="d-flex justify-content-center align-items-center">
-                        <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($actividad['Codigo']) . '\')">Editar</button>
-                        <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($actividad['Codigo']) . '\',\''. htmlspecialchars($actividad['Nombre']) .'\')">Eliminar</button>
+                        <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($Donacion['Codigo']) . '\')">Detalles</button>
+                        <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($Donacion['Codigo']) . '\')">Eliminar</button>
                     </div>
                 </td>
             </tr>';
@@ -166,46 +165,6 @@ if (empty($rows)) {
 }
 
 $panel .= '</div>
-
-<div id="creatediv" class="container d-none mt-5 position-relative col-6">
-    <button class="btn btn-danger p-2 position-absolute" style="right: 0; top: 0;" onclick="closeDiv()">
-        <svg class="closeicon-bg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-          <path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="white" />
-        </svg>
-     </button>
-    <h2>Crear Actividad</h2>
-      <form id="crearForm" enctype="multipart/form-data">
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre de la actividad</label>
-            <input type="text" name="nombre" id="nombre" class="form-control" required>
-        </div>
-        <div class="mb-3">
-            <label for="descripcion" class="form-label">Descripción</label>
-            <textarea name="descripcion" id="descripcion" class="form-control" required></textarea>
-        </div>
-        <div class="mb-3">
-            <label for="fecha" class="form-label">Fecha</label>
-            <input type="datetime-local" name="fecha" id="fecha" class="form-control">
-        </div>
-
-
-        <div class="form-check form-switch mb-3">
-          <input class="form-check-input" name="visible" type="checkbox" id="visible">
-          <label class="form-check-label" for="visible">Visibilidad</label>
-        </div>
-
-        <div class="mb-3">
-            <label for="imagenes" class="form-label">Subir imágenes</label>
-            <input type="file" name="imagenes[]" id="imagenes" class="form-control" multiple accept="image/*">
-        </div>  
-        <span id="respuesta" class="text-danger"></span>
-        <button type="submit" class="btn btn-primary">Crear Actividad</button>
-    </form>
-
-
-  </div>
-
-
 
   <div id="editdiv" class="container d-none mt-5 position-relative col-6">
          <button class="btn btn-danger p-2 position-absolute" style="right: 0; top: 0;" onclick="closeDiv()">

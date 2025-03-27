@@ -133,7 +133,7 @@ if (empty($rows)) {
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Visibilidad</th>
-                    <th>Acciones</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>';
