@@ -1,8 +1,8 @@
-// JavaScript source code
+ï»¿// JavaScript source code
 document.addEventListener("DOMContentLoaded", function () {
 
     const path = window.location.pathname;
-    const segmentos = path.split("/").filter(segmento => segmento !== ""); // Eliminar vacíos
+    const segmentos = path.split("/").filter(segmento => segmento !== ""); // Eliminar vacÃ­os
     if (segmentos.length <= 1) {
         fetch("assets/php/Visita.php", {
             method: 'GET',
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Error al generar vista:', error);
             });
     } else {
-        console.log('No se generará vista');
+        console.log('No se generarÃ¡ vista');
     }
 });
 function Alerta(mensaje) {
