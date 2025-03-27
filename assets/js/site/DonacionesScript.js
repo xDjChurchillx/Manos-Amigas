@@ -61,7 +61,7 @@ document.getElementById('donationForm').addEventListener('submit', function (e) 
 const urlParams = new URLSearchParams(window.location.search);
 const error = urlParams.get('error');
 const url = new URL(window.location.href);
-url.searchParams.delete(param);
+url.searchParams.delete('error');
 window.history.replaceState({}, document.title, url);
 Alerta('test');
 if (error) {
