@@ -107,7 +107,7 @@ $panel = '
        <div class="d-flex justify-content-between align-items-center">
            <div></div>
           <!-- Contenedor para el TextBox y el botón de buscar a la derecha -->
-          <div class="d-flex">
+          <div class="d-flex mb-3">
             <input id="buscar" type="text" class="form-control me-2" placeholder="Buscar...">
             <button class="btn btn-outline-secondary" onclick="search()">
                <img src="../assets/img/iconos/buscar.svg" alt="Buscar" class="icono">
@@ -166,58 +166,56 @@ if (empty($rows)) {
 
 $panel .= '</div>
 
-  <div id="detaildiv" class="container d-none mt-5 position-relative col-6">
-         <button class="btn btn-danger p-2 position-absolute" style="right: 0; top: 0;" onclick="closeDiv()">
-            <svg class="closeicon-bg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="white" />
-            </svg>
-         </button>
-        <h2>Editar Actividad</h2>
-        <form id="editarForm" enctype="multipart/form-data">
-            <div class="mb-3">
-                <label for="codigoE" class="form-label">Fecha de creacion</label>
-                <input type="text" name="codigoE" id="codigoE" class="form-control" value="Codigo" required readonly>
-            </div>
-            <div class="mb-3">
-                <label for="nombreE" class="form-label">Nombre de la actividad</label>
-                <input type="text" name="nombreE" id="nombreE" class="form-control" value="Nombre de la actividad" required>
-            </div>
-            <div class="mb-3">
-                <label for="descripcionE" class="form-label">Descripción</label>
-                <textarea name="descripcionE" id="descripcionE" class="form-control" required>Descripción de la actividad</textarea>
-            </div>
-            <div class="mb-3">
-                <label for="fechaE" class="form-label">Fecha</label>
-                <input type="datetime-local" name="fechaE" id="fechaE" class="form-control" value="2023-10-01T12:00">
-            </div>
-            <div class="form-check form-switch mb-3">
-              <input class="form-check-input" name="visibleE" type="checkbox" id="visibleE">
-              <label class="form-check-label" for="visibleE">Visibilidad</label>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Imágenes existentes</label>
-               <div id="listImg">
-                   
-               </div>
-              
-                
-            </div>
-            <div class="mb-3">
-                <label for="newimgE" class="form-label">Añadir nuevas imágenes</label>
-                <input type="file" name="newimgE[]" id="newimgE" class="form-control" multiple accept="image/*">
-            </div>
-            <span id="respuestaE" class="text-danger"></span>
-            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-        </form>
+ <div id="detaildiv" class="container d-none mt-5 position-relative col-6">
+  <button class="btn btn-danger p-2 position-absolute" style="right: 0; top: 0;" onclick="closeDiv()">
+    <svg class="closeicon-bg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="white" />
+    </svg>
+  </button>
+
+  <!-- Card de detalles de donación -->
+  <div class="card shadow">
+    <div class="card-header bg-primary text-white">
+      <h5 class="card-title mb-0">Detalles de Donación</h5>
     </div>
+    <div class="card-body">
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <p class="mb-1"><strong>Método de Pago:</strong></p>
+          <p class="text-muted" id="detail-paymentMethod">PayPal</p>
+        </div>
+        <div class="col-md-6">
+          <p class="mb-1"><strong>Destino:</strong></p>
+          <p class="text-muted" id="detail-destination">Ayuda a niños</p>
+        </div>
+      </div>
 
+      <div class="mb-3">
+        <p class="mb-1"><strong>Mensaje del donante:</strong></p>
+        <p class="text-muted" id="detail-message">"Espero que esto ayude a su causa"</p>
+      </div>
 
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <p class="mb-1"><strong>Nombre del donante:</strong></p>
+          <p class="text-muted" id="detail-name">Juan Pérez</p>
+        </div>
+        <div class="col-md-6">
+          <p class="mb-1"><strong>Contacto:</strong></p>
+          <p class="text-muted" id="detail-contact">juan@example.com</p>
+        </div>
+      </div>
 
-
-
-
-
-
+      <div class="mb-3">
+        <p class="mb-1"><strong>Fecha:</strong></p>
+        <p class="text-muted" id="detail-date">25/05/2023 14:30</p>
+      </div>
+    </div>
+    <div class="card-footer bg-light">
+      <small class="text-muted">ID de donación: <span id="detail-id">#12345</span></small>
+    </div>
+  </div>
+</div>
 
 
 ';

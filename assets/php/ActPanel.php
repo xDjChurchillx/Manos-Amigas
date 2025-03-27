@@ -109,7 +109,7 @@ $panel = '
           <button class="btn btn-primary mb-3" onclick="create()">Crear Actividad</button>
   
           <!-- Contenedor para el TextBox y el botón de buscar a la derecha -->
-          <div class="d-flex">
+          <div class="d-flex mb-3">
             <input id="buscar" type="text" class="form-control me-2" placeholder="Buscar...">
             <button class="btn btn-outline-secondary" onclick="search()">
                <img src="../assets/img/iconos/buscar.svg" alt="Buscar" class="icono">
