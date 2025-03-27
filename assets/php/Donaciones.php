@@ -1,4 +1,5 @@
-<?php
+﻿<?php
+    require '../../../Private/Credentials/DataBase/connection.php';
 // Verificar si el formulario fue enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Capturar los datos del formulario
@@ -8,16 +9,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $donorName = isset($_POST['donorName']) ? $_POST['donorName'] : '';
     $donorContact = isset($_POST['donorContact']) ? $_POST['donorContact'] : '';
 
-    // Validar y sanitizar los datos (importante para seguridad)
-    $paymentMethod = htmlspecialchars($paymentMethod);
-    $donationDestination = htmlspecialchars($donationDestination);
-    $donorMessage = htmlspecialchars($donorMessage);
-    $donorName = htmlspecialchars($donorName);
-    $donorContact = htmlspecialchars($donorContact);
 
-    // Aqu� puedes procesar los datos (guardar en base de datos, enviar por email, etc.)
+
+   // Validar campos obligatorios
+    if (empty($paymentMethod)) {
+       // die("Error: El método de pago es obligatorio.");
+    }
+    if (empty($donationDestination)) {
+      //  die("Error: El destino de la donación es obligatorio.");
+    }
+
+    // Sanitizar TODOS los caracteres especiales (incluyendo =)
+    $paymentMethod = htmlentities($paymentMethod, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $donationDestination = htmlentities($donationDestination, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $donorMessage = htmlentities($donorMessage, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $donorName = htmlentities($donorName, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $donorContact = htmlentities($donorContact, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+
+  $stmt = $conn->prepare('CALL sp_CrearActividad(?,?,?,?,?)');
+  if (!$stmt) {
+     // echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
+     // exit();
+  }
+
+  $stmt->bind_param('sssss', $paymentMethod, $donationDestination, $donorMessage, $donorName, $donorContact);
+
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $row = $result->fetch_assoc();
+
+  if (array_key_exists('Sucess', $row)) {
+     //
+  } else {
+    // 
+  }
+  $stmt->close();
+  $conn->close();
+
+
+
+
+    // Aquí puedes procesar los datos (guardar en base de datos, enviar por email, etc.)
     // Por ejemplo, guardar en un archivo de texto:
-    $data = "M�todo de pago: $paymentMethod\n";
+    $data = "Método de pago: $paymentMethod\n";
     $data .= "Destino: $donationDestination\n";
     $data .= "Mensaje: $donorMessage\n";
     $data .= "Nombre: $donorName\n";
@@ -26,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $data .= "------------------------\n";
 
 
-    // Redirigir a una p�gina de agradecimiento
+    // Redirigir a una página de agradecimiento
     echo $data;
     exit;
 } else {
