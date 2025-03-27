@@ -98,7 +98,7 @@ function startPanel(datos) {
 }
 function edit(id) {
     console.log(id);
-    document.getElementById('editdiv').classList.remove('d-none');
+    document.getElementById('detaildiv').classList.remove('d-none');
     document.getElementById('listpanel').classList.add('d-none');
 
     // Obtener los datos del item usando el id desde la variable global
