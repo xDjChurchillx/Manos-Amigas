@@ -13,10 +13,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    // Validar campos obligatorios
     if (empty($paymentMethod)) {
-       // die("Error: El método de pago es obligatorio.");
+         header("Location: /Gestion/ingreso.html?error=1"); // Error en 
+         exit();
     }
     if (empty($donationDestination)) {
-      //  die("Error: El destino de la donación es obligatorio.");
+         header("Location: /Gestion/ingreso.html?error=1"); // Error en 
+         exit();
     }
 
     // Sanitizar TODOS los caracteres especiales (incluyendo =)
@@ -28,8 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   $stmt = $conn->prepare('CALL sp_CrearDonacion(?,?,?,?,?)');
   if (!$stmt) {
-     // echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
-     // exit();
+      header("Location: /Gestion/ingreso.html?error=2"); // Error en BD
+      exit();
   }
 
   $stmt->bind_param('sssss', $paymentMethod, $donationDestination, $donorMessage, $donorName, $donorContact);
@@ -39,19 +41,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $row = $result->fetch_assoc();
 
   if (array_key_exists('Sucess', $row)) {
-        $data = "Método de pago: $paymentMethod\n";
-        $data .= "Destino: $donationDestination\n";
-        $data .= "Mensaje: $donorMessage\n";
-        $data .= "Nombre: $donorName\n";
-        $data .= "Contacto: $donorContact\n";
-        $data .= "Fecha: " . date('Y-m-d H:i:s') . "\n";
-        $data .= "------------------------\n";
-
-
-        echo $data;
-        exit;
+         header("Location: /Gestion/ingreso.html?error=0"); // SUCESS
+         exit();
   } else {
-    // 
+      header("Location: /Gestion/ingreso.html?error=2"); // Error en BD
+      exit();
   }
   $stmt->close();
   $conn->close();

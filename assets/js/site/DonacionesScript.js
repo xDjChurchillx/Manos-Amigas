@@ -56,3 +56,29 @@ document.getElementById('donationForm').addEventListener('submit', function (e) 
     }
    
 });
+
+// Obtener parámetros de la URL
+const urlParams = new URLSearchParams(window.location.search);
+const error = urlParams.get('error');
+const url = new URL(window.location.href);
+url.searchParams.delete(param);
+window.history.replaceState({}, document.title, url);
+Alerta('test');
+if (error) {
+    switch (error) {
+        case '1':
+           
+            break;
+        case '2':
+           
+            break;
+        case '3':
+          
+            break;
+        case '4':
+          
+            break;
+        default:
+          
+    }
+}

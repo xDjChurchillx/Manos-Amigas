@@ -13,3 +13,11 @@ document.addEventListener("DOMContentLoaded", function () {
             console.error('Error al generar vista:', error);
         });
 });
+function Alerta(mensaje) {
+    const alertaDiv = document.getElementById('alerta');
+    alertaDiv.textContent = mensaje;
+    alertaDiv.classList.remove('d-none');
+    setTimeout(() => {
+        alertaDiv.classList.add('d-none');
+    }, 5000);
+}
