@@ -50,7 +50,7 @@
                                 <h3 class="section-title">1. Métodos de Donación</h3>
 
                                 <div class="form-check payment-method p-0" onclick="copyToClipboard('CR1234567890')">
-                                    <input class="form-check-input d-none" type="radio" name="paymentMethod" id="ibanMethod" value="iban">
+                                    <input class="form-check-input d-none" type="radio" name="Metodo" id="ibanMethod" value="iban">
                                     <label class="form-check-label w-100 p-3 m-0" for="ibanMethod">
                                         <div class="d-flex align-items-center">
                                             <div class="flex-grow-1">
@@ -70,7 +70,7 @@
                                 </div>
 
                                 <div class="form-check payment-method p-0" onclick="copyToClipboard('88887777')">
-                                    <input class="form-check-input d-none" type="radio" name="paymentMethod" id="sinpeMethod" value="sinpe">
+                                    <input class="form-check-input d-none" type="radio" name="Metodo" id="sinpeMethod" value="sinpe">
                                     <label class="form-check-label w-100 p-3 m-0" for="sinpeMethod">
                                         <div class="d-flex align-items-center">
                                             <div class="flex-grow-1">
@@ -89,7 +89,7 @@
                                 </div>
 
                                 <div class="form-check payment-method p-0">
-                                    <input class="form-check-input d-none" type="radio" name="paymentMethod" id="paypalMethod" value="paypal">
+                                    <input class="form-check-input d-none" type="radio" name="Metodo" id="paypalMethod" value="paypal">
                                     <label class="form-check-label w-100 p-3 m-0" for="paypalMethod">
                                         <div class="d-flex align-items-center">
                                             <div class="flex-grow-1">
@@ -115,17 +115,17 @@
                                     <div class="destination-btn" id="foodDestination">
                                         <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><path fill="currentColor" d="M20 10c2 3-3 12-5 12s-2-1-3-1s-1 1-3 1s-7-9-5-12s5-3 7-2V5C5.38 8.07 4.11 3.78 4.11 3.78S6.77.19 11 5V3h2v5c2-1 5-1 7 2Z" /></svg>
                                         <span class="user-select-none">Alimentos</span>
-                                        <input type="radio" name="donationDestination" value="alimentos" style="display: none;">
+                                        <input type="radio" name="Destino" value="alimentos" style="display: none;">
                                     </div>
                                     <div class="destination-btn" id="infraDestination">
                                         <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 17 16"><g fill="currentColor" fill-rule="evenodd"><path d="m16.794 8.77l-3.81-3.906V2.017l-.968.022v1.728L9.502 1.245a.711.711 0 0 0-1.003 0L1.206 8.771a.713.713 0 0 0 0 1.002a.71.71 0 0 0 1.003-.001L9 2.982l6.793 6.79a.704.704 0 0 0 1.001.001a.715.715 0 0 0 0-1.003z" /><path d="M4.043 9.532v5.69c0 .394.218.786.567.786h2.277l.064-3.993h4.074l-.002 3.993h2.303c.349 0 .632-.391.632-.786V9.531L9 4.625L4.043 9.532z" /></g></svg>
                                         <span class="user-select-none">Infraestructura</span>
-                                        <input type="radio" name="donationDestination" value="infraestructura" style="display: none;">
+                                        <input type="radio" name="Destino" value="infraestructura" style="display: none;">
                                     </div>
                                     <div class="destination-btn" id="medicineDestination">
                                         <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24"><g fill="currentColor"><path d="m20.91 13.332l-7.578 7.577a5.41 5.41 0 0 0 7.577-7.577Z" /><path fill-rule="evenodd" d="m12.235 19.885l7.65-7.65l-8.12-8.12l-7.65 7.65l8.12 8.12Zm-2.356-8.592a1 1 0 1 1-1.414 1.414a1 1 0 0 1 1.414-1.414Zm2.828 4.243a1 1 0 1 0-1.414-1.415a1 1 0 0 0 1.414 1.415Zm0-7.071a1 1 0 1 1-1.414 1.414a1 1 0 0 1 1.414-1.414Zm2.828 4.242a1 1 0 1 0-1.414-1.414a1 1 0 0 0 1.414 1.414Z" clip-rule="evenodd" /><path d="m3.09 10.668l7.578-7.577a5.41 5.41 0 0 0-7.577 7.577Z" /></g></svg>
                                         <span class="user-select-none">Medicina</span>
-                                        <input type="radio" name="donationDestination" value="medicina" style="display: none;">
+                                        <input type="radio" name="Destino" value="medicina" style="display: none;">
                                     </div>
                                 </div>
 
@@ -142,20 +142,20 @@
                             <div class="mb-4">
                                 <h3 class="section-title">3. Mensaje y Contacto</h3>
 
-                                <div class="mb-3">
-                                    <label for="donorMessage" class="form-label">Mensaje personal (opcional)</label>
-                                    <textarea name="donorMessage" class="form-control" id="donorMessage" rows="3" placeholder="Escribe un mensaje de apoyo o dedicatoria para nuestro centro"></textarea>
-                                </div>
-
                                 <div class="row g-2">
                                     <div class="col-md-6">
-                                        <label for="donorName" class="form-label">Tu nombre (opcional)</label>
-                                        <input type="text" name="donorName" class="form-control" id="donorName" placeholder="Para saber a quién agradecer">
+                                        <label for="NombreD" class="form-label">Tu nombre (opcional)</label>
+                                        <input type="text" name="NombreD" class="form-control" id="NombreD" placeholder="Para saber a quién agradecer">
                                     </div>
                                     <div class="col-md-6">
-                                        <label for="donorContact" class="form-label">Correo electrónico o contacto(opcional)</label>
-                                        <input type="text" name="donorContact" class="form-control" id="donorContact" placeholder="Si deseas recibir nuestro agradecimiento">
+                                        <label for="ContactoD" class="form-label">Correo electrónico o contacto(opcional)</label>
+                                        <input type="text" name="ContactoD" class="form-control" id="ContactoD" placeholder="Si deseas recibir nuestro agradecimiento">
                                     </div>
+                                </div>
+                            
+                                <div class="mb-3">
+                                    <label for="MensajeD" class="form-label">Mensaje personal (opcional)</label>
+                                    <textarea name="MensajeD" class="form-control" id="MensajeD" rows="3" placeholder="Escribe un mensaje de apoyo o dedicatoria para nuestro centro"></textarea>
                                 </div>
 
                                 <div class="alert alert-info mt-4">

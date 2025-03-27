@@ -3,30 +3,30 @@
 // Verificar si el formulario fue enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Capturar los datos del formulario
-    $paymentMethod = isset($_POST['paymentMethod']) ? $_POST['paymentMethod'] : '';
-    $donationDestination = isset($_POST['donationDestination']) ? $_POST['donationDestination'] : '';
-    $donorMessage = isset($_POST['donorMessage']) ? $_POST['donorMessage'] : '';
-    $donorName = isset($_POST['donorName']) ? $_POST['donorName'] : '';
-    $donorContact = isset($_POST['donorContact']) ? $_POST['donorContact'] : '';
+    $Metodo = isset($_POST['Metodo']) ? $_POST['Metodo'] : '';
+    $Destino= isset($_POST['Destino']) ? $_POST['Destino'] : '';
+    $Nombre = isset($_POST['NombreD']) ? $_POST['NombreD'] : '';
+    $Contacto = isset($_POST['ContactoD']) ? $_POST['ContactoD'] : '';
+    $Mensaje = isset($_POST['MensajeD']) ? $_POST['MensajeD'] : '';
 
 
 
    // Validar campos obligatorios
-    if (empty($paymentMethod)) {
+    if (empty($Metodo)) {
          header("Location: /Donaciones.html?error=1"); // Error en 
          exit();
     }
-    if (empty($donationDestination)) {
+    if (empty($Destino)) {
          header("Location: /Donaciones.html?error=1"); // Error en 
          exit();
     }
 
     // Sanitizar TODOS los caracteres especiales (incluyendo =)
-    $paymentMethod = htmlentities($paymentMethod, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    $donationDestination = htmlentities($donationDestination, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    $donorMessage = htmlentities($donorMessage, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    $donorName = htmlentities($donorName, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    $donorContact = htmlentities($donorContact, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $Metodo = htmlentities($Metodo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $Destino= htmlentities($Destino, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $Nombre = htmlentities($Nombre, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $Contacto = htmlentities($Contacto, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $Mensaje = htmlentities($Mensaje, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
   $stmt = $conn->prepare('CALL sp_CrearDonacion(?,?,?,?,?)');
   if (!$stmt) {
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       exit();
   }
 
-  $stmt->bind_param('sssss', $paymentMethod, $donationDestination, $donorMessage, $donorName, $donorContact);
+  $stmt->bind_param('sssss', $Metodo, $Destino, $Nombre, $Contacto, $Mensaje);
 
   $stmt->execute();
   $result = $stmt->get_result();
