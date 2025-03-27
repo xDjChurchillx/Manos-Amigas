@@ -105,7 +105,7 @@ $panel = '
     <div id="listpanel" class="container text-center mt-4">
         <h2 class="mb-4">Donaciones</h2>
        <div class="d-flex justify-content-between align-items-center">
-           
+           <div></div>
           <!-- Contenedor para el TextBox y el botón de buscar a la derecha -->
           <div class="d-flex">
             <input id="buscar" type="text" class="form-control me-2" placeholder="Buscar...">
