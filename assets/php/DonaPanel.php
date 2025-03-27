@@ -166,54 +166,41 @@ if (empty($rows)) {
 
 $panel .= '</div>
 
- <div id="detaildiv" class="container d-none mt-5 position-relative col-6">
-  <button class="btn btn-danger p-2 position-absolute" style="right: 0; top: 0;" onclick="closeDiv()">
-    <svg class="closeicon-bg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-      <path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="white" />
-    </svg>
-  </button>
-
-  <div class="card shadow">
-    <div class="card-header bg-primary text-white">
-      <h5 class="card-title mb-0">Detalles de Donación</h5>
+<div id="detailDonaciones" class="container d-none mt-5 position-relative col-6">
+    <button class="btn btn-danger p-2 position-absolute" style="right: 0; top: 0;" onclick="closeDiv()">
+        <svg class="closeicon-bg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="white" />
+        </svg>
+    </button>
+    <h2>Detalle de Donación</h2>
+    <div class="mb-3">
+        <label for="codigoD" class="form-label">Código</label>
+        <input type="text" id="codigoD" class="form-control" value="Código" readonly>
     </div>
-    <div class="card-body">
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <p class="mb-1"><strong>Método de Pago:</strong></p>
-          <p class="text-muted" id="detail-paymentMethod">PayPal</p>
-        </div>
-        <div class="col-md-6">
-          <p class="mb-1"><strong>Destino:</strong></p>
-          <p class="text-muted" id="detail-destination">Ayuda a niños</p>
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <p class="mb-1"><strong>Mensaje del donante:</strong></p>
-        <p class="text-muted" id="detail-message">"Espero que esto ayude a su causa"</p>
-      </div>
-
-      <div class="row mb-3">
-        <div class="col-md-6">
-          <p class="mb-1"><strong>Nombre del donante:</strong></p>
-          <p class="text-muted" id="detail-name">Juan Pérez</p>
-        </div>
-        <div class="col-md-6">
-          <p class="mb-1"><strong>Contacto:</strong></p>
-          <p class="text-muted" id="detail-contact">juan@example.com</p>
-        </div>
-      </div>
-
-      <div class="mb-3">
-        <p class="mb-1"><strong>Fecha:</strong></p>
-        <p class="text-muted" id="detail-date">25/05/2023 14:30</p>
-      </div>
+    <div class="mb-3">
+        <label for="metodoD" class="form-label">Método</label>
+        <input type="text" id="metodoD" class="form-control" value="Método" readonly>
     </div>
-    <div class="card-footer bg-light">
-      <small class="text-muted">ID de donación: <span id="detail-id">#12345</span></small>
+    <div class="mb-3">
+        <label for="destinoD" class="form-label">Destino</label>
+        <input type="text" id="destinoD" class="form-control" value="Destino" readonly>
     </div>
-  </div>
+    <div class="mb-3">
+        <label for="nombreD" class="form-label">Nombre</label>
+        <input type="text" id="nombreD" class="form-control" value="Nombre" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="contactoD" class="form-label">Contacto</label>
+        <input type="text" id="contactoD" class="form-control" value="Contacto" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="mensajeD" class="form-label">Mensaje</label>
+        <textarea id="mensajeD" class="form-control" readonly>Mensaje</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="fechaD" class="form-label">Fecha</label>
+        <input type="datetime-local" id="fechaD" class="form-control" value="2023-10-01T12:00" readonly>
+    </div>
 </div>
 
 
