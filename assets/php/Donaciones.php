@@ -13,11 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    // Validar campos obligatorios
     if (empty($paymentMethod)) {
-         header("Location: /Gestion/ingreso.html?error=1"); // Error en 
+         header("Location: /Donaciones.html?error=1"); // Error en 
          exit();
     }
     if (empty($donationDestination)) {
-         header("Location: /Gestion/ingreso.html?error=1"); // Error en 
+         header("Location: /Donaciones.html?error=1"); // Error en 
          exit();
     }
 
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
   $stmt = $conn->prepare('CALL sp_CrearDonacion(?,?,?,?,?)');
   if (!$stmt) {
-      header("Location: /Gestion/ingreso.html?error=2"); // Error en BD
+      header("Location: /Donaciones.html?error=2"); // Error en BD
       exit();
   }
 
@@ -41,10 +41,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $row = $result->fetch_assoc();
 
   if (array_key_exists('Sucess', $row)) {
-         header("Location: /Gestion/ingreso.html?error=0"); // SUCESS
+         header("Location: /Donaciones.html?error=0"); // SUCESS
          exit();
   } else {
-      header("Location: /Gestion/ingreso.html?error=2"); // Error en BD
+      header("Location: /Donaciones.html?error=2"); // Error en BD
       exit();
   }
   $stmt->close();
