@@ -1,5 +1,5 @@
-<?php
-// Repetimos la misma configuraciÛn de sesiÛn para asegurar consistencia
+Ôªø<?php
+// Repetimos la misma configuraci√≥n de sesi√≥n para asegurar consistencia
 ini_set('session.use_only_cookies', 1);
 require '../../../Private/Credentials/DataBase/connection.php';
 header('Content-Type: application/json; charset=UTF-8');
@@ -8,21 +8,21 @@ session_set_cookie_params([
     'lifetime' => 0, // Hasta cerrar navegador
     'path' => '/',
     'domain' => '', // Cambia por tu dominio real
-    'secure' => false, // Solo HTTPS (IMPORTANTE en producciÛn)
+    'secure' => false, // Solo HTTPS (IMPORTANTE en producci√≥n)
     'httponly' => true, // No accesible desde JavaScript
-    'samesite' => 'Strict', // ProtecciÛn contra CSRF
+    'samesite' => 'Strict', // Protecci√≥n contra CSRF
 ]);
 
 session_start();
 
-// ValidaciÛn de sesiÛn
+// Validaci√≥n de sesi√≥n
 if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
     $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
     $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
-    // No autenticado o sesiÛn alterada
+    // No autenticado o sesi√≥n alterada
         setcookie('token', '', time() - 3600, '/');
-        session_unset(); // Limpia variables de sesiÛn
-        session_destroy(); // Elimina la sesiÛn
+        session_unset(); // Limpia variables de sesi√≥n
+        session_destroy(); // Elimina la sesi√≥n
 
     
     // Retornar JSON con error
@@ -87,7 +87,7 @@ $navbar = '
         <li class="nav-item">
             <a class="nav-link" href="Suscripciones.html">Suscripciones</a>
         </li>
-        <!-- Men˙ desplegable del usuario -->
+        <!-- Men√∫ desplegable del usuario -->
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 <svg fill="#FFFFFF" width="24px" height="24px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -95,8 +95,8 @@ $navbar = '
                 </svg>
             </a>
             <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Cambiar contraseÒa</a></li>
-                <li><a class="dropdown-item" href="../assets/php/Logout.php">Cerrar sesiÛn</a></li>
+                <li><a class="dropdown-item" href="#">Cambiar contrase√±a</a></li>
+                <li><a class="dropdown-item" href="../assets/php/Logout.php">Cerrar sesi√≥n</a></li>
             </ul>
         </li>
 ';
@@ -106,7 +106,7 @@ $panel = '
         <h2 class="mb-4">Donaciones</h2>
        <div class="d-flex justify-content-between align-items-center">
            
-          <!-- Contenedor para el TextBox y el botÛn de buscar a la derecha -->
+          <!-- Contenedor para el TextBox y el bot√≥n de buscar a la derecha -->
           <div class="d-flex">
             <input id="buscar" type="text" class="form-control me-2" placeholder="Buscar...">
             <button class="btn btn-outline-secondary" onclick="search()">
@@ -183,8 +183,8 @@ $panel .= '</div>
                 <input type="text" name="nombreE" id="nombreE" class="form-control" value="Nombre de la actividad" required>
             </div>
             <div class="mb-3">
-                <label for="descripcionE" class="form-label">DescripciÛn</label>
-                <textarea name="descripcionE" id="descripcionE" class="form-control" required>DescripciÛn de la actividad</textarea>
+                <label for="descripcionE" class="form-label">Descripci√≥n</label>
+                <textarea name="descripcionE" id="descripcionE" class="form-control" required>Descripci√≥n de la actividad</textarea>
             </div>
             <div class="mb-3">
                 <label for="fechaE" class="form-label">Fecha</label>
@@ -195,7 +195,7 @@ $panel .= '</div>
               <label class="form-check-label" for="visibleE">Visibilidad</label>
             </div>
             <div class="mb-3">
-                <label class="form-label">Im·genes existentes</label>
+                <label class="form-label">Im√°genes existentes</label>
                <div id="listImg">
                    
                </div>
@@ -203,7 +203,7 @@ $panel .= '</div>
                 
             </div>
             <div class="mb-3">
-                <label for="newimgE" class="form-label">AÒadir nuevas im·genes</label>
+                <label for="newimgE" class="form-label">A√±adir nuevas im√°genes</label>
                 <input type="file" name="newimgE[]" id="newimgE" class="form-control" multiple accept="image/*">
             </div>
             <span id="respuestaE" class="text-danger"></span>
