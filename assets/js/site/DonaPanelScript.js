@@ -120,8 +120,7 @@ function edit(id) {
 }
 function closeDiv() {
     console.log('close');
-    document.getElementById('creatediv').classList.add('d-none');
-    document.getElementById('editdiv').classList.add('d-none');
+    document.getElementById('detaildiv').classList.add('d-none');
     document.getElementById('listpanel').classList.remove('d-none');
 }
 function search() {
