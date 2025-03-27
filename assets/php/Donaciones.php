@@ -39,7 +39,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $row = $result->fetch_assoc();
 
   if (array_key_exists('Sucess', $row)) {
-     //
+        $data = "Método de pago: $paymentMethod\n";
+        $data .= "Destino: $donationDestination\n";
+        $data .= "Mensaje: $donorMessage\n";
+        $data .= "Nombre: $donorName\n";
+        $data .= "Contacto: $donorContact\n";
+        $data .= "Fecha: " . date('Y-m-d H:i:s') . "\n";
+        $data .= "------------------------\n";
+
+
+        echo $data;
+        exit;
   } else {
     // 
   }
@@ -47,24 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $conn->close();
 
 
-
-
-    // Aquí puedes procesar los datos (guardar en base de datos, enviar por email, etc.)
-    // Por ejemplo, guardar en un archivo de texto:
-    $data = "Método de pago: $paymentMethod\n";
-    $data .= "Destino: $donationDestination\n";
-    $data .= "Mensaje: $donorMessage\n";
-    $data .= "Nombre: $donorName\n";
-    $data .= "Contacto: $donorContact\n";
-    $data .= "Fecha: " . date('Y-m-d H:i:s') . "\n";
-    $data .= "------------------------\n";
-
-
-    // Redirigir a una página de agradecimiento
-    echo $data;
-    exit;
 } else {
     // Si alguien intenta acceder directamente al script sin enviar el formulario
-    header('Location: index.html');
+    header('Location: ../../index.html');
     exit;
 }
