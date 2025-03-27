@@ -40,8 +40,8 @@ document.querySelectorAll('.destination-btn').forEach(btn => {
 
 // Manejo del envío del formulario
 document.getElementById('donationForm').addEventListener('submit', function (e) {
-    const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked');
-    const selectedDestination = document.querySelector('input[name="donationDestination"]:checked');
+    const selectedPayment = document.querySelector('input[name="Metodo"]:checked');
+    const selectedDestination = document.querySelector('input[name="Destino"]:checked');
     const errorPayment = document.getElementById('errPayment');
     const errorDestination = document.getElementById('errDestination');
     errorPayment.textContent = '';
