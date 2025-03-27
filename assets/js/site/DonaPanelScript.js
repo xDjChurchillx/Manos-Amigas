@@ -110,7 +110,7 @@ function search() {
 function del(id) {
 
     $.confirm({
-        title: 'Eliminar Actividad?',
+        title: 'Eliminar Donacion?',
         content: 'Donacion: ' + id,
         buttons: {
             confirmar: function () {
@@ -129,7 +129,7 @@ function del(id) {
                         try {
                             let data = JSON.parse(text);
                             if (data.status === 'success') {
-                                //    Alerta(data.mensaje); // Actividad eliminada exitosamente
+                                //    Alerta(data.mensaje); // Donacion eliminada exitosamente
                                 location.reload();
                             } else {
                                 if ("ex" in data) {
