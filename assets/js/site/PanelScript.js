@@ -207,14 +207,6 @@ async function actualizarDatos(val) {
         Alerta('Hubo un error al cargar los datos');
     }
 }
-function Alerta(mensaje) {
-    const alertaDiv = document.getElementById('alerta');
-    alertaDiv.textContent = mensaje;
-    alertaDiv.classList.remove('d-none');
-    setTimeout(() => {
-        alertaDiv.classList.add('d-none');
-    }, 5000);
-}
 function sumarDias(fecha, dias) {
     const date = new Date(fecha);
     date.setDate(date.getDate() + dias);

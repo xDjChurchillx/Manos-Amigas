@@ -132,14 +132,6 @@ function startPanel(datos) {
     });
  
 }
-function Alerta(mensaje) {
-    const alertaDiv = document.getElementById('alerta');
-    alertaDiv.textContent = mensaje;
-    alertaDiv.classList.remove('d-none');
-    setTimeout(() => {
-        alertaDiv.classList.add('d-none');
-    }, 5000);
-}
 function edit(id) {
     console.log(id);
     document.getElementById('editdiv').classList.remove('d-none');
