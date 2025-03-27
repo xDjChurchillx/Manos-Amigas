@@ -61,39 +61,7 @@ function startPanel(datos) {
             listaDonaciones[item.Codigo] = item;
         });
 
-        document.getElementById("editarForm").addEventListener("submit", function (event) {
-            event.preventDefault(); // Evita el postback
-
-            let formData = new FormData(this); // Captura los datos del formulario
-
-            fetch("../assets/php/UpdAct.php", {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.text())
-                .then(text => {
-                    try {
-                        console.log(text);
-                        let data = JSON.parse(text);
-                        if (data.status === "success") {
-                            location.reload();
-                        } else {
-                            if ("ex" in data) {
-                                document.getElementById("respuestaE").innerHTML = data.ex;
-                            } else {
-                                Alerta("Error al actualizar la actividad.");
-                            }
-                            if ("redirect" in data) {
-                                window.location.href = data.redirect;
-                            }
-                        }
-                    } catch (error) {
-                        console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
-                        Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
-                    }
-                })
-                .catch(error => console.error("Error en la solicitud:", error));
-        });
+       
     } catch (e) {
         console.error("Error iniciando panel:", e); // Imprime el texto antes de que falle
         Alerta("Error inesperado: " + e); // Opcional: mostrar el error en un alert
