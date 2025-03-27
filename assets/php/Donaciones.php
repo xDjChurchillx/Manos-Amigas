@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $donorName = htmlentities($donorName, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     $donorContact = htmlentities($donorContact, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
-  $stmt = $conn->prepare('CALL sp_CrearActividad(?,?,?,?,?)');
+  $stmt = $conn->prepare('CALL sp_CrearDonacion(?,?,?,?,?)');
   if (!$stmt) {
      // echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
      // exit();
