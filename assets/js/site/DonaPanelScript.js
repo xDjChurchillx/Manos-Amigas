@@ -83,12 +83,14 @@ function edit(id) {
     }
 
     // Rellenar los campos del formulario con los datos del item
-  
+    document.getElementById('codigoD').value = item.codigo || "";
+    document.getElementById('metodoD').value = item.metodo || "";
+    document.getElementById('destinoD').value = item.destino || "";
+    document.getElementById('nombreD').value = item.nombre || "";
+    document.getElementById('contactoD').value = item.contacto || "";
+    document.getElementById('mensajeD').value = item.mensaje || "";
+    document.getElementById('fechaD').value = item.fecha || "";
     
-
-
-
-
 
 }
 function closeDiv() {
