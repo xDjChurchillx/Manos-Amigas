@@ -83,13 +83,13 @@ function edit(id) {
     }
 
     // Rellenar los campos del formulario con los datos del item
-    document.getElementById('codigoD').value = item.codigo || "";
-    document.getElementById('metodoD').value = item.metodo || "";
-    document.getElementById('destinoD').value = item.destino || "";
-    document.getElementById('nombreD').value = item.nombre || "";
-    document.getElementById('contactoD').value = item.contacto || "";
-    document.getElementById('mensajeD').value = item.mensaje || "";
-    document.getElementById('fechaD').value = item.fecha || "";
+    document.getElementById('codigoD').value = item.Codigo || "";
+    document.getElementById('metodoD').value = item.Metodo || "";
+    document.getElementById('destinoD').value = item.Destino || "";
+    document.getElementById('nombreD').value = item.Nombre || "";
+    document.getElementById('contactoD').value = item.Contacto || "";
+    document.getElementById('mensajeD').value = item.Mensaje || "";
+    document.getElementById('fechaD').value = item.Fecha || "";
     
 
 }
