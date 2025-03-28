@@ -13,15 +13,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
    // Validar campos obligatorios
     if (empty($Nombre)) {
-         header("Location: /Voluntariado.html?1error=1"); // Error en 
+         header("Location: /Voluntariado.html?error=1"); // Error en 
          exit();
     }
     if (empty($Correo) && empty($Telefono)) {
-         header("Location: /Voluntariado.html?2error=1"); // Error en 
+         header("Location: /Voluntariado.html?error=1"); // Error en 
          exit();
     }
    if (empty($Propuesta)) {
-         header("Location: /Voluntariado.html?3error=1"); // Error en 
+         header("Location: /Voluntariado.html?error=1"); // Error en 
          exit();
     }
     // Sanitizar TODOS los caracteres especiales (incluyendo =)
