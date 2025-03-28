@@ -152,7 +152,7 @@ if (empty($rows)) {
                 <td>' . htmlspecialchars($Donacion['Destino']) . '</td>
                 <td>' . htmlspecialchars($Donacion['Nombre']) . '</td>
                 <td>' . htmlspecialchars($Donacion['Contacto']) . '</td>
-                <td class="text-truncate">' . htmlspecialchars($Donacion['Mensaje']) . '</td>
+                <td class="text-truncate" style="max-width: 9vw;">' . htmlspecialchars($Donacion['Mensaje']) . '</td>
                 <td>    
                     <div class="d-flex justify-content-center align-items-center">
                         <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($Donacion['Codigo']) . '\')">Detalles</button>
