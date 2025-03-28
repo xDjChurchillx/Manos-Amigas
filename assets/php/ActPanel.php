@@ -149,7 +149,7 @@ if (empty($rows)) {
             <tr>
                 <td>' . $fecha . '</td>
                 <td>' . htmlspecialchars($actividad['Nombre']) . '</td>
-                <td>' . htmlspecialchars($actividad['Descripcion']) . '</td>
+                <td class="text-truncate" style="max-width: 9vw;">' . htmlspecialchars($actividad['Descripcion']) . '</td>
                 <td>' . $visibilidad . '</td>
                 <td>    
                     <div class="d-flex justify-content-center align-items-center">
