@@ -40,8 +40,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $result = $stmt->get_result();
   $row = $result->fetch_assoc();
 
-  if (array_key_exists('Sucess', $row)) {
-         header("Location: /Donaciones.html?error=0"); // SUCESS
+  if (array_key_exists('Success', $row)) {
+         header("Location: /Donaciones.html?error=0"); // Success
          exit();
   } else {
       header("Location: /Donaciones.html?error=2"); // Error en BD
