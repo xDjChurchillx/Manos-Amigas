@@ -143,7 +143,11 @@ if (empty($rows)) {
             <tbody>';
 
     foreach ($rows as $Donacion) {
-       
+       // Truncar el mensaje si es muy largo (ej: 50 caracteres)
+    $mensaje = $Donacion['Mensaje'];
+    $mensajeTruncado = (strlen($mensaje) > 50) 
+                       ? substr($mensaje, 0, 50) . '...' 
+                       : $mensaje);
         $panel .= '
             <tr>
                 <td>' . htmlspecialchars($Donacion['Codigo']) . '</td>
@@ -152,7 +156,7 @@ if (empty($rows)) {
                 <td>' . htmlspecialchars($Donacion['Destino']) . '</td>
                 <td>' . htmlspecialchars($Donacion['Nombre']) . '</td>
                 <td>' . htmlspecialchars($Donacion['Contacto']) . '</td>
-                 <td>' . htmlspecialchars($Donacion['Mensaje']) . '</td>
+                 <td>' . $mensajeTruncado . '</td>
                 <td>    
                     <div class="d-flex justify-content-center align-items-center">
                         <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($Donacion['Codigo']) . '\')">Detalles</button>
