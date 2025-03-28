@@ -25,13 +25,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          exit();
     }
     // Sanitizar TODOS los caracteres especiales (incluyendo =)
-    $Nombre = htmlentities($Metodo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    $Correo = htmlentities($Metodo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    $Telefono = htmlentities($Metodo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    $Institucion = htmlentities($Metodo, ENT_QUOTES | ENT_HTML5, 'UTF-8'); '';
-    $Carrera = htmlentities($Metodo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    $Propuesta = htmlentities($Metodo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    $otraPropuesta = htmlentities($Metodo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $Nombre = htmlentities($Nombre, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $Correo = htmlentities($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $Telefono = htmlentities($Telefono, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $Institucion = htmlentities($Institucion, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $Carrera = htmlentities($Carrera, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $Propuesta = htmlentities($Propuesta, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $otraPropuesta = htmlentities($otraPropuesta, ENT_QUOTES | ENT_HTML5, 'UTF-8');
   
     if($Propuesta == 'otro'){
       $Propuesta = $otraPropuesta;
@@ -48,8 +48,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $result = $stmt->get_result();
   $row = $result->fetch_assoc();
 
-  if (array_key_exists('Sucess', $row)) {
-         header("Location: /Voluntariado.html?error=0"); // SUCESS
+  if (array_key_exists('Success', $row)) {
+         header("Location: /Voluntariado.html?error=0"); // Success
          exit();
   } else {
       header("Location: /Voluntariado.html?error=2"); // Error en BD
