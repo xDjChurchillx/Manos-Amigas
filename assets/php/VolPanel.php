@@ -80,6 +80,7 @@ echo json_encode([
     'filas' => $rows
 ]);
 exit();
+
 $navbar = '
         <li class="nav-item">
             <a class="nav-link" href="Panel.html">Panel</a>
