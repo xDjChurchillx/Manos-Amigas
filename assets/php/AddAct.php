@@ -1,5 +1,5 @@
-<?php
-// Repetimos la misma configuración de sesión para asegurar consistencia
+ï»¿<?php
+// Repetimos la misma configuraciÃ³n de sesiÃ³n para asegurar consistencia
 ini_set('session.use_only_cookies', 1);
 require '../../../Private/Credentials/DataBase/connection.php';
 header('Content-Type: application/json; charset=UTF-8');
@@ -8,21 +8,21 @@ session_set_cookie_params([
     'lifetime' => 0, // Hasta cerrar navegador
     'path' => '/',
     'domain' => '', // Cambia por tu dominio real
-    'secure' => false, // Solo HTTPS (IMPORTANTE en producción)
+    'secure' => false, // Solo HTTPS (IMPORTANTE en producciÃ³n)
     'httponly' => true, // No accesible desde JavaScript
-    'samesite' => 'Strict', // Protección contra CSRF
+    'samesite' => 'Strict', // ProtecciÃ³n contra CSRF
 ]);
 
 session_start();
 
-// Validación de sesión
+// ValidaciÃ³n de sesiÃ³n
 if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
     $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
     $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
-    // No autenticado o sesión alterada
+    // No autenticado o sesiÃ³n alterada
         setcookie('token', '', time() - 3600, '/');
-        session_unset(); // Limpia variables de sesión
-        session_destroy(); // Elimina la sesión
+        session_unset(); // Limpia variables de sesiÃ³n
+        session_destroy(); // Elimina la sesiÃ³n
 
     
     // Retornar JSON con error
@@ -41,13 +41,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $descripcion = trim($_POST['descripcion'] ?? '');
         $fecha = trim($_POST['fecha'] ?? date('Y-m-d H:i:s'));
         $visible = isset($_POST['visible']) ? 1 : 0; 
-        // Validación de datos
+        // ValidaciÃ³n de datos
         if (empty($nombreActividad) || empty($descripcion)) {
             echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
             exit();
         }
 
-        // Validar si hay imágenes antes de procesarlas
+        // Validar si hay imÃ¡genes antes de procesarlas
         if (!isset($_FILES['imagenes']) || empty($_FILES['imagenes']['name'][0])) {
             echo json_encode(["status" => "error", "ex" => "Debe subir al menos una imagen."]);
             exit();
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp']; // Extensiones permitidas (incluyendo WebP)
         $maxFileSize = 5 * 1024 * 1024; // 5 MB
 
-        // Crear carpeta temporal para las imágenes
+        // Crear carpeta temporal para las imÃ¡genes
         $tempDir = "../img/temp/";
 
         // Si la carpeta temporal ya existe, eliminarla y crearla de nuevo en blanco
@@ -84,9 +84,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 exit();
             }
 
-            // Validar tamaño de archivo
+            // Validar tamaÃ±o de archivo
             if ($_FILES['imagenes']['size'][$index] > $maxFileSize) {
-                echo json_encode(["status" => "error", "ex" => "El archivo {$fileName} excede el tamaño permitido (5 MB)."]);
+                echo json_encode(["status" => "error", "ex" => "El archivo {$fileName} excede el tamaÃ±o permitido (5 MB)."]);
                 exit();
             }
 
@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Convertir a WebP si no lo es
             if ($extension !== 'webp') {
-                // Cargar la imagen según su formato original
+                // Cargar la imagen segÃºn su formato original
                 switch ($extension) {
                     case 'jpg':
                     case 'jpeg':
@@ -111,7 +111,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $image = imagecreatefromgif($tmpFilePath);
                         break;
                     default:
-                        echo json_encode(["status" => "error", "ex" => "Formato de imagen no soportado para conversión."]);
+                        echo json_encode(["status" => "error", "ex" => "Formato de imagen no soportado para conversiÃ³n."]);
                         exit();
                 }
 
@@ -134,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $imagePaths[] = $newFileName; // Solo guardamos el nombre de la imagen
         }
 
-        // Convertir rutas de imágenes a JSON
+        // Convertir rutas de imÃ¡genes a JSON
         $imageJson = json_encode($imagePaths, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         // Insertar en la base de datos
@@ -153,19 +153,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (array_key_exists('Error', $row)) {
             echo json_encode([
                 'status' => 'error',
-                'ex' => 'Usuario o token inválido.'
+                'ex' => 'Usuario o token invÃ¡lido.'
             ]);
         } else {
             if (array_key_exists('Codigo', $row)) {
                 $codigoActividad = $row['Codigo'];
                 $codigoActividad = preg_replace('/\D/', '', $codigoActividad);
-                // Crear carpeta con el nombre del código de la actividad
+                // Crear carpeta con el nombre del cÃ³digo de la actividad
                 $finalDir = "../img/{$codigoActividad}/";
                 if (!file_exists($finalDir)) {
                     mkdir($finalDir, 0777, true);
                 }
 
-                // Mover las imágenes de la carpeta temporal a la carpeta final
+                // Mover las imÃ¡genes de la carpeta temporal a la carpeta final
                 foreach ($imagePaths as $imageName) {
                     rename($tempDir . $imageName, $finalDir . $imageName);
                 }
@@ -199,7 +199,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } catch (Exception $ex) {
      echo json_encode([
         'status' => 'error',
-         'ex' => $ex
+         'ex' => $ex->getMessage()
     ]);
     exit();
 }

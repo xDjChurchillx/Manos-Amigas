@@ -1,5 +1,5 @@
-<?php
-// Repetimos la misma configuración de sesión para asegurar consistencia
+ï»¿<?php
+// Repetimos la misma configuraciÃ³n de sesiÃ³n para asegurar consistencia
 ini_set('session.use_only_cookies', 1);
 require '../../../Private/Credentials/DataBase/connection.php';
 header('Content-Type: application/json; charset=UTF-8');
@@ -8,21 +8,21 @@ session_set_cookie_params([
     'lifetime' => 0, // Hasta cerrar navegador
     'path' => '/',
     'domain' => '', // Cambia por tu dominio real
-    'secure' => false, // Solo HTTPS (IMPORTANTE en producción)
+    'secure' => false, // Solo HTTPS (IMPORTANTE en producciÃ³n)
     'httponly' => true, // No accesible desde JavaScript
-    'samesite' => 'Strict', // Protección contra CSRF
+    'samesite' => 'Strict', // ProtecciÃ³n contra CSRF
 ]);
 
 session_start();
 
-// Validación de sesión
+// ValidaciÃ³n de sesiÃ³n
 if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
     $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
     $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
-    // No autenticado o sesión alterada
+    // No autenticado o sesiÃ³n alterada
         setcookie('token', '', time() - 3600, '/');
-        session_unset(); // Limpia variables de sesión
-        session_destroy(); // Elimina la sesión
+        session_unset(); // Limpia variables de sesiÃ³n
+        session_destroy(); // Elimina la sesiÃ³n
 
     
     // Retornar JSON con error
@@ -53,13 +53,13 @@ $row = $result->fetch_assoc();
 if (array_key_exists('Error', $row)) {
     echo json_encode([
         'status' => 'error',
-        'ex' => 'Usuario o token inválido.'
+        'ex' => 'Usuario o token invÃ¡lido.'
     ]);
 } else {
    
     if(array_key_exists('Mensaje',$row)){
                 $codigoActividad = preg_replace('/\D/', '', $codigo);
-                // Crear carpeta con el nombre del código de la actividad
+                // Crear carpeta con el nombre del cÃ³digo de la actividad
                 $finalDir = "../img/{$codigoActividad}/"; 
                 // Eliminar la carpeta temporal
                 if (file_exists($finalDir)) {
@@ -89,7 +89,7 @@ $conn->close();
 } catch (Exception $ex) {
      echo json_encode([
         'status' => 'error',
-         'ex' => $ex
+         'ex' => $ex->getMessage()
     ]);
     exit();
 }

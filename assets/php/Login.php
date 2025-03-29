@@ -1,4 +1,4 @@
-<?php
+ï»¿<?php
 require '../../../Private/Credentials/DataBase/connection.php';
 
 
@@ -8,9 +8,9 @@ session_set_cookie_params([
     'lifetime' => 0, // Hasta cerrar navegador
     'path' => '/',
     'domain' => '', // Cambia por tu dominio real
-    'secure' => false, // Solo HTTPS (IMPORTANTE en producción)
+    'secure' => false, // Solo HTTPS (IMPORTANTE en producciÃ³n)
     'httponly' => true, // No accesible desde JavaScript
-    'samesite' => 'Strict', // Protección contra CSRF
+    'samesite' => 'Strict', // ProtecciÃ³n contra CSRF
 ]);
 
 session_start();
@@ -23,16 +23,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
 
-        // Sanitización de entrada
+        // SanitizaciÃ³n de entrada
         $username = trim($_POST["username"]);
         $password = trim($_POST["password"]);
 
         if (empty($username) || empty($password)) {
-            header("Location: /Gestion/ingreso.html?error=2"); // Campos vacíos
+            header("Location: /Gestion/ingreso.html?error=2"); // Campos vacÃ­os
             exit();
         }
 
-        // Obtener el hash de la contraseña almacenada desde la base de datos
+        // Obtener el hash de la contraseÃ±a almacenada desde la base de datos
         $stmt = $conn->prepare("CALL sp_Login(?)");
         if (!$stmt) {
             header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
@@ -52,11 +52,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($row = $result->fetch_assoc()) {
             $storedHash = $row["Contrasena"]; // Hash almacenado en la base de datos
 
-            // Verificar la contraseña usando password_verify()
+            // Verificar la contraseÃ±a usando password_verify()
             if (password_verify($password, $storedHash)) {
-                session_regenerate_id(true); // Regenerar sesión para evitar fixation
+                session_regenerate_id(true); // Regenerar sesiÃ³n para evitar fixation
                 $_SESSION["username"] = $username;
-                $_SESSION["user_agent"] = $_SERVER['HTTP_USER_AGENT']; // Asociar sesión al navegador
+                $_SESSION["user_agent"] = $_SERVER['HTTP_USER_AGENT']; // Asociar sesiÃ³n al navegador
                 $_SESSION["ip_address"] = $_SERVER['REMOTE_ADDR']; // Opcional: asociar a IP
 
 
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     exit();
                 }
 
-                // Pasar los parámetros al procedimiento almacenado
+                // Pasar los parÃ¡metros al procedimiento almacenado
                 $stmt->bind_param("ss", $username, $activationToken);
 
                 // Ejecutar el procedimiento almacenado
@@ -79,15 +79,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 header("Location: /Gestion/panel.html"); // Redirigir a dashboard
                 exit();
             } else {
-                header("Location: /Gestion/ingreso.html?error=1"); // Usuario o contraseña incorrectos
+                header("Location: /Gestion/ingreso.html?error=1"); // Usuario o contraseÃ±a incorrectos
                 exit();
             }
         } else {
-            header("Location: /Gestion/ingreso.html?error=1"); // Usuario o contraseña incorrectos
+            header("Location: /Gestion/ingreso.html?error=1"); // Usuario o contraseÃ±a incorrectos
             exit();
         }
     } catch (Exception $ex) {
-        echo $ex;
+        echo $ex->getMessage();
         exit();
     }
 }

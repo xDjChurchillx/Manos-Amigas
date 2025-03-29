@@ -1,5 +1,5 @@
-<?php
-// Repetimos la misma configuración de sesión para asegurar consistencia
+ï»¿<?php
+// Repetimos la misma configuraciÃ³n de sesiÃ³n para asegurar consistencia
 ini_set('session.use_only_cookies', 1);
 require '../../../Private/Credentials/DataBase/connection.php';
 header('Content-Type: application/json; charset=UTF-8');
@@ -8,21 +8,21 @@ session_set_cookie_params([
     'lifetime' => 0, // Hasta cerrar navegador
     'path' => '/',
     'domain' => '', // Cambia por tu dominio real
-    'secure' => false, // Solo HTTPS (IMPORTANTE en producción)
+    'secure' => false, // Solo HTTPS (IMPORTANTE en producciÃ³n)
     'httponly' => true, // No accesible desde JavaScript
-    'samesite' => 'Strict', // Protección contra CSRF
+    'samesite' => 'Strict', // ProtecciÃ³n contra CSRF
 ]);
 
 session_start();
 
-// Validación de sesión
+// ValidaciÃ³n de sesiÃ³n
 if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
     $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
     $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
-    // No autenticado o sesión alterada
+    // No autenticado o sesiÃ³n alterada
         setcookie('token', '', time() - 3600, '/');
-        session_unset(); // Limpia variables de sesión
-        session_destroy(); // Elimina la sesión
+        session_unset(); // Limpia variables de sesiÃ³n
+        session_destroy(); // Elimina la sesiÃ³n
 
     
     // Retornar JSON con error
@@ -44,19 +44,19 @@ $username = $_SESSION['username'];
         $visible = isset($_POST['visibleE']) ? 1 : 0; 
         $imagenesExistentes = $_POST['imgE'] ?? [];
         $nuevasImagenes = $_FILES['newimgE'] ?? [];
-        // Validación de datos
+        // ValidaciÃ³n de datos
         if (empty($codigoActividad) || empty($nombreActividad) || empty($descripcion)) {
             echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
             exit();
         }
 
-        // Validar si hay imágenes existentes o nuevas
+        // Validar si hay imÃ¡genes existentes o nuevas
         if (empty($imagenesExistentes) && empty($nuevasImagenes['name'][0])) {
             echo json_encode(["status" => "error", "ex" => "Debe haber al menos una imagen."]);
             exit();
         }
 
-        // Procesar imágenes existentes
+        // Procesar imÃ¡genes existentes
         $aux = 1;
         $imagenesActualizadas = [];
         foreach ($imagenesExistentes as $imagen) {
@@ -67,7 +67,7 @@ $username = $_SESSION['username'];
             }
         }
 
-        // Procesar nuevas imágenes
+        // Procesar nuevas imÃ¡genes
         $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
         $maxFileSize = 5 * 1024 * 1024; // 5 MB
         $tempDir = "../img/temp/";
@@ -82,9 +82,9 @@ $username = $_SESSION['username'];
                     echo json_encode(["status" => "error","a"=> $imagenesExistentes,"b"=> $nuevasImagenes, "ex" => "Formato de imagen no permitido ($extension)."]);
                     exit();
                 }
-                 // Validar tamaño de archivo
+                 // Validar tamaÃ±o de archivo
                 if ($nuevasImagenes['size'][$index] > $maxFileSize) {
-                    echo json_encode(["status" => "error", "ex" => "El archivo {$fileName} excede el tamaño permitido (5 MB)."]);
+                    echo json_encode(["status" => "error", "ex" => "El archivo {$fileName} excede el tamaÃ±o permitido (5 MB)."]);
                     exit();
                 }
 
@@ -106,7 +106,7 @@ $username = $_SESSION['username'];
                             $image = imagecreatefromgif($tmpFilePath);
                             break;
                         default:
-                            echo json_encode(["status" => "error", "ex" => "Formato de imagen no soportado para conversión."]);
+                            echo json_encode(["status" => "error", "ex" => "Formato de imagen no soportado para conversiÃ³n."]);
                             exit();
                     }
 
@@ -130,7 +130,7 @@ $username = $_SESSION['username'];
         }
        
 
-        // Convertir rutas de imágenes a JSON
+        // Convertir rutas de imÃ¡genes a JSON
         $imageJson = json_encode($imagenesActualizadas, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
          
         // Actualizar en la base de datos
@@ -149,7 +149,7 @@ $username = $_SESSION['username'];
         if (array_key_exists('Error', $row)) {
             echo json_encode([
                 'status' => 'error',
-                'ex' => 'Usuario o token inválido.'
+                'ex' => 'Usuario o token invÃ¡lido.'
             ]);
         } else {
             if (array_key_exists('Codigo', $row)) {
@@ -165,10 +165,10 @@ $username = $_SESSION['username'];
                     // Obtener todos los archivos del directorio
                     $archivosEnDirectorio = scandir($finalDir);
     
-                    // Filtrar archivos válidos (excluyendo "." y "..")
+                    // Filtrar archivos vÃ¡lidos (excluyendo "." y "..")
                     foreach ($archivosEnDirectorio as $archivo) {
                         if ($archivo !== "." && $archivo !== "..") {
-                            // Verificar si el archivo está en $imagenesActualizadas
+                            // Verificar si el archivo estÃ¡ en $imagenesActualizadas
                             if (!in_array($archivo, $imagenesActualizadas)) {
                                 $rutaArchivo = $finalDir . $archivo;
                 
@@ -186,7 +186,7 @@ $username = $_SESSION['username'];
 
 
 
-                // Mover las imágenes de la carpeta temporal a la carpeta final
+                // Mover las imÃ¡genes de la carpeta temporal a la carpeta final
                 foreach ($imagenesActualizadas as $imageName) {
                     if (file_exists($tempDir . $imageName)) {
                         rename($tempDir . $imageName, $finalDir . $imageName);
@@ -227,7 +227,7 @@ $username = $_SESSION['username'];
 } catch (Exception $ex) {
      echo json_encode([
         'status' => 'error',
-         'ex' => $ex
+         'ex' => $ex->getMessage()
     ]);
     exit();
 }

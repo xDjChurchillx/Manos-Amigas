@@ -223,7 +223,7 @@ echo json_encode([
 } catch (Exception $ex) {
      echo json_encode([
         'status' => 'error',
-         'ex' => $ex
+         'ex' => $ex->getMessage()
     ]);
     exit();
 }
