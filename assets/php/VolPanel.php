@@ -43,7 +43,7 @@ $buscar = filter_var($buscar, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 $buscar = htmlspecialchars($buscar, ENT_QUOTES, 'UTF-8');
 
 
-$stmt = $conn->prepare("CALL sp_ListarDonaciones(?,?,?)");
+$stmt = $conn->prepare("CALL sp_ListarVoluntarios(?,?,?)");
 $stmt->bind_param('sss',$username,$token, $buscar);
 if (!$stmt) {
      echo json_encode([
@@ -78,7 +78,7 @@ while ($row = $result->fetch_assoc()) {
 }
 
 $navbar = '
-         <li class="nav-item">
+        <li class="nav-item">
             <a class="nav-link" href="Panel.html">Panel</a>
         </li>
         <li class="nav-item">
@@ -109,7 +109,7 @@ $navbar = '
 
 $panel = '
     <div id="listpanel" class="container text-center mt-4">
-        <h2 class="mb-4">Donaciones</h2>
+        <h2 class="mb-4">Voluntarios</h2>
        <div class="d-flex justify-content-between align-items-center">
            <div></div>
           <!-- Contenedor para el TextBox y el botón de buscar a la derecha -->
@@ -124,42 +124,38 @@ $panel = '
 ';
 
 if (empty($rows)) {
-    // Si no hay Donaciones, mostrar el mensaje
+    // Si no hay Voluntarios, mostrar el mensaje
     $panel .= '
-        <p>No hay donaciones para mostrar.</p>';
+        <p>No hay Voluntarios para mostrar.</p>';
 } else {
-    // Si hay actividades, crear la tabla con los datos
+    // Si hay Voluntarios, crear la tabla con los datos
     $panel .= '
         <table class="table table-striped">
             <thead class="table-dark">
                 <tr>
                     <th>Codigo</th>
                     <th>Fecha</th>
-                    <th>Metodo</th>
-                    <th>Destino</th>
                     <th>Nombre</th>
-                    <th>Contacto</th>
-                    <th>Mensaje</th>
+                    <th>Telefono</th>
+                    <th>Correo</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>';
 
-    foreach ($rows as $Donacion) {
+    foreach ($rows as $Voluntario) {
        
         $panel .= '
             <tr>
-                <td>' . htmlspecialchars($Donacion['Codigo']) . '</td>
-                <td>' . htmlspecialchars($Donacion['Fecha']) . '</td>
-                <td>' . htmlspecialchars($Donacion['Metodo']) . '</td>
-                <td>' . htmlspecialchars($Donacion['Destino']) . '</td>
-                <td>' . htmlspecialchars($Donacion['Nombre']) . '</td>
-                <td>' . htmlspecialchars($Donacion['Contacto']) . '</td>
-                <td class="text-truncate" style="max-width: 9vw;">' . htmlspecialchars($Donacion['Mensaje']) . '</td>
+                <td>' . htmlspecialchars($Voluntario['Codigo']) . '</td>
+                <td>' . htmlspecialchars($Voluntario['Fecha']) . '</td>
+                <td>' . htmlspecialchars($Voluntario['Nombre']) . '</td>
+                <td>' . htmlspecialchars($Voluntario['Telefono']) . '</td>
+                <td>' . htmlspecialchars($Voluntario['Correo']) . '</td>
                 <td>    
                     <div class="d-flex justify-content-center align-items-center">
-                        <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($Donacion['Codigo']) . '\')">Detalles</button>
-                        <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($Donacion['Codigo']) . '\')">Eliminar</button>
+                        <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($Voluntario['Codigo']) . '\')">Detalles</button>
+                        <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($Voluntario['Codigo']) . '\')">Eliminar</button>
                     </div>
                 </td>
             </tr>';
@@ -178,34 +174,38 @@ $panel .= '</div>
             <path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="white" />
         </svg>
     </button>
-    <h2>Detalle de Donación</h2>
+    <h2>Detalle de Voluntario</h2>
     <div class="mb-3">
-        <label for="codigoD" class="form-label">Código</label>
-        <input type="text" id="codigoD" class="form-control" value="Código" readonly>
+        <label for="codigoV" class="form-label">Código</label>
+        <input type="text" id="codigoV" class="form-control" value="Código" readonly>
     </div>
     <div class="mb-3">
-        <label for="metodoD" class="form-label">Método</label>
-        <input type="text" id="metodoD" class="form-control" value="Método" readonly>
+        <label for="fechaV" class="form-label">Fecha</label>
+        <input type="datetime-local" id="fechaV" class="form-control" value="2023-10-01T12:00" readonly>
     </div>
     <div class="mb-3">
-        <label for="destinoD" class="form-label">Destino</label>
-        <input type="text" id="destinoD" class="form-control" value="Destino" readonly>
+        <label for="nombreV" class="form-label">Nombre</label>
+        <input type="text" id="nombreV" class="form-control" value="Nombre" readonly>
     </div>
     <div class="mb-3">
-        <label for="nombreD" class="form-label">Nombre</label>
-        <input type="text" id="nombreD" class="form-control" value="Nombre" readonly>
+        <label for="telefonoV" class="form-label">Telefono</label>
+        <input type="text" id="telefonoV" class="form-control" value="Telefono" readonly>
     </div>
     <div class="mb-3">
-        <label for="contactoD" class="form-label">Contacto</label>
-        <input type="text" id="contactoD" class="form-control" value="Contacto" readonly>
+        <label for="correoV" class="form-label">Correo</label>
+        <input type="text" id="correoV" class="form-control" value="Correo" readonly>
     </div>
     <div class="mb-3">
-        <label for="mensajeD" class="form-label">Mensaje</label>
-        <textarea id="mensajeD" class="form-control" readonly>Mensaje</textarea>
+        <label for="institucionV" class="form-label">Institucion</label>
+        <input type="text" id="institucionV" class="form-control" value="Institucion" readonly>
     </div>
     <div class="mb-3">
-        <label for="fechaD" class="form-label">Fecha</label>
-        <input type="datetime-local" id="fechaD" class="form-control" value="2023-10-01T12:00" readonly>
+        <label for="carreraV" class="form-label">Carrera</label>
+        <input type="text" id="carreraV" class="form-control" value="Carrera" readonly>
+    </div>
+    <div class="mb-3">
+        <label for="propuestaV" class="form-label">Propuesta</label>
+        <textarea id="propuestaV" class="form-control" readonly>Propuesta</textarea>
     </div>
 </div>
 

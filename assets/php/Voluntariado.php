@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $Telefono = isset($_POST['Telefono']) ? $_POST['Telefono'] : '';
     $Institucion = isset($_POST['Institucion']) ? $_POST['Institucion'] : '';
     $Carrera = isset($_POST['Carrera']) ? $_POST['Carrera'] : '';
-    $Propuesta = isset($_POST['Propuesta']) ? $_POST['Propuesta'] : '';
+    $Propuesta = isset($_POST['Propuesta']) ? $_POST['Propuesta'] : ''; 
     $otraPropuesta = isset($_POST['otraPropuesta']) ? $_POST['otraPropuesta'] : '';
 
    // Validar campos obligatorios
@@ -26,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     // Sanitizar TODOS los caracteres especiales (incluyendo =)
     $Nombre = htmlentities($Nombre, ENT_QUOTES | ENT_HTML5, 'UTF-8');
-    $Correo = htmlentities($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     $Telefono = htmlentities($Telefono, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $Correo = htmlentities($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     $Institucion = htmlentities($Institucion, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     $Carrera = htmlentities($Carrera, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     $Propuesta = htmlentities($Propuesta, ENT_QUOTES | ENT_HTML5, 'UTF-8');
@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       exit();
   }
 
-  $stmt->bind_param('ssssss', $Nombre,$Correo, $Telefono, $Institucion, $Carrera, $Propuesta);
+  $stmt->bind_param('ssssss', $Nombre, $Telefono,$Correo, $Institucion, $Carrera, $Propuesta);
 
   $stmt->execute();
   $result = $stmt->get_result();

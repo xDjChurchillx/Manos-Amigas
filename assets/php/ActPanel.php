@@ -85,6 +85,9 @@ $navbar = '
             <a class="nav-link" href="Donaciones.html">Donaciones</a>
         </li>
         <li class="nav-item">
+            <a class="nav-link" href="Voluntarios.html">Voluntarios</a>
+        </li>
+        <li class="nav-item">
             <a class="nav-link" href="Suscripciones.html">Suscripciones</a>
         </li>
         <!-- Menú desplegable del usuario -->
