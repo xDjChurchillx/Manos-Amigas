@@ -1,8 +1,4 @@
-﻿
-///errores en el return
-
-
-<?php
+﻿<?php
 // Repetimos la misma configuración de sesión para asegurar consistencia
 ini_set('session.use_only_cookies', 1);
 require '../../../Private/Credentials/DataBase/connection.php';
