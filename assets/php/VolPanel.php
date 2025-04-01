@@ -152,27 +152,7 @@ if (empty($rows)) {
             </thead>
             <tbody>';
 
-    foreach ($rows as $Voluntario) {
-       
-        $panel .= '
-            <tr>
-                <td>' . htmlspecialchars($Voluntario['Codigo']) . '</td>
-                <td>' . htmlspecialchars($Voluntario['Fecha']) . '</td>
-                <td>' . htmlspecialchars($Voluntario['Nombre']) . '</td>
-                <td>' . htmlspecialchars($Voluntario['Telefono']) . '</td>
-                <td>' . htmlspecialchars($Voluntario['Correo']) . '</td>
-                <td>    
-                    <div class="d-flex justify-content-center align-items-center">
-                        <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($Voluntario['Codigo']) . '\')">Detalles</button>
-                        <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($Voluntario['Codigo']) . '\')">Eliminar</button>
-                    </div>
-                </td>
-            </tr>';
-    }
-
-    $panel .= '
-            </tbody>
-        </table>';
+ 
 }
 
 $panel .= '</div>
