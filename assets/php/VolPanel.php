@@ -1,4 +1,8 @@
-﻿<?php
+﻿
+///errores en el return
+
+
+<?php
 // Repetimos la misma configuración de sesión para asegurar consistencia
 ini_set('session.use_only_cookies', 1);
 require '../../../Private/Credentials/DataBase/connection.php';
@@ -80,6 +84,7 @@ echo json_encode([
     'filas' => $rows
 ]);
 exit();
+die();
 
 $navbar = '
         <li class="nav-item">
