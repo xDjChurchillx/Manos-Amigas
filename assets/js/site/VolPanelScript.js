@@ -86,11 +86,11 @@ function edit(id) {
     document.getElementById('codigoV').value = item.Codigo || "";
     document.getElementById('fechaV').value = item.Fecha || "";
     document.getElementById('nombreV').value = item.Nombre || "";
-    document.getElementById('telefonoV').value = item.Metodo || "";
-    document.getElementById('correoV').value = item.Metodo || "";
-    document.getElementById('institucionV').value = item.Destino || "";
-    document.getElementById('carreraV').value = item.Contacto || "";
-    document.getElementById('propuestaV').value = item.Mensaje || "";
+    document.getElementById('telefonoV').value = item.Telefono || "";
+    document.getElementById('correoV').value = item.Correo || "";
+    document.getElementById('institucionV').value = item.Institucion || "";
+    document.getElementById('carreraV').value = item.Carrera || "";
+    document.getElementById('propuestaV').value = item.Propuesta || "";
 
 
 }
