@@ -115,7 +115,7 @@ function del(id) {
         content: 'Voluntario: ' + id,
         buttons: {
             confirmar: function () {
-                fetch('../assets/php/DelDona.php', {
+                fetch('../assets/php/DelVol.php', {
                     method: 'POST',
                     credentials: 'same-origin',
                     headers: {

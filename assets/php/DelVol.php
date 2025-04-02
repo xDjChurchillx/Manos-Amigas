@@ -39,7 +39,7 @@ $username = $_SESSION['username'];
 $data = json_decode(file_get_contents('php://input'), true);
 $codigo = $data['codigo'] ?? '';
 // eliminar en la base de datos
-$stmt = $conn->prepare('CALL sp_EliminarDonacion(?, ?, ?)');
+$stmt = $conn->prepare('CALL sp_EliminarVoluntario(?, ?, ?)');
 if (!$stmt) {
     echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
     exit();
@@ -57,8 +57,8 @@ if (array_key_exists('Error', $row)) {
     ]);
 } else {
    
-    if(array_key_exists('Mensaje',$row)){
-                echo json_encode([
+    if(array_key_exists('Mensaje',$row)){             
+                  echo json_encode([
                     'status' => 'success',
                     'mensaje' => $row['Mensaje']
                 ]);
