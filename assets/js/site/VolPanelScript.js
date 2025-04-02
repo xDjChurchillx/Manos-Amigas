@@ -107,7 +107,7 @@ function search() {
     const url = new URL(window.location);
     url.searchParams.set('buscar', input);
     window.location.href = url;
-}
+} 
 function del(id) {
 
     $.confirm({
