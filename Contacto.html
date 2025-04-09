@@ -53,15 +53,13 @@
     <div class="container py-5">
         <div class="row justify-content-center">
             <div class="col-lg-9">
-                <h1 class="text-center mb-5" style="color: var(--primary);">Contacto - Asilo Villa Serena</h1>
-
                 <!-- Pestañas -->
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="map-tab" data-bs-toggle="tab" data-bs-target="#map-tab-pane" type="button">📍 Ubicación</button>
+                        <button class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button">📞 Contacto</button>
                     </li>
                     <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button">📞 Contacto</button>
+                        <button class="nav-link" id="map-tab" data-bs-toggle="tab" data-bs-target="#map-tab-pane" type="button">📍 Ubicación</button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="faq-tab" data-bs-toggle="tab" data-bs-target="#faq-tab-pane" type="button">❓ Preguntas Frecuentes</button>
@@ -70,30 +68,8 @@
 
                 <!-- Contenido de Pestañas -->
                 <div class="tab-content" id="myTabContent">
-                    <!-- Pestaña 1: Mapa -->
-                    <div class="tab-pane fade show active" id="map-tab-pane" role="tabpanel">
-                        <div class="ratio ratio-16x9 mb-4">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.256715589435!2d-99.16593892433898!3d19.39864664113045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff3a2b559b25%3A0x4c4f1c2d5e1881e9!2sAngel%20de%20la%20Independencia!5e0!3m2!1sen!2smx!4v1717632827409!5m2!1sen!2smx"
-                                    allowfullscreen="" loading="lazy"></iframe>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h3>Dirección</h3>
-                                <p>Paseo de la Reforma #1, Col. Juárez</p>
-                                <p>Ciudad de México, 06600</p>
-                            </div>
-                            <div class="col-md-6">
-                                <h3>Transporte Público</h3>
-                                <ul>
-                                    <li>Metro: Estación Insurgentes (Línea 1)</li>
-                                    <li>Metrobús: Estación Reforma</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pestaña 2: Contacto -->
-                    <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel">
+                    <!-- Pestaña 1: Contacto (ACTIVA) -->
+                    <div class="tab-pane fade show active" id="contact-tab-pane" role="tabpanel">
                         <div class="row">
                             <div class="col-md-6">
                                 <h3>📞 Teléfonos</h3>
@@ -113,6 +89,28 @@
                                     <li class="mb-2"><strong>Urgencias:</strong> 24/7</li>
                                 </ul>
                                 <a href="mailto:contacto@villaserena.com" class="btn btn-tab mt-3">Enviar Mensaje</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Pestaña 2: Mapa -->
+                    <div class="tab-pane fade" id="map-tab-pane" role="tabpanel">
+                        <div class="ratio ratio-16x9 mb-4">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.256715589435!2d-99.16593892433898!3d19.39864664113045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff3a2b559b25%3A0x4c4f1c2d5e1881e9!2sAngel%20de%20la%20Independencia!5e0!3m2!1sen!2smx!4v1717632827409!5m2!1sen!2smx"
+                                    allowfullscreen="" loading="lazy"></iframe>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h3>Dirección</h3>
+                                <p>Paseo de la Reforma #1, Col. Juárez</p>
+                                <p>Ciudad de México, 06600</p>
+                            </div>
+                            <div class="col-md-6">
+                                <h3>Transporte Público</h3>
+                                <ul>
+                                    <li>Metro: Estación Insurgentes (Línea 1)</li>
+                                    <li>Metrobús: Estación Reforma</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
