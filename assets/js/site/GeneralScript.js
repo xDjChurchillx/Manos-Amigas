@@ -1,6 +1,16 @@
 ﻿// JavaScript source code
 document.addEventListener("DOMContentLoaded", function () {
 
+    window.addEventListener('scroll', function () {
+        const navbar = document.getElementById('mainNav');
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+
     const path = window.location.pathname;
     const segmentos = path.split("/").filter(segmento => segmento !== ""); // Eliminar vacíos
     if (segmentos.length <= 1) {
