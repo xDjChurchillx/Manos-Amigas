@@ -9,7 +9,13 @@ document.addEventListener("DOMContentLoaded", function () {
             navbar.classList.remove('scrolled');
         }
     });
+    document.getElementById('navbutton').addEventListener('click', function () {
+        const navbar = document.getElementById('mainNav');
+        if (!(window.scrollY > 100)) {
+            navbar.classList.toggle('scrolled');
+        }
 
+    });
 
     const path = window.location.pathname;
     const segmentos = path.split("/").filter(segmento => segmento !== ""); // Eliminar vacíos
