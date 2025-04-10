@@ -42,104 +42,56 @@
         </div>
     </header>
     <!-- Contenido -->
-    <div class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-lg-9">
-                <!-- Pestañas -->
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link active" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" type="button">📞 Contacto</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="map-tab" data-bs-toggle="tab" data-bs-target="#map-tab-pane" type="button">📍 Ubicación</button>
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <button class="nav-link" id="faq-tab" data-bs-toggle="tab" data-bs-target="#faq-tab-pane" type="button">❓ Preguntas Frecuentes</button>
-                    </li>
-                </ul>
-
-                <!-- Contenido de Pestañas -->
-                <div class="tab-content" id="myTabContent">
-                    <!-- Pestaña 1: Contacto (ACTIVA) -->
-                    <div class="tab-pane fade show active" id="contact-tab-pane" role="tabpanel">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h3>📞 Teléfonos</h3>
-                                <ul class="list-unstyled">
-                                    <li class="mb-2"><strong>Administración:</strong> 55 2345 6789</li>
-                                    <li class="mb-2"><strong>Enfermería:</strong> 55 3456 7890</li>
-                                    <li class="mb-2"><strong>Emergencias:</strong> 55 4567 8901</li>
-                                </ul>
-                                <h3 class="mt-4">✉️ Email</h3>
-                                <p>contacto@villaserena.com</p>
-                            </div>
-                            <div class="col-md-6">
-                                <h3>🕒 Horarios</h3>
-                                <ul class="list-unstyled">
-                                    <li class="mb-2"><strong>Visitas:</strong> 10:00 - 18:00 hrs</li>
-                                    <li class="mb-2"><strong>Administración:</strong> 8:00 - 20:00 hrs</li>
-                                    <li class="mb-2"><strong>Urgencias:</strong> 24/7</li>
-                                </ul>
-                                <a href="mailto:contacto@villaserena.com" class="btn btn-tab mt-3">Enviar Mensaje</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pestaña 2: Mapa -->
-                    <div class="tab-pane fade" id="map-tab-pane" role="tabpanel">
-                        <div class="ratio ratio-16x9 mb-4">
-                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3763.256715589435!2d-99.16593892433898!3d19.39864664113045!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1ff3a2b559b25%3A0x4c4f1c2d5e1881e9!2sAngel%20de%20la%20Independencia!5e0!3m2!1sen!2smx!4v1717632827409!5m2!1sen!2smx"
-                                    allowfullscreen="" loading="lazy"></iframe>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6">
-                                <h3>Dirección</h3>
-                                <p>Paseo de la Reforma #1, Col. Juárez</p>
-                                <p>Ciudad de México, 06600</p>
-                            </div>
-                            <div class="col-md-6">
-                                <h3>Transporte Público</h3>
-                                <ul>
-                                    <li>Metro: Estación Insurgentes (Línea 1)</li>
-                                    <li>Metrobús: Estación Reforma</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pestaña 3: FAQ -->
-                    <div class="tab-pane fade" id="faq-tab-pane" role="tabpanel">
-                        <div class="accordion" id="accordionFAQ">
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
-                                        ¿Qué documentos necesito para internar a un familiar?
-                                    </button>
-                                </h2>
-                                <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
-                                    <div class="accordion-body">
-                                        Acta de nacimiento, CURP, historial médico, identificación oficial del familiar responsable y comprobante de domicilio.
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="accordion-item">
-                                <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
-                                        ¿Aceptan seguros de gastos médicos?
-                                    </button>
-                                </h2>
-                                <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionFAQ">
-                                    <div class="accordion-body">
-                                        Sí, trabajamos con las principales aseguradoras. Contáctenos para validar su póliza.
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+    <main class="container my-5">
+        <div class="d-flex flex-row flex-column-md gap-4">
+            <!-- Ubicación -->
+            <div class="col-md-6 location-box">
+                <h4 class="section-title">Ubicación</h4>
+                <p><strong>Hogar de Ancianos Vida Plena</strong></p>
+                <p>123 Calle Central</p>
+                <p>San José, Costa Rica</p>
+                <p><strong>Teléfono:</strong> +506 2222 3333</p>
+                <p><strong>Email:</strong> info@hogarancianos.org</p>
+                <div class="mt-3">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3930.234!2d-84.08!3d9.93!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zOeKIkTM1JzQ4LjAiTiA4NMKwMDQnMzAuMCJX!5e0!3m2!1ses-419!2scr!4v1712345678901"
+                            width="100%"
+                            height="250"
+                            style="border:0;"
+                            allowfullscreen=""
+                            loading="lazy">
+                    </iframe>
                 </div>
             </div>
+
+            <!-- Formulario -->
+            <div class="col-md-6 form-container">
+                <h4 class="section-title">Formulario de Contacto</h4>
+                <form>
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre Completo</label>
+                        <input type="text" class="form-control" id="nombre" placeholder="Tu nombre">
+                    </div>
+                    <div class="mb-3">
+                        <label for="correo" class="form-label">Correo Electrónico</label>
+                        <input type="email" class="form-control" id="correo" placeholder="tucorreo@example.com">
+                    </div>
+                    <div class="mb-3">
+                        <label for="asunto" class="form-label">Asunto</label>
+                        <input type="text" class="form-control" id="asunto" placeholder="Motivo del mensaje">
+                    </div>
+                    <div class="mb-3">
+                        <label for="mensaje" class="form-label">Mensaje</label>
+                        <textarea class="form-control" id="mensaje" rows="4" placeholder="Escribe tu mensaje..."></textarea>
+                    </div>
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-primary px-4" style="background-color: var(--primary); border: none;">
+                            Enviar
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
-    </div>
+    </main>
 
 
     <!-- Footer -->
