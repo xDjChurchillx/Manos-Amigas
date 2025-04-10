@@ -78,7 +78,7 @@ body {
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
 .titulo-personalizado {
-    font-family: 'Special Gothic Expanded One', sans-serif;
+    font-family: 'Courier New', Courier, monospace;
     font-size: 2rem;
 }
 
