@@ -16,7 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
     });
-
+    const navbar = document.getElementById('mainNav');
+    if (!(window.scrollY > 100)) {
+        navbar.classList.toggle('scrolled');
+    }
     const path = window.location.pathname;
     const segmentos = path.split("/").filter(segmento => segmento !== ""); // Eliminar vacíos
     if (segmentos.length <= 1) {
