@@ -13,7 +13,7 @@
     }
 }
 
-.volunteer-header {
+.contact-header {
     color: white;
 }
 
@@ -37,7 +37,7 @@
         box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
 
-.btn-volunteer {
+.btn-contact {
     background-color: var(--primary);
     color: white;
     padding: 12px 30px;
@@ -45,7 +45,7 @@
     transition: all 0.3s;
 }
 
-    .btn-volunteer:hover {
+    .btn-contact:hover {
         background-color: var(--secondary);
         color: white;
     }
