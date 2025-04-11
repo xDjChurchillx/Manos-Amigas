@@ -1,5 +1,12 @@
 ﻿
 
+.location-box {
+    background-color: white;
+    border-radius: 10px;
+    padding: 20px;
+    border: 1px solid var(--accent);
+}
+
 @media (max-width: 768px) {
     .flex-column-md {
         flex-direction: column !important;
