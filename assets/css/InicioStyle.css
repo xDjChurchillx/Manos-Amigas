@@ -1,12 +1,4 @@
-﻿.hero-section-inicio {
-    background: linear-gradient(to right, var(--primary), var(--secondary));
-    min-height: 80vh;
-    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
-    padding-top: 80px;
-    color: white;
-}
-
-.navbar-custom-inicio {
+﻿.navbar-custom-inicio {
     transition: all 0.3s ease;
 }
 
@@ -22,6 +14,82 @@
 .vavbarItem {
     color: var(--accent);
 }
+.hero-section-inicio {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
+    min-height: 80vh;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+    padding-top: 80px;
+    color: white;
+}
+
+.btn-hero {
+    background-color: var(--accent);
+    color: var(--primary);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+}
+.gap {
+  height:20vh;
+
+}
+/* Sobre Nosotros Cards */
+.mission-card, .vision-card {
+    border-radius: 15px;
+    transition: all 0.4s ease;
+    background-color: white;
+    overflow: hidden;
+    position: relative;
+}
+
+    .mission-card:hover, .vision-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    .mission-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background-color: var(--accent);
+    }
+
+    .vision-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background-color: var(--secondary);
+    }
+
+.icon-container {
+    background-color: rgba(152, 210, 192, 0.2);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+.card-title {
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.card-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+
+
+
 .newsletter-section {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     padding: 5rem 0;
@@ -38,12 +106,4 @@
 .newsletter-form .btn-hero {
     border-radius: 0 50px 50px 0;
     padding: 0 2rem;
-}
-
-.btn-hero {
-    background-color: var(--accent);
-    color: var(--primary);
-    font-weight: 600;
-    transition: all 0.3s ease;
-    border: none;
 }
