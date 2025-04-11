@@ -67,30 +67,72 @@
 
             <!-- Formulario -->
             <div class="col-md-6 form-container">
-                <h4 class="section-title">Formulario de Contacto</h4>
-                <form>
-                    <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre Completo</label>
-                        <input type="text" class="form-control" id="nombre" placeholder="Tu nombre">
+                <div class="card shadow">
+                    <div class="volunteer-header bg1gradient card-header py-4">
+                        <p class="text-center mb-0">Contribuye con tu tiempo y habilidades</p>
                     </div>
-                    <div class="mb-3">
-                        <label for="correo" class="form-label">Correo Electrónico</label>
-                        <input type="email" class="form-control" id="correo" placeholder="tucorreo@example.com">
+
+                    <div class="card-body p-4">
+                        <form id="volunteerForm" action="assets/php/Voluntariado.php" method="POST">
+                            <!-- Sección 1: Información Personal -->
+                            <div class="mb-5">
+                                <h3 class="section-title">Información Personal</h3>
+
+                                <div class="form-card">
+                                    <div class="row g-3">
+                                        <div class="col-12">
+                                            <label for="Nombre" class="form-label">Nombre completo <span class="text-danger">*</span></label>
+                                            <input type="text" class="form-control" name="Nombre" id="Nombre" required>
+                                            <span id="errNombre" class="text-danger small"></span>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label for="Correo" class="form-label">Correo electrónico </label>
+                                            <input type="email" class="form-control" name="Correo" id="Correo">
+                                            <span id="errCorreo" class="text-danger small"></span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                            <!-- Sección 3: Propuesta de Voluntariado -->
+                            <div class="mb-4">
+                                <h3 class="section-title">Propuesta de Voluntariado</h3>
+
+                                <div class="form-card">
+                                    <div class="mb-3">
+                                        <div class="col-md-12">
+                                            <label for="Asunto" class="form-label">Asunto electrónico </label>
+                                            <input type="text" class="form-control" name="Asunto" id="Asunto">
+                                            <span id="errAsunto" class="text-danger small"></span>
+                                        </div>
+
+                                        <div class="mt-3">
+                                            <label for="Mensaje" class="form-label">Describe tu propuesta o habilidades específicas</label>
+                                            <textarea class="form-control" name="Mensaje" id="Mensaje" rows="3" placeholder="Ej: Soy músico y puedo ofrecer conciertos, tengo experiencia en fisioterapia, etc."></textarea>
+                                            <span id="errMensaje" class="text-danger small"></span>
+                                        </div>
+                                        <span id="errPropuesta" class="text-danger small"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                           
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-volunteer btn-lg">
+                                    <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 640 512"><path fill="currentColor" d="M488 192H336v56c0 39.7-32.3 72-72 72s-72-32.3-72-72V126.4l-64.9 39C107.8 176.9 96 197.8 96 220.2v47.3l-80 46.2C.7 322.5-4.6 342.1 4.3 357.4l80 138.6c8.8 15.3 28.4 20.5 43.7 11.7L231.4 448H368c35.3 0 64-28.7 64-64h16c17.7 0 32-14.3 32-32v-64h8c13.3 0 24-10.7 24-24v-48c0-13.3-10.7-24-24-24zm147.7-37.4L555.7 16C546.9.7 527.3-4.5 512 4.3L408.6 64H306.4c-12 0-23.7 3.4-33.9 9.7L239 94.6c-9.4 5.8-15 16.1-15 27.1V248c0 22.1 17.9 40 40 40s40-17.9 40-40v-88h184c30.9 0 56 25.1 56 56v28.5l80-46.2c15.3-8.9 20.5-28.4 11.7-43.7z" /></svg> Enviar Solicitud
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="mb-3">
-                        <label for="asunto" class="form-label">Asunto</label>
-                        <input type="text" class="form-control" id="asunto" placeholder="Motivo del mensaje">
+
+                    <div class="card-footer text-center py-3 bg-light">
+                        <small class="text-muted">
+                            <svg class="icono-small" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 1024 1024"><path fill="currentColor" d="m576 736l-32-.001v-286c0-.336-.096-.656-.096-1.008s.096-.655.096-.991c0-17.664-14.336-32-32-32h-64c-17.664 0-32 14.336-32 32s14.336 32 32 32h32v256h-32c-17.664 0-32 14.336-32 32s14.336 32 32 32h128c17.664 0 32-14.336 32-32s-14.336-32-32-32zm-64-384.001c35.344 0 64-28.656 64-64s-28.656-64-64-64s-64 28.656-64 64s28.656 64 64 64zm0-352c-282.768 0-512 229.232-512 512c0 282.784 229.232 512 512 512c282.784 0 512-229.216 512-512c0-282.768-229.216-512-512-512zm0 961.008c-247.024 0-448-201.984-448-449.01c0-247.024 200.976-448 448-448s448 200.977 448 448s-200.976 449.01-448 449.01z" /></svg> Revisaremos tu mensaje y nos pondremos en contacto contigo.
+                        </small>
                     </div>
-                    <div class="mb-3">
-                        <label for="mensaje" class="form-label">Mensaje</label>
-                        <textarea class="form-control" id="mensaje" rows="4" placeholder="Escribe tu mensaje..."></textarea>
-                    </div>
-                    <div class="text-end">
-                        <button type="submit" class="btn btn-primary px-4" style="background-color: var(--primary); border: none;">
-                            Enviar
-                        </button>
-                    </div>
-                </form>
+                </div>
             </div>
         </div>
     </main>
