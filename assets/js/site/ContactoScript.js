@@ -17,7 +17,7 @@
         errorTelefono.textContent = 'Por favor, indique un correo o telefono.';
         e.preventDefault();
     }
-    if (!Mensaje) {
+    if (!Mensaje.value == '') {
         errorMensaje.textContent = 'Por favor, digita el mensaje que desea enviar.';
         e.preventDefault();
     }
