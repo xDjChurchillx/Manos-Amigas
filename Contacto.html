@@ -47,8 +47,10 @@
     <main class="container my-5">
         <div class="d-flex flex-row flex-column-md gap-4">
             <!-- Ubicación -->
-            <div class="col-md-6 location-box">
-                <h4 class="section-title">Ubicación</h4>
+            <div class="card shadow">
+                <div class="volunteer-header bg1gradient card-header py-4">
+                    <p class="text-center mb-0">Ubicación</p>
+                </div>
                 <p><strong>Hogar de Ancianos Vida Plena</strong></p>
                 <p>123 Calle Central</p>
                 <p>San José, Costa Rica</p>
@@ -63,8 +65,7 @@
                             loading="lazy">
                     </iframe>
                 </div>
-            </div>
-
+            </div>  
             <!-- Formulario -->
             <div class="col-md-6 form-container">
                 <div class="card shadow">
@@ -90,12 +91,17 @@
                                             <input type="email" class="form-control" name="Correo" id="Correo">
                                             <span id="errCorreo" class="text-danger small"></span>
                                         </div>
+                                        <div class="col-md-12">
+                                            <label for="Telefono" class="form-label">Teléfono </label>
+                                            <input type="tel" class="form-control" name="Telefono" id="Telefono">
+                                            <span id="errTelefono" class="text-danger small"></span>
+                                        </div>
                                     </div>
 
                                 </div>
                             </div>
 
-                            <!-- Sección 3: mesnsaje -->
+                            <!-- Sección 3: mensajes -->
                             <div class="mb-4">
                                 <h3 class="section-title">Mensaje</h3>
 
@@ -112,13 +118,10 @@
                                             <textarea class="form-control" name="Mensaje" id="Mensaje" rows="3" placeholder="..."></textarea>
                                             <span id="errMensaje" class="text-danger small"></span>
                                         </div>
-                                        <span id="errPropuesta" class="text-danger small"></span>
+                                        <span id="errMensaje" class="text-danger small"></span>
                                     </div>
                                 </div>
                             </div>
-
-                           
-
                             <div class="d-grid">
                                 <button type="submit" class="btn btn-volunteer btn-lg">
 
@@ -135,8 +138,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
+            </div>
+</main>
 
 
     <!-- Footer -->
