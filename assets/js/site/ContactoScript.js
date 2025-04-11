@@ -1,5 +1,4 @@
 ﻿document.getElementById('contactForm').addEventListener('submit', function (e) {
-    const Nombre = document.getElementById('Nombre');
     const Correo = document.getElementById('Correo');
     const Telefono = document.getElementById('Telefono');
     const Mensaje = document.getElementById('Mensaje');
@@ -17,7 +16,7 @@
         errorTelefono.textContent = 'Por favor, indique un correo o telefono.';
         e.preventDefault();
     }
-    if (!Mensaje.value == '') {
+    if (Mensaje.value == '') {
         errorMensaje.textContent = 'Por favor, digita el mensaje que desea enviar.';
         e.preventDefault();
     }
