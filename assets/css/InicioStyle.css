@@ -88,12 +88,11 @@
     line-height: 1.6;
 }
 
-
-
+/*Estilos suscripciones*/
 .newsletter-section {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     padding: 5rem 0;
-    margin-top: 3rem;
+    font-family: 'Arial', sans-serif;
 }
 
 .newsletter-form .form-control {
@@ -106,7 +105,21 @@
 .newsletter-form .btn-hero {
     border-radius: 0 50px 50px 0;
     padding: 0 2rem;
+    background-color: var(--accent);
+    color: var(--primary);
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
 }
+
+    .newsletter-form .btn-hero:hover {
+        background-color: var(--light);
+        transform: translateY(-2px);
+    }
+
+
+
+/* Estilos para validación */
 .is-valid {
     border-color: var(--accent) !important;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%2398D2C0' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
@@ -127,4 +140,20 @@
 .btn-outline-light:hover {
     color: var(--primary) !important;
     background-color: var(--light);
+}
+
+.fade-in {
+    animation: fadeIn 0.5s ease-in;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

@@ -41,19 +41,19 @@ body {
     background: linear-gradient(135deg, var(--secondary), var(--accent));
 }
 .c1color {
-    color: #205781;
+    color: var(--primary);
 }
 
 .c2color {
-    color: #4F959D;
+    color: var(--secondary);
 }
 
 .c3color {
-    color: #98D2C0;
+    color: var(--accent);
 }
 
 .c4color {
-    color: #F6F8D5;
+    color: var(--light);
 }
 
 /*   ///////*/
