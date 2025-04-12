@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       exit();
   }
 
-  $stmt->bind_param('s',$Correo, );
+  $stmt->bind_param('s',$Correo);
 
   $stmt->execute();
   $result = $stmt->get_result();

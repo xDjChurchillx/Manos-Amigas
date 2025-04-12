@@ -1,30 +1,31 @@
 ﻿// JavaScript source code
 document.addEventListener("DOMContentLoaded", function () {
 
-    window.addEventListener('scroll', function () {
-        const navbar = document.getElementById('mainNav');
-        if (window.scrollY > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-    });
-    document.getElementById('navbutton').addEventListener('click', function () {
-        const navbar = document.getElementById('mainNav');
-        if (!(window.scrollY > 100)) {
-            navbar.classList.toggle('scrolled');
-        }
-
-    });
-    const navbar = document.getElementById('mainNav');
-    if (window.scrollY > 100) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
+  
     const path = window.location.pathname;
     const segmentos = path.split("/").filter(segmento => segmento !== ""); // Eliminar vacíos
     if (segmentos.length <= 1) {
+        window.addEventListener('scroll', function () {
+            const navbar = document.getElementById('mainNav');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        document.getElementById('navbutton').addEventListener('click', function () {
+            const navbar = document.getElementById('mainNav');
+            if (!(window.scrollY > 100)) {
+                navbar.classList.toggle('scrolled');
+            }
+
+        });
+        const navbar = document.getElementById('mainNav');
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        }
+
+
         fetch("assets/php/Visita.php", {
             method: 'GET',
             credentials: 'same-origin'
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Error al generar vista:', error);
             });
     } else {
-        console.log('No se generará vista');
+        console.log('No es pagina publica');
     }
 });
 function Alerta(mensaje) {
