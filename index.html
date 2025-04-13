@@ -105,13 +105,11 @@
                         <h2 class="mb-4 c4color">Mantente Informado</h2>
                         <p class="lead mb-5 c3color">Suscríbete a nuestro boletín para recibir las últimas noticias, actividades y eventos de Manos Amigas.</p>
 
-                        <form id="newsletterForm" class="newsletter-form">
+                        <form class="newsletter-form" id="subscriptionForm" action="assets/php/Suscripciones.php" method="POST">
                             <div class="row g-3 justify-content-center">
                                 <div class="col-md-8 position-relative">
                                     <div class="input-group">
-                                        <input type="email" id="emailInput" class="form-control form-control-lg"
-                                               placeholder="Tu correo electrónico" aria-label="Email" required
-                                               pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+                                        <input type="email" id="emailInput" class="form-control form-control-lg" placeholder="Tu correo electrónico" aria-label="Email" required >
                                         <button class="btn btn-hero" type="submit">Suscribirse</button>
                                     </div>
                                     <div id="unsubscribeGroup" class="mt-3 d-none fade-in">

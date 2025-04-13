@@ -7,27 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const unsubscribeBtn = document.getElementById('unsubscribeBtn');
     const successMessage = document.getElementById('successMessage');
 
-    // Validar email y mostrar opción para eliminar
-    newsletterForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        if (emailInput.checkValidity()) {
-            // Simular envío exitoso (en producción sería una llamada AJAX)
-            successMessage.classList.remove('d-none');
-            unsubscribeGroup.classList.remove('d-none');
-
-            // Ocultar mensaje después de 3 segundos
-            setTimeout(() => {
-                successMessage.classList.add('d-none');
-            }, 3000);
-
-            // Guardar en localStorage para simular suscripción
-            localStorage.setItem('subscribedEmail', emailInput.value);
-        } else {
-            emailInput.classList.add('is-invalid');
-        }
-    });
-
     // Botón para eliminar suscripción
     unsubscribeBtn.addEventListener('click', function () {
         // Simular eliminación de suscripción
@@ -47,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Comprobar si ya está suscrito al cargar la página
-    if (localStorage.getItem('subscribedEmail')) {
+    if (localStorage.getItem('correoSuscripcion ')) {
         emailInput.value = localStorage.getItem('subscribedEmail');
         unsubscribeGroup.classList.remove('d-none');
     }
@@ -61,42 +40,45 @@ document.addEventListener('DOMContentLoaded', function () {
             this.classList.remove('is-valid');
         }
     });
+
+    document.getElementById('subscriptionForm').addEventListener('submit', function (e) {
+
+        const Correo = document.getElementById('Correo');
+
+        const errorCorreo = document.getElementById('errCorreo');
+
+
+        errorCorreo.textContent = '';
+
+
+        if (Correo.value == '') {
+            errorCorreo.textContent = 'Por favor, indique un correo.';
+            e.preventDefault();
+        }
+    });
+
+    // Obtener parámetros de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const error = urlParams.get('error');
+    const url = new URL(window.location.href);
+    url.searchParams.delete('error');
+    window.history.replaceState({}, document.title, url);
+    if (error) {
+        switch (error) {
+            case '0':
+                localStorage.setItem('correoSuscripcion', 'value');
+                break;
+            case '1':
+                Alerta('Los campos obligatorios no fueron completados');
+                break;
+            case '2':
+                Alerta('Error en servidor');
+                break;
+            default:
+
+        }
+    }
+
+
 });
 
-document.getElementById('subscriptionForm').addEventListener('submit', function (e) {
-   
-    const Correo = document.getElementById('Correo');
-   
-    const errorCorreo = document.getElementById('errCorreo');
- 
-
-    errorCorreo.textContent = '';
-   
-
-    if (Correo.value == '') {
-        errorCorreo.textContent = 'Por favor, indique un correo.';      
-        e.preventDefault();
-    }
- });
-
-// Obtener parámetros de la URL
-const urlParams = new URLSearchParams(window.location.search);
-const error = urlParams.get('error');
-const url = new URL(window.location.href);
-url.searchParams.delete('error');
-window.history.replaceState({}, document.title, url);
-if (error) {
-    switch (error) {
-        case '0':
-
-            break;
-        case '1':
-            Alerta('Los campos obligatorios no fueron completados');
-            break;
-        case '2':
-            Alerta('Error en servidor');
-            break;
-        default:
-
-    }
-}
