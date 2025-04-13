@@ -26,14 +26,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Comprobar si ya está suscrito al cargar la página
-    if (localStorage.getItem('correoSuscripcion ')) {
+    if (localStorage.getItem('correoSuscripcion')) {
         emailInput.value = localStorage.getItem('subscribedEmail');
         unsubscribeGroup.classList.remove('d-none');
     }
 
     // Validación en tiempo real
     emailInput.addEventListener('input', function () {
-        if (this.checkValidity()) {
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (regex.test(this.value) ) {
             this.classList.remove('is-invalid');
             this.classList.add('is-valid');
         } else {
