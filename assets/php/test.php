@@ -43,7 +43,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail->Port       =  '465';   
     // Configura el remitente y el destinatario
     $mail->setFrom($mail1 , 'Suscripcion');
-    $mail->addAddress( html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8'), '');
+    $mail->addAddress(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8'), '');
 
     // Configura el asunto y el cuerpo del correo
     $mail->Subject = 'Suscripcion';
@@ -303,7 +303,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Envía el correo
         if ($mail->send()) {
-            echo("9");
+            echo("9".html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8'));
             exit();
         } else {
             echo("8"); // Fallo inesperado
