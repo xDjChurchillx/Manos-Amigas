@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Obtener parámetros de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const error = urlParams.get('error');
-    const correourl = urlParams.get('correo');
+    const correourl = decodeURIComponent(urlParams.get('correo'));
     const url = new URL(window.location.href);
    // url.searchParams.delete('error');
    //  window.history.replaceState({}, document.title, url);
