@@ -3,6 +3,7 @@
 document.addEventListener('DOMContentLoaded', function () {
     const frm = document.getElementById('subscriptionForm');
     const emailInput = document.getElementById('Correo');
+    const btnSubmit = document.getElementById('btnSubmit');
     const unsubscribeGroup = document.getElementById('unsubscribeGroup');
     const unsubscribeBtn = document.getElementById('unsubscribeBtn');
 
@@ -14,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!regex.test(Correo)) {
             errorCorreo.textContent = 'Por favor, indique un correo.';
             e.preventDefault();
-        }
+        } 
     });
     // Botón para eliminar suscripción
     unsubscribeBtn.addEventListener('click', function () {
@@ -47,7 +48,14 @@ document.addEventListener('DOMContentLoaded', function () {
     if (error) {
         switch (error) {
             case '0':
-                localStorage.setItem('correoSuscripcion', 'value');
+                var suscripcion = {
+                    correo: "Josué",
+                    verificado: true,
+                    fecha: new Date()
+                };
+
+                // Guardar en localStorage
+                localStorage.setItem("correoSuscripcion", JSON.stringify(suscripcion));
                 break;
             case '1':
                 Alerta('Los campos obligatorios no fueron completados');
@@ -61,8 +69,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     // Comprobar si ya está suscrito al cargar la página
     if (localStorage.getItem('correoSuscripcion')) {
-        emailInput.value = localStorage.getItem('subscribedEmail');
-        unsubscribeGroup.classList.remove('d-none');
+        var suscripcion = JSON.parse(localStorage.getItem("correoSuscripcion"));
+        emailInput.value = suscripcion.correo;
+        if (suscripcion.verificado) {
+           unsubscribeGroup.classList.remove('d-none');
+        } else {
+            btnSubmit.disabled = true;
+        }
     }
 
 
