@@ -47,13 +47,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                $mail->isSMTP();
                                 $mail->Host       = 'smtp.gmail.com';
                                 $mail->SMTPAuth   = true;
-                                $mail->Username   = 'ttest515151@gmail.com';       // Tu correo de Gmail
-                                $mail->Password   = 'gvxfxkaokhqiqwmm'; // Tu contraseña de Gmail o contraseña de aplicación
+                                $mail->Username   = $mail1; 
+                                $mail->Password   = $Pmail1;
                                 $mail->SMTPSecure = 'tls';                      // También podés usar 'ssl'
                                 $mail->Port       = 587;   
                                 // Configura el remitente y el destinatario
                                 $mail->setFrom($mail1 , 'Account Recovery');
-                                $mail->addAddress($Correo, '');
+                                $mail->addAddress(html_entity_decode($Correo), '');
 
                                 // Configura el asunto y el cuerpo del correo
                                 $mail->Subject = 'Account Recovery';
@@ -189,9 +189,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } elseif (array_key_exists('Error', $row)) {
         // Analizar el tipo de error
         if ($row['Error'] === 'El correo ya existe') {
-            header("Location: /index.html?error=2&correo=".$Correo); // Ya verificado
+            header("Location: /index.html?error=2&correo=".html_entity_decode($Correo)); // Ya verificado
         } elseif ($row['Error'] === 'Revise su correo electrónico para la verificación') {
-            header("Location: /index.html?error=3&correo=".$Correo); // Aún no verificado
+            header("Location: /index.html?error=3&correo=".html_entity_decode($Correo)); // Aún no verificado
         } else {
             header("Location: /index.html?error=5"); // Otro error
         }
