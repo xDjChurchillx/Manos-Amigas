@@ -3,16 +3,15 @@
 document.addEventListener('DOMContentLoaded', function () {
     const frm = document.getElementById('subscriptionForm');
     const emailInput = document.getElementById('Correo');
+    const errorCorreo = document.getElementById('errCorreo');
     const btnSubmit = document.getElementById('btnSubmit');
     const unsubscribeGroup = document.getElementById('unsubscribeGroup');
     const unsubscribeBtn = document.getElementById('unsubscribeBtn');
 
     frm.addEventListener('submit', function (e) {
-
-        const Correo = document.getElementById('Correo');
         const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         errorCorreo.textContent = '';
-        if (!regex.test(Correo)) {
+        if (!regex.test(emailInput.value)) {
             errorCorreo.textContent = 'Por favor, indique un correo.';
             e.preventDefault();
         } 
@@ -29,6 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Validación en tiempo real
     emailInput.addEventListener('input', function () {
+        var suscripcion = JSON.parse(localStorage.getItem("correoSuscripcion"));
         const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
         if (regex.test(this.value) ) {
             this.classList.remove('is-invalid');
@@ -36,12 +36,16 @@ document.addEventListener('DOMContentLoaded', function () {
         } else {
             this.classList.remove('is-valid');
         }
+        if (this.value == suscripcion.correo && suscripcion.verificado == true) {
+            unsubscribeGroup.classList.remove('d-none');
+        }
     });
 
 
     // Obtener parámetros de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const error = urlParams.get('error');
+    const correourl = urlParams.get('correo');
     const url = new URL(window.location.href);
     url.searchParams.delete('error');
     window.history.replaceState({}, document.title, url);
@@ -49,8 +53,8 @@ document.addEventListener('DOMContentLoaded', function () {
         switch (error) {
             case '0':
                 var suscripcion = {
-                    correo: "Josué",
-                    verificado: true,
+                    correo: correourl,
+                    verificado: false,
                     fecha: new Date()
                 };
 
@@ -58,10 +62,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 localStorage.setItem("correoSuscripcion", JSON.stringify(suscripcion));
                 break;
             case '1':
-                Alerta('Los campos obligatorios no fueron completados');
+                Alerta('Correo no Valido');
                 break;
             case '2':
-                Alerta('Error en servidor');
+                var suscripcion = {
+                    correo: correourl,
+                    verificado: true,
+                    fecha: new Date()
+                };
+                localStorage.setItem("correoSuscripcion", JSON.stringify(suscripcion));
+                break;
+            case '3':
+                var suscripcion = {
+                    correo: correourl,
+                    verificado: false,
+                    fecha: new Date()
+                };
+                localStorage.setItem("correoSuscripcion", JSON.stringify(suscripcion));
+                break;
+            case '4':
+                Alerta('Error en Base de datos');
+                break;
+            case '5':
+                Alerta('Error inesperado');
                 break;
             default:
 
@@ -74,7 +97,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (suscripcion.verificado) {
            unsubscribeGroup.classList.remove('d-none');
         } else {
-            btnSubmit.disabled = true;
+            errorCorreo.textContent = 'Revisa tu correo,aun no ha sido verficado';
         }
     }
 
