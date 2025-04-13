@@ -12,20 +12,12 @@ require 'PHPMailer/SMTP.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $Correo = isset($_POST['Correo']) ? $_POST['Correo'] : '';
-    $regex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
-    if (!preg_match($regex, $Correo)) {
-        header("Location: /index.html?error=1"); // Error correo no valido
-         exit();
-    }  
+    $regex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";    
     $Correo = htmlentities($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
  
  
       $stmt = $conn->prepare('CALL sp_CrearSuscripcion(?)');
-      if (!$stmt) {
-          header("Location: /index.html?error=4"); // Error en BD
-          exit();
-      }
-
+     
       $stmt->bind_param('s',$Correo);
 
       $stmt->execute();
@@ -177,10 +169,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Envía el correo
         if ($mail->send()) {
-            header("Location: /index.html?error=0");
+            echo("1");
             exit();
         } else {
-            header("Location: /index.html?error=5"); // Fallo inesperado
+            echo("2"); // Fallo inesperado
             exit();
         }           
 
@@ -188,7 +180,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
        
     } elseif (array_key_exists('Error', $row)) {
         // Analizar el tipo de error
-     header("Location: /index.html?error=2&correo=".html_entity_decode($Correo)); // Ya verificado        
+     echo("3". urlencode( html_entity_decode($Correo))); // Ya verificado        
      exit();
     }elseif (array_key_exists('Mensaje', $row)) {
        
@@ -325,15 +317,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Envía el correo
         if ($mail->send()) {
-            header("Location: /index.html?error=3");
+            echo("9");
             exit();
         } else {
-            header("Location: /index.html?error=5"); // Fallo inesperado
+            echo("8"); // Fallo inesperado
             exit();
         }           
     }
     else {
-        header("Location: /index.html?error=5"); // Fallo inesperado
+        echo("7"); // Fallo inesperado
         exit();
     }
       $stmt->close();
