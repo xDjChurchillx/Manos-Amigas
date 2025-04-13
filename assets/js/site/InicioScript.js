@@ -47,8 +47,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const error = urlParams.get('error');
     const correourl = urlParams.get('correo');
     const url = new URL(window.location.href);
-    url.searchParams.delete('error');
-    window.history.replaceState({}, document.title, url);
+   // url.searchParams.delete('error');
+  //  window.history.replaceState({}, document.title, url);
     if (error) {
         switch (error) {
             case '0':
