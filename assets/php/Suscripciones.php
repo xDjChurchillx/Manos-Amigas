@@ -2,7 +2,7 @@
     // Importa la clase PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-  require '../../../Private/Credentials/DataBase/connection.php';
+require '../../../Private/Credentials/DataBase/connection.php';
 require '../../../Private/Credentials/mailCred.php';
 require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
@@ -12,7 +12,7 @@ require 'PHPMailer/SMTP.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     $Correo = isset($_POST['Correo']) ? $_POST['Correo'] : '';
-    $Accion = isset($_POST['Accion']) ? $_POST['Accion'] : '';
+    $regex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
     if (!preg_match($regex, $Correo)) {
         header("Location: /index.html?error=1"); // Error correo no valido
          exit();
