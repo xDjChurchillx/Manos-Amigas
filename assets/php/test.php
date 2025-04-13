@@ -24,32 +24,33 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       $result = $stmt->get_result();
       $row = $result->fetch_assoc();
 
+      // Instancia un nuevo objeto PHPMailer
     $mail = new PHPMailer(true);
+      // Configura el servidor SMTP
+        //    $mail->isSMTP();
+        //    $mail->Host       = 'smtp.hostinger.com';  // Cambia esto por tu servidor SMTP
+        //    $mail->SMTPAuth   = true;
+        //    $mail->Username   = $mail1; // Cambia esto por tu nombre de usuario SMTP
+        //    $mail->Password   = $Pmail1; // Cambia esto por tu contraseña SMTP
+        //    $mail->SMTPSecure = 'tls';
+        //    $mail->Port       = 587;
+    $mail->isSMTP();
+    $mail->Host       = 'smtp.gmail.com';
+    $mail->SMTPAuth   = true;
+    $mail->Username   = $mail1; 
+    $mail->Password   = $Pmail1;
+    $mail->SMTPSecure = 'ssl';                      // También podés usar 'ssl'
+    $mail->Port       =  '465';   
+    // Configura el remitente y el destinatario
+    $mail->setFrom($mail1 , 'Suscripcion');
+    $mail->addAddress( html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8'), '');
+
+    // Configura el asunto y el cuerpo del correo
+    $mail->Subject = 'Suscripcion';
+    $mail->isHTML(true);  
     if (array_key_exists('Success', $row)) {
         // Éxito: se generó el token
-           // Instancia un nuevo objeto PHPMailer
-          // Configura el servidor SMTP
-                            //    $mail->isSMTP();
-                            //    $mail->Host       = 'smtp.hostinger.com';  // Cambia esto por tu servidor SMTP
-                            //    $mail->SMTPAuth   = true;
-                            //    $mail->Username   = $mail1; // Cambia esto por tu nombre de usuario SMTP
-                            //    $mail->Password   = $Pmail1; // Cambia esto por tu contraseña SMTP
-                            //    $mail->SMTPSecure = 'tls';
-                            //    $mail->Port       = 587;
-                               $mail->isSMTP();
-                                $mail->Host       = 'smtp.gmail.com';
-                                $mail->SMTPAuth   = true;
-                                $mail->Username   = $mail1; 
-                                $mail->Password   = $Pmail1;
-                                $mail->SMTPSecure = 'tls';                      // También podés usar 'ssl'
-                                $mail->Port       = 587;   
-                                // Configura el remitente y el destinatario
-                                $mail->setFrom($mail1 , 'Account Recovery');
-                                $mail->addAddress( html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8'), '');
-
-                                // Configura el asunto y el cuerpo del correo
-                                $mail->Subject = 'Account Recovery';
-                                $mail->isHTML(true);  
+         
                                $mail->Body = '
 <html>
 <head>
@@ -179,26 +180,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
        
     } elseif (array_key_exists('Error', $row)) {
-        // Analizar el tipo de error
+        
      echo("3". urlencode( html_entity_decode($Correo))); // Ya verificado        
      exit();
     }elseif (array_key_exists('Mensaje', $row)) {
-       
-          $mail->isSMTP();
-                                $mail->Host       = 'smtp.gmail.com';
-                                $mail->SMTPAuth   = true;
-                                $mail->Username   = $mail1; 
-                                $mail->Password   = $Pmail1;
-                                $mail->SMTPSecure = 'tls';                      // También podés usar 'ssl'
-                                $mail->Port       = 587;   
-                                // Configura el remitente y el destinatario
-                                $mail->setFrom($mail1 , 'Account Recovery');
-                                $mail->addAddress( html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8'), '');
-
-                                // Configura el asunto y el cuerpo del correo
-                                $mail->Subject = 'Account Recovery';
-                                $mail->isHTML(true);  
-                               $mail->Body = '
+       $mail->Body = '
 <html>
 <head>
     <style type="text/css">
