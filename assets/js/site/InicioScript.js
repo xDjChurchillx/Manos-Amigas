@@ -48,7 +48,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const correourl = urlParams.get('correo');
     const url = new URL(window.location.href);
    // url.searchParams.delete('error');
-  //  window.history.replaceState({}, document.title, url);
+   //  window.history.replaceState({}, document.title, url);
+    var newSus = false;
     if (error) {
         switch (error) {
             case '0':
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Guardar en localStorage
                 localStorage.setItem("correoSuscripcion", JSON.stringify(suscripcion));
+                newSus = true;
                 break;
             case '1':
                 Alerta('Correo no Valido');
@@ -97,7 +99,11 @@ document.addEventListener('DOMContentLoaded', function () {
         if (suscripcion.verificado) {
            unsubscribeGroup.classList.remove('d-none');
         } else {
-            errorCorreo.textContent = 'Revisa tu correo,aun no ha sido verficado';
+            if (newSus) {
+
+            } else {
+              errorCorreo.textContent = 'Revisa tu correo,aun no ha sido verficado';
+            }
         }
     }
 
