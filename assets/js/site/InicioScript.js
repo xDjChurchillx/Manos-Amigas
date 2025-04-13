@@ -1,35 +1,30 @@
 ﻿// JavaScript source code
 
 document.addEventListener('DOMContentLoaded', function () {
-    const newsletterForm = document.getElementById('newsletterForm');
-    const emailInput = document.getElementById('emailInput');
+    const frm = document.getElementById('subscriptionForm');
+    const emailInput = document.getElementById('Correo');
     const unsubscribeGroup = document.getElementById('unsubscribeGroup');
     const unsubscribeBtn = document.getElementById('unsubscribeBtn');
-    const successMessage = document.getElementById('successMessage');
 
+    frm.addEventListener('submit', function (e) {
+
+        const Correo = document.getElementById('Correo');
+        const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        errorCorreo.textContent = '';
+        if (!regex.test(Correo)) {
+            errorCorreo.textContent = 'Por favor, indique un correo.';
+            e.preventDefault();
+        }
+    });
     // Botón para eliminar suscripción
     unsubscribeBtn.addEventListener('click', function () {
         // Simular eliminación de suscripción
-        localStorage.removeItem('subscribedEmail');
-        emailInput.value = '';
+        localStorage.removeItem('correoSuscripcion');
         unsubscribeGroup.classList.add('d-none');
 
-        // Mostrar feedback
-        const feedback = document.createElement('div');
-        feedback.className = 'text-success small mt-2';
-        feedback.textContent = 'Suscripción eliminada correctamente';
-        unsubscribeGroup.parentNode.insertBefore(feedback, unsubscribeGroup);
-
-        setTimeout(() => {
-            feedback.remove();
-        }, 3000);
+        emailInput.value = '';        
     });
 
-    // Comprobar si ya está suscrito al cargar la página
-    if (localStorage.getItem('correoSuscripcion')) {
-        emailInput.value = localStorage.getItem('subscribedEmail');
-        unsubscribeGroup.classList.remove('d-none');
-    }
 
     // Validación en tiempo real
     emailInput.addEventListener('input', function () {
@@ -42,21 +37,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    document.getElementById('subscriptionForm').addEventListener('submit', function (e) {
-
-        const Correo = document.getElementById('Correo');
-
-        const errorCorreo = document.getElementById('errCorreo');
-
-
-        errorCorreo.textContent = '';
-
-
-        if (Correo.value == '') {
-            errorCorreo.textContent = 'Por favor, indique un correo.';
-            e.preventDefault();
-        }
-    });
 
     // Obtener parámetros de la URL
     const urlParams = new URLSearchParams(window.location.search);
@@ -78,6 +58,11 @@ document.addEventListener('DOMContentLoaded', function () {
             default:
 
         }
+    }
+    // Comprobar si ya está suscrito al cargar la página
+    if (localStorage.getItem('correoSuscripcion')) {
+        emailInput.value = localStorage.getItem('subscribedEmail');
+        unsubscribeGroup.classList.remove('d-none');
     }
 
 
