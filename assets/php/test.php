@@ -39,8 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $mail->SMTPAuth   = true;
     $mail->Username   = $mail1; 
     $mail->Password   = $Pmail1;
-    $mail->SMTPSecure = 'ssl';                      // También podés usar 'ssl'
-    $mail->Port       =  '465';   
+    $mail->SMTPSecure = 'tls';                      // También podés usar 'ssl'
+    $mail->Port       =  587;   
     // Configura el remitente y el destinatario
     $mail->setFrom($mail1 , 'Suscripcion');
     $mail->addAddress(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8'), '');
