@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 $mail->Port       = 587;   
                                 // Configura el remitente y el destinatario
                                 $mail->setFrom($mail1 , 'Account Recovery');
-                                $mail->addAddress($correo, '');
+                                $mail->addAddress($Correo, '');
 
                                 // Configura el asunto y el cuerpo del correo
                                 $mail->Subject = 'Account Recovery';
