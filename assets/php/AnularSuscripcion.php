@@ -109,27 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             color: #205781;
             font-size: 12px;
         }
-        
-        .anular-btn {
-            display: block;
-            width: 60%;
-            margin: 40px auto;
-            padding: 15px;
-            background: red;
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(79, 149, 157, 0.3);
-        }
-        
-        .anular-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(79, 149, 157, 0.4);
-        }
-        
+            
         .logo {
             text-align: center;
             margin-bottom: 20px;
@@ -153,8 +133,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             <p>Este correo es para anular la suscripcion a noticias y actividades de Centro Diurno Manos Amigas</p>
                     
-            <a href="'.$dominio.'/assets/php/AnularSuscripcion.php?correo='.urlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Success']).'" class="anular-btn">Anular Suscripcion</a>
-            
+            <a href="'.$dominio.'/assets/php/AnularSuscripcion.php?correo='.urlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Success']).'" 
+               class="anular-btn" 
+               style="display: block; width: 60%; margin: 40px auto; padding: 15px; background-color: #ff0000 !important; color: white !important; text-align: center; text-decoration: none; font-weight: bold; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(79, 149, 157, 0.3);">
+               Anular Suscripcion
+            </a>
             <p>Si no solicitaste anular la suscripcion y dejar de recibir noticias sobre nosotros, puedes ignorar este mensaje.</p>
             
             <p>Con gratitud,<br>
