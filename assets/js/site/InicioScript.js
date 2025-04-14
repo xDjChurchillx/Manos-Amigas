@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const frm = document.getElementById('subscriptionForm');
     const emailInput = document.getElementById('Correo');
     const errorCorreo = document.getElementById('errCorreo');
-    const btnSubmit = document.getElementById('btnSubmit');
     const unsubscribeGroup = document.getElementById('unsubscribeGroup');
     const unsubscribeBtn = document.getElementById('unsubscribeBtn');
 
@@ -19,6 +18,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Botón para eliminar suscripción
     unsubscribeBtn.addEventListener('click', function () {
         // Simular eliminación de suscripción
+
+
+
+
         localStorage.removeItem('correoSuscripcion');
         unsubscribeGroup.classList.add('d-none');
 
@@ -55,6 +58,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalConf = new bootstrap.Modal(modalElement);
     const modalElement2 = document.getElementById('activacionModal');
     const modalAct = new bootstrap.Modal(modalElement2);
+    const modalElement3 = document.getElementById('anulacionModal');
+    const modalAnul = new bootstrap.Modal(modalElement3);
     if (error) {
         switch (error) {
             case '0':
@@ -125,6 +130,22 @@ document.addEventListener('DOMContentLoaded', function () {
                     behavior: 'smooth' // Para un desplazamiento suave
                 });
                 break;
+            case '9':
+                modalAnul.show();
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth' // Para un desplazamiento suave
+                });
+                break;
+            case '10':
+               
+                break;
+            case '11':
+               
+                break;
+            case '12':
+              
+                break;
             default:
 
         }
@@ -139,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (newSus) {
 
             } else {
-              errorCorreo.textContent = 'Revisa tu correo,aun no ha sido verficado';
+              errorCorreo.textContent = 'Revisa tu correo o el spam,aun no ha sido verficado';
             }
         }
     }
@@ -147,12 +168,14 @@ document.addEventListener('DOMContentLoaded', function () {
     let seconds = 10;
     const countdownElement = document.getElementById('countdown');
     const countdownElement2 = document.getElementById('countdown-activacion');
+    const countdownElement3 = document.getElementById('countdown-anulacion');
     const countdownInterval = setInterval(updateCountdown, 1000);
 
     function updateCountdown() {
         seconds--;
         countdownElement.textContent = `Cerrando en ${seconds} segundo${seconds !== 1 ? 's' : ''}...`;
         countdownElement2.textContent = `Cerrando en ${seconds} segundo${seconds !== 1 ? 's' : ''}...`;
+        countdownElement3.textContent = `Cerrando en ${seconds} segundo${seconds !== 1 ? 's' : ''}...`;
         if (seconds <= 0) {
             clearInterval(countdownInterval);
             closeModal();
@@ -162,6 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function closeModal() {
         modalConf.hide();
         modalAct.hide();
+        modalAnul.hide();
     }
 
     // Cerrar manualmente

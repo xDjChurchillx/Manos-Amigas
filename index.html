@@ -153,7 +153,7 @@
                             <p>Ahora recibirás en tu correo electrónico todas las noticias importantes, actividades y eventos relevantes de nuestro centro.</p>
                             <p><small>Te mantendremos informado sobre todo lo que necesitas saber.</small></p>
                             <button type="button" class="btn btn-suscripcion" data-bs-dismiss="modal">
-                               Entendido
+                                Entendido
                             </button>
                             <div class="countdown" id="countdown">Cerrando en 10 segundos...</div>
                         </div>
@@ -177,9 +177,33 @@
                             <p>Te hemos enviado un correo con un enlace para activar tu suscripción.</p>
                             <p><small>Revisa tu bandeja de entrada o carpeta de spam y haz clic en el enlace para completar el proceso.</small></p>
                             <button type="button" class="btn btn-suscripcion" data-bs-dismiss="modal">
-                                 Entendido
+                                Entendido
                             </button>
                             <div class="countdown" id="countdown-activacion">Este mensaje se cerrará en 10 segundos...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal de Anulación -->
+            <div class="modal fade modal-anulacion" id="anulacionModal" tabindex="-1" aria-labelledby="anulacionModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content anulacion-content">
+                        <div class="modal-header anulacion-header">
+                            <h5 class="modal-title" id="anulacionModalLabel">Confirmación enviada</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <svg class="anulacion-icon" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="#dc3545">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
+                             10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" />
+                            </svg>
+                            <h4 class="anulacion-title">Anulación solicitada</h4>
+                            <p class="anulacion-text">Hemos enviado un correo con un enlace para confirmar la anulación de tu cuenta.</p>
+                            <p><small class="text-muted">Revisa tu bandeja de entrada o la carpeta de spam para completar el proceso.</small></p>
+                            <button type="button" class="btn btn-anulacion mt-3" data-bs-dismiss="modal">
+                                Entendido
+                            </button>
+                            <div class="countdown mt-2" id="countdown-anulacion">Este mensaje se cerrará en 10 segundos...</div>
                         </div>
                     </div>
                 </div>
