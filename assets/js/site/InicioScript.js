@@ -49,6 +49,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const modalAct = new bootstrap.Modal(modalElement2);
     const modalElement3 = document.getElementById('anulacionModal');
     const modalAnul = new bootstrap.Modal(modalElement3);
+    const modalElement4 = document.getElementById('anulacionExitosaModal');
+    const modalExitpAnul = new bootstrap.Modal(modalElement4);
     if (error) {
         switch (error) {
             case '0':
@@ -128,6 +130,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 break;
             case '10':
                 localStorage.removeItem('correoSuscripcion');
+                modalExitpAnul.show();
                 window.scrollTo({
                     top: document.body.scrollHeight,
                     behavior: 'smooth' // Para un desplazamiento suave
@@ -163,6 +166,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const countdownElement = document.getElementById('countdown');
     const countdownElement2 = document.getElementById('countdown-activacion');
     const countdownElement3 = document.getElementById('countdown-anulacion');
+    const countdownElement4 = document.getElementById('countdown-anulacion-exitosa');
     const countdownInterval = setInterval(updateCountdown, 1000);
 
     function updateCountdown() {
@@ -170,6 +174,7 @@ document.addEventListener('DOMContentLoaded', function () {
         countdownElement.textContent = `Cerrando en ${seconds} segundo${seconds !== 1 ? 's' : ''}...`;
         countdownElement2.textContent = `Cerrando en ${seconds} segundo${seconds !== 1 ? 's' : ''}...`;
         countdownElement3.textContent = `Cerrando en ${seconds} segundo${seconds !== 1 ? 's' : ''}...`;
+        countdownElement4.textContent = `Cerrando en ${seconds} segundo${seconds !== 1 ? 's' : ''}...`;
         if (seconds <= 0) {
             clearInterval(countdownInterval);
             closeModal();
@@ -180,6 +185,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modalConf.hide();
         modalAct.hide();
         modalAnul.hide();
+        modalExitpAnul.hide();
     }
 
     // Cerrar manualmente

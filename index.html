@@ -211,6 +211,30 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal de Anulación Exitosa -->
+            <div class="modal fade modal-anulacion" id="anulacionExitosaModal" tabindex="-1" aria-labelledby="anulacionExitosaModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content anulacion-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="anulacionExitosaModalLabel">Anulación completada</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            <svg class="anulacion-icon" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 24 24" fill="#28a745">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                            </svg>
+                            <h4 class="anulacion-title">¡Suscripción anulada con éxito!</h4>
+                            <p class="anulacion-text">Has confirmado correctamente la anulación de tu suscripción.</p>
+                            <p class="anulacion-text">No recibirás más correos de nuestra parte.</p>
+                            <p><small class="text-muted">Si cambias de opinión, siempre puedes volver a suscribirte.</small></p>
+                            <button type="button" class="btn btn-success mt-3" data-bs-dismiss="modal">
+                                Entendido
+                            </button>
+                            <div class="countdown mt-2" id="countdown-anulacion-exitosa">Este mensaje se cerrará en 10 segundos...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 
