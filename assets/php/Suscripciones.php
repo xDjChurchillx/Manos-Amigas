@@ -183,7 +183,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }  
     } elseif (array_key_exists('Error', $row)) {
          // Correo ya existe y esta verificado
-         header("Location: /index.html?error=2&correo=".rawurlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8'))); // Ya verificado        
+         header("Location: /index.html?error=8&correo=".rawurlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8'))); // Ya verificado        
          exit();
     }elseif (array_key_exists('Mensaje', $row)) {  
         // Correo ya existe pero no se a verificado

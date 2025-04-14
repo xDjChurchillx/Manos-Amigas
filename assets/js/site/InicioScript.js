@@ -43,13 +43,15 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     // Obtener parámetros de la URL
+    var newSus = false;
     const urlParams = new URLSearchParams(window.location.search);
     const error = urlParams.get('error');
     const correourl = decodeURIComponent(urlParams.get('correo'));
     const url = new URL(window.location.href);
    // url.searchParams.delete('error');
    //  window.history.replaceState({}, document.title, url);
-    var newSus = false;
+    // Inicializar el modal
+    var modalConf = new bootstrap.Modal(document.getElementById('suscripcionModal'));
     if (error) {
         switch (error) {
             case '0':
@@ -73,6 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     fecha: new Date()
                 };
                 localStorage.setItem("correoSuscripcion", JSON.stringify(suscripcion));
+                modalConf.show();
                 break;
             case '3':
                 var suscripcion = {
@@ -94,6 +97,14 @@ document.addEventListener('DOMContentLoaded', function () {
             case '7':
                 Alerta('Token o Correo Invalido');
                 break;
+            case '8':
+                var suscripcion = {
+                    correo: correourl,
+                    verificado: true,
+                    fecha: new Date()
+                };
+                localStorage.setItem("correoSuscripcion", JSON.stringify(suscripcion));
+                break;
             default:
 
         }
@@ -112,7 +123,36 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         }
     }
+    // Configuración del cierre automático
+    let seconds = 5;
+    const countdownElement = document.getElementById('countdown');
+    const countdownInterval = setInterval(updateCountdown, 1000);
 
+    function updateCountdown() {
+        seconds--;
+        countdownElement.textContent = `Cerrando en ${seconds} segundo${seconds !== 1 ? 's' : ''}...`;
+
+        if (seconds <= 0) {
+            clearInterval(countdownInterval);
+            closeModal();
+        }
+    }
+
+    function closeModal() {
+        const modal = bootstrap.Modal.getInstance(document.getElementById('suscripcionModal'));
+        if (modal) {
+            modal.hide();
+            document.querySelector('.modal-backdrop').remove();
+        }
+    }
+
+    // Cerrar manualmente
+    document.querySelector('.btn-suscripcion').addEventListener('click', function () {
+        clearInterval(countdownInterval);
+        closeModal();
+    });
+
+  
 
 });
 
