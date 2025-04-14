@@ -169,7 +169,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </html>
 ';
         if ($mail->send()) {
-            header("Location: /index.html?error=9";
+            header("Location: /index.html?error=9");
             exit();
         } else {
             header("Location: /index.html?error=5"); // Fallo inesperado
