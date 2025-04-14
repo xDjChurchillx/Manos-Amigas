@@ -80,6 +80,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 };
                 localStorage.setItem("correoSuscripcion", JSON.stringify(suscripcion));
                 modalConf.show();
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth' // Para un desplazamiento suave
+                });
                 break;
             case '3':
                 var suscripcion = {
@@ -88,6 +92,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     fecha: new Date()
                 };
                 localStorage.setItem("correoSuscripcion", JSON.stringify(suscripcion));
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth' // Para un desplazamiento suave
+                });
                 break;
             case '4':
                 Alerta('Error en Base de datos');
@@ -108,6 +116,10 @@ document.addEventListener('DOMContentLoaded', function () {
                     fecha: new Date()
                 };
                 localStorage.setItem("correoSuscripcion", JSON.stringify(suscripcion));
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth' // Para un desplazamiento suave
+                });
                 break;
             default:
 
