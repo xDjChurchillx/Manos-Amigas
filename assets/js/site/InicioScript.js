@@ -51,7 +51,8 @@ document.addEventListener('DOMContentLoaded', function () {
    // url.searchParams.delete('error');
    //  window.history.replaceState({}, document.title, url);
     // Inicializar el modal
-    var modalConf = new bootstrap.Modal(document.getElementById('suscripcionModal'));
+    const modalElement = document.getElementById('suscripcionModal');
+    const modalConf = new bootstrap.Modal(modalElement);
     if (error) {
         switch (error) {
             case '0':
@@ -140,7 +141,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function closeModal() {
             modalConf.hide();
-            document.querySelector('.modal-backdrop').remove();
     }
 
     // Cerrar manualmente
