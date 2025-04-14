@@ -68,6 +68,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 localStorage.setItem("correoSuscripcion", JSON.stringify(suscripcion));
                 newSus = true;
                 modalAct.show();
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth' // Para un desplazamiento suave
+                });
                 break;
             case '1':
                 Alerta('Correo no Valido');
