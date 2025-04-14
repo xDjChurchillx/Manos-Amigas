@@ -159,7 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <li>Promociones especiales para colaboradores</li>
             </ul>
             
-            <a href="'.$dominio.'/assets/php/Suscripciones.php?correo='.urlencode($Correo).'&token='.urlencode($row['Success']).'" class="subscribe-btn">SUSCRIBIRME AHORA</a>
+            <a href="'.$dominio.'/assets/php/Suscripciones.php?correo='.urlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Success']).'" class="subscribe-btn">SUSCRIBIRME AHORA</a>
             
             <p>Si prefieres no recibir noticias sobre nosotros, puedes ignorar este mensaje.</p>
             
