@@ -324,7 +324,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
          exit();
     }  
     $Correo = htmlentities($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')
-    $Token = urldecode($_GET['token']);
+   $Token = filter_input(INPUT_GET, 'token', FILTER_SANITIZE_STRING) ?? "";
+   $Token = urldecode($Token);
     $regex2 = "/^[a-z0-9]+$/";
     
     if (!preg_match($regex2, $Token)) {
