@@ -3,9 +3,9 @@
 document.addEventListener('DOMContentLoaded', function () {
     const frm = document.getElementById('subscriptionForm');
     const emailInput = document.getElementById('Correo');
+    const emailAnular = document.getElementById('ACorreo');
     const errorCorreo = document.getElementById('errCorreo');
     const unsubscribeGroup = document.getElementById('unsubscribeGroup');
-    const unsubscribeBtn = document.getElementById('unsubscribeBtn');
 
     frm.addEventListener('submit', function (e) {
         const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -147,6 +147,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (localStorage.getItem('correoSuscripcion')) {
         var suscripcion = JSON.parse(localStorage.getItem("correoSuscripcion"));
         emailInput.value = suscripcion.correo;
+        emailAnular.value = suscripcion.correo;
         if (suscripcion.verificado) {
            unsubscribeGroup.classList.remove('d-none');
         } else {
