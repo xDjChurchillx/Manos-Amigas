@@ -43,7 +43,7 @@ $buscar = filter_var($buscar, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 $buscar = htmlspecialchars($buscar, ENT_QUOTES, 'UTF-8');
 
 
-$stmt = $conn->prepare("CALL sp_ListarSuscripcions(?,?,?)");
+$stmt = $conn->prepare("CALL sp_ListarSuscripciones(?,?,?)");
 $stmt->bind_param('sss',$username,$token, $buscar);
 if (!$stmt) {
      echo json_encode([
@@ -123,11 +123,11 @@ $panel = '
 ';
 
 if (empty($rows)) {
-    // Si no hay Suscripcions, mostrar el mensaje
+    // Si no hay Suscripciones, mostrar el mensaje
     $panel .= '
-        <p>No hay Suscripcions para mostrar.</p>';
+        <p>No hay Suscripciones para mostrar.</p>';
 } else {
-    // Si hay Suscripcions, crear la tabla con los datos
+    // Si hay Suscripciones, crear la tabla con los datos
     $panel .= '
         <table class="table table-striped">
             <thead class="table-dark">
