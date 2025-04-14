@@ -237,13 +237,7 @@
     box-shadow: 0 0 20px rgba(220, 53, 69, 0.3);
 }
 
-.anulacion-header {
-    background-color: #dc3545;
-    color: #fff;
-    border-bottom: none;
-    justify-content: center;
-    text-align: center;
-}
+
 
 .anulacion-icon {
     margin-bottom: 15px;
