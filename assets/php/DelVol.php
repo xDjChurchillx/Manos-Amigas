@@ -53,14 +53,14 @@ $row = $result->fetch_assoc();
 if (array_key_exists('Error', $row)) {
     echo json_encode([
         'status' => 'error',
-        'ex' => 'Usuario o token inválido.'
+        'ex' => $row['Error']
     ]);
 } else {
    
-    if(array_key_exists('Mensaje',$row)){             
-                  echo json_encode([
+    if(array_key_exists('Success',$row)){
+                echo json_encode([
                     'status' => 'success',
-                    'mensaje' => $row['Mensaje']
+                    'mensaje' => $row['Success']
                 ]);
     }else {
 	    echo json_encode([

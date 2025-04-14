@@ -36,41 +36,43 @@ if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
 $token = $_COOKIE['token'] ;
 $username = $_SESSION['username'];
 
-$data = json_decode(file_get_contents('php://input'), true);
-$codigo = $data['codigo'] ?? '';
-// eliminar en la base de datos
-$stmt = $conn->prepare('CALL sp_EliminarDonacion(?, ?, ?)');
-if (!$stmt) {
-    echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
-    exit();
-}
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $codigoSuscripcion = trim($_POST['codigoE'] ?? '');
+        $fechaSuscripcion = trim($_POST['fechaS'] ?? date('Y-m-d H:i:s'));
+        $correoSuscripcion = trim($_POST['correoS'] ?? '');
+        $activoSuscripcion = isset($_POST['activoS']) ? 1 : 0; 
+        // Validación de datos
+        if (empty($codigoSuscripcion) || empty($correoSuscripcion) || empty($fechaSuscripcion)) {
+            echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
+            exit();
+        }
+        // Actualizar en la base de datos
+        $stmt = $conn->prepare('CALL sp_ActualizarSuscripcion(?, ?, ?, ?, ?,?)');
+        if (!$stmt) {
+            echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
+            exit();
+        }
 
-$stmt->bind_param('sss', $username, $token, $codigo);
-$stmt->execute();
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
+        $stmt->bind_param('ssssss', $username, $token, $codigoSuscripcion,$fechaSuscripcion, $correoSuscripcion ,$activoSuscripcion);
 
-if (array_key_exists('Error', $row)) {
-    echo json_encode([
-        'status' => 'error',
-        'ex' => $row['Error']
-    ]);
-} else {
-   
-    if(array_key_exists('Success',$row)){
-                echo json_encode([
-                    'status' => 'success',
-                    'mensaje' => $row['Success']
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $row = $result->fetch_assoc();
+
+        if (array_key_exists('Success', $row)) {
+            echo json_encode([
+                    'status' => 'success'
                 ]);
-    }else {
-	    echo json_encode([
-        'status' => 'error',
-        'ex' => 'Error en base de datos'
-    ]);
-    }  
-}
-$stmt->close();
-$conn->close();
+        } else {
+             echo json_encode([
+                    'status' => 'error',
+                    'ex' => 'Usuario o token inválido.'
+                ]);
+        }
+
+        $stmt->close();
+        $conn->close();
+    }
 
 
 } catch (Exception $ex) {
