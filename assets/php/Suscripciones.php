@@ -323,10 +323,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: /index.html?error=1"); // Error correo no valido
          exit();
     }  
-    $Correo = htmlentities($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')
-
-   $Token = filter_input(INPUT_GET, 'token', FILTER_SANITIZE_STRING) ?? "";
-   $Token = urldecode($Token);
+    $Correo = htmlentities($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    $Token = urldecode($_GET['token']);
     $regex2 = "/^[a-z0-9]+$/";
     
     if (!preg_match($regex2, $Token)) {
