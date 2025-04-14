@@ -160,6 +160,30 @@
                     </div>
                 </div>
             </div>
+            <!-- Modal de Activación -->
+            <div class="modal fade modal-suscripcion" id="activacionModal" tabindex="-1" aria-labelledby="activacionModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="activacionModalLabel">¡Revisa tu correo!</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <svg class="suscripcion-icon" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20 4H4C2.9 4 2 .9 2 2s.9 2 2 2h16c1.1 0 2-.9 2-2s-.9-2-2-2zm0 4H4c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm0 2l-8 5-8-5v10h16V10zm-8 3L4 8h16l-8 5z" />
+                            </svg>
+
+                            <h4>Activa tu suscripción</h4>
+                            <p>Te hemos enviado un correo con un enlace para activar tu suscripción.</p>
+                            <p><small>Revisa tu bandeja de entrada o carpeta de spam y haz clic en el enlace para completar el proceso.</small></p>
+                            <button type="button" class="btn btn-suscripcion" data-bs-dismiss="modal">
+                                <i class="fas fa-envelope-open-text me-2"></i> Entendido
+                            </button>
+                            <div class="countdown" id="countdown-activacion">Este mensaje se cerrará en 10 segundos...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
 

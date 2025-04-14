@@ -53,6 +53,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Inicializar el modal
     const modalElement = document.getElementById('suscripcionModal');
     const modalConf = new bootstrap.Modal(modalElement);
+    const modalElement2 = document.getElementById('activacionModal');
+    const modalAct = new bootstrap.Modal(modalElement2);
     if (error) {
         switch (error) {
             case '0':
@@ -65,6 +67,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 // Guardar en localStorage
                 localStorage.setItem("correoSuscripcion", JSON.stringify(suscripcion));
                 newSus = true;
+                modalAct.show();
                 break;
             case '1':
                 Alerta('Correo no Valido');
@@ -127,12 +130,13 @@ document.addEventListener('DOMContentLoaded', function () {
     // Configuración del cierre automático
     let seconds = 10;
     const countdownElement = document.getElementById('countdown');
+    const countdownElement2 = document.getElementById('countdown-activacion');
     const countdownInterval = setInterval(updateCountdown, 1000);
 
     function updateCountdown() {
         seconds--;
         countdownElement.textContent = `Cerrando en ${seconds} segundo${seconds !== 1 ? 's' : ''}...`;
-
+        countdownElement2.textContent = `Cerrando en ${seconds} segundo${seconds !== 1 ? 's' : ''}...`;
         if (seconds <= 0) {
             clearInterval(countdownInterval);
             closeModal();
@@ -140,7 +144,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function closeModal() {
-            modalConf.hide();
+        modalConf.hide();
+        modalAct.hide();
     }
 
     // Cerrar manualmente
