@@ -15,18 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
             e.preventDefault();
         } 
     });
-    // Botón para eliminar suscripción
-    unsubscribeBtn.addEventListener('click', function () {
-        // Simular eliminación de suscripción
-
-
-
-
-        localStorage.removeItem('correoSuscripcion');
-        unsubscribeGroup.classList.add('d-none');
-
-        emailInput.value = '';        
-    });
+  
 
 
     // Validación en tiempo real
@@ -138,7 +127,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                 break;
             case '10':
-               
+                localStorage.removeItem('correoSuscripcion');
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth' // Para un desplazamiento suave
+                });
                 break;
             case '11':
                

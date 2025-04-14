@@ -8,11 +8,11 @@ require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
 
+ $regex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
 // Verificar si el formulario fue enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
-    $Correo = isset($_POST['Correo']) ? $_POST['Correo'] : '';
-    $regex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
+    $Correo = isset($_POST['Correo']) ? $_POST['Correo'] : '';   
     //$dominio = "https://" . $_SERVER['HTTP_HOST'];
      $dominio = "http://" . $_SERVER['HTTP_HOST'];
     if (!preg_match($regex, $Correo)) {
@@ -316,11 +316,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: /index.html?error=5"); // Fallo inesperado
             exit();
     }
-	$Correo =htmlentities(urldecode($_GET['correo']), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+	$Correo = urldecode($_GET['correo']);   
+    //$dominio = "https://" . $_SERVER['HTTP_HOST'];
+    $dominio = "http://" . $_SERVER['HTTP_HOST'];
+    if (!preg_match($regex, $Correo)) {
+        header("Location: /index.html?error=1"); // Error correo no valido
+         exit();
+    }  
+    $Correo = htmlentities($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')
     $Token = urldecode($_GET['token']);
-    $regex = "/^[a-z0-9]+$/";
+    $regex2 = "/^[a-z0-9]+$/";
     
-    if (!preg_match($regex, $Token)) {
+    if (!preg_match($regex2, $Token)) {
         header("Location: /index.html?error=6"); // Error token no valido
          exit();
     }  
