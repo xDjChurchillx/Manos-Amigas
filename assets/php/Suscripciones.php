@@ -318,14 +318,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 	$Correo = urldecode(html_entity_decode($_GET['correo'], ENT_QUOTES | ENT_HTML5, 'UTF-8'));
     $Token = urldecode($_GET['token']);
-
-       $stmt = $conn->prepare('CALL sp_CrearSuscripcion(?)');
+    $regex = "/^[a-z0-9]+$/";
+    
+    if (!preg_match($regex, $Token)) {
+        header("Location: /index.html?error=6"); // Error token no valido
+         exit();
+    }  
+    $stmt = $conn->prepare('CALL sp_VerificarSuscripcion(?,?)');
     if (!$stmt) {
         header("Location: /index.html?error=4"); // Error en BD
         exit();
     }
 
-    $stmt->bind_param('s',$Correo);
+    $stmt->bind_param('ss',$Correo,$Token);
 
     $stmt->execute();
     $result = $stmt->get_result();
@@ -334,6 +339,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $conn->close();
     if (array_key_exists('Success', $row)) {
      header("Location: /index.html?error=2&correo=".rawurlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')));
+      exit();
+    }else {
+	 header("Location: /index.html?error=7"); // Error correo no valido o token
+     exit();
     }
-    exit();
+
+   
 }

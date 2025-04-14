@@ -88,6 +88,12 @@ document.addEventListener('DOMContentLoaded', function () {
             case '5':
                 Alerta('Error inesperado');
                 break;
+            case '6':
+                Alerta('Token Invalido');
+                break;
+            case '7':
+                Alerta('Token o Correo Invalido');
+                break;
             default:
 
         }
