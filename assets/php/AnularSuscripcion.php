@@ -177,7 +177,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }  
     } elseif (array_key_exists('Error', $row)) {
          // Correo o token invalido
-         header("Location: /index.html?error=7"; // Correo o token invalido       
+         header("Location: /index.html?error=7"); // Correo o token invalido       
          exit();
     }
     else {
@@ -218,7 +218,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->close();
     $conn->close();
     if (array_key_exists('Success', $row)) {
-     header("Location: /index.html?error=10";
+     header("Location: /index.html?error=10");
       exit();
     }else {
 	 header("Location: /index.html?error=7"); // Error correo no valido o token
