@@ -284,7 +284,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <li>Promociones especiales para colaboradores</li>
             </ul>
             
-            <a href="'.$dominio.'/assets/php/Suscripciones.php?correo='.urlencode($Correo).'&token='.urlencode($row['Mensaje']).'" class="subscribe-btn">SUSCRIBITE AHORA</a>
+            <a href="'.$dominio.'/assets/php/Suscripciones.php?correo='.urlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Mensaje']).'" class="subscribe-btn">SUSCRIBITE AHORA</a>
             
             <p>Si prefieres no recibir noticias sobre nosotros, puedes ignorar este mensaje.</p>
             
@@ -316,7 +316,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         header("Location: /index.html?error=5"); // Fallo inesperado
             exit();
     }
-	$Correo = urldecode(html_entity_decode($_GET['correo'], ENT_QUOTES | ENT_HTML5, 'UTF-8'));
+	$Correo =htmlentities(urldecode($_GET['correo']), ENT_QUOTES | ENT_HTML5, 'UTF-8');
     $Token = urldecode($_GET['token']);
     $regex = "/^[a-z0-9]+$/";
     
