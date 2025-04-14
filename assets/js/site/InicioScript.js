@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
     // Configuración del cierre automático
-    let seconds = 5;
+    let seconds = 10;
     const countdownElement = document.getElementById('countdown');
     const countdownInterval = setInterval(updateCountdown, 1000);
 
@@ -139,11 +139,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function closeModal() {
-        const modal = bootstrap.Modal.getInstance(document.getElementById('suscripcionModal'));
-        if (modal) {
-            modal.hide();
+            modalConf.hide();
             document.querySelector('.modal-backdrop').remove();
-        }
     }
 
     // Cerrar manualmente
