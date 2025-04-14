@@ -318,5 +318,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 	$Correo = urldecode(html_entity_decode($_GET['correo'], ENT_QUOTES | ENT_HTML5, 'UTF-8'));
     $Token = urldecode($_GET['token']);
-    echo($Correo.$Token);
+
+       $stmt = $conn->prepare('CALL sp_CrearSuscripcion(?)');
+    if (!$stmt) {
+        header("Location: /index.html?error=4"); // Error en BD
+        exit();
+    }
+
+    $stmt->bind_param('s',$Correo);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+    $stmt->close();
+    $conn->close();
+    if (array_key_exists('Success', $row)) {
+     header("Location: /index.html?error=2&correo=".rawurlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')));
+    }
+    exit();
 }
