@@ -184,7 +184,7 @@ function del(id, correo) {
 
     $.confirm({
         title: 'Eliminar Suscripcion?',
-        content: 'Suscripcion: ' + correo,
+        content: 'Correo: ' + correo,
         buttons: {
             confirmar: function () {
                 fetch('../assets/php/DelSus.php', {
