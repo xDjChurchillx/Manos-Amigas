@@ -154,7 +154,7 @@ function edit(id) {
     document.getElementById('codigoS').value = item.Codigo || "";
     document.getElementById('fechaS').value = item.Fecha || "";
     document.getElementById('correoS').value = item.Correo || "";
-    if (item.Activo == 1) {
+    if (item.Activo === 1) {
         document.getElementById('activoS').checked = true;
     } else {
         document.getElementById('activoS').checked = false;

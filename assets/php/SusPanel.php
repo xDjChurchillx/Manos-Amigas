@@ -72,7 +72,9 @@ while ($row = $result->fetch_assoc()) {
         exit();
     }
     foreach ($row as $key => $value) {
-        $row[$key] = html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        if ($key !== 'Activo') {
+            $row[$key] = html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        }
     }
     $rows[] = $row;
 }
