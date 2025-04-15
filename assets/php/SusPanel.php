@@ -172,16 +172,16 @@ $panel .= '</div>
     </button>
     <h2>Detalle de Suscripcion</h2>
     <div class="mb-3">
-        <label for="codigoV" class="form-label">Código</label>
-        <input type="text" id="codigoV" class="form-control" value="Código" readonly>
+        <label for="codigoS" class="form-label">Código</label>
+        <input type="text" id="codigoS" class="form-control" value="Código" readonly>
     </div>
     <div class="mb-3">
-        <label for="fechaV" class="form-label">Fecha</label>
-        <input type="datetime-local" id="fechaV" class="form-control" value="2023-10-01T12:00" readonly>
+        <label for="fechaS" class="form-label">Fecha</label>
+        <input type="datetime-local" id="fechaS" class="form-control" value="2023-10-01T12:00" readonly>
     </div>   
     <div class="mb-3">
-        <label for="correoV" class="form-label">Correo</label>
-        <input type="text" id="correoV" class="form-control" value="Correo" readonly>
+        <label for="correoS" class="form-label">Correo</label>
+        <input type="text" id="correoS" class="form-control" value="Correo" readonly>
     </div>
     <div class="form-check form-switch mb-3">
         <input class="form-check-input" name="activoS" type="checkbox" id="activoS">
