@@ -38,22 +38,21 @@ $username = $_SESSION['username'];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $codigoSuscripcion = trim($_POST['codigoS'] ?? '');
-        $fechaSuscripcion = trim($_POST['fechaS'] ?? date('Y-m-d H:i:s'));
         $correoSuscripcion = trim($_POST['correoS'] ?? '');
         $activoSuscripcion = isset($_POST['activoS']) ? 1 : 0; 
         // Validación de datos
-        if (empty($codigoSuscripcion) || empty($correoSuscripcion) || empty($fechaSuscripcion)) {
+        if (empty($codigoSuscripcion) || empty($correoSuscripcion)) {
             echo json_encode(["status" => "error","T"=> $codigoSuscripcion, "ex" => "Todos los campos son obligatorios."]);
             exit();
         }
         // Actualizar en la base de datos
-        $stmt = $conn->prepare('CALL sp_ActualizarSuscripcion(?, ?, ?, ?, ?,?)');
+        $stmt = $conn->prepare('CALL sp_ActualizarSuscripcion(?, ?, ?, ?)');
         if (!$stmt) {
             echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
             exit();
         }
 
-        $stmt->bind_param('ssssss', $username, $token, $codigoSuscripcion,$fechaSuscripcion, $correoSuscripcion ,$activoSuscripcion);
+        $stmt->bind_param('ssss', $username, $token, $codigoSuscripcion,$activoSuscripcion);
 
         $stmt->execute();
         $result = $stmt->get_result();

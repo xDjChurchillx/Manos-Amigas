@@ -152,8 +152,8 @@ $username = $_SESSION['username'];
                 'ex' => 'Usuario o token inválido.'
             ]);
         } else {
-            if (array_key_exists('Codigo', $row)) {
-                $codigoActividad = $row['Codigo'];
+            if (array_key_exists('Success', $row)) {
+                $codigoActividad = $row['Success'];
                 $codigoActividad = preg_replace('/\D/', '', $codigoActividad);
                 $finalDir = "../img/{$codigoActividad}/";
 
