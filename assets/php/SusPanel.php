@@ -134,9 +134,8 @@ if (empty($rows)) {
                 <tr>
                     <th>Codigo</th>
                     <th>Fecha</th>
-                    <th>Nombre</th>
-                    <th>Telefono</th>
                     <th>Correo</th>
+                    <th>Activo</th>
                     <th></th>
                 </tr>
             </thead>
@@ -148,8 +147,6 @@ if (empty($rows)) {
             <tr>
                 <td>' . htmlspecialchars($Suscripcion['Codigo']) . '</td>
                 <td>' . htmlspecialchars($Suscripcion['Fecha']) . '</td>
-                <td>' . htmlspecialchars($Suscripcion['Nombre']) . '</td>
-                <td>' . htmlspecialchars($Suscripcion['Telefono']) . '</td>
                 <td>' . htmlspecialchars($Suscripcion['Correo']) . '</td>
                 <td>    
                     <div class="d-flex justify-content-center align-items-center">
