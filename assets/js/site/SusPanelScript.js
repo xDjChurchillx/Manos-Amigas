@@ -143,7 +143,7 @@ function edit(id) {
     document.getElementById('listpanel').classList.add('d-none');
 
     // Obtener los datos del item usando el id desde la variable global
-    const item = listaActividades[id];
+    const item = listaSuscripciones[id];
 
     if (!item) {
         console.error("No se encontró el item con el ID:", id);
