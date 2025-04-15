@@ -56,29 +56,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         $result = $stmt->get_result();
         if ($result) {
-            $firstRow = $result->fetch_assoc();
-    
-            // Comprobar si es un error de autenticación
-            if (array_key_exists('Error', $firstRow)) {
-                echo json_encode([
-                    'status' => 'error',
-                    'ex' => 'Usuario o token inválido.'
-                ]);
-                exit();
-            }
-    
-            // Si no es error, procesar todos los resultados
-            $subscriptions = [];
-    
-            // Volvemos a incluir la primera fila (si existe)
-            if ($firstRow) {
-                $subscriptions[] = $firstRow;
-                // Procesar el resto de filas
-                while ($row = $result->fetch_assoc()) {
-                    $subscriptions[] = $row;
+
+            while ($row = $result->fetch_assoc()) {
+                if (array_key_exists('Error', $row)) {
+                        echo json_encode([
+                        'status' => 'error',
+                        'redirect' => '/Gestion/ingreso.html?error=1'
+                    ]);
+                    exit();
                 }
-            }
-    
+                foreach ($row as $key => $value) {
+                   $row[$key] = html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                }
+                $subscriptions[] = $row;
+            }    
             echo json_encode([
                     'status' => 'success',
                     't' => $subscriptions
