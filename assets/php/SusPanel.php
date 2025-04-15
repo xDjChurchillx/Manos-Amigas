@@ -205,7 +205,7 @@ if (empty($rows)) {
                     <td>' . htmlspecialchars($Suscripcion['Correo']) . '</td>
                     <td>    
                         <div class="d-flex justify-content-center align-items-center">
-                            <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\')">Detalles</button>
+                            <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\')">Editar</button>
                             <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\',\''. htmlspecialchars($Suscripcion['Correo']) .'\')">Eliminar</button>
                         </div>
                     </td>
@@ -230,7 +230,7 @@ $panel .= '</div>
         </svg>
      </button>
     <h2>Mandar Mensaje</h2>
-      <form id="msjForm">
+    <form id="msjForm">
         <div class="mb-3">
             <label for="asunto" class="form-label">Asunto del mensaje</label>
             <input type="text" name="asunto" id="asunto" class="form-control" required>

@@ -69,7 +69,7 @@ function startPanel(datos) {
 
             let formData = new FormData(this); // Captura los datos del formulario
 
-            fetch("../assets/php/MsjSuscripcion.php", {
+            fetch("../assets/php/MsjSus.php", {
                 method: "POST",
                 body: formData
             })
