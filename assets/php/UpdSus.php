@@ -37,7 +37,7 @@ $token = $_COOKIE['token'] ;
 $username = $_SESSION['username'];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $codigoSuscripcion = trim($_POST['codigoE'] ?? '');
+        $codigoSuscripcion = trim($_POST['codigoS'] ?? '');
         $fechaSuscripcion = trim($_POST['fechaS'] ?? date('Y-m-d H:i:s'));
         $correoSuscripcion = trim($_POST['correoS'] ?? '');
         $activoSuscripcion = isset($_POST['activoS']) ? 1 : 0; 
