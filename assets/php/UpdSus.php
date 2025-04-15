@@ -43,7 +43,7 @@ $username = $_SESSION['username'];
         $activoSuscripcion = isset($_POST['activoS']) ? 1 : 0; 
         // Validación de datos
         if (empty($codigoSuscripcion) || empty($correoSuscripcion) || empty($fechaSuscripcion)) {
-            echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
+            echo json_encode(["status" => "error","T"=> $fechaSuscripcion, "ex" => "Todos los campos son obligatorios."]);
             exit();
         }
         // Actualizar en la base de datos
