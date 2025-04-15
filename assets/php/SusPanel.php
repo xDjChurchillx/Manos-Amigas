@@ -257,7 +257,7 @@ $panel .= '</div>
      <form id="editarForm">
         <div class="mb-3">
             <label for="codigoS" class="form-label">Código</label>
-            <input type="text" id="codigoS" class="form-control" value="Código" readonly>
+            <input type="text" id="codigoS" name="codigoS" class="form-control" value="Código" readonly>
         </div>
         <div class="mb-3">
             <label for="fechaS" class="form-label">Fecha</label>
