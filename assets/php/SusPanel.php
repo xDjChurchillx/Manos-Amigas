@@ -108,9 +108,11 @@ $navbar = '
 
 $panel = '
     <div id="listpanel" class="container text-center mt-4">
-        <h2 class="mb-4">Voluntarios</h2>
+        <h2 class="mb-4">Suscripciones</h2>
        <div class="d-flex justify-content-between align-items-center">
-           <div></div>
+          <!-- Botón msj Suscripciones a la izquierda -->
+          <button class="btn btn-primary mb-3" onclick="msj()">Mensaje</button>
+  
           <!-- Contenedor para el TextBox y el botón de buscar a la derecha -->
           <div class="d-flex mb-3">
             <input id="buscar" type="text" class="form-control me-2" placeholder="Buscar...">
@@ -164,7 +166,31 @@ if (empty($rows)) {
 
 $panel .= '</div>
 
-<div id="editdiv" class="container d-none mt-5 position-relative col-6">
+<div id="msjdiv" class="container d-none mt-5 position-relative col-6">
+    <button class="btn btn-danger p-2 position-absolute" style="right: 0; top: 0;" onclick="closeDiv()">
+        <svg class="closeicon-bg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="white" />
+        </svg>
+     </button>
+    <h2>Mandar Mensaje</h2>
+      <form id="msjForm">
+        <div class="mb-3">
+            <label for="asunto" class="form-label">Asunto del mensaje</label>
+            <input type="text" name="asunto" id="asunto" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label for="mensaje" class="form-label">Descripción</label>
+            <textarea name="mensaje" id="mensaje" class="form-control" required></textarea>
+        </div>
+        <span id="respuesta" class="text-danger"></span>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+
+  </div>
+
+
+
+  <div id="editdiv" class="container d-none mt-5 position-relative col-6">
     <button class="btn btn-danger p-2 position-absolute" style="right: 0; top: 0;" onclick="closeDiv()">
         <svg class="closeicon-bg" width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M6.2253 4.81108C5.83477 4.42056 5.20161 4.42056 4.81108 4.81108C4.42056 5.20161 4.42056 5.83477 4.81108 6.2253L10.5858 12L4.81114 17.7747C4.42062 18.1652 4.42062 18.7984 4.81114 19.1889C5.20167 19.5794 5.83483 19.5794 6.22535 19.1889L12 13.4142L17.7747 19.1889C18.1652 19.5794 18.7984 19.5794 19.1889 19.1889C19.5794 18.7984 19.5794 18.1652 19.1889 17.7747L13.4142 12L19.189 6.2253C19.5795 5.83477 19.5795 5.20161 19.189 4.81108C18.7985 4.42056 18.1653 4.42056 17.7748 4.81108L12 10.5858L6.2253 4.81108Z" fill="white" />
@@ -193,7 +219,6 @@ $panel .= '</div>
       </form>
 </div>
 
-
 ';
 
 // Si pasa todas las validaciones, se puede mostrar el contenido
@@ -212,3 +237,4 @@ echo json_encode([
     exit();
 }
 ?>
+

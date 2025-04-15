@@ -255,15 +255,6 @@ $panel .= '</div>
         </form>
     </div>
 
-
-
-
-
-
-
-
-
-
 ';
 
 // Si pasa todas las validaciones, se puede mostrar el contenido
