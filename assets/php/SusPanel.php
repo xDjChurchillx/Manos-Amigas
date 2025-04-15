@@ -153,7 +153,7 @@ if (empty($rows)) {
                 <td>    
                     <div class="d-flex justify-content-center align-items-center">
                         <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\')">Detalles</button>
-                        <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\')">Eliminar</button>
+                        <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\',\''. htmlspecialchars($Suscripcion['Correo']) .'\')">Eliminar</button>
                     </div>
                 </td>
             </tr>';
