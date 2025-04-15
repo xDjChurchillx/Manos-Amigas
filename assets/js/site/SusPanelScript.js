@@ -62,9 +62,77 @@ function startPanel(datos) {
         });
 
 
+
+
+        document.getElementById("mensajeForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Evita el postback
+
+            let formData = new FormData(this); // Captura los datos del formulario
+
+            fetch("../assets/php/MsjSuscripcion.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.text())
+                .then(text => {
+                    try {
+                        let data = JSON.parse(text);
+                        if (data.status === "success") {
+                           //mensaje se envio exitosamenete
+                        } else {
+                            if ("ex" in data) {
+                                document.getElementById("respuesta").innerHTML = data.ex;
+                            } else {
+                                Alerta("Error al agregar la actividad.");
+                            }
+                            if ("redirect" in data) {
+                                window.location.href = data.redirect;
+                            }
+                        }
+                    } catch (error) {
+                        console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                        Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+                    }
+                })
+                .catch(error => console.error("Error en la solicitud:", error));
+        });
+
+        document.getElementById("editarForm").addEventListener("submit", function (event) {
+            event.preventDefault(); // Evita el postback
+
+            let formData = new FormData(this); // Captura los datos del formulario
+
+            fetch("../assets/php/UpdSus.php", {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.text())
+                .then(text => {
+                    try {
+                        console.log(text);
+                        let data = JSON.parse(text);
+                        if (data.status === "success") {
+                            location.reload();
+                        } else {
+                            if ("ex" in data) {
+                                document.getElementById("respuestaS").innerHTML = data.ex;
+                            } else {
+                                Alerta("Error al actualizar la suscripcion.");
+                            }
+                            if ("redirect" in data) {
+                                window.location.href = data.redirect;
+                            }
+                        }
+                    } catch (error) {
+                        console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                        Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+                    }
+                })
+                .catch(error => console.error("Error en la solicitud:", error));
+        });
     } catch (e) {
         console.error("Error iniciando panel:", e); // Imprime el texto antes de que falle
-        Alerta("Error inesperado: " + e); // Opcional: mostrar el error en un alert
+
     }
 
 
@@ -75,7 +143,7 @@ function edit(id) {
     document.getElementById('listpanel').classList.add('d-none');
 
     // Obtener los datos del item usando el id desde la variable global
-    const item = listaSuscripciones[id];
+    const item = listaActividades[id];
 
     if (!item) {
         console.error("No se encontró el item con el ID:", id);
@@ -91,10 +159,15 @@ function edit(id) {
     } else {
         document.getElementById('activoS').checked = false;
     }
-
+}
+function msj() {
+    console.log('msj');
+    document.getElementById('msjdiv').classList.remove('d-none');
+    document.getElementById('listpanel').classList.add('d-none');
 }
 function closeDiv() {
     console.log('close');
+    document.getElementById('msjdiv').classList.add('d-none');
     document.getElementById('editdiv').classList.add('d-none');
     document.getElementById('listpanel').classList.remove('d-none');
 }
@@ -107,11 +180,11 @@ function search() {
     url.searchParams.set('buscar', input);
     window.location.href = url;
 }
-function del(id) {
+function del(id, correo) {
 
     $.confirm({
         title: 'Eliminar Suscripcion?',
-        content: 'Suscripcion: ' + id,
+        content: 'Suscripcion: ' + correo,
         buttons: {
             confirmar: function () {
                 fetch('../assets/php/DelSus.php', {
@@ -129,7 +202,7 @@ function del(id) {
                         try {
                             let data = JSON.parse(text);
                             if (data.status === 'success') {
-                                //    Alerta(data.mensaje); // Suscripcion eliminada exitosamente
+                                //    Alerta(data.mensaje); // Actividad eliminada exitosamente
                                 location.reload();
                             } else {
                                 if ("ex" in data) {
@@ -157,3 +230,4 @@ function del(id) {
         }
     });
 }
+

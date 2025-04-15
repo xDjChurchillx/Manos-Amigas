@@ -171,26 +171,26 @@ $panel .= '</div>
         </svg>
     </button>
     <h2>Detalle de Suscripcion</h2>
- <form id="editarForm">
-    <div class="mb-3">
-        <label for="codigoS" class="form-label">Código</label>
-        <input type="text" id="codigoS" class="form-control" value="Código" readonly>
-    </div>
-    <div class="mb-3">
-        <label for="fechaS" class="form-label">Fecha</label>
-        <input type="datetime-local" id="fechaS" class="form-control" value="2023-10-01T12:00" readonly>
-    </div>   
-    <div class="mb-3">
-        <label for="correoS" class="form-label">Correo</label>
-        <input type="text" id="correoS" class="form-control" value="Correo" readonly>
-    </div>
-    <div class="form-check form-switch mb-3">
-        <input class="form-check-input" name="activoS" type="checkbox" id="activoS">
-        <label class="form-check-label" for="activoS">Activo</label>
-    </div>
-    <span id="respuestaE" class="text-danger"></span>
-    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-  </form>
+     <form id="editarForm">
+        <div class="mb-3">
+            <label for="codigoS" class="form-label">Código</label>
+            <input type="text" id="codigoS" class="form-control" value="Código" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="fechaS" class="form-label">Fecha</label>
+            <input type="datetime-local" id="fechaS" class="form-control" value="2023-10-01T12:00" readonly>
+        </div>   
+        <div class="mb-3">
+            <label for="correoS" class="form-label">Correo</label>
+            <input type="text" id="correoS" class="form-control" value="Correo" readonly>
+        </div>
+        <div class="form-check form-switch mb-3">
+            <input class="form-check-input" name="activoS" type="checkbox" id="activoS">
+            <label class="form-check-label" for="activoS">Activo</label>
+        </div>
+        <span id="respuestaS" class="text-danger"></span>
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+      </form>
 </div>
 
 
