@@ -210,7 +210,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($mail->send()) {
                 echo json_encode([
                         'status' => 'success',
-                        't' => $subscriptions
+                        'activos' => $subscriptions
                 ]);
                 exit();
             } else {
@@ -228,8 +228,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
               ]);
               exit();
         }
-
-
         $stmt->close();
         $conn->close();
 }
