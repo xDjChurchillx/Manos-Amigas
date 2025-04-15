@@ -156,8 +156,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'ex' => 'Usuario o token inválido.'
             ]);
         } else {
-            if (array_key_exists('Codigo', $row)) {
-                $codigoActividad = $row['Codigo'];
+            if (array_key_exists('Success', $row)) {
+                $codigoActividad = $row['Success'];
                 $codigoActividad = preg_replace('/\D/', '', $codigoActividad);
                 // Crear carpeta con el nombre del código de la actividad
                 $finalDir = "../img/{$codigoActividad}/";
