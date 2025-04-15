@@ -261,11 +261,11 @@ $panel .= '</div>
         </div>
         <div class="mb-3">
             <label for="fechaS" class="form-label">Fecha</label>
-            <input type="datetime-local" id="fechaS" class="form-control" value="2023-10-01T12:00" readonly>
+            <input type="datetime-local" id="fechaS" name="fechaS" class="form-control" value="2023-10-01T12:00" readonly>
         </div>   
         <div class="mb-3">
             <label for="correoS" class="form-label">Correo</label>
-            <input type="text" id="correoS" class="form-control" value="Correo" readonly>
+            <input type="text" id="correoS" name="correoS" class="form-control" value="Correo" readonly>
         </div>
         <div class="form-check form-switch mb-3">
             <input class="form-check-input" name="activoS" type="checkbox" id="activoS">

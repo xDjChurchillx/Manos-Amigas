@@ -38,10 +38,9 @@ $username = $_SESSION['username'];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $codigoSuscripcion = trim($_POST['codigoS'] ?? '');
-        $correoSuscripcion = trim($_POST['correoS'] ?? '');
         $activoSuscripcion = isset($_POST['activoS']) ? 1 : 0; 
         // Validación de datos
-        if (empty($codigoSuscripcion) || empty($correoSuscripcion)) {
+        if (empty($codigoSuscripcion)) {
             echo json_encode(["status" => "error","T"=> $codigoSuscripcion, "ex" => "Todos los campos son obligatorios."]);
             exit();
         }
