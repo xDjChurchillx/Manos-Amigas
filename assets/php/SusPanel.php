@@ -171,6 +171,7 @@ $panel .= '</div>
         </svg>
     </button>
     <h2>Detalle de Suscripcion</h2>
+ <form id="editarForm">
     <div class="mb-3">
         <label for="codigoS" class="form-label">Código</label>
         <input type="text" id="codigoS" class="form-control" value="Código" readonly>
@@ -187,6 +188,9 @@ $panel .= '</div>
         <input class="form-check-input" name="activoS" type="checkbox" id="activoS">
         <label class="form-check-label" for="activoS">Activo</label>
     </div>
+    <span id="respuestaE" class="text-danger"></span>
+    <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+  </form>
 </div>
 
 
