@@ -64,7 +64,7 @@ function startPanel(datos) {
 
 
 
-        document.getElementById("mensajeForm").addEventListener("submit", function (event) {
+        document.getElementById("msjForm").addEventListener("submit", function (event) {
             event.preventDefault(); // Evita el postback
 
             let formData = new FormData(this); // Captura los datos del formulario
