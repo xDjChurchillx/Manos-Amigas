@@ -80,7 +80,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
     
             echo json_encode([
-                    'status' => 'success'
+                    'status' => 'success',
+                    't' => $subscriptions
             ]);
             exit();
         } else {
