@@ -63,116 +63,108 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Éxito: se generó el token       
         // Envía el correo
            $mail->Body = '
-<html>
-<head>
-    <style type="text/css">
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #F6F8D5;
-            font-family: \'Arial\', sans-serif;
-            line-height: 1.6;
-        }
-        
-        .email-container {
-            max-width: 600px;
-            margin: 20px auto;
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .email-header {
-            background: linear-gradient(135deg, #205781, #4F959D);
-            padding: 30px 20px;
-            text-align: center;
-            color: white;
-        }
-        
-        .email-header h1 {
-            margin: 0;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        
-        .email-body {
-            padding: 30px;
-            color: #333;
-        }
-        
-        .email-footer {
-            padding: 20px;
-            text-align: center;
-            background-color: #f5f5f5;
-            color: #205781;
-            font-size: 12px;
-        }
-        
-        .subscribe-btn {
-            display: block;
-            width: 60%;
-            margin: 40px auto;
-            padding: 15px;
-            background: linear-gradient(135deg, #4F959D, #98D2C0);
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(79, 149, 157, 0.3);
-        }
-        
-        .subscribe-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(79, 149, 157, 0.4);
-        }
-        
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
-            font-family: \'Courier New\', Courier, monospace;
-            font-size: 24px;
-            color: #205781;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="email-container">
-        <div class="email-header">
-            <h1>Únete a Manos Amigas</h1>
-        </div>
-        
-        <div class="email-body">
-            <div class="logo">Manos Amigas</div>
+            <html>
+            <head>
+                      <meta charset="UTF-8">
+                      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                      <title>Confirmacion</title>
+            </head>
+            <body>
+                <header style="
+                          background: linear-gradient(135deg, #205781 0%, #4F959D 100%);
+                          min-height: 23vh;
+                          clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+                          color: white;
+                          display: flex;
+                          align-items: center;
+                          padding-bottom: 5rem;
+                      ">
+                          <div style="width: 100%; text-align: center; padding-top: 3rem;">
+                               <h1 style="
+                                  font-size: 2.5rem;
+                                  letter-spacing: 0.05em;
+                                  margin-bottom: 1rem;
+                                  text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+                                  font-weight: 300;
+                              ">
+                                Centro Diurno Manos Amigas
+                              </h1>
+                               <div style="width: 400px; height: 3px; background: #F6F8D5; margin: 0 auto;"></div>
+                              <h1 style="
+     
+                                   margin: 0;
+                                  font-size: 28px;
+                                  font-weight: 600;
+                                  letter-spacing: 0.5px;
+                              ">
+                                  Confirmar Suscripcion
+                              </h1>
+ 
+                          </div>
+                      </header>
+                      <div style="
+                          background-color: white;
+                          overflow: hidden;
+                      ">
+                          <!-- Contenido mejorado -->
+                          <div style="padding: 40px 30px; color: #444;">
+                                <p style="
+                                      margin: 0 0 20px;
+                                      font-size: 16px;
+                                      line-height: 1.7;
+                                  ">
+                                     Hola amigo/a,
+                                 </p>
+                                 <p style="
+                                      margin: 0 0 20px;
+                                      font-size: 16px;
+                                      line-height: 1.7;
+                                  ">
+                                     Estamos emocionados de invitarte a formar parte de nuestra comunidad. Al suscribirte recibirás:
+                                 </p>
+                                 <ul>
+                                        <li>Actualizaciones exclusivas sobre nuestras actividades</li>
+                                        <li>Noticias sobre cómo estamos ayudando a la comunidad</li>
+                                        <li>Informacion importante</li>
+                                </ul>
             
-            <p>Hola amigo/a,</p>
-            
-            <p>Estamos emocionados de invitarte a formar parte de nuestra comunidad. Al suscribirte recibirás:</p>
-            
-            <ul>
-                <li>Actualizaciones exclusivas sobre nuestros proyectos</li>
-                <li>Oportunidades para participar como voluntario</li>
-                <li>Noticias sobre cómo estamos ayudando a la comunidad</li>
-                <li>Promociones especiales para colaboradores</li>
-            </ul>
-            
-            <a href="'.$dominio.'/assets/php/Suscripciones.php?correo='.urlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Success']).'" class="subscribe-btn">SUSCRIBIRME AHORA</a>
-            
-            <p>Si prefieres no recibir noticias sobre nosotros, puedes ignorar este mensaje.</p>
-            
-            <p>Con gratitud,<br>
-            El equipo de <strong>Manos Amigas</strong></p>
-        </div>
-        
-        <div class="email-footer">
-            © 2023 Manos Amigas. Todos los derechos reservados.
-        </div>
-    </div>
-</body>
-</html>
+                                 <a href="'.$dominio.'/assets/php/Suscripciones.php?correo='.urlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Success']).'" style="display: block; width: 60%; margin: 40px auto; padding: 15px; background: linear-gradient(135deg, #4F959D, #98D2C0); color: white; text-align: center; text-decoration: none; font-weight: bold; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(79, 149, 157, 0.3);">SUSCRIBIRME AHORA</a>
+                 
+
+                              <p style="
+                                  margin: 30px 0 20px;
+                                  font-size: 14px;
+                                  color: #666;
+                              ">
+                                  Si prefieres no recibir noticias sobre nosotros, puedes ignorar este mensaje.
+                              </p>
+
+                              <p style="
+                                  margin: 40px 0 20px;
+                                  font-style: italic;
+                                  color: #555;
+                              ">
+                                  Con gratitud,<br>
+                                  El equipo de <strong style="color: #205781;">Centro Diurno Manos Amigas</strong>
+                              </p>
+                          </div>
+
+                          <!-- Pie de página mejorado -->
+                          <div style="
+                              padding: 20px;
+                              text-align: center;
+                              background-color: #f5f7fa;
+                              color: #205781;
+                              font-size: 12px;
+                              border-top: 1px solid #eaeaea;
+                          ">
+                              © 2025 Manos Amigas. Todos los derechos reservados.<br>
+                              <span style="font-size: 11px; opacity: 0.7;">Cuidando de nuestros adultos mayores con amor y dedicación</span>
+                          </div>
+                      </div>
+    
+            </body>
+            </html>
 ';
         if ($mail->send()) {
             header("Location: /index.html?error=0&correo=".rawurlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')));
@@ -188,117 +180,109 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }elseif (array_key_exists('Mensaje', $row)) {  
         // Correo ya existe pero no se a verificado
           $mail->Body = '
-<html>
-<head>
-    <style type="text/css">
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #F6F8D5;
-            font-family: \'Arial\', sans-serif;
-            line-height: 1.6;
-        }
-        
-        .email-container {
-            max-width: 600px;
-            margin: 20px auto;
-            background-color: white;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-        
-        .email-header {
-            background: linear-gradient(135deg, #205781, #4F959D);
-            padding: 30px 20px;
-            text-align: center;
-            color: white;
-        }
-        
-        .email-header h1 {
-            margin: 0;
-            font-size: 28px;
-            font-weight: bold;
-        }
-        
-        .email-body {
-            padding: 30px;
-            color: #333;
-        }
-        
-        .email-footer {
-            padding: 20px;
-            text-align: center;
-            background-color: #f5f5f5;
-            color: #205781;
-            font-size: 12px;
-        }
-        
-        .subscribe-btn {
-            display: block;
-            width: 60%;
-            margin: 40px auto;
-            padding: 15px;
-            background: linear-gradient(135deg, #4F959D, #98D2C0);
-            color: white;
-            text-align: center;
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 50px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(79, 149, 157, 0.3);
-        }
-        
-        .subscribe-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(79, 149, 157, 0.4);
-        }
-        
-        .logo {
-            text-align: center;
-            margin-bottom: 20px;
-            font-family: \'Courier New\', Courier, monospace;
-            font-size: 24px;
-            color: #205781;
-            font-weight: bold;
-        }
-    </style>
-</head>
-<body>
-    <div class="email-container">
-        <div class="email-header">
-            <h1>Únete a Manos Amigas</h1>
-        </div>
-        
-        <div class="email-body">
-            <div class="logo">Manos Amigas</div>
+            <html>
+            <head>
+                        <meta charset="UTF-8">
+                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                        <title>Confirmacion</title>
+            </head>
+            <body>
+                <header style="
+                            background: linear-gradient(135deg, #205781 0%, #4F959D 100%);
+                            min-height: 23vh;
+                            clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+                            color: white;
+                            display: flex;
+                            align-items: center;
+                            padding-bottom: 5rem;
+                        ">
+                            <div style="width: 100%; text-align: center; padding-top: 3rem;">
+                                <h1 style="
+                                    font-size: 2.5rem;
+                                    letter-spacing: 0.05em;
+                                    margin-bottom: 1rem;
+                                    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+                                    font-weight: 300;
+                                ">
+                                Centro Diurno Manos Amigas
+                                </h1>
+                                <div style="width: 400px; height: 3px; background: #F6F8D5; margin: 0 auto;"></div>
+                                <h1 style="
+     
+                                    margin: 0;
+                                    font-size: 28px;
+                                    font-weight: 600;
+                                    letter-spacing: 0.5px;
+                                ">
+                                    Confirmar Suscripcion
+                                </h1>
+ 
+                            </div>
+                        </header>
+                        <div style="
+                            background-color: white;
+                            overflow: hidden;
+                        ">
+                            <!-- Contenido mejorado -->
+                            <div style="padding: 40px 30px; color: #444;">
+                                <p style="
+                                        margin: 0 0 20px;
+                                        font-size: 16px;
+                                        line-height: 1.7;
+                                    ">
+                                        Hola amigo/a,
+                                    </p>
+                                    <p style="
+                                        margin: 0 0 20px;
+                                        font-size: 16px;
+                                        line-height: 1.7;
+                                    ">
+                                        Estamos emocionados de invitarte a formar parte de nuestra comunidad. Al suscribirte recibirás:
+                                    </p>
+                                    <ul>
+                                        <li>Actualizaciones exclusivas sobre nuestras actividades</li>
+                                        <li>Noticias sobre cómo estamos ayudando a la comunidad</li>
+                                        <li>Informacion importante</li>
+                                </ul>
             
-            <p>Hola amigo/a,</p>
-            
-            <p>Estamos emocionados de invitarte a formar parte de nuestra comunidad. Al suscribirte recibirás:</p>
-            
-            <ul>
-                <li>Actualizaciones exclusivas sobre nuestros proyectos</li>
-                <li>Oportunidades para participar como voluntario</li>
-                <li>Noticias sobre cómo estamos ayudando a la comunidad</li>
-                <li>Promociones especiales para colaboradores</li>
-            </ul>
-            
-            <a href="'.$dominio.'/assets/php/Suscripciones.php?correo='.urlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Mensaje']).'" class="subscribe-btn">SUSCRIBITE AHORA</a>
-            
-            <p>Si prefieres no recibir noticias sobre nosotros, puedes ignorar este mensaje.</p>
-            
-            <p>Con gratitud,<br>
-            El equipo de <strong>Manos Amigas</strong></p>
-        </div>
-        
-        <div class="email-footer">
-            © 2023 Manos Amigas. Todos los derechos reservados.
-        </div>
-    </div>
-</body>
-</html>
-';
+                                    <a href="'.$dominio.'/assets/php/Suscripciones.php?correo='.urlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Success']).'" style="display: block; width: 60%; margin: 40px auto; padding: 15px; background: linear-gradient(135deg, #4F959D, #98D2C0); color: white; text-align: center; text-decoration: none; font-weight: bold; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(79, 149, 157, 0.3);">SUSCRIBIRME AHORA</a>
+                 
+
+                                <p style="
+                                    margin: 30px 0 20px;
+                                    font-size: 14px;
+                                    color: #666;
+                                ">
+                                    Si prefieres no recibir noticias sobre nosotros, puedes ignorar este mensaje.
+                                </p>
+
+                                <p style="
+                                    margin: 40px 0 20px;
+                                    font-style: italic;
+                                    color: #555;
+                                ">
+                                    Con gratitud,<br>
+                                    El equipo de <strong style="color: #205781;">Centro Diurno Manos Amigas</strong>
+                                </p>
+                            </div>
+
+                            <!-- Pie de página mejorado -->
+                            <div style="
+                                padding: 20px;
+                                text-align: center;
+                                background-color: #f5f7fa;
+                                color: #205781;
+                                font-size: 12px;
+                                border-top: 1px solid #eaeaea;
+                            ">
+                                © 2025 Manos Amigas. Todos los derechos reservados.<br>
+                                <span style="font-size: 11px; opacity: 0.7;">Cuidando de nuestros adultos mayores con amor y dedicación</span>
+                            </div>
+                        </div>
+    
+            </body>
+            </html>
+            ';
         if ($mail->send()) {
             header("Location: /index.html?error=3&correo=".rawurlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')));
             exit();
