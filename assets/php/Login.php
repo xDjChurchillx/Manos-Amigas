@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 $result->free();
                 $stmt->close();
                  $activationToken = bin2hex(random_bytes(32));
-                 $stmt = $conn->prepare("CALL sp_UpdateActivationToken(?, ?)");
+                 $stmt = $conn->prepare("CALL sp_UpdateSession(?, ?)");
                 if (!$stmt) {
                     header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
                     exit();
