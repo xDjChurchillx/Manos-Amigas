@@ -9,7 +9,7 @@ try {
         exit(); // Salir sin hacer nada
     } else {
         // Llamar al procedimiento almacenado sin parámetros
-        $stmt = $conn->prepare("CALL sp_Visitas()");
+        $stmt = $conn->prepare("CALL sp_EstVisita()");
         $stmt->execute(); // Ejecutar el procedimiento
 
         // Registrar el tiempo de la última visita

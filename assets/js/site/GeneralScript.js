@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
 
-        fetch("assets/php/Visita.php", {
+        fetch("assets/php/Est.php", {
             method: 'GET',
             credentials: 'same-origin'
         })
