@@ -8,31 +8,25 @@
     <link rel="icon" type="image/x-icon" href="../assets/img/iconos/logo_Verde.svg">
 </head>
 <body>
-
-
-    <!-- Contenido -->
-    <div class="login-container">
-        <div class="logo">
-            <img src="../assets/img/iconos/logo_Verde.svg" alt="Logo del Centro Diurno">
+   
+    <main>
+        <div class="login-card">
+            <div class="logo">
+                <img src="../assets/img/iconos/logo_Verde.svg" alt="Logo del Centro Diurno">
+            </div>
+            <h2>Iniciar Sesión</h2>
+            <form method="POST" action="../assets/php/Login.php">
+                <div class="mb-3">
+                    <input name="username" id="username" type="text" class="form-control" placeholder="Usuario" required>
+                </div>
+                <div class="mb-3">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-primary-custom">Ingresar</button>
+                <a href="#" class="forgot-pass">¿Olvidaste tu contraseña?</a>
+            </form>
         </div>
-        <h2>Iniciar Sesión</h2>
-
-        <!-- Contenedor para los mensajes de error -->
-        <div id="error-message" style="display:none;"></div>
-
-        <form method="POST" action="../assets/php/Login.php">
-            <div class="mb-3">
-                <label for="username" class="form-label">Usuario</label>
-                <input type="text" class="form-control" id="username" name="username" placeholder="Ingrese su usuario" required>
-            </div>
-            <div class="mb-3">
-                <label for="password" class="form-label">Contraseña</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese su contraseña" required>
-            </div>
-            <button type="submit" class="btn btn-primary">Ingresar</button>
-        </form>
-    </div>
-
+    </main>
 
 
 
