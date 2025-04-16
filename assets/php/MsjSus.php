@@ -168,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 font-size: 14px;
                                 color: #666;
                             ">
-                                Si prefieres no recibir noticias sobre nosotros, puedes <a href="#" style="color: #4F959D; text-decoration: underline;">eliminar la suscripción</a>.
+                                Si prefieres no recibir noticias sobre nosotros, puedes <a href="#" style="color: #4F959D; text-decoration: underline;">eliminar la suscripción</a> desde el formulario de suscripción en el inicio.
                             </p>
 
                             <p style="
