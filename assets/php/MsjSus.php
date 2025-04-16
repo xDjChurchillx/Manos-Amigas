@@ -133,7 +133,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             ">
                               Centro Diurno Manos Amigas
                             </h1>
-                             <div style="width: 80px; height: 3px; background: #F6F8D5; margin: 0 auto;"></div>
+                             <div style="width: 400px; height: 3px; background: #F6F8D5; margin: 0 auto;"></div>
                             <h1 style="
                
                                  margin: 0;
@@ -141,7 +141,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 font-weight: 600;
                                 letter-spacing: 0.5px;
                             ">
-                                Mensaje 
+                                '.$Titulo.'
                             </h1>
            
                         </div>
@@ -151,21 +151,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <div style="
                         background-color: white;
                         overflow: hidden;
-       
                     ">
                         <!-- Contenido mejorado -->
                         <div style="padding: 40px 30px; color: #444;">
-                            <div style="
-                                text-align: center;
-                                margin-bottom: 25px;
-                                font-size: 24px;
-                                color: #205781;
-                                font-weight: 600;
-                                padding-bottom: 15px;
-                                border-bottom: 1px solid #eee;
-                            ">
-                                '.$Titulo.'
-                            </div>
 
                             <p style="
                                 margin: 0 0 20px;
@@ -207,7 +195,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                 </body>
-            </html>
+             </html>
             ';
             if ($mail->send()) {
                 echo json_encode([
