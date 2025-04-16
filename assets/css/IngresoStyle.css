@@ -68,3 +68,8 @@
     .logo img {
         max-width: 100px;
     }
+@media (min-width: 600px) {
+    .login-card {
+        width: 400px;
+    }
+}
