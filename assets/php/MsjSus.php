@@ -105,13 +105,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $mail->Subject = $Asunto;
             $mail->isHTML(true);  
             $mail->Body = '
-           <html>
+            <html>
                 <head>
                     <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
                     <title>'.$Titulo.'</title>
                 </head>
-                <body style="margin: 0; padding: 0; background-color: #f8f9fa; font-family: "Arial", sans-serif; line-height: 1.6;">
+                <body style="margin: 0; padding: 0; background-color: #f8f9fa; line-height: 1.6;">
 
                     <!-- Hero con forma diagonal mejorado -->
                     <header style="
@@ -122,51 +122,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         display: flex;
                         align-items: center;
                         padding-bottom: 5rem;
-                        margin-bottom: 6rem;
                     ">
                         <div style="width: 100%; text-align: center; padding-top: 3rem;">
-                            <h1 style="
-                                font-family: "Georgia", serif;
+                             <h1 style="
                                 font-size: 2.5rem;
                                 letter-spacing: 0.05em;
                                 margin-bottom: 1rem;
                                 text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
                                 font-weight: 300;
                             ">
-                                Mensaje Importante
+                              Centro Diurno Manos Amigas
                             </h1>
-                            <div style="width: 80px; height: 3px; background: #F6F8D5; margin: 0 auto;"></div>
+                             <div style="width: 80px; height: 3px; background: #F6F8D5; margin: 0 auto;"></div>
+                            <h1 style="
+               
+                                 margin: 0;
+                                font-size: 28px;
+                                font-weight: 600;
+                                letter-spacing: 0.5px;
+                            ">
+                                Mensaje 
+                            </h1>
+           
                         </div>
                     </header>
 
                     <!-- Contenedor principal mejorado -->
                     <div style="
                         background-color: white;
-                        width: 85%;
-                        max-width: 600px;
-                        margin: -5rem auto 2rem auto;
                         overflow: hidden;
-                        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-                        border-radius: 8px;
+       
                     ">
-                        <!-- Encabezado con gradiente mejorado -->
-                        <div style="
-                            background: linear-gradient(135deg, #205781 0%, #4F959D 100%);
-                            padding: 30px 20px;
-                            text-align: center;
-                            color: white;
-                        ">
-                            <h1 style="
-                                margin: 0;
-                                font-size: 28px;
-                                font-weight: 600;
-                                letter-spacing: 0.5px;
-                            ">
-                              Centro Diurno Manos Amigas
-                            </h1>
-                            <p style="margin: 8px 0 0; opacity: 0.9; font-size: 14px;">Cuidando con amor y profesionalismo</p>
-                        </div>
-
                         <!-- Contenido mejorado -->
                         <div style="padding: 40px 30px; color: #444;">
                             <div style="
@@ -221,7 +207,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                 </body>
-              </html>
+            </html>
             ';
             if ($mail->send()) {
                 echo json_encode([
