@@ -236,6 +236,10 @@ $panel .= '</div>
             <input type="text" name="asunto" id="asunto" class="form-control" required>
         </div>
         <div class="mb-3">
+            <label for="titulo" class="form-label">Titulo del mensaje</label>
+            <input type="text" name="titulo" id="titulo" class="form-control" required>
+        </div>
+        <div class="mb-3">
             <label for="mensaje" class="form-label">Descripción</label>
             <textarea name="mensaje" id="mensaje" class="form-control" required></textarea>
         </div>
@@ -243,7 +247,7 @@ $panel .= '</div>
         <button type="submit" class="btn btn-primary">Enviar</button>
     </form>
 
-  </div>
+ </div>
 
 
 
