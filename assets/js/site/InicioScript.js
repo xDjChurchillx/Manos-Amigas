@@ -137,7 +137,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
                 break;
             case '11':
-               
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth' // Para un desplazamiento suave
+                });
                 break;
             case '12':
               

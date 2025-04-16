@@ -49,6 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $Asunto = trim($_POST['asunto'] ?? '');
         $Titulo = trim($_POST['titulo'] ?? '');
          $Mensaje = trim($_POST['mensaje'] ?? '');
+          //$dominio = "https://" . $_SERVER['HTTP_HOST'];
+         $dominio = "http://" . $_SERVER['HTTP_HOST'];
         // Validación de datos
         if (empty($Asunto) || empty($Titulo) || empty($Mensaje)) {
             echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
@@ -168,7 +170,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 font-size: 14px;
                                 color: #666;
                             ">
-                                Si prefieres no recibir noticias sobre nosotros, puedes <a href="#" style="color: #4F959D; text-decoration: underline;">eliminar la suscripción</a> desde el formulario de suscripción en el inicio.
+                                Si prefieres no recibir noticias sobre nosotros, puedes <a href="'.$dominio.'index.html?error=11" style="color: #4F959D; text-decoration: underline;">eliminar la suscripción</a> desde el formulario de suscripción en la pagina de inicio.
                             </p>
 
                             <p style="
