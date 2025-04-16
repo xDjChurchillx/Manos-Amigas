@@ -14,14 +14,30 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Hashear la contraseña
     $hash = password_hash($password, PASSWORD_BCRYPT);
 
-    // Insertar el usuario en la base de datos
-    $stmt = $conn->prepare("INSERT INTO usuario (Usuario, Contrasena) VALUES (?, ?)");
-    $stmt->bind_param("ss", $username, $hash);
-    $stmt->execute();
 
-    if ($stmt->affected_rows > 0) {
-        echo "Usuario registrado exitosamente.".$password;
-    } else {
-        echo "Error al registrar el usuario.";
+    $stmt = $conn->prepare('CALL sp_RegistrarUsuario(?, ?)');
+    if (!$stmt) {
+        echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
+        exit();
     }
+
+    $stmt->bind_param('ss', $username, $hash);
+
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $row = $result->fetch_assoc();
+
+    if (array_key_exists('Success', $row)) {
+        echo json_encode([
+            'status' => 'Success'            
+        ]);
+        exit();
+    }else {
+	    echo json_encode([
+            'status' => 'error',
+            'ex' => 'Usuario o token inválido.'
+        ]);
+        exit();
+   }  
+   
 }
