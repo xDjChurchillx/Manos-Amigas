@@ -81,7 +81,7 @@ $username = $_SESSION['username'];
                  // Liberar los resultados de la primera consulta
                 $result->free();
                 $stmt->close();
-                
+                $hash = password_hash($nuevaContrasena, PASSWORD_BCRYPT);
                 // Actualizar en la base de datos
                 $stmt = $conn->prepare('CALL sp_ActualizarUsuario(?, ?, ?, ?)');
                 if (!$stmt) {
@@ -89,7 +89,7 @@ $username = $_SESSION['username'];
                     exit();
                 }
 
-                $stmt->bind_param('ssss', $username, $token, $User,$nuevaContrasena);
+                $stmt->bind_param('ssss', $username, $token, $User,$hash);
 
                 $stmt->execute();
                 $result = $stmt->get_result();
