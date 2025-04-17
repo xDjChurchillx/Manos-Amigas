@@ -193,7 +193,7 @@ try{
     $panel = '   
         <section class="w-100">
                 <div class="row text-center mtop justify-content-center">
-	                <div class="col-6 col-md-3">
+	                <div class="col-6 col-md-3 mb-3">
 	                    <div class="counter c1">
                             <img class="icono-big" src="../assets/img/iconos/ojo.svg" alt="icono" >
                                 <h2 id="visitas" class="timer count-title count-number" data-to="'.$sumas['visitas'].'" data-speed="1500"></h2>
