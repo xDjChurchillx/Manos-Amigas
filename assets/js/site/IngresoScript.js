@@ -16,22 +16,28 @@ if (error) {
             errorMessage.textContent = 'Porfavor introducir credenciales.';
             break;
         case '3':
-            errorMessage.textContent = 'Error en la base de datos. Inténtalo más tarde.';
+            Alerta('Error en la base de datos. Inténtalo más tarde.');
             break;
         case '4':
-            errorMessage.textContent = 'Error inesperado. Contacta al soporte.';
+            Alerta('Error inesperado. Contacta al soporte.');
             break;
         case '5':
-            errorMessage.textContent = '...';
+            // modal user datos faltantes
             break;
         case '6':
-            errorMessage.textContent = '...';
+            // modal user formato 
             break;
         case '7':
-            errorMessage.textContent = '...';
+            // modal contrase;a nueva formato 
             break;
         case '8':
-            errorMessage.textContent = '...';
+            // modal contrase;a nueva diferente al confirmar 
+            break;
+        case '9':
+            // modal contrase;a vieja invalida
+            break;
+        case '10':
+            // modal success
             break;
         default:
             errorMessage.textContent = 'Error desconocido.';

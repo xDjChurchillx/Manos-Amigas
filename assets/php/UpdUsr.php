@@ -43,36 +43,78 @@ $username = $_SESSION['username'];
         }
 
         // Additional validations
-        if (strlen($User) < 8 || strlen($nuevaContrasena) < 10 || strlen($User) > 41 || strlen($nuevaContrasena) > 20 || $nuevaContrasena !== $confirmarContrasena) {
-            header("Location: /Gestion/ingreso.html?error=5");
+        if (strlen($User) < 8  || strlen($User) > 41) {
+            header("Location: /Gestion/ingreso.html?error=6");
             exit();
         }
-        // Actualizar en la base de datos
-        $stmt = $conn->prepare('CALL sp_ActualizarUsuario(?, ?, ?, ?)');
+         if (strlen($nuevaContrasena) < 10 || strlen($nuevaContrasena) > 20 ) {
+            header("Location: /Gestion/ingreso.html?error=7");
+            exit();
+        }
+         if ($nuevaContrasena !== $confirmarContrasena) {
+            header("Location: /Gestion/ingreso.html?error=8");
+            exit();
+        }
+        // Obtener el hash de la contraseña almacenada desde la base de datos
+        $stmt = $conn->prepare("CALL sp_Login(?)");
         if (!$stmt) {
-            header("Location: /Gestion/ingreso.html?error=3");
+            header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
             exit();
         }
 
-        $stmt->bind_param('ssss', $username, $token, $User,$nuevaContrasena);
-
+        $stmt->bind_param("s", $username);
         $stmt->execute();
         $result = $stmt->get_result();
-        $row = $result->fetch_assoc();
 
-        if (array_key_exists('Success', $row)) {
-            echo json_encode([
-                    'status' => 'success'
-                ]);
-        } else {
-             echo json_encode([
-                    'status' => 'error',
-                    'ex' => 'Usuario o token inválido.'
-                ]);
+        if ($result === false) {
+            header("Location: /Gestion/ingreso.html?error=3"); // Error en base de datos
+            exit();
         }
 
-        $stmt->close();
-        $conn->close();
+        // Verificar si el usuario existe
+        if ($row = $result->fetch_assoc()) {
+            $storedHash = $row["Contrasena"]; // Hash almacenado en la base de datos
+
+            // Verificar la contraseña usando password_verify()
+            if (password_verify($contrasenaActual, $storedHash)) {  
+
+                 // Liberar los resultados de la primera consulta
+                $result->free();
+                $stmt->close();
+                
+                // Actualizar en la base de datos
+                $stmt = $conn->prepare('CALL sp_ActualizarUsuario(?, ?, ?, ?)');
+                if (!$stmt) {
+                    header("Location: /Gestion/ingreso.html?error=3");
+                    exit();
+                }
+
+                $stmt->bind_param('ssss', $username, $token, $User,$nuevaContrasena);
+
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $row = $result->fetch_assoc();
+
+                if (array_key_exists('Success', $row)) {
+                    header("Location: /Gestion/ingreso.html?error=10"); // Usuario o contraseña incorrectos
+                    exit();
+                exit();
+                } else {
+                     header("Location: /Gestion/ingreso.html?error=1"); // Usuario o contraseña incorrectos
+                     exit();
+                }
+
+                $stmt->close();
+                $conn->close();
+            } else {
+                header("Location: /Gestion/ingreso.html?error=9"); // Usuario o contraseña incorrectos
+                exit();
+            }
+        } else {
+            header("Location: /Gestion/ingreso.html?error=1"); // Usuario o contraseña incorrectos
+            exit();
+        }
+
     }
 
 
