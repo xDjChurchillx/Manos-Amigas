@@ -223,7 +223,7 @@ try{
                         </div>
                 </div>
         </section>
-        <section class="w-100 overflow-auto">
+        <section class="w-100">
             <div class="container m-4">
                 <div class="date-range-container">
                         <div>
