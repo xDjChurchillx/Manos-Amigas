@@ -191,30 +191,30 @@ try{
     ';
 
     $panel = '   
-        <section>
-                <div class="row text-center mtop" style="width: 55vw;">
-	                <div class="col">
+        <section class="w-100">
+                <div class="row text-center mtop justify-content-center">
+	                <div class="col-6 col-md-3">
 	                    <div class="counter c1">
                             <img class="icono-big" src="../assets/img/iconos/ojo.svg" alt="icono" >
                                 <h2 id="visitas" class="timer count-title count-number" data-to="'.$sumas['visitas'].'" data-speed="1500"></h2>
                                 <p class="count-text ">Visitas</p>
                             </div>
 	                </div>
-                    <div class="col">
+                    <div class="col-6 col-md-3">
                         <div class="counter c2">
                                 <img class="icono-big" src="../assets/img/iconos/suscribir.svg" alt="icono" >
                                 <h2 id="suscripciones" class="timer count-title count-number" data-to="'.$sumas['suscripciones'].'" data-speed="1500"></h2>
                                 <p class="count-text ">Suscripciones</p>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col-6 col-md-3">
                             <div class="counter c3">
                             <img class="icono-big" src="../assets/img/iconos/dinero.svg" alt="icono">
                             <h2 id="donaciones" class="timer count-title count-number" data-to="'.$sumas['donaciones'].'" data-speed="1500"></h2>
                             <p class="count-text ">Donaciones</p>
                             </div>
                         </div>
-                        <div class="col">
+                        <div class="col-6 col-md-3">
                             <div class="counter c4">
                                 <img class="icono-big" src="../assets/img/iconos/voluntario.svg" alt="icono">
                                 <h2 id="voluntarios" class="timer count-title count-number" data-to="'.$sumas['voluntarios'].'" data-speed="1500"></h2>
@@ -223,8 +223,8 @@ try{
                         </div>
                 </div>
         </section>
-        <section>
-            <div class="container m-4"  style="width: 55vw;">
+        <section class="w-100 overflow-auto">
+            <div class="container m-4">
                 <div class="date-range-container">
                         <div>
                         <label for="desde">Desde:</label>
