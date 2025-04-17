@@ -96,7 +96,13 @@ body {
 }
 /*   ///////*/
 
-
+.modal-site .modal-header {
+    background: linear-gradient(135deg, var(--primary), var(--secondary));
+    color: white;
+    border-bottom: none;
+    padding: 1.5rem;
+    position: relative;
+}
 
 
 
