@@ -32,23 +32,29 @@ $token = $_COOKIE['token'] ;
 $username = $_SESSION['username'];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $UserActual = trim($_POST['UserActual'] ?? '');
+        $User = trim($_POST['UserActual'] ?? '');
         $contrasenaActual = trim($_POST['contrasenaActual'] ?? '');
         $nuevaContrasena = trim($_POST['nuevaContrasena'] ?? '');
         $confirmarContrasena = trim($_POST['confirmarContrasena'] ?? '');
         // Validación de datos
-        if (empty($UserActual) || empty($contrasenaActual) || empty($nuevaContrasena)) || empty($confirmarContrasena) {
+        if (empty($User) || empty($contrasenaActual) || empty($nuevaContrasena) || empty($confirmarContrasena)) {
+            header("Location: /Gestion/ingreso.html?error=5");
+            exit();
+        }
+
+        // Additional validations
+        if (strlen($User) < 8 || strlen($nuevaContrasena) < 10 || strlen($User) > 41 || strlen($nuevaContrasena) > 20 || $nuevaContrasena !== $confirmarContrasena) {
             header("Location: /Gestion/ingreso.html?error=5");
             exit();
         }
         // Actualizar en la base de datos
-        $stmt = $conn->prepare('CALL sp_ActualizarSuscripcion(?, ?, ?, ?)');
+        $stmt = $conn->prepare('CALL sp_ActualizarUsuario(?, ?, ?, ?)');
         if (!$stmt) {
             header("Location: /Gestion/ingreso.html?error=3");
             exit();
         }
 
-        $stmt->bind_param('ssss', $username, $token, $codigoSuscripcion,$activoSuscripcion);
+        $stmt->bind_param('ssss', $username, $token, $User,$nuevaContrasena);
 
         $stmt->execute();
         $result = $stmt->get_result();

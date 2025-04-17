@@ -261,7 +261,7 @@ try{
                         <div class="modal-body">
                             <div class="mb-3">
                             <label for="UserActual" class="form-label">Usuario</label>
-                            <input type="text" class="form-control" id="UserActual" name="UserActual" required>
+                            <input type="text" class="form-control" id="UserActual" name="UserActual" required value='.$username.'">
                             </div>
                             <div class="mb-3">
                             <label for="contrasenaActual" class="form-label">Contraseña actual</label>
