@@ -184,7 +184,7 @@ try{
                     </svg>
                 </a>
                 <ul class="dropdown-menu bg1color dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item text-white" href="#" data-bs-toggle="modal" data-bs-target="#cambiarContrasenaModal">Cambiar contraseña</a></li>
+                    <li><a class="dropdown-item text-white" href="#" data-bs-toggle="modal" data-bs-target="#EditModal">Editar Perfil</a></li>
                     <li><a class="dropdown-item text-white" href="../assets/php/Logout.php">Cerrar sesión</a></li>
                 </ul>
             </li>
@@ -246,17 +246,21 @@ try{
           </div>
 
 
-        <div class="modal fade" id="cambiarContrasenaModal" tabindex="-1" aria-labelledby="cambiarContrasenaLabel" aria-hidden="true">
+        <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="Editarlabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
     
               <div class="modal-header">
-                <h5 class="modal-title" id="cambiarContrasenaLabel">Cambiar Contraseña</h5>
+                <h5 class="modal-title" id="Editarlabel">Editar Perfil</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
               </div>
       
-              <form id="formCambiarContrasena">
+              <form id="formEditar">
                 <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="UserActual" class="form-label"Usuario</label>
+                    <input type="text" class="form-control" id="UserActual" name="UserActual" required>
+                  </div>
                   <div class="mb-3">
                     <label for="contrasenaActual" class="form-label">Contraseña actual</label>
                     <input type="password" class="form-control" id="contrasenaActual" name="contrasenaActual" required>
