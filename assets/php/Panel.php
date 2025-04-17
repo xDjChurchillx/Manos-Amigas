@@ -257,7 +257,7 @@ try{
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
       
-                    <form action="assets/php/UpdUsr.php" method="POST">
+                    <form action="../assets/php/UpdUsr.php" method="POST">
                         <div class="modal-body">
                             <div class="mb-3">
                             <label for="UserActual" class="form-label">Usuario</label>
