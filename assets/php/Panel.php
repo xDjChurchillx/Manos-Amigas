@@ -200,21 +200,21 @@ try{
                                 <p class="count-text ">Visitas</p>
                             </div>
 	                </div>
-                    <div class="col-6 col-md-3">
+                    <div class="col-6 col-md-3 mb-3">
                         <div class="counter c2">
                                 <img class="icono-big" src="../assets/img/iconos/suscribir.svg" alt="icono" >
                                 <h2 id="suscripciones" class="timer count-title count-number" data-to="'.$sumas['suscripciones'].'" data-speed="1500"></h2>
                                 <p class="count-text ">Suscripciones</p>
                         </div>
                     </div>
-                    <div class="col-6 col-md-3">
+                    <div class="col-6 col-md-3 mb-3">
                             <div class="counter c3">
                             <img class="icono-big" src="../assets/img/iconos/dinero.svg" alt="icono">
                             <h2 id="donaciones" class="timer count-title count-number" data-to="'.$sumas['donaciones'].'" data-speed="1500"></h2>
                             <p class="count-text ">Donaciones</p>
                             </div>
                         </div>
-                        <div class="col-6 col-md-3">
+                        <div class="col-6 col-md-3 mb-3">
                             <div class="counter c4">
                                 <img class="icono-big" src="../assets/img/iconos/voluntario.svg" alt="icono">
                                 <h2 id="voluntarios" class="timer count-title count-number" data-to="'.$sumas['voluntarios'].'" data-speed="1500"></h2>
@@ -257,30 +257,30 @@ try{
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
       
-                    <form id="formEditar">
-                    <div class="modal-body">
-                        <div class="mb-3">
-                        <label for="UserActual" class="form-label">Usuario</label>
-                        <input type="text" class="form-control" id="UserActual" name="UserActual" required>
+                    <form action="assets/php/UpdUsr.php" method="POST">
+                        <div class="modal-body">
+                            <div class="mb-3">
+                            <label for="UserActual" class="form-label">Usuario</label>
+                            <input type="text" class="form-control" id="UserActual" name="UserActual" required>
+                            </div>
+                            <div class="mb-3">
+                            <label for="contrasenaActual" class="form-label">Contraseña actual</label>
+                            <input type="password" class="form-control" id="contrasenaActual" name="contrasenaActual" required>
+                            </div>
+                            <div class="mb-3">
+                            <label for="nuevaContrasena" class="form-label">Nueva contraseña</label>
+                            <input type="password" class="form-control" id="nuevaContrasena" name="nuevaContrasena" required>
+                            </div>
+                            <div class="mb-3">
+                            <label for="confirmarContrasena" class="form-label">Confirmar nueva contraseña</label>
+                            <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
+                            </div>
                         </div>
-                        <div class="mb-3">
-                        <label for="contrasenaActual" class="form-label">Contraseña actual</label>
-                        <input type="password" class="form-control" id="contrasenaActual" name="contrasenaActual" required>
-                        </div>
-                        <div class="mb-3">
-                        <label for="nuevaContrasena" class="form-label">Nueva contraseña</label>
-                        <input type="password" class="form-control" id="nuevaContrasena" name="nuevaContrasena" required>
-                        </div>
-                        <div class="mb-3">
-                        <label for="confirmarContrasena" class="form-label">Confirmar nueva contraseña</label>
-                        <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
-                        </div>
-                    </div>
         
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                        <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                    </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
                     </form>
       
                 </div>

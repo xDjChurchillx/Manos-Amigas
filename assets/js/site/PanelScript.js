@@ -83,6 +83,7 @@ function startPanel(datos) {
         hasta.addEventListener('change', function () { actualizarDatos('2'); });
         opciones.addEventListener('change', function () { actualizarDatos('0'); });
 
+
         // Llamar al contador solo después de que el HTML con los elementos de .timer se haya cargado
         $('.timer').each(function () {
             var $this = $(this);

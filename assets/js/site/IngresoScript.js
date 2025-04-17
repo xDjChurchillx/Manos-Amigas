@@ -1,8 +1,8 @@
-// Obtener par·metros de la URL
+Ôªø// Obtener par√°metros de la URL
 const urlParams = new URLSearchParams(window.location.search);
 const error = urlParams.get('error');
 
-// Seleccionar el contenedor donde mostrar·s el mensaje
+// Seleccionar el contenedor donde mostrar√°s el mensaje
 const errorMessage = document.getElementById('error-message');
 
 if (error) {
@@ -16,10 +16,22 @@ if (error) {
             errorMessage.textContent = 'Porfavor introducir credenciales.';
             break;
         case '3':
-            errorMessage.textContent = 'Error en la base de datos. IntÈntalo m·s tarde.';
+            errorMessage.textContent = 'Error en la base de datos. Int√©ntalo m√°s tarde.';
             break;
         case '4':
             errorMessage.textContent = 'Error inesperado. Contacta al soporte.';
+            break;
+        case '5':
+            errorMessage.textContent = '...';
+            break;
+        case '6':
+            errorMessage.textContent = '...';
+            break;
+        case '7':
+            errorMessage.textContent = '...';
+            break;
+        case '8':
+            errorMessage.textContent = '...';
             break;
         default:
             errorMessage.textContent = 'Error desconocido.';
