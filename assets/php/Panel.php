@@ -246,7 +246,7 @@ try{
           </div>
 
 
-        <div class="modal fade" id="EditModal" tabindex="-1" aria-labelledby="Editarlabel" aria-hidden="true">
+        <div class="modal modal-perfil fade" id="EditModal" tabindex="-1" aria-labelledby="Editarlabel" aria-hidden="true">
           <div class="modal-dialog">
             <div class="modal-content">
     
