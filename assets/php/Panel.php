@@ -224,7 +224,7 @@ try{
                 </div>
         </section>
         <section class="w-100">
-            <div class="container m-4">
+            <div class="container p-4">
                 <div class="date-range-container">
                         <div>
                         <label for="desde">Desde:</label>
