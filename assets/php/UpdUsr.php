@@ -44,7 +44,7 @@ $username = $_SESSION['username'];
 
         // Additional validations
         if (strlen($User) < 8  || strlen($User) > 41) {
-            header("Location: /Gestion/ingreso.html?error=6");
+            header("Location: /Gestion/ingreso.html?error=6".strlen($User));
             exit();
         }
          if (strlen($nuevaContrasena) < 10 || strlen($nuevaContrasena) > 20 ) {
