@@ -192,7 +192,7 @@ try{
 
     $panel = '   
         <section>
-                <div class="row text-center mtop">
+                <div class="row text-center mtop" style="width: 55vw;">
 	                <div class="col">
 	                    <div class="counter c1">
                             <img class="icono-big" src="../assets/img/iconos/ojo.svg" alt="icono" >
