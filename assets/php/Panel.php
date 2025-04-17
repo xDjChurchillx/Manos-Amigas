@@ -258,7 +258,7 @@ try{
               <form id="formEditar">
                 <div class="modal-body">
                   <div class="mb-3">
-                    <label for="UserActual" class="form-label"Usuario</label>
+                    <label for="UserActual" class="form-label">Usuario</label>
                     <input type="text" class="form-control" id="UserActual" name="UserActual" required>
                   </div>
                   <div class="mb-3">
