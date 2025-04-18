@@ -248,7 +248,7 @@ try{
         </section>        
          <!-- modals -->
         <section>
-            <div class="modal modal-site fade" id="EditModal" tabindex="-1" aria-labelledby="Editarlabel" aria-hidden="true">
+            <div class="modal modal-site fade" id="ModalEditUsr" tabindex="-1" aria-labelledby="Editarlabel" aria-hidden="true">
                 <div class="modal-dialog">
                 <div class="modal-content">
     
