@@ -184,7 +184,7 @@ try{
                     </svg>
                 </a>
                 <ul class="dropdown-menu bg1color dropdown-menu-dark dropdown-menu-end" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item text-white" href="#" data-bs-toggle="modal" data-bs-target="#EditModal">Editar Perfil</a></li>
+                    <li><a class="dropdown-item text-white" href="#" data-bs-toggle="modal" data-bs-target="#ModalEditUsr">Editar Perfil</a></li>
                     <li><a class="dropdown-item text-white" href="../assets/php/Logout.php">Cerrar sesión</a></li>
                 </ul>
             </li>
