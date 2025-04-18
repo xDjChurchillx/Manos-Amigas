@@ -41,7 +41,7 @@ try{
     $buscar = filter_var($buscar, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
     $buscar = htmlspecialchars($buscar, ENT_QUOTES, 'UTF-8');
 
-    //Obtener estadisticas de la base de datos
+    //Obtener actividades de la base de datos
     $stmt = $conn->prepare("CALL sp_ListarActividades(?)");
     $stmt->bind_param('s', $buscar);
     if (!$stmt) {
@@ -266,7 +266,7 @@ try{
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
       
-                    <form id="editarForm">
+                    <form id="editarUsrForm">
                         <div class="modal-body">
                             <div class="mb-3">
                             <label for="UserActual" class="form-label">Usuario</label>
@@ -305,7 +305,7 @@ try{
         'panel' => $panel,
         'filas' => $rows,
         'b'=> $buscar,        
-        'name0' => 'editarForm',
+        'name0' => 'editarUsrForm',
         'name1' => 'rEditUser',
         'url1' => '../assets/php/UpdUsr.php',
         'name2' => 'crearForm',
