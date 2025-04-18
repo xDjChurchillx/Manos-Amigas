@@ -276,7 +276,7 @@ try{
                             <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
                             </div>
                         </div>
-                        <span id="respuestaEditU" class="text-danger"></span>
+                        <span id="rEditUser" class="text-danger"></span>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary">Guardar cambios</button>
@@ -304,8 +304,9 @@ try{
         'data2' => $data2,
         'data3' => $data3,
         'data4' => $data4,
-        'cat' => $cat,
-        'name1' => 'editarForm',
+        'cat' => $cat,        
+        'name0' => 'editarForm',
+        'name1' => 'rEditUser',
         'url1' => '../assets/php/UpdUsr.php',
         'name2' => 'Visitas',
         'name3' => 'Suscripciones',

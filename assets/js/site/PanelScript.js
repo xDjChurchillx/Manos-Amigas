@@ -49,7 +49,7 @@ function startPanel(datos) {
         document.getElementById('navbaritems').innerHTML = datos.navbar;
         document.getElementById('panel').innerHTML = datos.panel;
 
-        document.getElementById(datos.name1).addEventListener("submit", function (event) {
+        document.getElementById(datos.name0).addEventListener("submit", function (event) {
             event.preventDefault(); // Evita el postback
 
             let formData = new FormData(this); // Captura los datos del formulario
@@ -67,7 +67,7 @@ function startPanel(datos) {
                             location.reload();
                         } else {
                             if ("ex" in data) {
-                                document.getElementById("respuestaEditU").innerHTML = data.ex;
+                                document.getElementById(datos.name1).innerHTML = data.ex;
                             } else {
                                 Alerta("Error al actualizar la actividad.");
                             }
