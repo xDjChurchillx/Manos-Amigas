@@ -1,6 +1,6 @@
 ﻿// Objeto global para almacenar los datos
 let listaActividades = {};
-let datosGlobal;
+let urlAux;
 
 document.addEventListener("DOMContentLoaded", function () {
    // Llamar a la función de verificación de sesión al cargar la página
@@ -50,7 +50,7 @@ function startSession() {
 function startPanel(datos) {
     try {
         console.log(datos);
-        datosGlobal = datos;
+        urlAux = datos.url4;
         // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
         document.getElementById('navbaritems').innerHTML = datos.navbar;
         document.getElementById('panel').innerHTML = datos.panel;
@@ -252,7 +252,7 @@ function del(id, nombre) {
         content: 'Actividad: ' + nombre,
         buttons: {
             confirmar: function () {
-                fetch(datosGlobal.url4, {
+                fetch(urlAux, {
                     method: 'POST',
                     credentials: 'same-origin',
                     headers: {

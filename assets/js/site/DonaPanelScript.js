@@ -1,6 +1,6 @@
 ﻿// Objeto global para almacenar los datos
 let listaDonaciones = {};
-let datosGlobal;
+let urlAux;
 
 document.addEventListener("DOMContentLoaded", function () {
     // Llamar a la función de verificación de sesión al cargar la página
@@ -50,7 +50,7 @@ function startSession() {
 function startPanel(datos) {
     try {
         console.log(datos);
-        datosGlobal = datos;
+        urlAux = datos.url2;
         // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
         document.getElementById('navbaritems').innerHTML = datos.navbar;
         document.getElementById('panel').innerHTML = datos.panel;
@@ -146,7 +146,7 @@ function del(id) {
         content: 'Donacion: ' + id,
         buttons: {
             confirmar: function () {
-                fetch(datosGlobal.url2, {
+                fetch(urlAux, {
                     method: 'POST',
                     credentials: 'same-origin',
                     headers: {
