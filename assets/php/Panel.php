@@ -1,5 +1,5 @@
 ﻿<?php
-// Repetimos la misma configuración de sesión para asegurar consistencia
+// Configuracion de Cookies y Base de datos 
 ini_set('session.use_only_cookies', 1);
 require '../../../Private/Credentials/DataBase/connection.php';
 header('Content-Type: application/json; charset=UTF-8');
@@ -7,8 +7,8 @@ try{
     session_set_cookie_params([
         'lifetime' => 0, // Hasta cerrar navegador
         'path' => '/',
-        'domain' => '', // Cambia por tu dominio real
-        'secure' => false, // Solo HTTPS (IMPORTANTE en producción)
+        'domain' => '', 
+        'secure' => false, // Solo HTTPS 
         'httponly' => true, // No accesible desde JavaScript
         'samesite' => 'Strict', // Protección contra CSRF
     ]);
@@ -22,20 +22,18 @@ try{
         // No autenticado o sesión alterada
             setcookie('token', '', time() - 3600, '/');
             session_unset(); // Limpia variables de sesión
-            session_destroy(); // Elimina la sesión
-
-    
-        // Retornar JSON con error
+            session_destroy(); // Elimina la sesión    
+        // Retornar error de credenciales invalidas
         echo json_encode([
             'status' => 'error',
             'redirect' => '/Gestion/ingreso.html?error=1'
         ]);
         exit();
     }
-    ////////////////////////////////////////////////////////////////////////////////////////////
+    //Sesion valida
     $token = $_COOKIE['token'] ;
     $username = $_SESSION['username'];
-
+    //variables de estaditica para el panel
     $data1 = [];
     $data2 = [];
     $data3 = [];
@@ -47,6 +45,7 @@ try{
         'c' => 0,
         'd' => 0
     ];
+    //Verificar si hay inputs para el panel
     $datos = json_decode(file_get_contents('php://input'), true);
     if ($datos === null) {
         if (isset($_SESSION['datos'])) {
@@ -62,9 +61,9 @@ try{
     if (empty($datos['fechaHasta'])) {
         $datos['fechaHasta'] = date('Y-m-d');
     }
-
     $date1 = new DateTime($datos['fechaDesde']);
     $date2 = new DateTime($datos['fechaHasta']);
+    //obtener estadisticas de la base de datos
     $stmt = $conn->prepare('CALL sp_ObtenerEstadisticas(?,?,?,?)');
     if (!$stmt) {
          echo json_encode([
@@ -73,7 +72,6 @@ try{
         ]);
         exit();
     }
-
     $stmt->bind_param('ssss', $username,$token,$datos['fechaDesde'],$datos['fechaHasta']);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -85,6 +83,7 @@ try{
         ]);
         exit();
     }
+    //iterar en los resultados de la base de datos
     $rows = [];
     while ($row = $result->fetch_assoc()) {
          if (array_key_exists('Error', $row)) {
@@ -103,15 +102,16 @@ try{
     // Calcular la diferencia en días entre las dos fechas
     $diff = $date1->diff($date2);
     $diasDiferencia = $diff->days + 1;
-
+    //crear los rangos
     if ($diasDiferencia <= 7) {
+        //por semana
        $diasSemana = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
         $period = new DatePeriod($date1, new DateInterval('P1D'), $date2->modify('+1 day'));
         foreach ($period as $date) {
             $cat[] = $diasSemana[$date->format('w')]; // Obtener el nombre en español
         }
     } elseif ($diasDiferencia <= 90) {
-        // Bloques de tiempo
+        //por rangos
         $numBloques = 7;
         $intervalo = ($date2->getTimestamp() - $date1->getTimestamp()) / $numBloques;
         for ($i = 0; $i < $numBloques; $i++) {
@@ -124,7 +124,7 @@ try{
             $cat[] = "Del $inicio al $fin";
         }
     } else {
-        // Por mes
+        //por mes
         $period = new DatePeriod($date1, new DateInterval('P1M'), $date2->modify('+1 month'));
         foreach ($period as $date) {
             $cat[] = $date->format('M Y');
@@ -140,13 +140,11 @@ try{
         $index = null;
 
         if ($diasDiferencia <= 7) {
-            // Calcular diferencia de días desde fechaDesde
             $diffRow = $date1->diff($fecha);
             $index = $diffRow->days; 
         } elseif ($diasDiferencia <= 90) {
             $timestamp = $fecha->getTimestamp();
             $index = floor(($timestamp - $date1->getTimestamp()) / $intervalo);
-            // Asegurar que el índice no exceda el número de bloques
             $index = min($index, $numBloques - 1);
         } else {
             $monthYear = $fecha->format('M Y');
@@ -160,6 +158,7 @@ try{
             $data4[$index] += $row['Voluntarios'];
         }
     }
+    //navbar para el html
     $navbar = '
             <li class="nav-item">
                 <a class="nav-link" href="Panel.html">Panel</a>
@@ -189,7 +188,7 @@ try{
                 </ul>
             </li>
     ';
-
+    //panel para el html
     $panel = '   
         <section class="w-100">
                 <div class="row text-center mtop justify-content-center">
@@ -268,11 +267,11 @@ try{
                             <input type="password" class="form-control" id="contrasenaActual" name="contrasenaActual" required>
                             </div>
                             <div class="mb-3">
-                            <label for="nuevaContrasena" class="form-label">Nueva contraseña</label>
+                            <label for="nuevaContrasena" class="form-label">Nueva contraseña(opcional)</label>
                             <input type="password" class="form-control" id="nuevaContrasena" name="nuevaContrasena" required>
                             </div>
                             <div class="mb-3">
-                            <label for="confirmarContrasena" class="form-label">Confirmar nueva contraseña</label>
+                            <label for="confirmarContrasena" class="form-label">Confirmar nueva contraseña(opcional)</label>
                             <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
                             </div>
                         </div>
@@ -293,7 +292,7 @@ try{
     ';
 
 
-    // Si pasa todas las validaciones, se puede mostrar el contenido
+    // retorno de todos los valores necesarios para el panel
     echo json_encode([
         'status' => 'success',
         'navbar' => $navbar,
