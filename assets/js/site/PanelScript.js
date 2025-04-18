@@ -67,7 +67,7 @@ function startPanel(datos) {
                             location.reload();
                         } else {
                             if ("ex" in data) {
-                                document.getElementById("respuestaE").innerHTML = data.ex;
+                                document.getElementById("respuestaEditU").innerHTML = data.ex;
                             } else {
                                 Alerta("Error al actualizar la actividad.");
                             }

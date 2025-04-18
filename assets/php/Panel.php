@@ -276,7 +276,7 @@ try{
                             <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
                             </div>
                         </div>
-        
+                        <span id="respuestaEditU" class="text-danger"></span>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-primary">Guardar cambios</button>
