@@ -68,7 +68,7 @@ function startPanel(datos) {
             fetch(datos.url1, {
                 method: "POST",
                 body: formData
-            })
+            }) 
                 .then(response => response.text())
                 .then(text => {
                     try {
