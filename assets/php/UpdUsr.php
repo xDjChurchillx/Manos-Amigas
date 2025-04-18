@@ -24,8 +24,11 @@ if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
         session_unset(); // Limpia variables de sesión
         session_destroy(); // Elimina la sesión  
    
-       header("Location: /Gestion/ingreso.html?error=1");
-       exit();
+         echo json_encode([
+            'status' => 'error',
+            'redirect' => '/Gestion/ingreso.html?error=1'
+        ]);
+        exit();
 }
 ////////////////////////////////////////////////////////////////////////////////////////////
 $token = $_COOKIE['token'] ;
@@ -38,27 +41,27 @@ $username = $_SESSION['username'];
         $confirmarContrasena = trim($_POST['confirmarContrasena'] ?? '');
         // Validación de datos
         if (empty($User) || empty($contrasenaActual) || empty($nuevaContrasena) || empty($confirmarContrasena)) {
-            header("Location: /Gestion/ingreso.html?error=5");
+            echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
             exit();
         }
 
         // Additional validations
         if (strlen($User) < 8  || strlen($User) > 41) {
-            header("Location: /Gestion/ingreso.html?error=6".strlen($User));
+            echo json_encode(["status" => "error", "ex" => "Formato de Usuario incorrecto(de 8 a 40 caracteres)"]);
             exit();
         }
          if (strlen($nuevaContrasena) < 10 || strlen($nuevaContrasena) > 20 ) {
-            header("Location: /Gestion/ingreso.html?error=7");
+            echo json_encode(["status" => "error", "ex" => "Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)"]);
             exit();
         }
          if ($nuevaContrasena !== $confirmarContrasena) {
-            header("Location: /Gestion/ingreso.html?error=8");
+            echo json_encode(["status" => "error", "ex" => "Contraseña de confirmacion no coincide"]);
             exit();
         }
         // Obtener el hash de la contraseña almacenada desde la base de datos
         $stmt = $conn->prepare("CALL sp_Login(?)");
         if (!$stmt) {
-            header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
+            echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
             exit();
         }
 
@@ -67,7 +70,7 @@ $username = $_SESSION['username'];
         $result = $stmt->get_result();
 
         if ($result === false) {
-            header("Location: /Gestion/ingreso.html?error=3"); // Error en base de datos
+            echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
             exit();
         }
 
@@ -85,7 +88,7 @@ $username = $_SESSION['username'];
                 // Actualizar en la base de datos
                 $stmt = $conn->prepare('CALL sp_ActualizarUsuario(?, ?, ?, ?)');
                 if (!$stmt) {
-                    header("Location: /Gestion/ingreso.html?error=3");
+                    echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
                     exit();
                 }
 
@@ -96,22 +99,22 @@ $username = $_SESSION['username'];
                 $row = $result->fetch_assoc();
 
                 if (array_key_exists('Success', $row)) {
-                    header("Location: /Gestion/ingreso.html?error=10"); // Usuario o contraseña incorrectos
+                    echo json_encode(['status' => 'success']);
                     exit();
                 exit();
                 } else {
-                     header("Location: /Gestion/ingreso.html?error=1"); // Usuario o contraseña incorrectos
+                     echo json_encode(['status' => 'error', 'ex' => 'Error en las credenciales']);
                      exit();
                 }
 
                 $stmt->close();
                 $conn->close();
             } else {
-                header("Location: /Gestion/ingreso.html?error=9"); // Usuario o contraseña incorrectos
+                echo json_encode(['status' => 'error', 'ex' => 'Contraseña Incorrecta']);
                 exit();
             }
         } else {
-            header("Location: /Gestion/ingreso.html?error=1"); // Usuario o contraseña incorrectos
+            echo json_encode(['status' => 'error', 'ex' => 'Usuario Incorrecto']);
             exit();
         }
 

@@ -42,10 +42,10 @@ try{
     $data4 = [];
     $cat = [];
     $sumas = [
-        'visitas' => 0,
-        'suscripciones' => 0,
-        'donaciones' => 0,
-        'voluntarios' => 0
+        'a' => 0,
+        'b' => 0,
+        'c' => 0,
+        'd' => 0
     ];
     $datos = json_decode(file_get_contents('php://input'), true);
     if ($datos === null) {
@@ -94,10 +94,10 @@ try{
             ]);
             exit();
         }
-        $sumas['visitas'] += $row['Visitas'];
-        $sumas['suscripciones'] += $row['Suscripciones'];
-        $sumas['donaciones'] += $row['Donaciones'];
-        $sumas['voluntarios'] += $row['Voluntarios'];
+        $sumas['a'] += $row['Visitas'];
+        $sumas['b'] += $row['Suscripciones'];
+        $sumas['c'] += $row['Donaciones'];
+        $sumas['d'] += $row['Voluntarios'];
         $rows[] = $row;
     }
     // Calcular la diferencia en días entre las dos fechas
@@ -196,28 +196,28 @@ try{
 	                <div class="col-6 col-md-3 mb-3">
 	                    <div class="counter c1">
                             <img class="icono-big" src="../assets/img/iconos/ojo.svg" alt="icono" >
-                                <h2 id="visitas" class="timer count-title count-number" data-to="'.$sumas['visitas'].'" data-speed="1500"></h2>
+                                <h2 id="a" class="timer count-title count-number" data-to="'.$sumas['a'].'" data-speed="1500"></h2>
                                 <p class="count-text ">Visitas</p>
                             </div>
 	                </div>
                     <div class="col-6 col-md-3 mb-3">
                         <div class="counter c2">
                                 <img class="icono-big" src="../assets/img/iconos/suscribir.svg" alt="icono" >
-                                <h2 id="suscripciones" class="timer count-title count-number" data-to="'.$sumas['suscripciones'].'" data-speed="1500"></h2>
+                                <h2 id="b" class="timer count-title count-number" data-to="'.$sumas['b'].'" data-speed="1500"></h2>
                                 <p class="count-text ">Suscripciones</p>
                         </div>
                     </div>
                     <div class="col-6 col-md-3 mb-3">
                             <div class="counter c3">
                             <img class="icono-big" src="../assets/img/iconos/dinero.svg" alt="icono">
-                            <h2 id="donaciones" class="timer count-title count-number" data-to="'.$sumas['donaciones'].'" data-speed="1500"></h2>
+                            <h2 id="c" class="timer count-title count-number" data-to="'.$sumas['c'].'" data-speed="1500"></h2>
                             <p class="count-text ">Donaciones</p>
                             </div>
                         </div>
                         <div class="col-6 col-md-3 mb-3">
                             <div class="counter c4">
                                 <img class="icono-big" src="../assets/img/iconos/voluntario.svg" alt="icono">
-                                <h2 id="voluntarios" class="timer count-title count-number" data-to="'.$sumas['voluntarios'].'" data-speed="1500"></h2>
+                                <h2 id="d" class="timer count-title count-number" data-to="'.$sumas['d'].'" data-speed="1500"></h2>
                                 <p class="count-text ">Voluntarios</p>
                             </div>
                         </div>
@@ -257,7 +257,7 @@ try{
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                     </div>
       
-                    <form action="../assets/php/UpdUsr.php" method="POST">
+                    <form id="editarForm">
                         <div class="modal-body">
                             <div class="mb-3">
                             <label for="UserActual" class="form-label">Usuario</label>
@@ -304,7 +304,13 @@ try{
         'data2' => $data2,
         'data3' => $data3,
         'data4' => $data4,
-        'cat' => $cat
+        'cat' => $cat,
+        'name1' => 'editarForm',
+        'url1' => '../assets/php/UpdUsr.php'
+        'name2' => 'editarForm',
+        'name3' => 'editarForm',
+        'name4' => 'editarForm',
+        'name5' => 'editarForm'
     ]);
 } catch (Exception $ex) {
      echo json_encode([

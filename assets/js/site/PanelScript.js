@@ -48,6 +48,40 @@ function startPanel(datos) {
         // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
         document.getElementById('navbaritems').innerHTML = datos.navbar;
         document.getElementById('panel').innerHTML = datos.panel;
+
+        document.getElementById(datos.name1).addEventListener("submit", function (event) {
+            event.preventDefault(); // Evita el postback
+
+            let formData = new FormData(this); // Captura los datos del formulario
+
+            fetch(datos.url1, {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.text())
+                .then(text => {
+                    try {
+                        console.log(text);
+                        let data = JSON.parse(text);
+                        if (data.status === "success") {
+                            location.reload();
+                        } else {
+                            if ("ex" in data) {
+                                document.getElementById("respuestaE").innerHTML = data.ex;
+                            } else {
+                                Alerta("Error al actualizar la actividad.");
+                            }
+                            if ("redirect" in data) {
+                                window.location.href = data.redirect;
+                            }
+                        }
+                    } catch (error) {
+                        console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                        Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+                    }
+                })
+                .catch(error => console.error("Error en la solicitud:", error));
+        });
         // Obtener los elementos
         desde = document.getElementById('desde');
         hasta = document.getElementById('hasta');
@@ -93,10 +127,10 @@ function startPanel(datos) {
 
         const options = {
             series: [
-                { name: "Visitas", data: datos.data1 },
-                { name: "Suscripciones", data: datos.data2 },
-                { name: "Donaciones", data: datos.data3 },
-                { name: "Voluntarios", data: datos.data4 }
+                { name: datos.name2, data: datos.data1 },
+                { name: datos.name3, data: datos.data2 },
+                { name: datos.name4, data: datos.data3 },
+                { name: datos.name5, data: datos.data4 }
             ],
             legend: { position: "bottom" },
             theme: { palette: "palette4" },
@@ -177,16 +211,16 @@ async function actualizarDatos(val) {
         try {
             const data = JSON.parse(text);
             if (data.status === "success") {
-                document.getElementById("visitas").innerText = data.sumas.visitas;
-                document.getElementById("suscripciones").innerText = data.sumas.suscripciones;
-                document.getElementById("donaciones").innerText = data.sumas.donaciones;
-                document.getElementById("voluntarios").innerText = data.sumas.voluntarios;
+                document.getElementById("a").innerText = data.sumas.a;
+                document.getElementById("b").innerText = data.sumas.b;
+                document.getElementById("c").innerText = data.sumas.c;
+                document.getElementById("d").innerText = data.sumas.d;
                 chart.updateOptions({
                     series: [
-                        { name: "Visitas", data: data.data1 },
-                        { name: "Suscripciones", data: data.data2 },
-                        { name: "Donaciones", data: data.data3 },
-                        { name: "Voluntarios", data: data.data4 }
+                        { name: data.name2, data: data.data1 },
+                        { name: data.name3, data: data.data2 },
+                        { name: data.name4, data: data.data3 },
+                        { name: data.name5, data: data.data4 }
                     ],
                     xaxis: {
                         categories: data.cat
