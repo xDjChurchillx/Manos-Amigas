@@ -306,11 +306,11 @@ try{
         'data4' => $data4,
         'cat' => $cat,
         'name1' => 'editarForm',
-        'url1' => '../assets/php/UpdUsr.php'
-        'name2' => 'editarForm',
-        'name3' => 'editarForm',
-        'name4' => 'editarForm',
-        'name5' => 'editarForm'
+        'url1' => '../assets/php/UpdUsr.php',
+        'name2' => 'Visitas',
+        'name3' => 'Suscripciones',
+        'name4' => 'Donaciones',
+        'name5' => 'Voluntarios'
     ]);
 } catch (Exception $ex) {
      echo json_encode([
