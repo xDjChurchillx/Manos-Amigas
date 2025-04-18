@@ -1,5 +1,6 @@
 ﻿// Objeto global para almacenar los datos
 let listaDonaciones = {};
+let datosGlobal;
 
 document.addEventListener("DOMContentLoaded", function () {
     // Llamar a la función de verificación de sesión al cargar la página
@@ -49,6 +50,7 @@ function startSession() {
 function startPanel(datos) {
     try {
         console.log(datos);
+        datosGlobal = datos;
         // Si la sesión es válida, mostrar el contenido HTML devuelto en el JSON
         document.getElementById('navbaritems').innerHTML = datos.navbar;
         document.getElementById('panel').innerHTML = datos.panel;
@@ -60,7 +62,37 @@ function startPanel(datos) {
         datos.filas.forEach(function (item) {
             listaDonaciones[item.Codigo] = item;
         });
-
+        document.getElementById(datos.name0).addEventListener("submit", function (event) {
+            event.preventDefault(); // Evita el postback
+            let formData = new FormData(this); // Captura los datos del formulario
+            fetch(datos.url1, {
+                method: "POST",
+                body: formData
+            })
+                .then(response => response.text())
+                .then(text => {
+                    try {
+                        console.log(text);
+                        let data = JSON.parse(text);
+                        if (data.status === "success") {
+                            location.reload();
+                        } else {
+                            if ("ex" in data) {
+                                document.getElementById(datos.name1).innerHTML = data.ex;
+                            } else {
+                                Alerta("Error al actualizar la actividad.");
+                            }
+                            if ("redirect" in data) {
+                                window.location.href = data.redirect;
+                            }
+                        }
+                    } catch (error) {
+                        console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                        Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+                    }
+                })
+                .catch(error => console.error("Error en la solicitud:", error));
+        });
        
     } catch (e) {
         console.error("Error iniciando panel:", e); // Imprime el texto antes de que falle
@@ -114,7 +146,7 @@ function del(id) {
         content: 'Donacion: ' + id,
         buttons: {
             confirmar: function () {
-                fetch('../assets/php/DelDona.php', {
+                fetch(datosGlobal.url2, {
                     method: 'POST',
                     credentials: 'same-origin',
                     headers: {
@@ -129,7 +161,6 @@ function del(id) {
                         try {
                             let data = JSON.parse(text);
                             if (data.status === 'success') {
-                                //    Alerta(data.mensaje); // Donacion eliminada exitosamente
                                 location.reload();
                             } else {
                                 if ("ex" in data) {

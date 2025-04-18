@@ -224,7 +224,7 @@ $panel .= '</div>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
       
-                <form id="editarForm">
+                <form id="editarUsrForm">
                     <div class="modal-body">
                         <div class="mb-3">
                         <label for="UserActual" class="form-label">Usuario</label>
@@ -263,9 +263,10 @@ echo json_encode([
     'panel' => $panel,
     'filas' => $rows,
     'b'=> $buscar,        
-    'name0' => 'editarForm',
+    'name0' => 'editarUsrForm',
     'name1' => 'rEditUser',
     'url1' => '../assets/php/UpdUsr.php',
+    'url2' => '../assets/php/DelDona.php'
 ]);
 } catch (Exception $ex) {
      echo json_encode([

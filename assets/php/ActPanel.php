@@ -312,13 +312,7 @@ try{
         'url2' => '../assets/php/AddAct.php',
         'name3' => 'editarForm',
         'url3' => '../assets/php/UpdAct.php',
-        'name4' => 'codigoE',
-        'name5' => 'nombreE',
-        'name6' => 'descripcionE',
-        'name7' => 'fechaE',
-        'name8' => 'visibleE',
-        'name9' => 'listImg',
-         'url4' => '../assets/php/DelAct.php'
+        'url4' => '../assets/php/DelAct.php'
     ]);
 } catch (Exception $ex) {
      echo json_encode([

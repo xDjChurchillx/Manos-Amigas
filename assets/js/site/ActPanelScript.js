@@ -183,18 +183,18 @@ function edit(id) {
     }
 
     // Rellenar los campos del formulario con los datos del item
-    document.getElementById(datosGlobal.name4).value = id;
-    document.getElementById(datosGlobal.name5).value = item.Nombre;
-    document.getElementById(datosGlobal.name6).value = item.Descripcion;
-    document.getElementById(datosGlobal.name7).value = item.Fecha;
+    document.getElementById('codigoE').value = id;
+    document.getElementById('nombreE').value = item.Nombre;
+    document.getElementById('descripcionE').value = item.Descripcion;
+    document.getElementById('fechaE').value = item.Fecha;
     if (item.Visible === 1) {
-        document.getElementById(datosGlobal.name8).checked = true;
+        document.getElementById('visibleE').checked = true;
     } else {
-        document.getElementById(datosGlobal.name8).checked = false;
+        document.getElementById('visibleE').checked = false;
     }
 
 
-    const listImg = document.getElementById(datosGlobal.name9);
+    const listImg = document.getElementById('listImg');
     listImg.innerHTML = '';
 
     const imagenes = JSON.parse(item.Img);
