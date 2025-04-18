@@ -30,9 +30,11 @@ try{
         ]);
         exit();
     }
+
     //Sesion valida
     $token = $_COOKIE['token'] ;
     $username = $_SESSION['username'];
+
     //variables de estaditica para el panel
     $data1 = [];
     $data2 = [];
@@ -45,6 +47,7 @@ try{
         'c' => 0,
         'd' => 0
     ];
+
     //Verificar si hay inputs para el panel
     $datos = json_decode(file_get_contents('php://input'), true);
     if ($datos === null) {
@@ -54,6 +57,7 @@ try{
     }else{
         $_SESSION['datos'] = $datos;
     }
+
     // Establecer fechas predeterminadas si no se proporcionan
     if (empty($datos['fechaDesde'])) {
         $datos['fechaDesde'] = date('Y-m-d', strtotime('-6 days'));
@@ -63,7 +67,8 @@ try{
     }
     $date1 = new DateTime($datos['fechaDesde']);
     $date2 = new DateTime($datos['fechaHasta']);
-    //obtener estadisticas de la base de datos
+
+    //Obtener estadisticas de la base de datos
     $stmt = $conn->prepare('CALL sp_ObtenerEstadisticas(?,?,?,?)');
     if (!$stmt) {
          echo json_encode([
@@ -83,7 +88,8 @@ try{
         ]);
         exit();
     }
-    //iterar en los resultados de la base de datos
+
+    //Iterar en los resultados de la base de datos
     $rows = [];
     while ($row = $result->fetch_assoc()) {
          if (array_key_exists('Error', $row)) {
@@ -99,9 +105,11 @@ try{
         $sumas['d'] += $row['Voluntarios'];
         $rows[] = $row;
     }
+
     // Calcular la diferencia en días entre las dos fechas
     $diff = $date1->diff($date2);
     $diasDiferencia = $diff->days + 1;
+
     //crear los rangos
     if ($diasDiferencia <= 7) {
         //por semana
@@ -130,7 +138,8 @@ try{
             $cat[] = $date->format('M Y');
         }
     }
-    // Inicializar datos con ceros
+
+    // Inicializar datos 
     $data1 = array_fill(0, count($cat), 0);
     $data2 = array_fill(0, count($cat), 0);
     $data3 = array_fill(0, count($cat), 0);
@@ -158,7 +167,8 @@ try{
             $data4[$index] += $row['Voluntarios'];
         }
     }
-    //navbar para el html
+
+    //Navbar para el html
     $navbar = '
             <li class="nav-item">
                 <a class="nav-link" href="Panel.html">Panel</a>
@@ -285,14 +295,10 @@ try{
                 </div>
                 </div>
             </div>
-        </section>
-       
-
-       
+        </section> 
     ';
 
-
-    // retorno de todos los valores necesarios para el panel
+    //Retorno de todos los valores necesarios para el panel
     echo json_encode([
         'status' => 'success',
         'navbar' => $navbar,
