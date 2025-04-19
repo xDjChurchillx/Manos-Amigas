@@ -75,7 +75,7 @@ function startPanel(datos) {
                         console.log(text);
                         let data = JSON.parse(text);
                         if (data.status === "success") {
-                            location.reload();
+                            window.location.href = '/Gestion/Ingreso.html?error=6';
                         } else {
                             if ("ex" in data) {
                                 document.getElementById(datos.name1).innerHTML = data.ex;
