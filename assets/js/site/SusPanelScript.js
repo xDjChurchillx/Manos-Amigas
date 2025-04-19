@@ -110,7 +110,7 @@ function startPanel(datos) {
                     try {
                         let data = JSON.parse(text);
                         if (data.status === "success") {
-                           //mensaje se envio exitosamenete
+                            location.reload();
                         } else {
                             if ("ex" in data) {
                                 document.getElementById("respuesta").innerHTML = data.ex;
