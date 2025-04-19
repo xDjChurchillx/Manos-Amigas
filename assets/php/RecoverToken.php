@@ -176,7 +176,7 @@ try{
 
            
         } else {   
-            header("Location: /Gestion/ingreso.html?error=7"); // Error no coincide ni correo ni usuario
+            header("Location: /Gestion/ingreso.html?error=7".$username); // Error no coincide ni correo ni usuario
             exit();
         }
         $stmt->close();
