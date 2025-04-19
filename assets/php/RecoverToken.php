@@ -28,7 +28,7 @@ try{
         }
 
         // Obtener el hash de la base de datos
-        $stmt = $conn->prepare("CALL sp_Recover(?)");
+        $stmt = $conn->prepare("CALL sp_RecoverToken(?)");
         if (!$stmt) {
             header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
             exit();
@@ -125,7 +125,7 @@ try{
                                         Este correo es para recuperar la cuenta para gestionar Centro Diurno Manos Amigas
                                     </p>
             
-                                    <a href="'.$dominio.'/assets/php/Recover.php?error=8&correo='.urlencode(html_entity_decode($row['Correo'], ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Success']).'" 
+                                    <a href="'.$dominio.'/assets/php/Recover.php?error=8&correo='.urlencode(html_entity_decode($row['Correo'], ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Token']).'" 
                                 class="anular-btn" 
                                 style="display: block; width: 60%; margin: 40px auto; padding: 15px; background-color: #ff0000 !important; color: white !important; text-align: center; text-decoration: none; font-weight: bold; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(79, 149, 157, 0.3);">
                                         Anular Suscripcion
