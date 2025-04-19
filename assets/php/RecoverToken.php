@@ -39,7 +39,7 @@ try{
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
 
-        if (array_key_exists('Correo', $row)) {
+        if (array_key_exists('Success', $row)) {
             // Instancia un nuevo objeto PHPMailer
             $mail = new PHPMailer(true);
             // Configura el servidor SMTP
