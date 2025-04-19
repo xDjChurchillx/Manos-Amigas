@@ -25,7 +25,9 @@ if (error) {
             // modal user datos faltantes
             break;
         case '6':
-            // modal user formato 
+            const modalElement = document.getElementById('successModal');
+            const modalConf = new bootstrap.Modal(modalElement);
+            modal.show();
             break;
         case '7':
             // modal contrase;a nueva formato 
