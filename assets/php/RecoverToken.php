@@ -166,16 +166,15 @@ try{
              </html>
             ';
             if ($mail->send()) {
-                header("Location: /index.html?error=0&correo=".rawurlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')));
-                exit();
+                header("Location: /Gestion/ingreso.html?error=6"); // success
+                 exit();
             } else {
                 header("Location: /index.html?error=4"); // Fallo inesperado
                 exit();
             }  
 
 
-            header("Location: /Gestion/ingreso.html?error=6"); // success
-            exit();
+           
         } else {   
             header("Location: /Gestion/ingreso.html?error=7"); // Error no coincide ni correo ni usuario
             exit();
