@@ -13,25 +13,31 @@
 
     </div>
     <main>
-        <div class="login-card">
-            <div class="logo">
-                <a href="../index.html">
-                    <img src="../assets/img/iconos/logo_Verde.svg" alt="Logo del Centro Diurno">
-                </a>
+        <section>
+            <div class="login-card">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../assets/img/iconos/logo_Verde.svg" alt="Logo del Centro Diurno">
+                    </a>
+                </div>
+                <h2 class="text-center">Iniciar Sesión</h2>
+                <form method="POST" action="../assets/php/Login.php">
+                    <div class="mb-3">
+                        <input name="username" id="username" type="text" class="form-control" placeholder="Usuario" required>
+                    </div>
+                    <div class="mb-3">
+                        <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
+                    </div>
+                    <span id="error-message" class="text-danger"></span>
+                    <button type="submit" class="btn btn-primary btn-primary-custom">Ingresar</button>
+                    <a href="#" class="forgot-pass">¿Olvidaste tu contraseña?</a>
+                </form>
             </div>
-            <h2 class="text-center">Iniciar Sesión</h2>
-            <form method="POST" action="../assets/php/Login.php">
-                <div class="mb-3">
-                    <input name="username" id="username" type="text" class="form-control" placeholder="Usuario" required>
-                </div>
-                <div class="mb-3">
-                    <input type="password" id="password" name="password" class="form-control" placeholder="Contraseña" required>
-                </div>
-                <span id="error-message" class="text-danger"></span>
-                <button type="submit" class="btn btn-primary btn-primary-custom">Ingresar</button>
-                <a href="#" class="forgot-pass">¿Olvidaste tu contraseña?</a>
-            </form>
-        </div>
+        </section>
+        <section>
+
+        </section>
+       
     </main>
 
 
