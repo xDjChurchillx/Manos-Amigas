@@ -62,10 +62,10 @@
                             <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="recoverForm">
+                            <form id="recoverForm" method="POST" action="../assets/php/Recover.php">
                                 <div class="mb-3">
-                                    <label for="username" class="form-label">Nombre de usuario o correo electrónico</label>
-                                    <input type="text" class="form-control" id="username" name="username" placeholder="Ingresa tu usuario o correo" required>
+                                    <label for="usernameR" class="form-label">Nombre de usuario o correo electrónico</label>
+                                    <input type="text" class="form-control" id="usernameR" name="usernameR" placeholder="Ingresa tu usuario o correo" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Recuperar cuenta</button>
                             </form>
@@ -73,11 +73,8 @@
                     </div>
                 </div>
             </div>
-        </section>
-       
+        </section>       
     </main>
-     
-
 
     <script src="../assets/js/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../assets/js/site/GeneralScript.js"></script>
