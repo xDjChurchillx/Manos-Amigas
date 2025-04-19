@@ -62,10 +62,36 @@
                             <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                         </div>
                         <div class="modal-body">
-                            <form id="recoverForm" method="POST" action="../assets/php/Recover.php">
+                            <form id="recoverForm" method="POST" action="../assets/php/RecoverToken.php">
                                 <div class="mb-3">
                                     <label for="usernameR" class="form-label">Nombre de usuario o correo electrónico</label>
                                     <input type="text" class="form-control" id="usernameR" name="usernameR" placeholder="Ingresa tu usuario o correo" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Recuperar cuenta</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade modal-verify" id="verifyModal" tabindex="-1" aria-labelledby="verifyModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="verifyModalLabel">Recuperar Cuenta</h5>
+                            <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <h4>Define una nueva contraseña para finalizar la recuperacion de la cuenta</h4>
+                            <form id="verifyForm" method="POST" action="../assets/php/RecoverToken.php">
+                                <input type="text" class="d-none" id="correoR" name="correoR" required>
+                                <input type="text" class="d-none" id="tokenR" name="tokenR" required>
+                                <div class="mb-3">
+                                    <label for="nuevaContrasena" class="form-label">Nueva contraseña</label>
+                                    <input type="password" class="form-control" id="nuevaContrasena" name="nuevaContrasena" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="confirmarContrasena" class="form-label">Confirmar nueva contraseña</label>
+                                    <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
                                 </div>
                                 <button type="submit" class="btn btn-primary">Recuperar cuenta</button>
                             </form>

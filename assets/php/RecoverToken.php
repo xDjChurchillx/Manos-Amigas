@@ -1,8 +1,16 @@
 ﻿<?php
-// Configuracion de la Base de datos
+// Configuracion de la clase PHPMailer y Base de datos
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 require '../../../Private/Credentials/DataBase/connection.php';
+require '../../../Private/Credentials/mailCred.php';
+require 'PHPMailer/Exception.php';
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
 
 try{
+    //$dominio = "https://" . $_SERVER['HTTP_HOST'];
+    $dominio = "http://" . $_SERVER['HTTP_HOST'];
     if ($_SERVER["REQUEST_METHOD"] == "POST") {    
         // Validacion de datos
         if (!isset($_POST["usernameR"])) {
@@ -117,7 +125,7 @@ try{
                                         Este correo es para recuperar la cuenta para gestionar Centro Diurno Manos Amigas
                                     </p>
             
-                                    <a href="'.$dominio.'/assets/php/Recover.php?correo='.urlencode(html_entity_decode($row['Correo'], ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Success']).'" 
+                                    <a href="'.$dominio.'/assets/php/Recover.php?error=8&correo='.urlencode(html_entity_decode($row['Correo'], ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Success']).'" 
                                 class="anular-btn" 
                                 style="display: block; width: 60%; margin: 40px auto; padding: 15px; background-color: #ff0000 !important; color: white !important; text-align: center; text-decoration: none; font-weight: bold; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(79, 149, 157, 0.3);">
                                         Anular Suscripcion
@@ -128,7 +136,7 @@ try{
                                         font-size: 14px;
                                         color: #666;
                                     ">
-                                        Si no solicitaste anular la suscripcion y dejar de recibir noticias sobre nosotros, puedes ignorar este mensaje.
+                                        Si no solicitaste la recuperacion de cuenta coincidera cambiar la contraseña y el usuario lo mas pronto posible.
                                     </p>
                                     <p style="
                                         margin: 40px 0 20px;

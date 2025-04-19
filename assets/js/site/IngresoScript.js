@@ -22,18 +22,23 @@ if (error) {
             Alerta('Error inesperado. Contacta al soporte.');
             break;
         case '5':
-            // modal user datos faltantes
-            break;
-        case '6':
             const modalElement = document.getElementById('successModal');
             const modalsuccess = new bootstrap.Modal(modalElement);
             modalsuccess.show();
             break;
+        case '6':
+            // success
+            break;
         case '7':
-            // modal contrase;a nueva formato 
+            // no coincide el input del recover
             break;
         case '8':
-            // modal contrase;a nueva diferente al confirmar 
+            // Atajar token
+            document.getElementById('correoR').value = urlParams.get('correo');
+            document.getElementById('tokenR').value = urlParams.get('token');
+            const modalElement = document.getElementById('verifyModal');
+            const modalverify = new bootstrap.Modal(modalElement);
+            modalverify.show();
             break;
         case '9':
             // modal contrase;a vieja invalida
