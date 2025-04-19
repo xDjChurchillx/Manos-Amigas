@@ -26,8 +26,8 @@ if (error) {
             break;
         case '6':
             const modalElement = document.getElementById('successModal');
-            const modalConf = new bootstrap.Modal(modalElement);
-            modal.show();
+            const modalsuccess = new bootstrap.Modal(modalElement);
+            modalsuccess.show();
             break;
         case '7':
             // modal contrase;a nueva formato 
