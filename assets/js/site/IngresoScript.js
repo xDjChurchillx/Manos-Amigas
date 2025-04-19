@@ -36,8 +36,8 @@ if (error) {
             // Atajar token
             document.getElementById('correoR').value = urlParams.get('correo');
             document.getElementById('tokenR').value = urlParams.get('token');
-            const modalElement = document.getElementById('verifyModal');
-            const modalverify = new bootstrap.Modal(modalElement);
+            const modalElement2 = document.getElementById('verifyModal');
+            const modalverify = new bootstrap.Modal(modalElement2);
             modalverify.show();
             break;
         case '9':
