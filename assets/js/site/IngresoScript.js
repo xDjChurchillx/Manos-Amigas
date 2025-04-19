@@ -40,6 +40,6 @@ if (error) {
             // modal success
             break;
         default:
-            errorMessage.textContent = 'Error desconocido.';
+            Alerta('Error desconocido.');
     }
 }

@@ -259,40 +259,40 @@ try{
         <section>
             <div class="modal modal-site fade" id="ModalEditUsr" tabindex="-1" aria-labelledby="Editarlabel" aria-hidden="true">
                 <div class="modal-dialog">
-                <div class="modal-content">
+                    <div class="modal-content">
     
-                    <div class="modal-header">
-                    <h5 class="modal-title" id="Editarlabel">Editar Perfil</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="Editarlabel">Editar Perfil</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+      
+                        <form id="editarUsrForm">
+                            <div class="modal-body">
+                                <div class="mb-3">
+                                <label for="UserActual" class="form-label">Usuario</label>
+                                <input type="text" class="form-control" id="UserActual" name="UserActual" required value="'.$username.'">
+                                </div>
+                                <div class="mb-3">
+                                <label for="contrasenaActual" class="form-label">Contraseña actual</label>
+                                <input type="password" class="form-control" id="contrasenaActual" name="contrasenaActual" required>
+                                </div>
+                                <div class="mb-3">
+                                <label for="nuevaContrasena" class="form-label">Nueva contraseña(opcional)</label>
+                                <input type="password" class="form-control" id="nuevaContrasena" name="nuevaContrasena" required>
+                                </div>
+                                <div class="mb-3">
+                                <label for="confirmarContrasena" class="form-label">Confirmar nueva contraseña(opcional)</label>
+                                <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
+                                </div>
+                            </div>
+                            <span id="rEditUser" class="text-danger"></span>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                            </div>
+                        </form>
+      
                     </div>
-      
-                    <form id="editarUsrForm">
-                        <div class="modal-body">
-                            <div class="mb-3">
-                            <label for="UserActual" class="form-label">Usuario</label>
-                            <input type="text" class="form-control" id="UserActual" name="UserActual" required value="'.$username.'">
-                            </div>
-                            <div class="mb-3">
-                            <label for="contrasenaActual" class="form-label">Contraseña actual</label>
-                            <input type="password" class="form-control" id="contrasenaActual" name="contrasenaActual" required>
-                            </div>
-                            <div class="mb-3">
-                            <label for="nuevaContrasena" class="form-label">Nueva contraseña(opcional)</label>
-                            <input type="password" class="form-control" id="nuevaContrasena" name="nuevaContrasena" required>
-                            </div>
-                            <div class="mb-3">
-                            <label for="confirmarContrasena" class="form-label">Confirmar nueva contraseña(opcional)</label>
-                            <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
-                            </div>
-                        </div>
-                        <span id="rEditUser" class="text-danger"></span>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-                        </div>
-                    </form>
-      
-                </div>
                 </div>
             </div>
         </section> 
