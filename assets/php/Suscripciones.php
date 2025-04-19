@@ -245,7 +245,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                         <li>Informacion importante</li>
                                 </ul>
             
-                                    <a href="'.$dominio.'/assets/php/Suscripciones.php?correo='.urlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Success']).'" style="display: block; width: 60%; margin: 40px auto; padding: 15px; background: linear-gradient(135deg, #4F959D, #98D2C0); color: white; text-align: center; text-decoration: none; font-weight: bold; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(79, 149, 157, 0.3);">SUSCRIBIRME AHORA</a>
+                                    <a href="'.$dominio.'/assets/php/Suscripciones.php?correo='.urlencode(html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Mensaje']).'" style="display: block; width: 60%; margin: 40px auto; padding: 15px; background: linear-gradient(135deg, #4F959D, #98D2C0); color: white; text-align: center; text-decoration: none; font-weight: bold; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(79, 149, 157, 0.3);">SUSCRIBIRME AHORA</a>
                  
 
                                 <p style="
