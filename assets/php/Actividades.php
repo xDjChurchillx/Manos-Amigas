@@ -1,4 +1,5 @@
 ﻿<?php
+// Configuracion de Base de datos 
 require '../../../Private/Credentials/DataBase/connection.php';
 header('Content-Type: application/json; charset=UTF-8');
 try{
@@ -8,7 +9,7 @@ try{
     $buscar = filter_var($buscar, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
     $buscar = htmlspecialchars($buscar, ENT_QUOTES, 'UTF-8');
 
-
+    //Obtener actividades de la base de datos
     $stmt = $conn->prepare("CALL sp_ListarActividades(?)");
     $stmt->bind_param('s', $buscar);
     if (!$stmt) {
@@ -28,11 +29,13 @@ try{
         ]);
         exit();
     }
+
+    //Iterar en los resultados de la base de datos
     $rows = [];
     while ($row = $result->fetch_assoc()) {
-        // Verificar si existe el campo Visible y su valor es 0
+        // Verificar si la actividad es visible
         if (isset($row['Visible']) && $row['Visible'] == 0) {
-            continue; // Saltar este registro (no se agrega al array)
+            continue; // Salta el registro en caso de que no sea visible
         }
         
         // Si el registro es visible, eliminamos solo la columna Visible
@@ -43,16 +46,16 @@ try{
         $rows[] = $row;
     }
 
-    // Si pasa todas las validaciones, se puede mostrar el contenido
+    //Retorno de todos los valores necesarios para el panel
     echo json_encode([
         'status' => 'success',
-        'filas' => $rows,
+        'actividades' => $rows,
         'b'=> $buscar
     ]);
 } catch (Exception $ex) {
      echo json_encode([
         'status' => 'error',
-         'ex' => $ex->getMessage()
+         'ex' => 'error en actividades php'
     ]);
     exit();
 }

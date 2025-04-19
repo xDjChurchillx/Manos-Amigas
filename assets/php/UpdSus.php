@@ -1,49 +1,51 @@
 ﻿<?php
-// Repetimos la misma configuración de sesión para asegurar consistencia
+// Configuracion de Cookies y Base de datos 
 ini_set('session.use_only_cookies', 1);
 require '../../../Private/Credentials/DataBase/connection.php';
 header('Content-Type: application/json; charset=UTF-8');
 try{
-session_set_cookie_params([
-    'lifetime' => 0, // Hasta cerrar navegador
-    'path' => '/',
-    'domain' => '', // Cambia por tu dominio real
-    'secure' => false, // Solo HTTPS (IMPORTANTE en producción)
-    'httponly' => true, // No accesible desde JavaScript
-    'samesite' => 'Strict', // Protección contra CSRF
-]);
-
-session_start();
-
-// Validación de sesión
-if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
-    $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
-    $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
-    // No autenticado o sesión alterada
-        setcookie('token', '', time() - 3600, '/');
-        session_unset(); // Limpia variables de sesión
-        session_destroy(); // Elimina la sesión
-
-    
-    // Retornar JSON con error
-    echo json_encode([
-        'status' => 'error',
-        'redirect' => '/Gestion/ingreso.html?error=1'
+    session_set_cookie_params([
+        'lifetime' => 0, // Hasta cerrar navegador
+        'path' => '/',
+        'domain' => '', 
+        'secure' => false, // Solo HTTPS 
+        'httponly' => true, // No accesible desde JavaScript
+        'samesite' => 'Strict', // Protección contra CSRF
     ]);
-    exit();
-}
-////////////////////////////////////////////////////////////////////////////////////////////
-$token = $_COOKIE['token'] ;
-$username = $_SESSION['username'];
+
+    session_start();
+
+    // Validación de sesión
+    if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
+        $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
+        $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
+        // No autenticado o sesión alterada
+            setcookie('token', '', time() - 3600, '/');
+            session_unset(); // Limpia variables de sesión
+            session_destroy(); // Elimina la sesión
+        // Retornar error de credenciales invalidas
+        echo json_encode([
+            'status' => 'error',
+            'redirect' => '/Gestion/ingreso.html?error=1'
+        ]);
+        exit();
+    }
+    
+    //Sesion valida
+    $token = $_COOKIE['token'] ;
+    $username = $_SESSION['username'];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        //Variables del form
         $codigoSuscripcion = trim($_POST['codigoS'] ?? '');
         $activoSuscripcion = isset($_POST['activoS']) ? 1 : 0; 
+       
         // Validación de datos
         if (empty($codigoSuscripcion)) {
             echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
             exit();
         }
+       
         // Actualizar en la base de datos
         $stmt = $conn->prepare('CALL sp_ActualizarSuscripcion(?, ?, ?, ?)');
         if (!$stmt) {

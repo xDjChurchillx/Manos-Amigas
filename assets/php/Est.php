@@ -1,24 +1,24 @@
 ﻿<?php
-require '../../../Private/Credentials/DataBase/connection.php'; // Asumo que es MySQLi
+// Configuracion de Base de datos 
+require '../../../Private/Credentials/DataBase/connection.php'; 
 session_start();
-
 try {
     // Verificar si ya se registró una visita en los últimos 30 segundos
     if (isset($_SESSION['last_visit_update']) && (time() - $_SESSION['last_visit_update']) < 7200) {
         echo 'false';
         exit(); // Salir sin hacer nada
     } else {
-        // Llamar al procedimiento almacenado sin parámetros
+        // Insertar visita en la base de datos
         $stmt = $conn->prepare("CALL sp_EstVisita()");
-        $stmt->execute(); // Ejecutar el procedimiento
+        $stmt->execute();
 
         // Registrar el tiempo de la última visita
         $_SESSION['last_visit_update'] = time();
         echo 'true';
-        exit(); // Salir correctamente
+        exit(); 
     }
 } catch (Exception $ex) {  
-    echo $ex->getMessage();
+    echo 'error en Est php';
     exit();
 }
 ?>

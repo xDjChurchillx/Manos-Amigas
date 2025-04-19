@@ -142,9 +142,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     behavior: 'smooth' // Para un desplazamiento suave
                 });
                 break;
-            case '12':
-              
-                break;
             default:
 
         }

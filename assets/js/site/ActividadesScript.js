@@ -60,7 +60,7 @@ function startPanel(datos) {
     if (buscar) {
         document.getElementById('buscar').value = buscar;
     }
-    datos.filas.forEach(function (item) {
+    datos.actividades.forEach(function (item) {
         listaActividades[item.Codigo] = item;
         activitysGrid.innerHTML += createActivityCard(item);
         

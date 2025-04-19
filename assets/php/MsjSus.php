@@ -1,6 +1,5 @@
 ﻿<?php
-
-    // Importa la clase PHPMailer
+// Configuracion de la clase PHPMailer y Base de datos
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 require '../../../Private/Credentials/DataBase/connection.php';
@@ -8,55 +7,56 @@ require '../../../Private/Credentials/mailCred.php';
 require 'PHPMailer/Exception.php';
 require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
-
-// Repetimos la misma configuración de sesión para asegurar consistencia
 ini_set('session.use_only_cookies', 1);
 header('Content-Type: application/json; charset=UTF-8');
 try{
-session_set_cookie_params([
-    'lifetime' => 0, // Hasta cerrar navegador
-    'path' => '/',
-    'domain' => '', // Cambia por tu dominio real
-    'secure' => false, // Solo HTTPS (IMPORTANTE en producción)
-    'httponly' => true, // No accesible desde JavaScript
-    'samesite' => 'Strict', // Protección contra CSRF
-]);
+    //$dominio = "https://" . $_SERVER['HTTP_HOST'];
+    $dominio = "http://" . $_SERVER['HTTP_HOST'];
 
-session_start();
-
-// Validación de sesión
-if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
-    $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
-    $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
-    // No autenticado o sesión alterada
-        setcookie('token', '', time() - 3600, '/');
-        session_unset(); // Limpia variables de sesión
-        session_destroy(); // Elimina la sesión
-
-    
-    // Retornar JSON con error
-    echo json_encode([
-        'status' => 'error',
-        'redirect' => '/Gestion/ingreso.html?error=1'
+    session_set_cookie_params([
+        'lifetime' => 0, // Hasta cerrar navegador
+        'path' => '/',
+        'domain' => '', 
+        'secure' => false, // Solo HTTPS 
+        'httponly' => true, // No accesible desde JavaScript
+        'samesite' => 'Strict', // Protección contra CSRF
     ]);
-    exit();
-}
-////////////////////////////////////////////////////////////////////////////////////////////
-$token = $_COOKIE['token'] ;
-$username = $_SESSION['username'];
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    session_start();
+
+    // Validación de sesión
+    if (!isset($_COOKIE['token']) || !isset($_SESSION['username']) ||
+        $_SESSION['user_agent'] !== $_SERVER['HTTP_USER_AGENT'] ||
+        $_SESSION['ip_address'] !== $_SERVER['REMOTE_ADDR']) {
+        // No autenticado o sesión alterada
+            setcookie('token', '', time() - 3600, '/');
+            session_unset(); // Limpia variables de sesión
+            session_destroy(); // Elimina la sesión
+        // Retornar error de credenciales invalidas
+        echo json_encode([
+            'status' => 'error',
+            'redirect' => '/Gestion/ingreso.html?error=1'
+        ]);
+        exit();
+    }
+    
+    //Sesion valida
+    $token = $_COOKIE['token'] ;
+    $username = $_SESSION['username'];
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        //Variables del form
         $Asunto = trim($_POST['asunto'] ?? '');
         $Titulo = trim($_POST['titulo'] ?? '');
-         $Mensaje = trim($_POST['mensaje'] ?? '');
-          //$dominio = "https://" . $_SERVER['HTTP_HOST'];
-         $dominio = "http://" . $_SERVER['HTTP_HOST'];
+        $Mensaje = trim($_POST['mensaje'] ?? '');
+              
         // Validación de datos
         if (empty($Asunto) || empty($Titulo) || empty($Mensaje)) {
             echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
             exit();
         }
-        // 
+
+        //Listar Sucripciones de la base de datos 
         $stmt = $conn->prepare('CALL sp_ListarSusActivas(?, ?)');
         if (!$stmt) {
             echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
@@ -64,11 +64,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         $stmt->bind_param('ss', $username, $token);
-
         $stmt->execute();
         $result = $stmt->get_result();
+
         if ($result) {
-             // Instancia un nuevo objeto PHPMailer
+                // Instancia un nuevo objeto PHPMailer
             $mail = new PHPMailer(true);
             // Configura el servidor SMTP
             //    $mail->isSMTP();
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Configura el remitente y el destinatario
             $mail->setFrom($mail1 , 'ManosAmigas');
                  
- 
+            //Iterar en los resultados de la base de datos
             while ($row = $result->fetch_assoc()) {
                 if (array_key_exists('Error', $row)) {
                         echo json_encode([
@@ -98,12 +98,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     exit();
                 }
                 foreach ($row as $key => $value) {
-                   $row[$key] = html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+                    $row[$key] = html_entity_decode($value, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                 }
                 $mail->addAddress( $row['Correo'] , ''); 
                 $subscriptions[] = $row;
             }
-                 // Configura el asunto y el cuerpo del correo
+                    // Configura el asunto y el cuerpo del correo
             $mail->Subject = $Asunto;
             $mail->isHTML(true);  
             $mail->Body = '
@@ -126,19 +126,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         padding-bottom: 5rem;
                     ">
                         <div style="width: 100%; text-align: center; padding-top: 3rem;">
-                             <h1 style="
+                                <h1 style="
                                 font-size: 2.5rem;
                                 letter-spacing: 0.05em;
                                 margin-bottom: 1rem;
                                 text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
                                 font-weight: 300;
                             ">
-                              Centro Diurno Manos Amigas
+                                Centro Diurno Manos Amigas
                             </h1>
-                             <div style="width: 400px; height: 3px; background: #F6F8D5; margin: 0 auto;"></div>
+                                <div style="width: 400px; height: 3px; background: #F6F8D5; margin: 0 auto;"></div>
                             <h1 style="
                
-                                 margin: 0;
+                                    margin: 0;
                                 font-size: 28px;
                                 font-weight: 600;
                                 letter-spacing: 0.5px;
@@ -162,7 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 font-size: 16px;
                                 line-height: 1.7;
                             ">
-                               '.$Mensaje.'
+                                '.$Mensaje.'
                             </p>
 
                             <p style="
@@ -197,7 +197,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                 </body>
-             </html>
+                </html>
             ';
             if ($mail->send()) {
                 echo json_encode([
@@ -206,24 +206,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]);
                 exit();
             } else {
-               echo json_encode([
+                echo json_encode([
                     'status' => 'error',
                     'ex' => 'Error enviando correo'
-               ]);
+                ]);
                 exit();
             }           
            
         } else {
-             echo json_encode([
+                echo json_encode([
                     'status' => 'error',
                     'ex' => 'Error en base de datos'
-              ]);
-              exit();
+                ]);
+                exit();
         }
         $stmt->close();
         $conn->close();
-}
-
+    }
 } catch (Exception $ex) {
      echo json_encode([
         'status' => 'error',

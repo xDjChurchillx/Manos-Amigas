@@ -1,5 +1,6 @@
 ﻿<?php
-    require '../../../Private/Credentials/DataBase/connection.php';
+// Configuracion de Base de datos 
+require '../../../Private/Credentials/DataBase/connection.php';
 // Verificar si el formulario fue enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Capturar los datos del formulario
