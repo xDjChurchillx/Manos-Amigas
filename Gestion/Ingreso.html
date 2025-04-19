@@ -30,7 +30,7 @@
                     </div>
                     <span id="error-message" class="text-danger"></span>
                     <button type="submit" class="btn btn-primary btn-primary-custom">Ingresar</button>
-                    <a href="#" class="forgot-pass">¿Olvidaste tu contraseña?</a>
+                    <a onclick="recover()" id="btnRecover" class="forgot-pass">¿Olvidaste tus credenciales?</a>
                 </form>
             </div>
         </section>
@@ -42,14 +42,33 @@
                             <h5 class="modal-title" id="successModalLabel">Confirmacion</h5>
                             <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <div class="modal-body">                            
+                        <div class="modal-body">
 
                             <h4>Perfil actualizado con exito</h4>
                             <p>Ahora deberas iniciar sesion con tus nuevas credenciales</p>
-                            
+
                             <button type="button" class="btn btn-success" data-bs-dismiss="modal">
                                 Entendido
-                            </button>                            
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade modal-recover" id="recoverModal" tabindex="-1" aria-labelledby="recoverModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="recoverModalLabel">Recuperar Cuenta</h5>
+                            <button type="button" class="btn-close btn-close-black" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="recoverForm">
+                                <div class="mb-3">
+                                    <label for="username" class="form-label">Nombre de usuario o correo electrónico</label>
+                                    <input type="text" class="form-control" id="username" name="username" placeholder="Ingresa tu usuario o correo" required>
+                                </div>
+                                <button type="submit" class="btn btn-recover">Recuperar cuenta</button>
+                            </form>
                         </div>
                     </div>
                 </div>

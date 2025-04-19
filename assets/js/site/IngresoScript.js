@@ -45,3 +45,8 @@ if (error) {
             Alerta('Error desconocido.');
     }
 }
+function recover() {
+    const modalElement = document.getElementById('recoverModal');
+    const modalsuccess = new bootstrap.Modal(modalElement);
+    modalsuccess.show();
+}
