@@ -126,7 +126,7 @@ try{
                                     </p>
             
                                   
-                                   <a href="'.$dominio.'/assets/php/Recover.php?error=8&correo='.urlencode(html_entity_decode($row['Correo'], ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Token']).'" 
+                                   <a href="'.$dominio.'/Gestion/Ingreso.html?error=8&correo='.urlencode(html_entity_decode($row['Correo'], ENT_QUOTES | ENT_HTML5, 'UTF-8')).'&token='.urlencode($row['Token']).'" 
                                   style="display: block; width: 60%; margin: 40px auto; padding: 15px; background: linear-gradient(135deg, #4F959D, #98D2C0); color: white; text-align: center; text-decoration: none; font-weight: bold; border-radius: 50px; transition: all 0.3s ease; box-shadow: 0 4px 8px rgba(79, 149, 157, 0.3);">Recuperar</a>
                                   
                                    <p style="
