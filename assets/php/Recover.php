@@ -8,7 +8,6 @@ try{
         $token = isset($_POST["tokenR"]) ? trim($_POST["tokenR"]) : "";
         $nuevaContrasena = isset($_POST["nuevaContrasena"]) ? trim($_POST["nuevaContrasena"]) : "";
         $confirmarContrasena = isset($_POST["confirmarContrasena"]) ? trim($_POST["confirmarContrasena"]) : "";
-        $correo = htmlentities($Metodo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
         // Validacion de datos
         if (empty($correo) || empty($token) || empty($nuevaContrasena) || empty($confirmarContrasena)) {
             header("Location: /Gestion/ingreso.html?error=10"."&correo=".$correo."&token=".$token); // Campos vacíos
@@ -22,6 +21,7 @@ try{
             header("Location: /Gestion/ingreso.html?error=11"."&correo=".$correo."&token=".$token); // contraseña diferente
             exit();
         }
+        $correo = htmlentities($correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
         // Recuperar cuenta de la base de datos
         $stmt = $conn->prepare('CALL sp_Recover(?, ?, ?)');
         if (!$stmt) {
