@@ -115,6 +115,12 @@ if (error) {
             errorVerify.textContent = 'Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)';
             modalverify.show();
             break;
+        case '15':
+            // cuenta bloqueada
+            errorMessage.style.display = 'block';
+            errorMessage.style.color = 'red';
+            errorMessage.textContent = 'Cuenta bloqueada porfavor revisar correo.';
+            break;
         default:
             Alerta('Error desconocido.');
     }

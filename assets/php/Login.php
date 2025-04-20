@@ -167,7 +167,7 @@ try{
                                         font-size: 16px;
                                         line-height: 1.7;
                                     ">
-                                        Este correo es para recuperar la cuenta para gestionar Centro Diurno Manos Amigas
+                                        Este correo es para recuperar la cuenta para gestionar Centro Diurno Manos Amigas la cual se encuetra bloqueada debido a un exceso de intentos de login
                                     </p>
             
                                   
@@ -179,7 +179,7 @@ try{
                                         font-size: 14px;
                                         color: #666;
                                     ">
-                                        Si no solicitaste la recuperacion de cuenta coincidera cambiar la contraseña y el usuario lo mas pronto posible.
+                                        Si no fuistes tu el que la bloqueo coincidera cambiar la contraseña y el usuario lo mas pronto posible.
                                     </p>
                                     <p style="
                                         margin: 40px 0 20px;
