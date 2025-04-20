@@ -46,8 +46,12 @@ if (error) {
             break;
         case '8':
             // Atajar token
-            document.getElementById('correoR').value = urlParams.get('correo');
-            document.getElementById('tokenR').value = urlParams.get('token');           
+            if (urlParams.get('correo')) {
+              document.getElementById('correoR').value = urlParams.get('correo');
+            }
+            if (urlParams.get('token')) {
+                document.getElementById('tokenR').value = urlParams.get('token');           
+            }           
             modalverify.show();
             break;
         case '9':
@@ -57,12 +61,26 @@ if (error) {
             modalrecover.show();
             break;
         case '10':
+            // Atajar token
+            if (urlParams.get('correo')) {
+                document.getElementById('correoR').value = urlParams.get('correo');
+            }
+            if (urlParams.get('token')) {
+                document.getElementById('tokenR').value = urlParams.get('token');
+            } 
             errorVerify.style.display = 'block';
             errorVerify.style.color = 'red';
             errorVerify.textContent = 'Porfavor introducir los datos que se solicitan';
             modalverify.show();
             break;
         case '11':
+            // Atajar token
+            if (urlParams.get('correo')) {
+                document.getElementById('correoR').value = urlParams.get('correo');
+            }
+            if (urlParams.get('token')) {
+                document.getElementById('tokenR').value = urlParams.get('token');
+            } 
             errorVerify.style.display = 'block';
             errorVerify.style.color = 'red';
             errorVerify.textContent = 'Las contraseñas no coinciden';
@@ -72,12 +90,26 @@ if (error) {
             // modal success
             break;
         case '13':
+            // Atajar token
+            if (urlParams.get('correo')) {
+                document.getElementById('correoR').value = urlParams.get('correo');
+            }
+            if (urlParams.get('token')) {
+                document.getElementById('tokenR').value = urlParams.get('token');
+            } 
             errorVerify.style.display = 'block';
             errorVerify.style.color = 'red';
             errorVerify.textContent = 'Token o correo invalido';
             modalverify.show();
             break;
         case '14':
+            // Atajar token
+            if (urlParams.get('correo')) {
+                document.getElementById('correoR').value = urlParams.get('correo');
+            }
+            if (urlParams.get('token')) {
+                document.getElementById('tokenR').value = urlParams.get('token');
+            } 
             errorVerify.style.display = 'block';
             errorVerify.style.color = 'red';
             errorVerify.textContent = 'Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)';

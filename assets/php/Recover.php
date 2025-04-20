@@ -3,29 +3,23 @@
 require '../../../Private/Credentials/DataBase/connection.php';
 
 try{
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {    
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {   
+        $correo = isset($_POST["correoR"]) ? trim($_POST["correoR"]) : "";
+        $token = isset($_POST["tokenR"]) ? trim($_POST["tokenR"]) : "";
+        $nuevaContrasena = isset($_POST["nuevaContrasena"]) ? trim($_POST["nuevaContrasena"]) : "";
+        $confirmarContrasena = isset($_POST["confirmarContrasena"]) ? trim($_POST["confirmarContrasena"]) : "";
+        
         // Validacion de datos
-       if (!isset($_POST["correoR"]) || !isset($_POST["tokenR"]) || !isset($_POST["nuevaContrasena"]) || !isset($_POST["confirmarContrasena"])) {
-            header("Location: /Gestion/ingreso.html?error=10"); // Falta de datos
-            exit();
-        }
-
-        // Sanitización de entrada
-        $correo = trim($_POST["correoR"]);
-        $token = trim($_POST["tokenR"]);
-        $nuevaContrasena = trim($_POST["nuevaContrasena"]);
-        $confirmarContrasena = trim($_POST["confirmarContrasena"]);
-
         if (empty($correo) || empty($token) || empty($nuevaContrasena) || empty($confirmarContrasena)) {
-            header("Location: /Gestion/ingreso.html?error=10"); // Campos vacíos
+            header("Location: /Gestion/ingreso.html?error=10"."&correo=".$correo."&token=".$token); // Campos vacíos
             exit();
         }
         if (strlen($nuevaContrasena) < 10 || strlen($nuevaContrasena) > 20 ) {
-            header("Location: /Gestion/ingreso.html?error=14"); // Fortmato incorrecto
+            header("Location: /Gestion/ingreso.html?error=14"."&correo=".$correo."&token=".$token); // Fortmato incorrecto
             exit();
         }
         if ($nuevaContrasena != $confirmarContrasena) {
-            header("Location: /Gestion/ingreso.html?error=11"); // contraseña diferente
+            header("Location: /Gestion/ingreso.html?error=11"."&correo=".$correo."&token=".$token); // contraseña diferente
             exit();
         }
         // Recuperar cuenta de la base de datos
@@ -46,14 +40,14 @@ try{
            exit();
         
         } else {
-           header("Location: /Gestion/ingreso.html?error=13"); // Error en token o Credentials
+           header("Location: /Gestion/ingreso.html?error=13"."&correo=".$correo."&token=".$token); // Error en token o Credentials
            exit();
         }
 
         $stmt->close();
         $conn->close();
     }else {
-	   header("Location: /Gestion/ingreso.html?error=4"); // Error inesperado
+	   header("Location: /Gestion/ingreso.html?error=4"."&correo=".$correo."&token=".$token); // Error inesperado
        exit();
     }
 
