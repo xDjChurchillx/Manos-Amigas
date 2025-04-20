@@ -4,15 +4,25 @@ const error = urlParams.get('error');
 
 // Seleccionar el contenedor donde mostrarás el mensaje
 const errorMessage = document.getElementById('error-message');
+const errorRecover = document.getElementById('error-recover');
+const errorVerify = document.getElementById('error-verify');
 
-if (error) {
-    errorMessage.style.display = 'block';
-    errorMessage.style.color = 'red'; 
+const modalElement = document.getElementById('successModal');
+const modalsuccess = new bootstrap.Modal(modalElement);
+const modalElement2 = document.getElementById('recoverModal');
+const modalrecover = new bootstrap.Modal(modalElement2);
+const modalElement3 = document.getElementById('verifyModal');
+const modalverify = new bootstrap.Modal(modalElement3);
+if (error) {   
     switch (error) {
         case '1':
+            errorMessage.style.display = 'block';
+            errorMessage.style.color = 'red'; 
             errorMessage.textContent = 'Credenciales invalidas.';
             break;
         case '2':
+            errorMessage.style.display = 'block';
+            errorMessage.style.color = 'red'; 
             errorMessage.textContent = 'Porfavor introducir credenciales.';
             break;
         case '3':
@@ -21,9 +31,7 @@ if (error) {
         case '4':
             Alerta('Error inesperado. Contacta al soporte.');
             break;
-        case '5':
-            const modalElement = document.getElementById('successModal');
-            const modalsuccess = new bootstrap.Modal(modalElement);
+        case '5':           
             modalsuccess.show();
             break;
         case '6':
@@ -31,20 +39,49 @@ if (error) {
             break;
         case '7':
             // no coincide el input del recover
+            errorRecover.style.display = 'block';
+            errorRecover.style.color = 'red';
+            errorRecover.textContent = 'Usuario o correo invalidos.';
+            modalrecover.show();
             break;
         case '8':
             // Atajar token
             document.getElementById('correoR').value = urlParams.get('correo');
-            document.getElementById('tokenR').value = urlParams.get('token');
-            const modalElement2 = document.getElementById('verifyModal');
-            const modalverify = new bootstrap.Modal(modalElement2);
+            document.getElementById('tokenR').value = urlParams.get('token');           
             modalverify.show();
             break;
         case '9':
-            // modal contrase;a vieja invalida
+            errorRecover.style.display = 'block';
+            errorRecover.style.color = 'red';
+            errorRecover.textContent = 'Porfavor introducir correo o usuario.';
+            modalrecover.show();
             break;
         case '10':
+            errorVerify.style.display = 'block';
+            errorVerify.style.color = 'red';
+            errorVerify.textContent = 'Porfavor introducir los datos que se solicitan';
+            modalverify.show();
+            break;
+        case '11':
+            errorVerify.style.display = 'block';
+            errorVerify.style.color = 'red';
+            errorVerify.textContent = 'Las contraseñas no coinciden';
+            modalverify.show();
+            break;
+        case '12':
             // modal success
+            break;
+        case '13':
+            errorVerify.style.display = 'block';
+            errorVerify.style.color = 'red';
+            errorVerify.textContent = 'Token o correo invalido';
+            modalverify.show();
+            break;
+        case '14':
+            errorVerify.style.display = 'block';
+            errorVerify.style.color = 'red';
+            errorVerify.textContent = 'Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)';
+            modalverify.show();
             break;
         default:
             Alerta('Error desconocido.');

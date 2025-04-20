@@ -14,7 +14,7 @@ try{
     if ($_SERVER["REQUEST_METHOD"] == "POST") {    
         // Validacion de datos
         if (!isset($_POST["usernameR"])) {
-            header("Location: /Gestion/ingreso.html?error=2"); // Falta de datos
+            header("Location: /Gestion/ingreso.html?error=9"); // Falta de datos
             exit();
         }
 
@@ -23,7 +23,7 @@ try{
        
 
         if (empty($username)) {
-            header("Location: /Gestion/ingreso.html?error=2"); // Campos vacíos
+            header("Location: /Gestion/ingreso.html?error=9"); // Campos vacíos
             exit();
         }
 
@@ -170,8 +170,6 @@ try{
                 header("Location: /index.html?error=4"); // Fallo inesperado
                 exit();
             }  
-
-
            
         } else {   
             header("Location: /Gestion/ingreso.html?error=7".$username); // Error no coincide ni correo ni usuario
@@ -185,7 +183,7 @@ try{
     }
 
 } catch (Exception $ex) {
-    header("Location: /Gestion/ingreso.html?error=4".$ex->getMessage()); // Error inesperado
+    header("Location: /Gestion/ingreso.html?error=4"); // Error inesperado
     exit();
 }
 ?>
