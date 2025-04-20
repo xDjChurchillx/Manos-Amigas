@@ -39,7 +39,10 @@ try{
            header("Location: /Gestion/ingreso.html?error=12"); // Success
            exit();
         
-        } else {
+        }elseif (array_key_exists('Token', $row)) {
+             header("Location: /Gestion/ingreso.html?error=16"); // Success
+           exit();
+        }else {
            header("Location: /Gestion/ingreso.html?error=13"."&correo=".$correo."&token=".$token); // Error en token o Credentials
            exit();
         }

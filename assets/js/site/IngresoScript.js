@@ -121,6 +121,12 @@ if (error) {
             errorMessage.style.color = 'red';
             errorMessage.textContent = 'Cuenta bloqueada porfavor revisar correo.';
             break;
+        case '16':
+            errorRecover.style.display = 'block';
+            errorRecover.style.color = 'red';
+            errorRecover.textContent = 'Porfavor introducir correo o usuario.(token regenerado)';
+            modalrecover.show();
+            break;
         default:
             Alerta('Error desconocido.');
     }
