@@ -215,6 +215,9 @@ try{
                 header("Location: /index.html?error=4"); // Fallo inesperado
                 exit();
             }  
+        }elseif (array_key_exists('Error', $row)) {
+	      header("Location: /Gestion/ingreso.html?error=1"); // Error en la base de datos
+          exit();
         }else {
             header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
             exit();
