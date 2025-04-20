@@ -187,7 +187,7 @@ try{
     }
 
 } catch (Exception $ex) {
-    header("Location: /Gestion/ingreso.html?error=4"); // Error inesperado
+    header("Location: /Gestion/ingreso.html?error=4".$ex->getMessage()); // Error inesperado
     exit();
 }
 ?>
