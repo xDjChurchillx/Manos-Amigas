@@ -209,7 +209,7 @@ try{
              </html>
             ';
             if ($mail->send()) {
-                header("Location: /Gestion/ingreso.html?error=6"); // success
+                header("Location: /Gestion/ingreso.html?error=15"); // success
                  exit();
             } else {
                 header("Location: /index.html?error=4"); // Fallo inesperado
