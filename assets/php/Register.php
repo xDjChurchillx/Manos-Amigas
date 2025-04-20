@@ -5,7 +5,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = trim($_POST["username"]);
     $password = trim($_POST["password"]);
     $email = trim($_POST["email"]);
-    $email = htmlentities($email, ENT_QUOTES | ENT_HTML5, 'UTF-8');
      //regedex para correo
     $regex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
     // Validar que los campos no estén vacíos
@@ -23,6 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         ]);
             exit();
     }  
+    $email = htmlentities($email, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     // Hashear la contraseña
     $hash = password_hash($password, PASSWORD_BCRYPT);
 
