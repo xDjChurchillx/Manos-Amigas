@@ -30,7 +30,8 @@
         }
 
     });
-
+    const modalElement = document.getElementById('suscripcionModal');
+    const modalConf = new bootstrap.Modal(modalElement);
     // Obtener parámetros de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const error = urlParams.get('error');
@@ -40,7 +41,7 @@
     if (error) {
         switch (error) {
             case '0':
-
+                modalConf.show();
                 break;
             case '1':
                 Alerta('Los campos obligatorios no fueron completados');
