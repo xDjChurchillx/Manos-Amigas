@@ -44,170 +44,204 @@
     </header>
     <div id="alerta" class="alert alert-danger d-none" role="alert">
 
-    </div>
-    <!-- Contenido -->
-    <div class="container mb-4">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="card shadow">
-                    <div class="volunteer-header bg1gradient card-header py-4">
-                        <p class="text-center mb-0">Contribuye con tu tiempo y habilidades</p>
-                    </div>
+    </div>    
+    <main>
+        <section>
+            <div class="container mb-4">
+                <div class="row justify-content-center">
+                    <div class="col-lg-8">
+                        <div class="card shadow">
+                            <div class="volunteer-header bg1gradient card-header py-4">
+                                <p class="text-center mb-0">Contribuye con tu tiempo y habilidades</p>
+                            </div>
 
-                    <div class="card-body p-4">
-                        <form id="volunteerForm" action="assets/php/Voluntariado.php" method="POST">
-                            <!-- Sección 1: Información Personal -->
-                            <div class="mb-5">
-                                <h3 class="section-title">Información Personal</h3>
+                            <div class="card-body p-4">
+                                <form id="volunteerForm" action="assets/php/Voluntariado.php" method="POST">
+                                    <!-- Sección 1: Información Personal -->
+                                    <div class="mb-5">
+                                        <h3 class="section-title">Información Personal</h3>
 
-                                <div class="form-card">
-                                    <div class="row g-3">
-                                        <div class="col-12">
-                                            <label for="Nombre" class="form-label">Nombre completo <span class="text-danger">*</span></label>
-                                            <input type="text" class="form-control" name="Nombre" id="Nombre" required>
-                                            <span id="errNombre" class="text-danger small"></span>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="Correo" class="form-label">Correo electrónico </label>
-                                            <input type="email" class="form-control" name="Correo" id="Correo">
-                                            <span id="errCorreo" class="text-danger small"></span>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="Telefono" class="form-label">Teléfono </label>
-                                            <input type="tel" class="form-control" name="Telefono" id="Telefono">
-                                            <span id="errTelefono" class="text-danger small"></span>
+                                        <div class="form-card">
+                                            <div class="row g-3">
+                                                <div class="col-12">
+                                                    <label for="Nombre" class="form-label">Nombre completo <span class="text-danger">*</span></label>
+                                                    <input type="text" class="form-control" name="Nombre" id="Nombre" required>
+                                                    <span id="errNombre" class="text-danger small"></span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="Correo" class="form-label">Correo electrónico </label>
+                                                    <input type="email" class="form-control" name="Correo" id="Correo">
+                                                    <span id="errCorreo" class="text-danger small"></span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="Telefono" class="form-label">Teléfono </label>
+                                                    <input type="tel" class="form-control" name="Telefono" id="Telefono">
+                                                    <span id="errTelefono" class="text-danger small"></span>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
 
-                                </div>
-                            </div>
+                                    <!-- Sección 2: Información Académica -->
+                                    <div class="mb-5">
+                                        <h3 class="section-title">Información Académica</h3>
 
-                            <!-- Sección 2: Información Académica -->
-                            <div class="mb-5">
-                                <h3 class="section-title">Información Académica</h3>
-
-                                <div class="form-card">
-                                    <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <label for="Institucion" class="form-label">Universidad o Institución </label>
-                                            <input type="text" class="form-control" name="Institucion" id="Institucion" placeholder="(Opcional)">
-                                        </div>
-                                        <div class="col-md-6">
-                                            <label for="Carrera" class="form-label">Carrera o área de estudio</label>
-                                            <input type="text" class="form-control" name="Carrera" id="Carrera" placeholder="(Opcional)">
+                                        <div class="form-card">
+                                            <div class="row g-3">
+                                                <div class="col-md-6">
+                                                    <label for="Institucion" class="form-label">Universidad o Institución </label>
+                                                    <input type="text" class="form-control" name="Institucion" id="Institucion" placeholder="(Opcional)">
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="Carrera" class="form-label">Carrera o área de estudio</label>
+                                                    <input type="text" class="form-control" name="Carrera" id="Carrera" placeholder="(Opcional)">
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
 
-                            <!-- Sección 3: Propuesta de Voluntariado -->
-                            <div class="mb-4">
-                                <h3 class="section-title">Propuesta de Voluntariado</h3>
+                                    <!-- Sección 3: Propuesta de Voluntariado -->
+                                    <div class="mb-4">
+                                        <h3 class="section-title">Propuesta de Voluntariado</h3>
 
-                                <div class="form-card">
-                                    <div class="mb-3">
-                                        <label class="form-label">Selecciona el tipo de actividad que te interesa <span class="text-danger">*</span></label>
+                                        <div class="form-card">
+                                            <div class="mb-3">
+                                                <label class="form-label">Selecciona el tipo de actividad que te interesa <span class="text-danger">*</span></label>
 
-                                        <div class="activity-option">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="Propuesta" id="activityCompanion" value="compañia" required>
-                                                <label class="form-check-label" for="activityCompanion">
-                                                    Acompañamiento y conversación con los adultos mayores
-                                                </label>
+                                                <div class="activity-option">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="Propuesta" id="activityCompanion" value="compañia" required>
+                                                        <label class="form-check-label" for="activityCompanion">
+                                                            Acompañamiento y conversación con los adultos mayores
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="activity-option">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="Propuesta" id="activityWorkshop" value="actividades">
+                                                        <label class="form-check-label" for="activityWorkshop">
+                                                            Talleres o actividades recreativas (música, arte, manualidades)
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="activity-option">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="Propuesta" id="activityTherapy" value="terapia">
+                                                        <label class="form-check-label" for="activityTherapy">
+                                                            Apoyo en terapias o ejercicios
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="activity-option">
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio" name="Propuesta" id="activityOther" value="otro">
+                                                        <label class="form-check-label" for="activityOther">
+                                                            Otra actividad (especificar abajo)
+                                                        </label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="mt-3">
+                                                    <label for="otraPropuesta" class="form-label">Describe tu propuesta o habilidades específicas</label>
+                                                    <textarea class="form-control" name="otraPropuesta" id="otraPropuesta" rows="3" placeholder="Ej: Soy músico y puedo ofrecer conciertos, tengo experiencia en fisioterapia, etc."></textarea>
+                                                    <span id="errotraPropuesta" class="text-danger small"></span>
+                                                </div>
+                                                <span id="errPropuesta" class="text-danger small"></span>
                                             </div>
                                         </div>
-
-                                        <div class="activity-option">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="Propuesta" id="activityWorkshop" value="actividades">
-                                                <label class="form-check-label" for="activityWorkshop">
-                                                    Talleres o actividades recreativas (música, arte, manualidades)
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="activity-option">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="Propuesta" id="activityTherapy" value="terapia">
-                                                <label class="form-check-label" for="activityTherapy">
-                                                    Apoyo en terapias o ejercicios
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="activity-option">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="Propuesta" id="activityOther" value="otro">
-                                                <label class="form-check-label" for="activityOther">
-                                                    Otra actividad (especificar abajo)
-                                                </label>
-                                            </div>
-                                        </div>
-
-                                        <div class="mt-3">
-                                            <label for="otraPropuesta" class="form-label">Describe tu propuesta o habilidades específicas</label>
-                                            <textarea class="form-control" name="otraPropuesta" id="otraPropuesta" rows="3" placeholder="Ej: Soy músico y puedo ofrecer conciertos, tengo experiencia en fisioterapia, etc."></textarea>
-                                            <span id="errotraPropuesta" class="text-danger small"></span>
-                                        </div>
-                                        <span id="errPropuesta" class="text-danger small"></span>
                                     </div>
-                                </div>
+
+                                    <!-- Sección 4: Horario del Centro -->
+                                    <div class="mb-4">
+                                        <h3 class="section-title">Horario del Centro</h3>
+
+                                        <div class="form-card">
+                                            <h5 class="mb-3">Horarios disponibles para voluntariado:</h5>
+
+                                            <table class="schedule-table mb-3">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Día</th>
+                                                        <th>Horario</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Lunes a Jueves</td>
+                                                        <td>6:45 AM - 4:30 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Viernes</td>
+                                                        <td>7:00 AM - 4:00 PM</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Sabados y Domingos</td>
+                                                        <td>Cerrado</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                            <p class="schedule-note">
+                                                <svg class="icono-small" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 1024 1024"><path fill="currentColor" d="m576 736l-32-.001v-286c0-.336-.096-.656-.096-1.008s.096-.655.096-.991c0-17.664-14.336-32-32-32h-64c-17.664 0-32 14.336-32 32s14.336 32 32 32h32v256h-32c-17.664 0-32 14.336-32 32s14.336 32 32 32h128c17.664 0 32-14.336 32-32s-14.336-32-32-32zm-64-384.001c35.344 0 64-28.656 64-64s-28.656-64-64-64s-64 28.656-64 64s28.656 64 64 64zm0-352c-282.768 0-512 229.232-512 512c0 282.784 229.232 512 512 512c282.784 0 512-229.216 512-512c0-282.768-229.216-512-512-512zm0 961.008c-247.024 0-448-201.984-448-449.01c0-247.024 200.976-448 448-448s448 200.977 448 448s-200.976 449.01-448 449.01z" /></svg> Por favor considera estos horarios al planificar tu disponibilidad para voluntariado.
+                                            </p>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-grid">
+                                        <button type="submit" class="btn btn-volunteer btn-lg">
+                                            <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 640 512"><path fill="currentColor" d="M488 192H336v56c0 39.7-32.3 72-72 72s-72-32.3-72-72V126.4l-64.9 39C107.8 176.9 96 197.8 96 220.2v47.3l-80 46.2C.7 322.5-4.6 342.1 4.3 357.4l80 138.6c8.8 15.3 28.4 20.5 43.7 11.7L231.4 448H368c35.3 0 64-28.7 64-64h16c17.7 0 32-14.3 32-32v-64h8c13.3 0 24-10.7 24-24v-48c0-13.3-10.7-24-24-24zm147.7-37.4L555.7 16C546.9.7 527.3-4.5 512 4.3L408.6 64H306.4c-12 0-23.7 3.4-33.9 9.7L239 94.6c-9.4 5.8-15 16.1-15 27.1V248c0 22.1 17.9 40 40 40s40-17.9 40-40v-88h184c30.9 0 56 25.1 56 56v28.5l80-46.2c15.3-8.9 20.5-28.4 11.7-43.7z" /></svg> Enviar Solicitud
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
 
-                            <!-- Sección 4: Horario del Centro -->
-                            <div class="mb-4">
-                                <h3 class="section-title">Horario del Centro</h3>
-
-                                <div class="form-card">
-                                    <h5 class="mb-3">Horarios disponibles para voluntariado:</h5>
-
-                                    <table class="schedule-table mb-3">
-                                        <thead>
-                                            <tr>
-                                                <th>Día</th>
-                                                <th>Horario</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Lunes a Jueves</td>
-                                                <td>6:45 AM - 4:30 PM</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Viernes</td>
-                                                <td>7:00 AM - 4:00 PM</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sabados y Domingos</td>
-                                                <td>Cerrado</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-
-                                    <p class="schedule-note">
-                                        <svg class="icono-small" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 1024 1024"><path fill="currentColor" d="m576 736l-32-.001v-286c0-.336-.096-.656-.096-1.008s.096-.655.096-.991c0-17.664-14.336-32-32-32h-64c-17.664 0-32 14.336-32 32s14.336 32 32 32h32v256h-32c-17.664 0-32 14.336-32 32s14.336 32 32 32h128c17.664 0 32-14.336 32-32s-14.336-32-32-32zm-64-384.001c35.344 0 64-28.656 64-64s-28.656-64-64-64s-64 28.656-64 64s28.656 64 64 64zm0-352c-282.768 0-512 229.232-512 512c0 282.784 229.232 512 512 512c282.784 0 512-229.216 512-512c0-282.768-229.216-512-512-512zm0 961.008c-247.024 0-448-201.984-448-449.01c0-247.024 200.976-448 448-448s448 200.977 448 448s-200.976 449.01-448 449.01z" /></svg> Por favor considera estos horarios al planificar tu disponibilidad para voluntariado.
-                                    </p>
-                                </div>
+                            <div class="card-footer text-center py-3 bg-light">
+                                <small class="text-muted">
+                                    <svg class="icono-small" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 1024 1024"><path fill="currentColor" d="m576 736l-32-.001v-286c0-.336-.096-.656-.096-1.008s.096-.655.096-.991c0-17.664-14.336-32-32-32h-64c-17.664 0-32 14.336-32 32s14.336 32 32 32h32v256h-32c-17.664 0-32 14.336-32 32s14.336 32 32 32h128c17.664 0 32-14.336 32-32s-14.336-32-32-32zm-64-384.001c35.344 0 64-28.656 64-64s-28.656-64-64-64s-64 28.656-64 64s28.656 64 64 64zm0-352c-282.768 0-512 229.232-512 512c0 282.784 229.232 512 512 512c282.784 0 512-229.216 512-512c0-282.768-229.216-512-512-512zm0 961.008c-247.024 0-448-201.984-448-449.01c0-247.024 200.976-448 448-448s448 200.977 448 448s-200.976 449.01-448 449.01z" /></svg> Revisaremos tu propuesta y nos pondremos en contacto contigo.
+                                </small>
                             </div>
-
-                            <div class="d-grid">
-                                <button type="submit" class="btn btn-volunteer btn-lg">
-                                    <svg class="icono" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 640 512"><path fill="currentColor" d="M488 192H336v56c0 39.7-32.3 72-72 72s-72-32.3-72-72V126.4l-64.9 39C107.8 176.9 96 197.8 96 220.2v47.3l-80 46.2C.7 322.5-4.6 342.1 4.3 357.4l80 138.6c8.8 15.3 28.4 20.5 43.7 11.7L231.4 448H368c35.3 0 64-28.7 64-64h16c17.7 0 32-14.3 32-32v-64h8c13.3 0 24-10.7 24-24v-48c0-13.3-10.7-24-24-24zm147.7-37.4L555.7 16C546.9.7 527.3-4.5 512 4.3L408.6 64H306.4c-12 0-23.7 3.4-33.9 9.7L239 94.6c-9.4 5.8-15 16.1-15 27.1V248c0 22.1 17.9 40 40 40s40-17.9 40-40v-88h184c30.9 0 56 25.1 56 56v28.5l80-46.2c15.3-8.9 20.5-28.4 11.7-43.7z" /></svg> Enviar Solicitud
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-
-                    <div class="card-footer text-center py-3 bg-light">
-                        <small class="text-muted">
-                            <svg class="icono-small" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 1024 1024"><path fill="currentColor" d="m576 736l-32-.001v-286c0-.336-.096-.656-.096-1.008s.096-.655.096-.991c0-17.664-14.336-32-32-32h-64c-17.664 0-32 14.336-32 32s14.336 32 32 32h32v256h-32c-17.664 0-32 14.336-32 32s14.336 32 32 32h128c17.664 0 32-14.336 32-32s-14.336-32-32-32zm-64-384.001c35.344 0 64-28.656 64-64s-28.656-64-64-64s-64 28.656-64 64s28.656 64 64 64zm0-352c-282.768 0-512 229.232-512 512c0 282.784 229.232 512 512 512c282.784 0 512-229.216 512-512c0-282.768-229.216-512-512-512zm0 961.008c-247.024 0-448-201.984-448-449.01c0-247.024 200.976-448 448-448s448 200.977 448 448s-200.976 449.01-448 449.01z" /></svg> Revisaremos tu propuesta y nos pondremos en contacto contigo.
-                        </small>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
 
+        <section>
+            <div class="modal fade modal-general" id="voluntarioModal" tabindex="-1" aria-labelledby="voluntarioModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="voluntarioModalLabel">¡Postulación recibida!</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <svg class="modal-general-icon" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 16 16"><path fill="currentColor" d="M7.3 14.2L.2 9l1.7-2.4l4.8 3.5l6.6-8.5l2.3 1.8z" /></svg>
+
+                            <h4>¡Gracias por tu interés en ser voluntario!</h4>
+                            <p>Hemos recibido tu formulario correctamente. El centro revisará tu información y se pondrá en contacto contigo para los próximos pasos.</p>
+
+                            <div class="alert alert-info mt-3">
+                                <strong>Por favor espera nuestro contacto</strong><br>
+                                Te enviaremos un correo o llamaremos para coordinar tu participación en el programa de voluntariado.
+                            </div>
+
+                            <p><small>El tiempo de respuesta puede variar según la cantidad de solicitudes recibidas.</small></p>
+
+                            <button type="button" class="btn btn-modal-general" data-bs-dismiss="modal">
+                                Entendido
+                            </button>
+                            <div class="countdown" id="voluntarioCountdown">Cerrando en 10 segundos...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
 
     <!-- Footer -->
     <footer class="bg1color text-light text-center py-3 mt-auto position-relative">
