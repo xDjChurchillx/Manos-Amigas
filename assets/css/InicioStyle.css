@@ -160,71 +160,7 @@
 /*modals*/
 
 
-.modal-suscripcion {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
 
-    .modal-suscripcion .modal-content {
-        border-radius: 12px;
-        overflow: hidden;
-        border: none;
-        box-shadow: 0 10px 30px rgba(32, 87, 129, 0.2);
-    }
-
-    .modal-suscripcion .modal-header {
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        color: white;
-        border-bottom: none;
-        padding: 1.5rem;
-        position: relative;
-    }
-
-    .modal-suscripcion .modal-body {
-        padding: 2.5rem 2rem;
-        text-align: center;
-        background-color: white;
-    }
-
-.suscripcion-icon {
-    font-size: 3.5rem;
-    color: var(--primary);
-    margin-bottom: 1.5rem;
-    display: inline-block;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    background-color: rgba(32, 87, 129, 0.1);
-    border-radius: 50%;
-}
-
-.modal-suscripcion h4 {
-    color: var(--primary);
-    font-weight: 600;
-    margin-bottom: 1rem;
-}
-
-.modal-suscripcion p {
-    color: #555;
-    line-height: 1.6;
-    margin-bottom: 1.5rem;
-}
-
-.btn-suscripcion {
-    background-color: var(--accent);
-    color: var(--primary);
-    border: none;
-    padding: 0.75rem 2rem;
-    border-radius: 30px;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    margin-top: 1rem;
-}
-
-    .btn-suscripcion:hover {
-        background-color: var(--secondary);
-        color: white;
-        transform: translateY(-2px);
-    }
 
 .countdown {
     color: var(--secondary);

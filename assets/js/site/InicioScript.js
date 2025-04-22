@@ -188,11 +188,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modalExitpAnul.hide();
     }
 
-    // Cerrar manualmente
-    document.querySelector('.btn-suscripcion').addEventListener('click', function () {
-        clearInterval(countdownInterval);
-        closeModal();
-    });
+   
 
   
 
