@@ -30,7 +30,7 @@
         }
 
     });
-    const modalElement = document.getElementById('suscripcionModal');
+    const modalElement = document.getElementById('donacionModal');
     const modalConf = new bootstrap.Modal(modalElement);
     // Obtener parámetros de la URL
     const urlParams = new URLSearchParams(window.location.search);
