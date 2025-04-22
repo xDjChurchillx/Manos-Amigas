@@ -141,28 +141,7 @@
         </section>
         <!-- modals -->
         <section>
-            <!-- Modal de Confirmación -->
-            <div class="modal fade modal-suscripcion" id="suscripcionModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="suscripcionModalLabel">¡Suscripción Confirmada!</h5>
-                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <svg class="suscripcion-icon" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 16 16"><path fill="currentColor" d="M7.3 14.2L.2 9l1.7-2.4l4.8 3.5l6.6-8.5l2.3 1.8z" /></svg>
 
-                            <h4>Gracias por suscribirte</h4>
-                            <p>Ahora recibirás en tu correo electrónico todas las noticias importantes, actividades y eventos relevantes de nuestro centro.</p>
-                            <p><small>Te mantendremos informado sobre todo lo que necesitas saber.</small></p>
-                            <button type="button" class="btn btn-suscripcion" data-bs-dismiss="modal">
-                                Entendido
-                            </button>
-                            <div class="countdown" id="countdown">Cerrando en 10 segundos...</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <!-- Modal de Activación -->
             <div class="modal fade modal-general" id="activacionModal" tabindex="-1" aria-labelledby="activacionModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
@@ -183,6 +162,28 @@
                                 Entendido
                             </button>
                             <div class="countdown" id="countdown-activacion">Este mensaje se cerrará en 10 segundos...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal de Confirmación -->
+            <div class="modal fade modal-general" id="suscripcionModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="suscripcionModalLabel">¡Suscripción Confirmada!</h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <svg class="modal-general-icon" xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 16 16"><path fill="currentColor" d="M7.3 14.2L.2 9l1.7-2.4l4.8 3.5l6.6-8.5l2.3 1.8z" /></svg>
+
+                            <h4>Gracias por suscribirte</h4>
+                            <p>Ahora recibirás en tu correo electrónico todas las noticias importantes, actividades y eventos relevantes de nuestro centro.</p>
+                            <p><small>Te mantendremos informado sobre todo lo que necesitas saber.</small></p>
+                            <button type="button" class="btn btn-modal-general" data-bs-dismiss="modal">
+                                Entendido
+                            </button>
+                            <div class="countdown" id="countdown">Cerrando en 10 segundos...</div>
                         </div>
                     </div>
                 </div>
