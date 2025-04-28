@@ -199,6 +199,7 @@ try{
             </li>
     ';
     //panel para el html
+    $tituloheader = 'Panel de Gestion';
     $panel = '   
         <section class="w-100">
                 <div class="row text-center mtop justify-content-center">
