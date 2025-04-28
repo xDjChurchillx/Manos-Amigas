@@ -136,3 +136,11 @@ function recover() {
     const modalsuccess = new bootstrap.Modal(modalElement);
     modalsuccess.show();
 }
+function Alerta(mensaje) {
+    const alertaDiv = document.getElementById('alerta');
+    alertaDiv.textContent = mensaje;
+    alertaDiv.classList.remove('d-none');
+    setTimeout(() => {
+        alertaDiv.classList.add('d-none');
+    }, 5000);
+}
