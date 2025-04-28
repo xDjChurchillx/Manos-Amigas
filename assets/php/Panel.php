@@ -171,7 +171,7 @@ try{
     //Navbar para el html
     $navbar = '
              <li class="nav-item mx-2 "><a class="nav-link vavbarItemActive active" href="Panel.html">Panel</a></li>
-             <li class="nav-item mx-2"><a class="nav-link vavbarItem" href="Actividades.html">Actividades</a></li>
+             <li class="nav-item mx-2 "><a class="nav-link vavbarItem" href="Actividades.html">Actividades</a></li>
              <li class="nav-item mx-2 "><a class="nav-link vavbarItem" href="Donaciones.html">Donaciones</a></li>
              <li class="nav-item mx-2 "><a class="nav-link vavbarItem" href="Voluntarios.html">Voluntarios</a></li>
              <li class="nav-item mx-2 "><a class="nav-link vavbarItem" href="Suscripciones.html">Suscripciones</a></li>

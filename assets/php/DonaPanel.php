@@ -80,21 +80,12 @@ try{
 
     //Navbar para el html
     $navbar = '
-             <li class="nav-item">
-                <a class="nav-link" href="Panel.html">Panel</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="Actividades.html">Actividades</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="Donaciones.html">Donaciones</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="Voluntarios.html">Voluntarios</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="Suscripciones.html">Suscripciones</a>
-            </li>
+             <li class="nav-item mx-2 "><a class="nav-link vavbarItem" href="Panel.html">Panel</a></li>
+             <li class="nav-item mx-2 "><a class="nav-link vavbarItem" href="Actividades.html">Actividades</a></li>
+             <li class="nav-item mx-2 "><a class="nav-link vavbarItemActive active" href="Donaciones.html">Donaciones</a></li>
+             <li class="nav-item mx-2 "><a class="nav-link vavbarItem" href="Voluntarios.html">Voluntarios</a></li>
+             <li class="nav-item mx-2 "><a class="nav-link vavbarItem" href="Suscripciones.html">Suscripciones</a></li>
+            
             <!-- Menú desplegable del usuario -->
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
