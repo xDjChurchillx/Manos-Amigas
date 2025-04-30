@@ -78,7 +78,7 @@ try{
 
         // Verificar si el usuario existe
         if ($row = $result->fetch_assoc()) {
-            $storedHash = $row["Contrasena"]; // Hash almacenado en la base de datos
+            $storedHash = $row["Success"]; // Hash almacenado en la base de datos
 
             // Verificar la contraseña usando password_verify()
             if (password_verify($contrasenaActual, $storedHash)) {  
