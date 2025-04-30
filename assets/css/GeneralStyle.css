@@ -59,9 +59,6 @@ body {
 /*   ///////*/
 
 
-
-
-
 .hero-section {
     background: linear-gradient(to right, var(--primary), var(--secondary));
     min-height: 30vh; /* Menor altura */
