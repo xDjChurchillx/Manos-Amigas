@@ -20,13 +20,12 @@ try{
 
         // Sanitización de entrada
         $username = trim($_POST["usernameR"]);
-        $correo =  html_entity_decode(trim($_POST["usernameR"]), ENT_QUOTES | ENT_HTML5, 'UTF-8');
-
+        $correo = trim($_POST["usernameR"]);
         if (empty($username)) {
             header("Location: /Gestion/ingreso.html?error=9"); // Campos vacíos
             exit();
         }
-
+         $correo = htmlentities($correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
         // Obtener el hash de la base de datos
         $stmt = $conn->prepare("CALL sp_RecoverToken(?,?)");
         if (!$stmt) {
