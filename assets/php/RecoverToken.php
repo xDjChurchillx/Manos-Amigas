@@ -20,7 +20,7 @@ try{
 
         // Sanitización de entrada
         $username = trim($_POST["usernameR"]);
-       
+        $correo =  html_entity_decode(trim($_POST["usernameR"]), ENT_QUOTES | ENT_HTML5, 'UTF-8')
 
         if (empty($username)) {
             header("Location: /Gestion/ingreso.html?error=9"); // Campos vacíos
@@ -28,13 +28,13 @@ try{
         }
 
         // Obtener el hash de la base de datos
-        $stmt = $conn->prepare("CALL sp_RecoverToken(?)");
+        $stmt = $conn->prepare("CALL sp_RecoverToken(?,?)");
         if (!$stmt) {
             header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
             exit();
         }
 
-        $stmt->bind_param("s", $username);
+        $stmt->bind_param("ss", $username,$correo);
         $stmt->execute();       
         $result = $stmt->get_result();
         $row = $result->fetch_assoc();
@@ -172,7 +172,7 @@ try{
             }  
            
         } else {   
-            header("Location: /Gestion/ingreso.html?error=7".$username); // Error no coincide ni correo ni usuario
+            header("Location: /Gestion/ingreso.html?error=7"); // Error no coincide ni correo ni usuario
             exit();
         }
         $stmt->close();
