@@ -20,7 +20,7 @@ try{
 
         // Sanitización de entrada
         $username = trim($_POST["usernameR"]);
-        $correo =  html_entity_decode(trim($_POST["usernameR"]), ENT_QUOTES | ENT_HTML5, 'UTF-8')
+        $correo =  html_entity_decode(trim($_POST["usernameR"]), ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
         if (empty($username)) {
             header("Location: /Gestion/ingreso.html?error=9"); // Campos vacíos
