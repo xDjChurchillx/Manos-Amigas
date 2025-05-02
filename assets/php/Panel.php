@@ -280,13 +280,17 @@ try{
                                     <label for="correo" class="form-label">Correo(opcional)</label>
                                     <input type="email" class="form-control" id="correo" name="correo">
                                 </div>
-                                <div class="d-flex gap-2">
-                                    <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
-                                    <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
-                                    <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
-                                    <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
-                                    <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
+                                <div class="mb-3">
+                                    <label for="correo" class="form-label">Codigo de Confirmacion de Correo</label>
+                                    <div class="d-flex gap-2">
+                                        <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
+                                        <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
+                                        <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
+                                        <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
+                                        <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
+                                    </div>
                                 </div>
+                               
                             </div>
                             <span id="rEditUser" class="text-danger"></span>
                             <div class="modal-footer">
