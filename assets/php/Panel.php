@@ -261,20 +261,51 @@ try{
                         <form id="editarUsrForm">
                             <div class="modal-body">
                                 <div class="mb-3">
-                                <label for="UserActual" class="form-label">Usuario</label>
-                                <input type="text" class="form-control" id="UserActual" name="UserActual" required value="'.$username.'">
+                                    <label for="UserActual" class="form-label">Usuario</label>
+                                    <input type="text" class="form-control" id="UserActual" name="UserActual" required value="'.$username.'">
                                 </div>
                                 <div class="mb-3">
-                                <label for="contrasenaActual" class="form-label">Contraseña actual</label>
-                                <input type="password" class="form-control" id="contrasenaActual" name="contrasenaActual" required>
+                                    <label for="contrasenaActual" class="form-label">Contraseña actual</label>
+                                    <input type="password" class="form-control" id="contrasenaActual" name="contrasenaActual" required>
                                 </div>
                                 <div class="mb-3">
-                                <label for="nuevaContrasena" class="form-label">Nueva contraseña(opcional)</label>
-                                <input type="password" class="form-control" id="nuevaContrasena" name="nuevaContrasena" required>
+                                    <label for="nuevaContrasena" class="form-label">Nueva contraseña(opcional)</label>
+                                    <input type="password" class="form-control" id="nuevaContrasena" name="nuevaContrasena">
                                 </div>
                                 <div class="mb-3">
-                                <label for="confirmarContrasena" class="form-label">Confirmar nueva contraseña(opcional)</label>
-                                <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
+                                    <label for="confirmarContrasena" class="form-label">Confirmar nueva contraseña(opcional)</label>
+                                    <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena">
+                                </div>
+                                <div class="mb-3">
+                                    <label for="correo" class="form-label">Correo(opcional)</label>
+                                    <input type="email" class="form-control" id="correo" name="correo">
+                                </div>
+                                <div class="d-flex gap-2 justify-content-start">
+                                    <div class="card text-center" style="width: 3rem; height: 3rem;">
+                                        <div class="card-body p-0 d-flex align-items-center justify-content-center">
+                                            _
+                                        </div>
+                                    </div>
+                                    <div class="card text-center" style="width: 3rem; height: 3rem;">
+                                        <div class="card-body p-0 d-flex align-items-center justify-content-center">
+                                            _
+                                        </div>
+                                    </div>
+                                    <div class="card text-center" style="width: 3rem; height: 3rem;">
+                                        <div class="card-body p-0 d-flex align-items-center justify-content-center">
+                                            _
+                                        </div>
+                                    </div>
+                                    <div class="card text-center" style="width: 3rem; height: 3rem;">
+                                        <div class="card-body p-0 d-flex align-items-center justify-content-center">
+                                            _
+                                        </div>
+                                    </div>
+                                    <div class="card text-center" style="width: 3rem; height: 3rem;">
+                                        <div class="card-body p-0 d-flex align-items-center justify-content-center">
+                                            _
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <span id="rEditUser" class="text-danger"></span>
