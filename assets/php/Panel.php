@@ -280,32 +280,12 @@ try{
                                     <label for="correo" class="form-label">Correo(opcional)</label>
                                     <input type="email" class="form-control" id="correo" name="correo">
                                 </div>
-                                <div class="d-flex gap-2 justify-content-start">
-                                    <div class="card text-center" style="width: 3rem; height: 3rem;">
-                                        <div class="card-body p-0 d-flex align-items-center justify-content-center">
-                                            _
-                                        </div>
-                                    </div>
-                                    <div class="card text-center" style="width: 3rem; height: 3rem;">
-                                        <div class="card-body p-0 d-flex align-items-center justify-content-center">
-                                            _
-                                        </div>
-                                    </div>
-                                    <div class="card text-center" style="width: 3rem; height: 3rem;">
-                                        <div class="card-body p-0 d-flex align-items-center justify-content-center">
-                                            _
-                                        </div>
-                                    </div>
-                                    <div class="card text-center" style="width: 3rem; height: 3rem;">
-                                        <div class="card-body p-0 d-flex align-items-center justify-content-center">
-                                            _
-                                        </div>
-                                    </div>
-                                    <div class="card text-center" style="width: 3rem; height: 3rem;">
-                                        <div class="card-body p-0 d-flex align-items-center justify-content-center">
-                                            _
-                                        </div>
-                                    </div>
+                                <div class="d-flex gap-2">
+                                    <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
+                                    <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
+                                    <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
+                                    <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
+                                    <input type="text" class="form-control text-center border rounded shadow-sm" maxlength="1" style="width: 3rem; height: 3rem;" />
                                 </div>
                             </div>
                             <span id="rEditUser" class="text-danger"></span>
