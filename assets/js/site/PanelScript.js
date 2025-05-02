@@ -53,34 +53,39 @@ function startPanel(datos) {
             event.preventDefault(); // Evita el postback
 
             let formData = new FormData(this); // Captura los datos del formulario
-
-            fetch(datos.url1, {
-                method: "POST",
-                body: formData
-            })
-                .then(response => response.text())
-                .then(text => {
-                    try {
-                        console.log(text);
-                        let data = JSON.parse(text);
-                        if (data.status === "success") {
-                            window.location.href = '/Gestion/Ingreso.html?error=5';
-                        } else {
-                            if ("ex" in data) {
-                                document.getElementById(datos.name1).innerHTML = data.ex;
-                            } else {
-                                Alerta("Error al actualizar la actividad.");
-                            }
-                            if ("redirect" in data) {
-                                window.location.href = data.redirect;
-                            }
-                        }
-                    } catch (error) {
-                        console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
-                        Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
-                    }
+            let correo = formData.get("correo");
+            if (!correo) {
+                fetch(datos.url1, {
+                    method: "POST",
+                    body: formData
                 })
-                .catch(error => console.error("Error en la solicitud:", error));
+                    .then(response => response.text())
+                    .then(text => {
+                        try {
+                            console.log(text);
+                            let data = JSON.parse(text);
+                            if (data.status === "success") {
+                                window.location.href = '/Gestion/Ingreso.html?error=5';
+                            } else {
+                                if ("ex" in data) {
+                                    document.getElementById(datos.name1).innerHTML = data.ex;
+                                } else {
+                                    Alerta("Error al actualizar la actividad.");
+                                }
+                                if ("redirect" in data) {
+                                    window.location.href = data.redirect;
+                                }
+                            }
+                        } catch (error) {
+                            console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                            Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+                        }
+                    })
+                    .catch(error => console.error("Error en la solicitud:", error));
+            } else {
+                document.getElementById("codigoVerificacion").classList.remove("d-none");
+            }
+           
         });
         // Obtener los elementos
         desde = document.getElementById('desde');
