@@ -41,23 +41,38 @@ try{
         $contrasenaActual = trim($_POST['contrasenaActual'] ?? '');
         $nuevaContrasena = trim($_POST['nuevaContrasena'] ?? '');
         $confirmarContrasena = trim($_POST['confirmarContrasena'] ?? '');
-       
+        $correo = trim($_POST['correo'] ?? '');
+        $code1 = trim($_POST['code1'] ?? '');
+        $code2 = trim($_POST['code2'] ?? '');
+        $code3 = trim($_POST['code3'] ?? '');
+        $code4 = trim($_POST['code4'] ?? '');
+        $code5 = trim($_POST['code5'] ?? '');
         // Validación de datos
-        if (empty($User) || empty($contrasenaActual) || empty($nuevaContrasena) || empty($confirmarContrasena)) {
+        if (empty($User) || empty($contrasenaActual)) {
             echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
             exit();
         }
-        if (strlen($User) < 8  || strlen($User) > 41) {
-            echo json_encode(["status" => "error", "ex" => "Formato de Usuario incorrecto(de 8 a 40 caracteres)"]);
-            exit();
-        }
-         if (strlen($nuevaContrasena) < 10 || strlen($nuevaContrasena) > 20 ) {
+//        if (strlen($User) < 8  || strlen($User) > 41) {
+//            echo json_encode(["status" => "error", "ex" => "Formato de Usuario incorrecto(de 8 a 40 caracteres)"]);
+//            exit();
+//       }
+//        if (strlen($nuevaContrasena) < 10 || strlen($nuevaContrasena) > 20 || strlen($nuevaContrasena) == 0) {
+//            echo json_encode(["status" => "error", "ex" => "Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)"]);
+//            exit();
+//        }
+        if (strlen($nuevaContrasena) < 3 || strlen($nuevaContrasena) > 20 || strlen($nuevaContrasena) == 0) {
             echo json_encode(["status" => "error", "ex" => "Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)"]);
             exit();
         }
          if ($nuevaContrasena !== $confirmarContrasena) {
             echo json_encode(["status" => "error", "ex" => "Contraseña de confirmacion no coincide"]);
             exit();
+        }
+        if(strlen($correo) !== 0){
+            if (empty($code1) || empty($code2) || empty($code3) || empty($code4) || empty($code5)) {
+                echo json_encode(["status" => "error", "ex" => "Introduce el codigo de verificacion que se envio al correo"]);
+                exit();
+            }
         }
 
         // Obtener el hash de la base de datos
@@ -92,8 +107,12 @@ try{
                     echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
                     exit();
                 }
-
-                $stmt->bind_param('ssss', $username, $token, $User,$hash);
+                if(strlen($nuevaContrasena) == 0){
+                   $stmt->bind_param('ssss', $username, $token, $User,$storedHash);
+                }else{
+                  $stmt->bind_param('ssss', $username, $token, $User,$hash);
+                }
+               
 
                 $stmt->execute();
                 $result = $stmt->get_result();

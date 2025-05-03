@@ -54,7 +54,14 @@ function startPanel(datos) {
 
             let formData = new FormData(this); // Captura los datos del formulario
             let correo = formData.get("correo");
+            let code1 = formData.get("code1");
+            let code2 = formData.get("code2");
+            let code3 = formData.get("code3");
+            let code4 = formData.get("code4");
+            let code5 = formData.get("code5");
+          
             if (!correo) {
+                document.getElementById("codigoVerificacion").classList.add("d-none");
                 fetch(datos.url1, {
                     method: "POST",
                     body: formData
@@ -84,6 +91,35 @@ function startPanel(datos) {
                     .catch(error => console.error("Error en la solicitud:", error));
             } else {
                 document.getElementById("codigoVerificacion").classList.remove("d-none");
+                if (code1 && code2 && code3 && code4 && code5) {
+                    fetch(datos.url1, {
+                        method: "POST",
+                        body: formData
+                    })
+                        .then(response => response.text())
+                        .then(text => {
+                            try {
+                                console.log(text);
+                                let data = JSON.parse(text);
+                                if (data.status === "success") {
+                                    window.location.href = '/Gestion/Ingreso.html?error=5';
+                                } else {
+                                    if ("ex" in data) {
+                                        document.getElementById(datos.name1).innerHTML = data.ex;
+                                    } else {
+                                        Alerta("Error al actualizar la actividad.");
+                                    }
+                                    if ("redirect" in data) {
+                                        window.location.href = data.redirect;
+                                    }
+                                }
+                            } catch (error) {
+                                console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                                Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+                            }
+                        })
+                        .catch(error => console.error("Error en la solicitud:", error));
+                } 
             }
            
         });
