@@ -145,7 +145,9 @@ try{
                                         line-height: 1.7;
                                     ">
                                         Este correo es para confirmar la direccion de respaldo para el usuario de gestion.
-                                    </p>';
+                                    </p>
+                                   <div style="display: flex; justify-content: center; gap: 10px;">';
+
             
                               foreach ($cartas as $numero) {
                                 $mail->Body .= '
@@ -169,7 +171,9 @@ try{
                                   
                                   
                                  
-                                $mail->Body .= '<p style="
+                                $mail->Body .= '
+                                     </div>
+                                    <p style="
                                         margin: 40px 0 20px;
                                         font-style: italic;
                                         color: #555;
@@ -179,7 +183,7 @@ try{
                                     </p>
                               </div>
 
-                              <!-- Pie de página mejorado -->
+                              <!-- Pie de página -->
                               <div style="
                                   padding: 20px;
                                   text-align: center;
