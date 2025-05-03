@@ -77,7 +77,7 @@ function startPanel(datos) {
                                 if ("ex" in data) {
                                     document.getElementById(datos.name1).innerHTML = data.ex;
                                 } else {
-                                    Alerta("Error al actualizar la actividad.");
+                                    Alerta("Error al actualizar usuario.");
                                 }
                                 if ("redirect" in data) {
                                     window.location.href = data.redirect;
@@ -107,7 +107,7 @@ function startPanel(datos) {
                                     if ("ex" in data) {
                                         document.getElementById(datos.name1).innerHTML = data.ex;
                                     } else {
-                                        Alerta("Error al actualizar la actividad.");
+                                        Alerta("Error al actualizar el usuario.");
                                     }
                                     if ("redirect" in data) {
                                         window.location.href = data.redirect;
@@ -120,7 +120,74 @@ function startPanel(datos) {
                         })
                         .catch(error => console.error("Error en la solicitud:", error));
                 } else {
-                    document.getElementById(datos.name1).innerHTML = 'Introducir codigo';
+                    const key = 'codigo_fallido_timestamp';
+                    const now = Date.now();
+                    const esperaMin = 60 * 1000; // 1 minuto en milisegundos
+                    const last = localStorage.getItem(key);
+                    if (!last) {
+                        localStorage.setItem(key, now);
+                        fetch(datos.url0, {
+                            method: "POST",
+                            body: formData
+                        })
+                            .then(response => response.text())
+                            .then(text => {
+                                try {
+                                    console.log(text);
+                                    let data = JSON.parse(text);
+                                    if (data.status === "success") {
+                                        document.getElementById(datos.name1).innerHTML = 'El correo ya se envio';
+                                    } else {
+                                        if ("ex" in data) {
+                                            document.getElementById(datos.name1).innerHTML = data.ex;
+                                        } else {
+                                            Alerta("Error al actualizar el usuario.");
+                                        }
+                                        if ("redirect" in data) {
+                                            window.location.href = data.redirect;
+                                        }
+                                    }
+                                } catch (error) {
+                                    console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                                    Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+                                }
+                            })
+                            .catch(error => console.error("Error en la solicitud:", error));
+                    } else {
+                        const diff = now - parseInt(last);
+                        if (diff >= esperaMin) {
+                            localStorage.setItem(key, now); // Actualizar la marca de tiempo
+                            fetch(datos.url0, {
+                                method: "POST",
+                                body: formData
+                            })
+                                .then(response => response.text())
+                                .then(text => {
+                                    try {
+                                        console.log(text);
+                                        let data = JSON.parse(text);
+                                        if (data.status === "success") {
+                                            document.getElementById(datos.name1).innerHTML = 'El correo ya se envio';
+                                        } else {
+                                            if ("ex" in data) {
+                                                document.getElementById(datos.name1).innerHTML = data.ex;
+                                            } else {
+                                                Alerta("Error al actualizar el usuario.");
+                                            }
+                                            if ("redirect" in data) {
+                                                window.location.href = data.redirect;
+                                            }
+                                        }
+                                    } catch (error) {
+                                        console.error("La respuesta no es JSON:", text); // Imprime el texto antes de que falle
+                                        Alerta("Error inesperado: " + text); // Opcional: mostrar el error en un alert
+                                    }
+                                })
+                                .catch(error => console.error("Error en la solicitud:", error));
+                        } else {
+                            document.getElementById(datos.name1).innerHTML = 'Introducir codigo';
+                        }
+                    }
                 } 
             }
            

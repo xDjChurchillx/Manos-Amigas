@@ -1,9 +1,19 @@
 ﻿<?php
-// Configuracion de Cookies y Base de datos 
-ini_set('session.use_only_cookies', 1);
+// Configuracion de la clase PHPMailer y Base de datos
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 require '../../../Private/Credentials/DataBase/connection.php';
+require '../../../Private/Credentials/mailCred.php';
+require 'PHPMailer/Exception.php';
+require 'PHPMailer/PHPMailer.php';
+require 'PHPMailer/SMTP.php';
+
+
+ini_set('session.use_only_cookies', 1);
 header('Content-Type: application/json; charset=UTF-8');
 try{
+      //$dominio = "https://" . $_SERVER['HTTP_HOST'];
+    $dominio = "http://" . $_SERVER['HTTP_HOST'];
     session_set_cookie_params([
         'lifetime' => 0, // Hasta cerrar navegador
         'path' => '/',
@@ -37,106 +47,163 @@ try{
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //Variables del form
-        $User = trim($_POST['UserActual'] ?? '');
-        $contrasenaActual = trim($_POST['contrasenaActual'] ?? '');
-        $nuevaContrasena = trim($_POST['nuevaContrasena'] ?? '');
-        $confirmarContrasena = trim($_POST['confirmarContrasena'] ?? '');
         $correo = trim($_POST['correo'] ?? '');
-        $code1 = trim($_POST['code1'] ?? '');
-        $code2 = trim($_POST['code2'] ?? '');
-        $code3 = trim($_POST['code3'] ?? '');
-        $code4 = trim($_POST['code4'] ?? '');
-        $code5 = trim($_POST['code5'] ?? '');
         // Validación de datos
-        if (empty($User) || empty($contrasenaActual)) {
-            echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
-            exit();
+       
+        if(strlen($correo) == 0){           
+            echo json_encode(["status" => "error", "ex" => "No existe correo"]);
+            exit();            
         }
-//        if (strlen($User) < 8  || strlen($User) > 41) {
-//            echo json_encode(["status" => "error", "ex" => "Formato de Usuario incorrecto(de 8 a 40 caracteres)"]);
-//            exit();
-//       }
-//        if (strlen($nuevaContrasena) < 10 || strlen($nuevaContrasena) > 20 || strlen($nuevaContrasena) == 0) {
-//            echo json_encode(["status" => "error", "ex" => "Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)"]);
-//            exit();
-//        }
-        if (strlen($nuevaContrasena) < 3 || strlen($nuevaContrasena) > 20 || strlen($nuevaContrasena) == 0) {
-            echo json_encode(["status" => "error", "ex" => "Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)"]);
-            exit();
-        }
-         if ($nuevaContrasena !== $confirmarContrasena) {
-            echo json_encode(["status" => "error", "ex" => "Contraseña de confirmacion no coincide"]);
-            exit();
-        }
-        if(strlen($correo) !== 0){
-            if (empty($code1) || empty($code2) || empty($code3) || empty($code4) || empty($code5)) {
-                echo json_encode(["status" => "error", "ex" => "Introduce el codigo de verificacion que se envio al correo"]);
-                exit();
-            }
+        $cartas = [];
+        for ($i = 0; $i < 5; $i++) {
+            $cartas[] = rand(1, 99);
         }
 
-        // Obtener el hash de la base de datos
-        $stmt = $conn->prepare("CALL sp_Login(?)");
-        if (!$stmt) {
-            echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
-            exit();
-        }
+        // Guardar en la sesión
+        $_SESSION['cartas'] = $cartas;
 
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
+         // Instancia un nuevo objeto PHPMailer
+            $mail = new PHPMailer(true);
+            // Configura el servidor SMTP
+            //    $mail->isSMTP();
+            //    $mail->Host       = 'smtp.hostinger.com';  // Cambia esto por tu servidor SMTP
+            //    $mail->SMTPAuth   = true;
+            //    $mail->Username   = $mail1; // Cambia esto por tu nombre de usuario SMTP
+            //    $mail->Password   = $Pmail1; // Cambia esto por tu contraseña SMTP
+            //    $mail->SMTPSecure = 'tls';
+            //    $mail->Port       = 587;
+            $mail->isSMTP();
+            $mail->Host       = 'smtp.gmail.com';
+            $mail->SMTPAuth   = true;
+            $mail->Username   = $mail1; 
+            $mail->Password   = $Pmail1;
+            $mail->SMTPSecure = 'tls';                      // También podés usar 'ssl'
+            $mail->Port       = 587;
+            // Configura el remitente y el destinatario
+            $mail->setFrom($mail1 , 'ManosAmigas');
+            $mail->addAddress($correo, '');
 
-        if ($result === false) {
-            echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
-            exit();
-        }
+            // Configura el asunto y el cuerpo del correo
+            $mail->Subject = 'Cambio de Correo';
+            $mail->isHTML(true);  
+            $mail->Body = '
+             <html>
+                <head>
+                          <meta charset="UTF-8">
+                          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                          <title>Recuperacion</title>
+                </head>
+                <body>
+                    <header style="
+                              background: linear-gradient(135deg, #205781 0%, #4F959D 100%);
+                              min-height: 23vh;
+                              clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+                              color: white;
+                              display: flex;
+                              align-items: center;
+                              padding-bottom: 5rem;
+                          ">
+                              <div style="width: 100%; text-align: center; padding-top: 3rem;">
+                                   <h1 style="
+                                      font-size: 2.5rem;
+                                      letter-spacing: 0.05em;
+                                      margin-bottom: 1rem;
+                                      text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+                                      font-weight: 300;
+                                  ">
+                                    Centro Diurno Manos Amigas
+                                  </h1>
+                                   <div style="width: 400px; height: 3px; background: #F6F8D5; margin: 0 auto;"></div>
+                                  <h1 style="
+     
+                                       margin: 0;
+                                      font-size: 28px;
+                                      font-weight: 600;
+                                      letter-spacing: 0.5px;
+                                  ">
+                                      Confirmar Correo
+                                  </h1>
+ 
+                              </div>
+                          </header>
+                          <div style="
+                              background-color: white;
+                              overflow: hidden;
+                          ">
+                              <!-- Contenido mejorado -->
+                              <div style="padding: 40px 30px; color: #444;">
+                                     <p style="
+                                        margin: 0 0 20px;
+                                        font-size: 16px;
+                                        line-height: 1.7;
+                                    ">
+                                        Hola,
+                                    </p>
+                                    <p style="
+                                        margin: 0 0 20px;
+                                        font-size: 16px;
+                                        line-height: 1.7;
+                                    ">
+                                        Este correo es para confirmar la direccion de respaldo para el usuario de gestion.
+                                    </p>';
+            
+                              foreach ($cartas as $numero) {
+                                $mail->Body .= '
+                                <div style="
+                                  width: 80px;
+                                  height: 120px;
+                                  background-color: white;
+                                  border: 2px solid #333;
+                                  border-radius: 10px;
+                                  box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+                                  display: flex;
+                                  align-items: center;
+                                  justify-content: center;
+                                  font-size: 32px;
+                                  font-weight: bold;
+                                  color: #444;
+                                ">
+                                  ' . $numero . '
+                                </div>';
+                                }    
+                                  
+                                  
+                                 
+                                $mail->Body .= '<p style="
+                                        margin: 40px 0 20px;
+                                        font-style: italic;
+                                        color: #555;
+                                    ">
+                                        Con gratitud,<br>
+                                        El equipo de <strong style="color: #205781;">Centro Diurno Manos Amigas</strong>
+                                    </p>
+                              </div>
 
-        // Verificar si el usuario existe
-        if ($row = $result->fetch_assoc()) {
-            $storedHash = $row["Success"]; // Hash almacenado en la base de datos
-
-            // Verificar la contraseña usando password_verify()
-            if (password_verify($contrasenaActual, $storedHash)) {  
-                // Liberar los resultados de la primera consulta
-                $result->free();
-                $stmt->close();
-                $hash = password_hash($nuevaContrasena, PASSWORD_BCRYPT);
-                // Actualizar usuario en la base de datos
-                $stmt = $conn->prepare('CALL sp_ActualizarUsuario(?, ?, ?, ?)');
-                if (!$stmt) {
-                    echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
-                    exit();
-                }
-                if(strlen($nuevaContrasena) == 0){
-                   $stmt->bind_param('ssss', $username, $token, $User,$storedHash);
-                }else{
-                  $stmt->bind_param('ssss', $username, $token, $User,$hash);
-                }
-               
-
-                $stmt->execute();
-                $result = $stmt->get_result();
-                $row = $result->fetch_assoc();
-
-                if (array_key_exists('Success', $row)) {
-                    echo json_encode(['status' => 'success']);
-                    exit();
-                exit();
-                } else {
-                     echo json_encode(['status' => 'error', 'ex' => 'Error en las credenciales']);
-                     exit();
-                }
-
-                $stmt->close();
-                $conn->close();
+                              <!-- Pie de página mejorado -->
+                              <div style="
+                                  padding: 20px;
+                                  text-align: center;
+                                  background-color: #f5f7fa;
+                                  color: #205781;
+                                  font-size: 12px;
+                                  border-top: 1px solid #eaeaea;
+                              ">
+                                  © 2025 Manos Amigas. Todos los derechos reservados.<br>
+                                  <span style="font-size: 11px; opacity: 0.7;">Cuidando de nuestros adultos mayores con amor y dedicación</span>
+                              </div>
+                          </div>
+    
+                </body>
+             </html>
+            ';
+            if ($mail->send()) {
+                header("Location: /Gestion/ingreso.html?error=6"); // success
+                 exit();
             } else {
-                echo json_encode(['status' => 'error', 'ex' => 'Contraseña Incorrecta']);
+                header("Location: /index.html?error=4"); // Fallo inesperado
                 exit();
-            }
-        } else {
-            echo json_encode(['status' => 'error', 'ex' => 'Usuario Incorrecto']);
-            exit();
-        }
+            }  
+      
     }
 } catch (Exception $ex) {
      echo json_encode([

@@ -319,6 +319,7 @@ try{
         'cat' => $cat,        
         'name0' => 'editarUsrForm',
         'name1' => 'rEditUser',
+        'url0' => '../assets/php/UpdCorreo.php',
         'url1' => '../assets/php/UpdUsr.php',
         'name2' => 'Visitas',
         'name3' => 'Suscripciones',
