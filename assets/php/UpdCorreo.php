@@ -86,126 +86,99 @@ try{
             // Configura el asunto y el cuerpo del correo
             $mail->Subject = 'Cambio de Correo';
             $mail->isHTML(true);  
-          $mail->Body = '
-           <html>
-              <head>
-                        <meta charset="UTF-8">
-                        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                        <title>Recuperacion</title>
-              </head>
-              <body>
-                  <header style="
-                            background: linear-gradient(135deg, #205781 0%, #4F959D 100%);
-                            min-height: 23vh;
-                            clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
-                            color: white;
-                            display: flex;
-                            align-items: center;
-                            padding-bottom: 5rem;
-                        ">
-                            <div style="width: 100%; text-align: center; padding-top: 3rem;">
-                                 <h1 style="
-                                    font-size: 2.5rem;
-                                    letter-spacing: 0.05em;
-                                    margin-bottom: 1rem;
-                                    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
-                                    font-weight: 300;
-                                ">
-                                  Centro Diurno Manos Amigas
-                                </h1>
-                                 <div style="width: 400px; height: 3px; background: #F6F8D5; margin: 0 auto;"></div>
-                                <h1 style="
-                                     margin: 0;
-                                    font-size: 28px;
-                                    font-weight: 600;
-                                    letter-spacing: 0.5px;
-                                ">
-                                    Confirmar Correo
-                                </h1>
- 
-                            </div>
-                        </header>
-                        <div style="
-                            background-color: white;
-                            overflow: hidden;
-                        ">
-                            <!-- Contenido mejorado -->
-                            <div style="padding: 40px 30px; color: #444;">
-                                   <p style="
-                                      margin: 0 0 20px;
-                                      font-size: 16px;
-                                      line-height: 1.7;
-                                  ">
-                                      Hola,
-                                  </p>
-                                  <p style="
-                                      margin: 0 0 20px;
-                                      font-size: 16px;
-                                      line-height: 1.7;
-                                  ">
-                                      Este correo es para confirmar la dirección de respaldo para el usuario de gestión.
-                                  </p>
-                                 <div style="
-                                     display: flex; 
-                                     justify-content: center; 
-                                     gap: 15px;
-                                     flex-wrap: wrap;
-                                     margin: 30px 0 40px;
-                                 ">';
-
-  
-                            foreach ($cartas as $numero) {
-                              $mail->Body .= '
-                              <div style="
-                                width: 80px;
-                                height: 120px;
-                                background: linear-gradient(135deg, #f5f7fa 0%, #e4e8eb 100%);
-                                border: 1px solid #d1d5db;
-                                border-radius: 8px;
-                                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                                display: flex;
-                                align-items: center;
-                                justify-content: center;
-                                font-size: 32px;
-                                font-weight: bold;
-                                color: #205781;
-                                transition: all 0.3s ease;
-                              ">
-                                ' . $numero . '
-                              </div>';
-                              }    
+            $mail->Body = '
+            <html>
+               <head>
+                  <meta charset="UTF-8">
+                  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                  <title>Confirmacion</title>
+               </head>
+               <body style="margin:0; padding:0;">
+                  <table width="100%" border="0" cellspacing="0" cellpadding="0" style="font-family: Arial, sans-serif;">
+                     <tr>
+                        <td align="center">
+                           <table width="100%" border="0" cellspacing="0" cellpadding="0" style="max-width:600px;">
+                              <!-- Encabezado -->
+                              <tr>
+                                 <td style="background: linear-gradient(135deg, #205781 0%, #4F959D 100%); padding: 40px 20px 60px; color: white; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);">
+                                    <h1 style="font-size: 2.5rem; letter-spacing: 0.05em; margin-bottom: 1rem; text-shadow: 1px 1px 3px rgba(0,0,0,0.3); font-weight: 300; margin-top: 0;">
+                                       Centro Diurno Manos Amigas
+                                    </h1>
+                                    <div style="width: 400px; height: 3px; background: #F6F8D5; margin: 0 auto;"></div>
+                                    <h1 style="margin: 15px 0 0; font-size: 28px; font-weight: 600; letter-spacing: 0.5px;">
+                                       Confirmar Correo
+                                    </h1>
+                                 </td>
+                              </tr>
+                  
+                              <!-- Contenido -->
+                              <tr>
+                                 <td style="padding: 40px 30px; color: #444; background-color: white;">
+                                    <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.7;">
+                                       Hola,
+                                    </p>
+                                    <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.7;">
+                                       Este correo es para confirmar la dirección de respaldo para el usuario de gestión.
+                                    </p>
                         
-                        
-                       
-                              $mail->Body .= '
-                                   </div>
-                                  <p style="
-                                      margin: 40px 0 20px;
-                                      font-style: italic;
-                                      color: #555;
-                                  ">
-                                      Con gratitud,<br>
-                                      El equipo de <strong style="color: #205781;">Centro Diurno Manos Amigas</strong>
-                                  </p>
-                            </div>
+                                    <!-- Contenedor de cartas - Usamos tablas para mejor compatibilidad -->
+                                    <table width="100%" border="0" cellspacing="0" cellpadding="0" style="margin: 30px 0 40px;">
+                                       <tr>
+                                          <td align="center">
+                                             <table border="0" cellspacing="0" cellpadding="0">
+                                                <tr>';
 
-                            <!-- Pie de página -->
-                            <div style="
-                                padding: 20px;
-                                text-align: center;
-                                background-color: #f5f7fa;
-                                color: #205781;
-                                font-size: 12px;
-                                border-top: 1px solid #eaeaea;
-                            ">
-                                © 2025 Manos Amigas. Todos los derechos reservados.<br>
-                                <span style="font-size: 11px; opacity: 0.7;">Cuidando de nuestros adultos mayores con amor y dedicación</span>
-                            </div>
-                        </div>
-    
-              </body>
-           </html>
-        ';
+                                // Generamos las cartas
+                                foreach ($cartas as $numero) {
+                                  $mail->Body .= '
+                                                   <td style="padding: 0 7px;" align="center">
+                                                      <div style="
+                                                         width: 80px;
+                                                         height: 120px;
+                                                         background: #f5f7fa;
+                                                         border: 1px solid #d1d5db;
+                                                         border-radius: 8px;
+                                                         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                                                         display: flex;
+                                                         align-items: center;
+                                                         justify-content: center;
+                                                         font-size: 32px;
+                                                         font-weight: bold;
+                                                         color: #205781;
+                                                         margin: 0 auto;
+                                                      ">
+                                                         ' . $numero . '
+                                                      </div>
+                                                   </td>';
+                                }
+                        
+                                $mail->Body .= '
+                                                </tr>
+                                             </table>
+                                          </td>
+                                       </tr>
+                                    </table>
+                        
+                                    <p style="margin: 40px 0 20px; font-style: italic; color: #555;">
+                                       Con gratitud,<br>
+                                       El equipo de <strong style="color: #205781;">Centro Diurno Manos Amigas</strong>
+                                    </p>
+                                 </td>
+                              </tr>
+                  
+                              <!-- Pie de página -->
+                              <tr>
+                                 <td style="padding: 20px; text-align: center; background-color: #f5f7fa; color: #205781; font-size: 12px; border-top: 1px solid #eaeaea;">
+                                    © 2025 Manos Amigas. Todos los derechos reservados.<br>
+                                    <span style="font-size: 11px; opacity: 0.7;">Cuidando de nuestros adultos mayores con amor y dedicación</span>
+                                 </td>
+                              </tr>
+                           </table>
+                        </td>
+                     </tr>
+                  </table>
+               </body>
+            </html>';
             if ($mail->send()) {
                 echo json_encode(['status' => 'success']);
                 exit();
