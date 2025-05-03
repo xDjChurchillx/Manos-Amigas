@@ -31,7 +31,8 @@ if (error) {
         case '4':
             Alerta('Error inesperado. Contacta al soporte.');
             break;
-        case '5':           
+        case '5':
+            //sucess
             modalsuccess.show();
             break;
         case '6':

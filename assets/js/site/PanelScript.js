@@ -119,6 +119,8 @@ function startPanel(datos) {
                             }
                         })
                         .catch(error => console.error("Error en la solicitud:", error));
+                } else {
+                    document.getElementById(datos.name1).innerHTML = 'Introducir codigo';
                 } 
             }
            
