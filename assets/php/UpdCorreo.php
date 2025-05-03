@@ -197,11 +197,11 @@ try{
              </html>
             ';
             if ($mail->send()) {
-                header("Location: /Gestion/ingreso.html?error=6"); // success
-                 exit();
-            } else {
-                header("Location: /index.html?error=4"); // Fallo inesperado
+                echo json_encode(['status' => 'success']);
                 exit();
+            } else {
+                 echo json_encode(["status" => "error", "ex" => "Error al enviar correo"]);
+                  exit();    
             }  
       
     }
