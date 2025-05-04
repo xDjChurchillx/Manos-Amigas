@@ -72,6 +72,7 @@ try{
         }
         
         if(strlen($correo) !== 0){
+             $correo = htmlentities($correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
             if (empty($code1) || empty($code2) || empty($code3) || empty($code4) || empty($code5)) {
                 echo json_encode(["status" => "error", "ex" => "Introduce el codigo de verificacion que se envio al correo"]);
                 exit();
@@ -120,6 +121,10 @@ try{
 
             // Verificar la contraseña usando password_verify()
             if (password_verify($contrasenaActual, $storedHash)) {  
+                if(strlen($correo) === 0){
+                  $correo = $row["Correo"];
+                }
+
                 // Liberar los resultados de la primera consulta
                 $result->free();
                 $stmt->close();
@@ -131,9 +136,9 @@ try{
                     exit();
                 }
                 if(strlen($nuevaContrasena) === 0){
-                   $stmt->bind_param('ssss', $username, $token, $User,$storedHash);
+                   $stmt->bind_param('sssss', $username, $token, $User,$storedHash,$correo);
                 }else{
-                  $stmt->bind_param('ssss', $username, $token, $User,$hash);
+                  $stmt->bind_param('sssss', $username, $token, $User,$hash,$correo);
                 }
                
 
