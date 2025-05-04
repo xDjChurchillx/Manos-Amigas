@@ -130,7 +130,7 @@ try{
                 $stmt->close();
                 $hash = password_hash($nuevaContrasena, PASSWORD_BCRYPT);
                 // Actualizar usuario en la base de datos
-                $stmt = $conn->prepare('CALL sp_ActualizarUsuario(?, ?, ?, ?)');
+                $stmt = $conn->prepare('CALL sp_ActualizarUsuario(?, ?,?, ?, ?)');
                 if (!$stmt) {
                     echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
                     exit();
