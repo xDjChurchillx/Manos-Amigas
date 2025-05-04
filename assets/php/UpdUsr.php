@@ -74,7 +74,7 @@ try{
         if(strlen($correo) !== 0){
              $correo = htmlentities($correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
             if (empty($code1) || empty($code2) || empty($code3) || empty($code4) || empty($code5)) {
-                echo json_encode(["status" => "error", "ex" => "Introduce el codigo de verificacion que se envio al correo"]);
+                echo json_encode(["status" => "error", "ex" => "Introduce el codigo de verificacion que se envio al correo".$code1.$code2.$code3.$code4.$code5]);
                 exit();
             }
             // Obtener los códigos enviados
