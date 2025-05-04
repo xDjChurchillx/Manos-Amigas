@@ -53,6 +53,7 @@ function startPanel(datos) {
         document.getElementById(datos.name).addEventListener('hidden.bs.modal', function () {
             document.getElementById("codigoVerificacion").classList.add("d-none");
             localStorage.removeItem('cambio_correo');
+            document.getElementById(datos.name1).innerHTML = '';
             document.getElementById(datos.name0).reset();
         });
         document.getElementById(datos.name0).addEventListener("submit", function (event) {
