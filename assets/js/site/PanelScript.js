@@ -178,6 +178,7 @@ function startPanel(datos) {
                                             document.getElementById(datos.name1).innerHTML = 'El correo fue enviado nuevamente, espera 1 min para manda otro';
                                         } else {
                                             if ("ex" in data) {
+                                                document.getElementById("codigoVerificacion").classList.remove("d-none");
                                                 document.getElementById(datos.name1).innerHTML = data.ex;
                                             } else {
                                                 Alerta("Error al actualizar el usuario.");
