@@ -319,6 +319,8 @@ try{
         'cat' => $cat,        
         'name0' => 'editarUsrForm',
         'name1' => 'rEditUser',
+        'id1' => 'ModalEditUsr',
+        'id2' => 'Editarlabel',
         'url0' => '../assets/php/UpdCorreo.php',
         'url1' => '../assets/php/UpdUsr.php',
         'name2' => 'Visitas',

@@ -49,6 +49,10 @@ function startPanel(datos) {
         document.getElementById('navbaritems').innerHTML = datos.navbar;
         document.getElementById('panel').innerHTML = datos.panel;
 
+
+        document.getElementById(datos.id1).addEventListener('hidden.bs.modal', function () {
+            document.getElementById(datos.id2).reset();
+        });
         document.getElementById(datos.name0).addEventListener("submit", function (event) {
             event.preventDefault(); // Evita el postback
 
