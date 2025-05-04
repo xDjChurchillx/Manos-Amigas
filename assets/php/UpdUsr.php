@@ -47,6 +47,10 @@ try{
         $code3 = trim($_POST['code3'] ?? '');
         $code4 = trim($_POST['code4'] ?? '');
         $code5 = trim($_POST['code5'] ?? '');
+
+        echo json_encode(["status" => "error", "ex" => "".$code1.$code2.$code3.$code4.$code5]);
+        exit();
+
         // Validación de datos
         if (empty($User) || empty($contrasenaActual)) {
             echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
