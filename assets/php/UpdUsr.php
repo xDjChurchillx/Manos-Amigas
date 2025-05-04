@@ -48,7 +48,7 @@ try{
         $code4 = trim($_POST['code4'] ?? '');
         $code5 = trim($_POST['code5'] ?? '');
 
-        echo json_encode(["status" => "error", "ex" => "".$code1.$code2.$code3.$code4.$code5]);
+        echo json_encode(["status" => "error", "ex" => "codigos:".$code1.$code2.$code3.$code4.$code5]);
         exit();
 
         // Validación de datos
