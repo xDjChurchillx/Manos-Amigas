@@ -51,7 +51,8 @@ function startPanel(datos) {
 
 
         document.getElementById(datos.name).addEventListener('hidden.bs.modal', function () {
-            console.log('ddd');
+            document.getElementById("codigoVerificacion").classList.add("d-none");
+            localStorage.removeItem('cambio_correo');
             document.getElementById(datos.name0).reset();
         });
         document.getElementById(datos.name0).addEventListener("submit", function (event) {
@@ -94,8 +95,7 @@ function startPanel(datos) {
                         }
                     })
                     .catch(error => console.error("Error en la solicitud:", error));
-            } else {
-                document.getElementById("codigoVerificacion").classList.remove("d-none");
+            } else {                
                 if (code1 && code2 && code3 && code4 && code5) {
                     fetch(datos.url1, {
                         method: "POST",
@@ -125,12 +125,11 @@ function startPanel(datos) {
                         })
                         .catch(error => console.error("Error en la solicitud:", error));
                 } else {
-                    const key = 'codigo_fallido_timestamp';
                     const now = Date.now();
                     const esperaMin = 60 * 1000; // 1 minuto en milisegundos
-                    const last = localStorage.getItem(key);
+                    const last = localStorage.getItem('cambio_correo');
                     if (!last) {
-                        localStorage.setItem(key, now);
+                        localStorage.setItem('cambio_correo', now);
                         fetch(datos.url0, {
                             method: "POST",
                             body: formData
@@ -141,7 +140,9 @@ function startPanel(datos) {
                                     console.log(text);
                                     let data = JSON.parse(text);
                                     if (data.status === "success") {
-                                        document.getElementById(datos.name1).innerHTML = 'El correo ya se envio';
+                                        document.getElementById("correo").disabled = true;
+                                        document.getElementById("codigoVerificacion").classList.remove("d-none");
+                                        document.getElementById(datos.name1).innerHTML = 'Se envio el correo de confirmacion';
                                     } else {
                                         if ("ex" in data) {
                                             document.getElementById(datos.name1).innerHTML = data.ex;
@@ -161,7 +162,7 @@ function startPanel(datos) {
                     } else {
                         const diff = now - parseInt(last);
                         if (diff >= esperaMin) {
-                            localStorage.setItem(key, now); // Actualizar la marca de tiempo
+                            localStorage.setItem('cambio_correo', now); // Actualizar la marca de tiempo
                             fetch(datos.url0, {
                                 method: "POST",
                                 body: formData
