@@ -15,8 +15,8 @@ const modalElement3 = document.getElementById('verifyModal');
 const modalverify = new bootstrap.Modal(modalElement3);
 const modalElement4 = document.getElementById('tokenModal');
 const modalToken = new bootstrap.Modal(modalElement4);
-const modalElement5 = document.getElementById('successModal');
-const modalsuccess = new bootstrap.Modal(modalElement5);
+const modalElement5 = document.getElementById('successRModal');
+const modalsuccessrecover = new bootstrap.Modal(modalElement5);
 if (error) {   
     switch (error) {
         case '1':
@@ -94,7 +94,7 @@ if (error) {
             break;
         case '12':
             // modal success
-            modalsuccess.show();
+            modalsuccessrecover.show();
             break;
         case '13':
             // Atajar token
