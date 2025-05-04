@@ -54,6 +54,7 @@ function startPanel(datos) {
             document.getElementById("codigoVerificacion").classList.add("d-none");
             localStorage.removeItem('cambio_correo');
             document.getElementById(datos.name1).innerHTML = '';
+            document.getElementById("correo").readOnly = false;
             document.getElementById(datos.name0).reset();
         });
         document.getElementById(datos.name0).addEventListener("submit", function (event) {
