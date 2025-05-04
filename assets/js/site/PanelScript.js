@@ -173,7 +173,7 @@ function startPanel(datos) {
                                         console.log(text);
                                         let data = JSON.parse(text);
                                         if (data.status === "success") {
-                                            document.getElementById(datos.name1).innerHTML = 'El correo ya se envio';
+                                            document.getElementById(datos.name1).innerHTML = 'El correo fue enviado, espera 1 min para manda otro';
                                         } else {
                                             if ("ex" in data) {
                                                 document.getElementById(datos.name1).innerHTML = data.ex;
