@@ -56,7 +56,7 @@ try{
         }
         $cartas = [];
         for ($i = 0; $i < 5; $i++) {
-            $cartas[] = rand(1, 99);
+            $cartas[] = rand(0, 9);
         }
 
         // Guardar en la sesión
