@@ -73,6 +73,26 @@ try{
                 echo json_encode(["status" => "error", "ex" => "Introduce el codigo de verificacion que se envio al correo"]);
                 exit();
             }
+            // Obtener los códigos enviados
+            $inputCodes = [
+                intval($code1),
+                intval($code2),
+                intval($code3),
+                intval($code4),
+                intval($code5)
+            ];
+
+            // Obtener los códigos guardados
+            $storedCodes = $_SESSION['cartas'] ?? [];
+              if (count($storedCodes) !== 5) {
+                    echo json_encode(["status" => "error", "ex" => "El código ha expirado."]);
+                    exit();
+                }
+            // Validar
+            if ($inputCodes !== $storedCodes) {
+               echo json_encode(["status" => "error", "ex" => "Codigo Incorrecto"]);
+                exit();
+            }
         }
 
         // Obtener el hash de la base de datos

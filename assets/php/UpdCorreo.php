@@ -131,25 +131,25 @@ try{
                                 // Generamos las cartas
                                 foreach ($cartas as $numero) {
                                   $mail->Body .= '
-                                                   <td style="padding: 0 7px;" align="center">
-                                                      <div style="
-                                                         width: 80px;
-                                                         height: 120px;
-                                                         background: #f5f7fa;
-                                                         border: 1px solid #d1d5db;
-                                                         border-radius: 8px;
-                                                         box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-                                                         display: flex;
-                                                         align-items: center;
-                                                         justify-content: center;
-                                                         font-size: 32px;
-                                                         font-weight: bold;
-                                                         color: #205781;
-                                                         margin: 0 auto;
-                                                      ">
-                                                         ' . $numero . '
-                                                      </div>
-                                                   </td>';
+                                            <td style="padding: 0 7px;" align="center">
+                                                <div style="
+                                                    width: 80px;
+                                                    height: 120px;
+                                                    background: #f5f7fa;
+                                                    border: 1px solid #d1d5db;
+                                                    border-radius: 8px;
+                                                    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                                                    display: flex;
+                                                    align-items: center;
+                                                    justify-content: center;
+                                                    font-size: 32px;
+                                                    font-weight: bold;
+                                                    color: #205781;
+                                                    margin: 0 auto;
+                                                ">
+                                                    ' . $numero . '
+                                                </div>
+                                            </td>';
                                 }
                         
                                 $mail->Body .= '
