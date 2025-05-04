@@ -51,7 +51,7 @@ function startPanel(datos) {
 
 
         document.getElementById(datos.id1).addEventListener('hidden.bs.modal', function () {
-            console.log('ddd')
+            console.log('ddd');
             document.getElementById(datos.id2).reset();
         });
         document.getElementById(datos.name0).addEventListener("submit", function (event) {
