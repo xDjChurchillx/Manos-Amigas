@@ -13,6 +13,8 @@ const modalElement2 = document.getElementById('recoverModal');
 const modalrecover = new bootstrap.Modal(modalElement2);
 const modalElement3 = document.getElementById('verifyModal');
 const modalverify = new bootstrap.Modal(modalElement3);
+const modalElement4 = document.getElementById('tokenModal');
+const modalToken = new bootstrap.Modal(modalElement4);
 if (error) {   
     switch (error) {
         case '1':
