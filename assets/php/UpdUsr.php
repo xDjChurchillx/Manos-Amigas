@@ -47,9 +47,6 @@ try{
         $code3 = trim($_POST['code3'] ?? '');
         $code4 = trim($_POST['code4'] ?? '');
         $code5 = trim($_POST['code5'] ?? '');
-        
-        echo json_encode(["status" => "error", "ex" => "codigos:".$correo.$code1.$code2.$code3.$code4.$code5."lengs".strlen($correo).strlen($code1).strlen($code2).strlen($code3).strlen($code4).strlen($code5)]);
-        exit();
 
         // Validación de datos
         if (empty($User) || empty($contrasenaActual)) {
@@ -76,9 +73,9 @@ try{
         }
         
         if(strlen($correo) !== 0){
-             $correo = htmlentities($correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+            $correo = htmlentities($correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
             if (strlen($code1) === 0 || strlen($code2) === 0 || strlen($code3) === 0 || strlen($code4) === 0 || strlen($code5) === 0) {
-                echo json_encode(["status" => "error", "ex" => "Introduce el codigo de verificacion que se envio al correo".$code1.$code2.$code3.$code4.$code5]);
+                echo json_encode(["status" => "error", "ex" => "Introduce el codigo de verificacion que se envio al correo"]);
                 exit();
             }
             // Obtener los códigos enviados

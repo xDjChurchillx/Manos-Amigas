@@ -141,7 +141,7 @@ function startPanel(datos) {
                                     console.log(text);
                                     let data = JSON.parse(text);
                                     if (data.status === "success") {
-                                        document.getElementById("correo").disabled = true;
+                                        document.getElementById("correo").readOnly = true;
                                         document.getElementById("codigoVerificacion").classList.remove("d-none");
                                         document.getElementById(datos.name1).innerHTML = 'Se envio el correo de confirmacion';
                                     } else {
