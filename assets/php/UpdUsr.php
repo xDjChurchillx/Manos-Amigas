@@ -61,7 +61,7 @@ try{
 //            exit();
 //        }
         if (strlen($nuevaContrasena) < 3 || strlen($nuevaContrasena) > 20 || strlen($nuevaContrasena) === 0) {
-            echo json_encode(["status" => "error", "ex" => "Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)"]);
+            echo json_encode(["status" => "error", "ex" => "Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)".strlen($nuevaContrasena)]);
             exit();
         }
          if ($nuevaContrasena !== $confirmarContrasena) {
