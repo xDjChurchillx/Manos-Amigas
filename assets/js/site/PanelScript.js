@@ -175,7 +175,7 @@ function startPanel(datos) {
                                         let data = JSON.parse(text);
                                         if (data.status === "success") {
                                             document.getElementById("codigoVerificacion").classList.remove("d-none");
-                                            document.getElementById(datos.name1).innerHTML = 'El correo fue enviado, espera 1 min para manda otro';
+                                            document.getElementById(datos.name1).innerHTML = 'El correo fue enviado nuevamente, espera 1 min para manda otro';
                                         } else {
                                             if ("ex" in data) {
                                                 document.getElementById(datos.name1).innerHTML = data.ex;
