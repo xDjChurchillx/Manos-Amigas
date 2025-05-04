@@ -39,6 +39,7 @@ if (error) {
             break;
         case '6':
             // success
+            modalToken.show();
             break;
         case '7':
             // no coincide el input del recover
