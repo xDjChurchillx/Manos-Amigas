@@ -78,6 +78,7 @@ function startPanel(datos) {
                             console.log(text);
                             let data = JSON.parse(text);
                             if (data.status === "success") {
+                                localStorage.removeItem('cambio_correo');
                                 window.location.href = '/Gestion/Ingreso.html?error=5';
                             } else {
                                 if ("ex" in data) {
@@ -173,6 +174,7 @@ function startPanel(datos) {
                                         console.log(text);
                                         let data = JSON.parse(text);
                                         if (data.status === "success") {
+                                            document.getElementById("codigoVerificacion").classList.remove("d-none");
                                             document.getElementById(datos.name1).innerHTML = 'El correo fue enviado, espera 1 min para manda otro';
                                         } else {
                                             if ("ex" in data) {
@@ -191,6 +193,7 @@ function startPanel(datos) {
                                 })
                                 .catch(error => console.error("Error en la solicitud:", error));
                         } else {
+                            document.getElementById("codigoVerificacion").classList.remove("d-none");
                             document.getElementById(datos.name1).innerHTML = 'Introducir codigo';
                         }
                     }
