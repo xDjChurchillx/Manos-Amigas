@@ -150,7 +150,6 @@ try{
                 if (array_key_exists('Success', $row)) {
                     echo json_encode(['status' => 'success']);
                     exit();
-                exit();
                 } else {
                      echo json_encode(['status' => 'error', 'ex' => 'Error en las credenciales']);
                      exit();
