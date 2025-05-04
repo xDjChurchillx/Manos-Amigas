@@ -60,14 +60,17 @@ try{
 //            echo json_encode(["status" => "error", "ex" => "Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)"]);
 //            exit();
 //        }
-        if (strlen($nuevaContrasena) < 3 || strlen($nuevaContrasena) > 20 || strlen($nuevaContrasena) === 0) {
-            echo json_encode(["status" => "error", "ex" => "Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)".strlen($nuevaContrasena)]);
-            exit();
+        if(strlen($nuevaContrasena) !== 0){
+           if (strlen($nuevaContrasena) < 3 || strlen($nuevaContrasena) > 20) {
+                echo json_encode(["status" => "error", "ex" => "Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)"]);
+                exit();
+            }
+             if ($nuevaContrasena !== $confirmarContrasena) {
+                echo json_encode(["status" => "error", "ex" => "Contraseña de confirmacion no coincide"]);
+                exit();
+            }
         }
-         if ($nuevaContrasena !== $confirmarContrasena) {
-            echo json_encode(["status" => "error", "ex" => "Contraseña de confirmacion no coincide"]);
-            exit();
-        }
+        
         if(strlen($correo) !== 0){
             if (empty($code1) || empty($code2) || empty($code3) || empty($code4) || empty($code5)) {
                 echo json_encode(["status" => "error", "ex" => "Introduce el codigo de verificacion que se envio al correo"]);
@@ -127,7 +130,7 @@ try{
                     echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
                     exit();
                 }
-                if(strlen($nuevaContrasena) == 0){
+                if(strlen($nuevaContrasena) === 0){
                    $stmt->bind_param('ssss', $username, $token, $User,$storedHash);
                 }else{
                   $stmt->bind_param('ssss', $username, $token, $User,$hash);
