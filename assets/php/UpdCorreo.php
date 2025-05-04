@@ -56,7 +56,7 @@ try{
 
         $correoentitie = htmlentities($correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
 
-        $stmt = $conn->prepare('CALL sp_ActualizarActividad(?, ?, ?)');
+        $stmt = $conn->prepare('CALL sp_VerificarCorreo(?, ?, ?)');
         if (!$stmt) {
             echo json_encode(['status' => 'error', 'ex' => 'Error en la base de datos']);
             exit();
