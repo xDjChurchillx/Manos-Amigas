@@ -152,7 +152,7 @@ try{
                     exit();
                 } else {
                     if (array_key_exists('Repetido', $row)) {
-                        echo json_encode(['status' => 'error', 'ex' => 'Usuario o Correo no se pueden repetir entre usuarios']);
+                        echo json_encode(['status' => 'error', 'ex' => 'Usuario o Correo no se pueden repetir entre las cuentas']);
                          exit();
                     } else {
                          echo json_encode(['status' => 'error', 'ex' => 'Error en las credenciales']);
