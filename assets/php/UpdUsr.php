@@ -151,8 +151,13 @@ try{
                     echo json_encode(['status' => 'success']);
                     exit();
                 } else {
-                     echo json_encode(['status' => 'error', 'ex' => 'Error en las credenciales']);
-                     exit();
+                    if (array_key_exists('Repetido', $row)) {
+                        echo json_encode(['status' => 'error', 'ex' => 'Usuario o Correo no se pueden repetir entre usuarios']);
+                         exit();
+                    } else {
+                         echo json_encode(['status' => 'error', 'ex' => 'Error en las credenciales']);
+                         exit();
+                    }
                 }
 
                 $stmt->close();
