@@ -1,7 +1,9 @@
-﻿.location-card {
+﻿/* Estilos para la tarjeta de ubicación que coinciden con el formulario */
+.location-card {
+    background-color: white;
     border: 2px solid var(--accent);
     border-radius: 8px;
-    padding: 20px;
+    padding: 0; /* Eliminamos el padding general para que el header ocupe todo el ancho */
     margin-bottom: 20px;
     transition: all 0.3s;
     height: 100%;
@@ -19,10 +21,12 @@
     background: var(--bg1gradient);
     padding: 15px;
     border-radius: 6px 6px 0 0;
-    margin: -20px -20px 20px -20px;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .location-content {
+    padding: 0 20px 20px 20px;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -32,10 +36,15 @@
     margin-bottom: 20px;
 }
 
+    .location-details p {
+        margin-bottom: 8px;
+    }
+
 .location-map-container {
     flex: 1;
-    min-height: 300px; /* Altura mínima para móviles */
+    min-height: 300px;
     position: relative;
+    background: white; /* Fondo blanco para coincidir con el formulario */
 }
 
     .location-map-container iframe {
@@ -47,7 +56,6 @@
         border-radius: 6px;
         border: 1px solid var(--accent);
     }
-
 
 @media (max-width: 768px) {
     .location-map-container {
