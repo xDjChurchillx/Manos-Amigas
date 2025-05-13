@@ -34,11 +34,7 @@ function startPage() {
             Alerta("Main Error al cargar actividades");  
         });
 
-    document.getElementById('susAct').addEventListener('click', function (e) {
-        const email = document.getElementById('correo').value;
-        alert(`Tu correo (${email}) ha sido suscrito.`);
-        // Aquí podrías añadir lógica AJAX/Fetch para enviar el dato a tu backend
-    });
+
 
 
 
