@@ -49,16 +49,20 @@ function startPanel(datos) {
     const urlParams = new URLSearchParams(window.location.search);
     const buscar = urlParams.get('buscar');
     const activitysGrid = document.getElementById('activitysGrid');
+    const noAct = document.getElementById('noAct');
 
     if (buscar) {
         document.getElementById('buscar').value = buscar;
     }
+   
     datos.actividades.forEach(function (item) {
         listaActividades[item.Codigo] = item;
         activitysGrid.innerHTML += createActivityCard(item);
         
     });
-
+    if (Object.keys(listaActividades).length !== 0) {
+        noAct.classList.add('d-none');
+    }
 
     var activityModal = document.getElementById('activityModal');
 

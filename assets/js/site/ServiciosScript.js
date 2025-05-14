@@ -1,5 +1,5 @@
 ﻿// Objeto global para almacenar los datos
-let listaActividades = {};
+let listaServicios = {};
 
 document.addEventListener("DOMContentLoaded", function () {
     // Llamar a la función de verificación de sesión al cargar la página
@@ -33,20 +33,22 @@ function startPanel(datos) {
     console.log(datos);
 
     const servicesGrid = document.getElementById('servicesGrid');
-
+    const noSer = document.getElementById('noSer');
     
     datos.services.forEach(function (item) {
-        listaActividades[item.id] = item;
+        listaServicios[item.id] = item;
         servicesGrid.innerHTML += createServiceCard(item);
     });
 
-
+    if (Object.keys(listaServicios).length !== 0) {
+        noSer.classList.add('d-none');
+    }
     var serviceModal = document.getElementById('serviceModal');
 
     serviceModal.addEventListener('show.bs.modal', function (event) {
         var button = event.relatedTarget;
         var serviceId = button.getAttribute('data-service');
-        const service = listaActividades[serviceId.toString()];
+        const service = listaServicios[serviceId.toString()];
         if (!service) return;
         showDetails(service);
     });
