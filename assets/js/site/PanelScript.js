@@ -323,7 +323,7 @@ async function actualizarDatos(val) {
     };
 
     try {
-        const response = await fetch("../assets/php/panel.php", {
+        const response = await fetch("../assets/php/Panel.php", {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

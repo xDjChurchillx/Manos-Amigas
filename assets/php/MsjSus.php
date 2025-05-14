@@ -35,7 +35,7 @@ try{
         // Retornar error de credenciales invalidas
         echo json_encode([
             'status' => 'error',
-            'redirect' => '/Gestion/ingreso.html?error=1'
+            'redirect' => '/Gestion/Ingreso.html?error=1'
         ]);
         exit();
     }
@@ -87,7 +87,7 @@ try{
                 if (array_key_exists('Error', $row)) {
                         echo json_encode([
                         'status' => 'error',
-                        'redirect' => '/Gestion/ingreso.html?error=1'
+                        'redirect' => '/Gestion/Ingreso.html?error=1'
                     ]);
                     exit();
                 }

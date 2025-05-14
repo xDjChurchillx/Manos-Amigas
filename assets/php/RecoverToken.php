@@ -14,7 +14,7 @@ try{
     if ($_SERVER["REQUEST_METHOD"] == "POST") {    
         // Validacion de datos
         if (!isset($_POST["usernameR"])) {
-            header("Location: /Gestion/ingreso.html?error=9"); // Falta de datos
+            header("Location: /Gestion/Ingreso.html?error=9"); // Falta de datos
             exit();
         }
 
@@ -22,14 +22,14 @@ try{
         $username = trim($_POST["usernameR"]);
         $correo = trim($_POST["usernameR"]);
         if (empty($username)) {
-            header("Location: /Gestion/ingreso.html?error=9"); // Campos vacíos
+            header("Location: /Gestion/Ingreso.html?error=9"); // Campos vacíos
             exit();
         }
          $correo = htmlentities($correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
         // Obtener el hash de la base de datos
         $stmt = $conn->prepare("CALL sp_RecoverToken(?,?)");
         if (!$stmt) {
-            header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
+            header("Location: /Gestion/Ingreso.html?error=3"); // Error en la base de datos
             exit();
         }
 
@@ -157,7 +157,7 @@ try{
              </html>
             ';
             if ($mail->send()) {
-                header("Location: /Gestion/ingreso.html?error=6"); // success
+                header("Location: /Gestion/Ingreso.html?error=6"); // success
                  exit();
             } else {
                 header("Location: /index.html?error=4"); // Fallo inesperado
@@ -165,18 +165,18 @@ try{
             }  
            
         } else {   
-            header("Location: /Gestion/ingreso.html?error=7".$correo); // Error no coincide ni correo ni usuario
+            header("Location: /Gestion/Ingreso.html?error=7".$correo); // Error no coincide ni correo ni usuario
             exit();
         }
         $stmt->close();
         $conn->close();   
     }else {
-	   header("Location: /Gestion/ingreso.html?error=4"); // Error inesperado
+	   header("Location: /Gestion/Ingreso.html?error=4"); // Error inesperado
        exit();
     }
 
 } catch (Exception $ex) {
-    header("Location: /Gestion/ingreso.html?error=4"); // Error inesperado
+    header("Location: /Gestion/Ingreso.html?error=4"); // Error inesperado
     exit();
 }
 ?>

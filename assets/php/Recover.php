@@ -10,22 +10,22 @@ try{
         $confirmarContrasena = isset($_POST["confirmarContrasena"]) ? trim($_POST["confirmarContrasena"]) : "";
         // Validacion de datos
         if (empty($correo) || empty($token) || empty($nuevaContrasena) || empty($confirmarContrasena)) {
-            header("Location: /Gestion/ingreso.html?error=10"."&correo=".$correo."&token=".$token); // Campos vacíos
+            header("Location: /Gestion/Ingreso.html?error=10"."&correo=".$correo."&token=".$token); // Campos vacíos
             exit();
         }
         if (strlen($nuevaContrasena) < 10 || strlen($nuevaContrasena) > 20 ) {
-            header("Location: /Gestion/ingreso.html?error=14"."&correo=".$correo."&token=".$token); // Fortmato incorrecto
+            header("Location: /Gestion/Ingreso.html?error=14"."&correo=".$correo."&token=".$token); // Fortmato incorrecto
             exit();
         }
         if ($nuevaContrasena != $confirmarContrasena) {
-            header("Location: /Gestion/ingreso.html?error=11"."&correo=".$correo."&token=".$token); // contraseña diferente
+            header("Location: /Gestion/Ingreso.html?error=11"."&correo=".$correo."&token=".$token); // contraseña diferente
             exit();
         }
         $correo = htmlentities($correo, ENT_QUOTES | ENT_HTML5, 'UTF-8');
         // Recuperar cuenta de la base de datos
         $stmt = $conn->prepare('CALL sp_Recover(?, ?, ?)');
         if (!$stmt) {
-           header("Location: /Gestion/ingreso.html?error=3"); // Base de datos
+           header("Location: /Gestion/Ingreso.html?error=3"); // Base de datos
             exit();
         }
         $hash = password_hash($nuevaContrasena, PASSWORD_BCRYPT);
@@ -36,26 +36,26 @@ try{
         $row = $result->fetch_assoc();
 
         if (array_key_exists('Success', $row)) {
-           header("Location: /Gestion/ingreso.html?error=12"); // Success
+           header("Location: /Gestion/Ingreso.html?error=12"); // Success
            exit();
         
         }elseif (array_key_exists('Token', $row)) {
-             header("Location: /Gestion/ingreso.html?error=16"); // Success
+             header("Location: /Gestion/Ingreso.html?error=16"); // Success
            exit();
         }else {
-           header("Location: /Gestion/ingreso.html?error=13"."&correo=".$correo."&token=".$token); // Error en token o Credentials
+           header("Location: /Gestion/Ingreso.html?error=13"."&correo=".$correo."&token=".$token); // Error en token o Credentials
            exit();
         }
 
         $stmt->close();
         $conn->close();
     }else {
-	   header("Location: /Gestion/ingreso.html?error=4"."&correo=".$correo."&token=".$token); // Error inesperado
+	   header("Location: /Gestion/Ingreso.html?error=4"."&correo=".$correo."&token=".$token); // Error inesperado
        exit();
     }
 
 } catch (Exception $ex) {
-    header("Location: /Gestion/ingreso.html?error=4"); // Error inesperado
+    header("Location: /Gestion/Ingreso.html?error=4"); // Error inesperado
     exit();
 }
 ?>

@@ -26,7 +26,7 @@ try{
     if ($_SERVER["REQUEST_METHOD"] == "POST") {    
         // Validacion de datos
         if (!isset($_POST["username"]) || !isset($_POST["password"])) {
-            header("Location: /Gestion/ingreso.html?error=2"); // Falta de datos
+            header("Location: /Gestion/Ingreso.html?error=2"); // Falta de datos
             exit();
         }
 
@@ -35,14 +35,14 @@ try{
         $password = trim($_POST["password"]);
 
         if (empty($username) || empty($password)) {
-            header("Location: /Gestion/ingreso.html?error=2"); // Campos vacíos
+            header("Location: /Gestion/Ingreso.html?error=2"); // Campos vacíos
             exit();
         }
 
         // Obtener el hash de la base de datos
         $stmt = $conn->prepare("CALL sp_Login(?)");
         if (!$stmt) {
-            header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
+            header("Location: /Gestion/Ingreso.html?error=3"); // Error en la base de datos
             exit();
         }
 
@@ -69,7 +69,7 @@ try{
                  //Actualizar la sesión de la base de datos
                 $stmt = $conn->prepare("CALL sp_UpdateSession(?, ?)");
                 if (!$stmt) {
-                    header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
+                    header("Location: /Gestion/Ingreso.html?error=3"); // Error en la base de datos
                     exit();
                 }
 
@@ -78,10 +78,10 @@ try{
 
                 setcookie("token", $activationToken, time() + 86400, "/");
 
-                header("Location: /Gestion/panel.html"); // Redirigir a dashboard
+                header("Location: /Gestion/Panel.html"); // Redirigir a dashboard
                 exit();
             } else {
-                header("Location: /Gestion/ingreso.html?error=1"); // Usuario o contraseña incorrectos
+                header("Location: /Gestion/Ingreso.html?error=1"); // Usuario o contraseña incorrectos
                 exit();
             }
         }elseif (array_key_exists('Correo', $row)) {
@@ -209,17 +209,17 @@ try{
              </html>
             ';
             if ($mail->send()) {
-                header("Location: /Gestion/ingreso.html?error=15"); // success
+                header("Location: /Gestion/Ingreso.html?error=15"); // success
                  exit();
             } else {
                 header("Location: /index.html?error=4"); // Fallo inesperado
                 exit();
             }  
         }elseif (array_key_exists('Error', $row)) {
-	      header("Location: /Gestion/ingreso.html?error=1"); // Error en la base de datos
+	      header("Location: /Gestion/Ingreso.html?error=1"); // Error en la base de datos
           exit();
         }else {
-            header("Location: /Gestion/ingreso.html?error=3"); // Error en la base de datos
+            header("Location: /Gestion/Ingreso.html?error=3"); // Error en la base de datos
             exit();
         }
 
