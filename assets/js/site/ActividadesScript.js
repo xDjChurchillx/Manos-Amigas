@@ -35,9 +35,6 @@ function startPage() {
         });
 
 
-
-
-
 }
 
 

@@ -16,7 +16,7 @@ try{
         'lifetime' => 0, // Hasta cerrar navegador
         'path' => '/',
         'domain' => '', 
-        'secure' => false, // Solo HTTPS 
+        'secure' => true, // Solo HTTPS 
         'httponly' => true, // No accesible desde JavaScript
         'samesite' => 'Strict', // Protección contra CSRF
     ]);

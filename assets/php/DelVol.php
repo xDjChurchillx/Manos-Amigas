@@ -8,7 +8,7 @@ try{
         'lifetime' => 0, // Hasta cerrar navegador
         'path' => '/',
         'domain' => '', // Cambia por tu dominio real
-        'secure' => false, // Solo HTTPS (IMPORTANTE en producción)
+        'secure' => true, // Solo HTTPS (IMPORTANTE en producción)
         'httponly' => true, // No accesible desde JavaScript
         'samesite' => 'Strict', // Protección contra CSRF
     ]);

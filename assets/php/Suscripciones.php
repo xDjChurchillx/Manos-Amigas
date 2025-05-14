@@ -30,20 +30,14 @@ try{
         // Instancia un nuevo objeto PHPMailer
         $mail = new PHPMailer(true);
         // Configura el servidor SMTP
-        //    $mail->isSMTP();
-        //    $mail->Host       = 'smtp.hostinger.com';  // Cambia esto por tu servidor SMTP
-        //    $mail->SMTPAuth   = true;
-        //    $mail->Username   = $mail1; // Cambia esto por tu nombre de usuario SMTP
-        //    $mail->Password   = $Pmail1; // Cambia esto por tu contraseña SMTP
-        //    $mail->SMTPSecure = 'tls';
-        //    $mail->Port       = 587;
         $mail->isSMTP();
-        $mail->Host       = 'smtp.gmail.com';
+        $mail->Host       = 'smtp.hostinger.com';  // Cambia esto por tu servidor SMTP
         $mail->SMTPAuth   = true;
-        $mail->Username   = $mail1; 
-        $mail->Password   = $Pmail1;
-        $mail->SMTPSecure = 'tls';                      // También podés usar 'ssl'
+        $mail->Username   = $mail1; // Cambia esto por tu nombre de usuario SMTP
+        $mail->Password   = $Pmail1; // Cambia esto por tu contraseña SMTP
+        $mail->SMTPSecure = 'tls';
         $mail->Port       = 587;
+    
         // Configura el remitente y el destinatario
         $mail->setFrom($mail1 , 'ManosAmigas');
         $mail->addAddress( html_entity_decode($Correo, ENT_QUOTES | ENT_HTML5, 'UTF-8'), '');
