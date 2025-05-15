@@ -9,8 +9,9 @@ require 'PHPMailer/PHPMailer.php';
 require 'PHPMailer/SMTP.php';
 
 try{
-    //$dominio = "https://" . $_SERVER['HTTP_HOST'];
-    $dominio = "http://" . $_SERVER['HTTP_HOST'];
+    //dominio de la pagina 
+    $dominio = "https://" . $_SERVER['HTTP_HOST'];
+    //$dominio = "http://" . $_SERVER['HTTP_HOST'];
     if ($_SERVER["REQUEST_METHOD"] == "POST") {    
         // Validacion de datos
         if (!isset($_POST["usernameR"])) {

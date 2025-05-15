@@ -10,9 +10,10 @@ require 'PHPMailer/SMTP.php';
 try{
     //regedex para correo
     $regex = "/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/";
+
     //dominio de la pagina 
-    //$dominio = "https://" . $_SERVER['HTTP_HOST'];
-    $dominio = "http://" . $_SERVER['HTTP_HOST'];
+    $dominio = "https://" . $_SERVER['HTTP_HOST'];
+    //$dominio = "http://" . $_SERVER['HTTP_HOST'];
     // Verificar si el formulario fue enviado
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
          //Variables del form

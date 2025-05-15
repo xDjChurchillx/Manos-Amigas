@@ -12,8 +12,9 @@ require 'PHPMailer/SMTP.php';
 ini_set('session.use_only_cookies', 1);
 header('Content-Type: application/json; charset=UTF-8');
 try{
-      //$dominio = "https://" . $_SERVER['HTTP_HOST'];
-    $dominio = "http://" . $_SERVER['HTTP_HOST'];
+    //dominio de la pagina 
+    $dominio = "https://" . $_SERVER['HTTP_HOST'];
+    //$dominio = "http://" . $_SERVER['HTTP_HOST'];
     session_set_cookie_params([
         'lifetime' => 0, // Hasta cerrar navegador
         'path' => '/',
