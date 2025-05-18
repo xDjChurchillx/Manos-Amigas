@@ -170,7 +170,9 @@ try{
                 </table>';
         } else {
             $panel .= '
-                <p>No hay suscripciones activas.</p>';
+                  <div class="no-item">
+                    No hay Suscripciones activas para mostrar aún
+                </div>';
         }
     
         // Mostrar tabla de suscripciones inactivas
@@ -210,7 +212,9 @@ try{
                 </table>';
         } else {
             $panel .= '
-                <p>No hay suscripciones inactivas.</p>';
+               <div class="no-item">
+                    No hay Suscripciones inactivas para mostrar aún
+                </div>';
         }
     }
 

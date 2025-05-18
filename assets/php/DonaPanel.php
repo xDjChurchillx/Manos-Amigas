@@ -120,9 +120,11 @@ try{
     if (empty($rows)) {
         // Si no hay Donaciones, mostrar el mensaje
         $panel .= '
-            <p>No hay donaciones para mostrar.</p>';
+            <div class="no-item">
+                No hay Donaciones para mostrar aún
+            </div>';
     } else {
-        // Si hay actividades, crear la tabla con los datos
+        // Si hay donaciones, crear la tabla con los datos
         $panel .= '
             <table class="table table-striped">
                 <thead class="table-dark">
