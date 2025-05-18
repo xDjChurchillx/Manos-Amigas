@@ -179,7 +179,7 @@ try{
                 </div>
                 <div class="mb-3">
                     <label for="descripcion" class="form-label">Descripción</label>
-                    <textarea name="descripcion" id="descripcion" class="form-control" required></textarea>
+                    <textarea name="descripcion" id="descripcion" class="form-control" oninput="autoResize(this)" required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="fecha" class="form-label">Fecha</label>

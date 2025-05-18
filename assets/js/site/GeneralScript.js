@@ -48,3 +48,7 @@ function Alerta(mensaje) {
         alertaDiv.classList.add('d-none');
     }, 5000);
 }
+function autoResize(textarea) {
+    textarea.style.height = 'auto';
+    textarea.style.height = textarea.scrollHeight + 'px';
+}
