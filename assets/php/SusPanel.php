@@ -119,11 +119,7 @@ try{
 
     ';
 
-    if (empty($rows)) {
-        // Si no hay Suscripciones, mostrar el mensaje
-        $panel .= '
-            <p>No hay Suscripciones para mostrar.</p>';
-    } else {
+
         // Separar suscripciones activas e inactivas
         $activas = array_filter($rows, function($suscripcion) {
             return $suscripcion['Activo'] == 1;
@@ -216,7 +212,7 @@ try{
                     No hay Suscripciones inactivas para mostrar aún
                 </div>';
         }
-    }
+  
 
     $panel .= '</div>
     </section>
