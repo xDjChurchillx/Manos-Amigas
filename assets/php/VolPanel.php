@@ -121,7 +121,7 @@ try{
         // Si no hay Voluntarios, mostrar el mensaje
         $panel .= '
                 <div class="no-item">
-                    No hay Voluntarios para mostrar aún
+                    No hay Voluntarios para mostrar
                 </div>';
     } else {
         // Si hay Voluntarios, crear la tabla con los datos

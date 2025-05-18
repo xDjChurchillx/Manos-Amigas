@@ -120,7 +120,7 @@ try{
         // Si no hay actividades, mostrar el mensaje
         $panel .= '
         <div class="no-item">
-            No hay Actividades para mostrar aún
+            No hay Actividades para mostrar 
         </div>';
     } else {
         // Si hay actividades, crear la tabla con los datos

@@ -119,99 +119,98 @@ try{
 
     ';
 
-
-        // Separar suscripciones activas e inactivas
-        $activas = array_filter($rows, function($suscripcion) {
-            return $suscripcion['Activo'] == 1;
-        });
+    // Separar suscripciones activas e inactivas
+    $activas = array_filter($rows, function($suscripcion) {
+        return $suscripcion['Activo'] == 1;
+    });
     
-        $inactivas = array_filter($rows, function($suscripcion) {
-            return $suscripcion['Activo'] == 0;
-        });
+    $inactivas = array_filter($rows, function($suscripcion) {
+        return $suscripcion['Activo'] == 0;
+    });
     
-        // Mostrar tabla de suscripciones activas
+    // Mostrar tabla de suscripciones activas
+    $panel .= '
+        <h3 class="mt-4 mb-3">Suscripciones Activas</h3>';
+    
+    if (!empty($activas)) {
         $panel .= '
-            <h3 class="mt-4 mb-3">Suscripciones Activas</h3>';
-    
-        if (!empty($activas)) {
-            $panel .= '
-                <table class="table table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Código</th>
-                            <th>Fecha</th>
-                            <th>Correo</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>';
-        
-            foreach ($activas as $Suscripcion) {
-                $panel .= '
+            <table class="table table-striped">
+                <thead class="table-dark">
                     <tr>
-                        <td>' . htmlspecialchars($Suscripcion['Codigo']) . '</td>
-                        <td>' . htmlspecialchars($Suscripcion['Fecha']) . '</td>
-                        <td>' . htmlspecialchars($Suscripcion['Correo']) . '</td>
-                        <td>    
-                            <div class="d-flex justify-content-center align-items-center">
-                                <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\')">Editar</button>
-                                <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\',\''. htmlspecialchars($Suscripcion['Correo']) .'\')">Eliminar</button>
-                            </div>
-                        </td>
-                    </tr>';
-            }
+                        <th>Código</th>
+                        <th>Fecha</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>';
         
+        foreach ($activas as $Suscripcion) {
             $panel .= '
-                    </tbody>
-                </table>';
-        } else {
-            $panel .= '
-                  <div class="no-item">
-                    No hay Suscripciones activas para mostrar aún
-                </div>';
+                <tr>
+                    <td>' . htmlspecialchars($Suscripcion['Codigo']) . '</td>
+                    <td>' . htmlspecialchars($Suscripcion['Fecha']) . '</td>
+                    <td>' . htmlspecialchars($Suscripcion['Correo']) . '</td>
+                    <td>    
+                        <div class="d-flex justify-content-center align-items-center">
+                            <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\')">Editar</button>
+                            <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\',\''. htmlspecialchars($Suscripcion['Correo']) .'\')">Eliminar</button>
+                        </div>
+                    </td>
+                </tr>';
         }
-    
-        // Mostrar tabla de suscripciones inactivas
+        
         $panel .= '
-            <h3 class="mt-5 mb-3">Suscripciones Inactivas</h3>';
+                </tbody>
+            </table>';
+    } else {
+        $panel .= '
+                <div class="no-item">
+                No hay Suscripciones activas para mostrar 
+            </div>';
+    }
     
-        if (!empty($inactivas)) {
-            $panel .= '
-                <table class="table table-striped">
-                    <thead class="table-dark">
-                        <tr>
-                            <th>Código</th>
-                            <th>Fecha</th>
-                            <th>Correo</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>';
-        
-            foreach ($inactivas as $Suscripcion) {
-                $panel .= '
+    // Mostrar tabla de suscripciones inactivas
+    $panel .= '
+        <h3 class="mt-5 mb-3">Suscripciones Inactivas</h3>';
+    
+    if (!empty($inactivas)) {
+        $panel .= '
+            <table class="table table-striped">
+                <thead class="table-dark">
                     <tr>
-                        <td>' . htmlspecialchars($Suscripcion['Codigo']) . '</td>
-                        <td>' . htmlspecialchars($Suscripcion['Fecha']) . '</td>
-                        <td>' . htmlspecialchars($Suscripcion['Correo']) . '</td>
-                        <td>    
-                            <div class="d-flex justify-content-center align-items-center">
-                                <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\')">Editar</button>
-                                <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\',\''. htmlspecialchars($Suscripcion['Correo']) .'\')">Eliminar</button>
-                            </div>
-                        </td>
-                    </tr>';
-            }
+                        <th>Código</th>
+                        <th>Fecha</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>';
         
+        foreach ($inactivas as $Suscripcion) {
             $panel .= '
-                    </tbody>
-                </table>';
-        } else {
-            $panel .= '
-               <div class="no-item">
-                    No hay Suscripciones inactivas para mostrar aún
-                </div>';
+                <tr>
+                    <td>' . htmlspecialchars($Suscripcion['Codigo']) . '</td>
+                    <td>' . htmlspecialchars($Suscripcion['Fecha']) . '</td>
+                    <td>' . htmlspecialchars($Suscripcion['Correo']) . '</td>
+                    <td>    
+                        <div class="d-flex justify-content-center align-items-center">
+                            <button class="btn btn-primary btn-sm" onclick="edit(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\')">Editar</button>
+                            <button class="btn btn-danger btn-sm" onclick="del(\'' . htmlspecialchars($Suscripcion['Codigo']) . '\',\''. htmlspecialchars($Suscripcion['Correo']) .'\')">Eliminar</button>
+                        </div>
+                    </td>
+                </tr>';
         }
+        
+        $panel .= '
+                </tbody>
+            </table>';
+    } else {
+        $panel .= '
+            <div class="no-item">
+                No hay Suscripciones inactivas para mostrar 
+            </div>';
+    }
   
 
     $panel .= '</div>
