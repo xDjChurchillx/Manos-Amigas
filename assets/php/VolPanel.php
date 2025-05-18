@@ -120,7 +120,9 @@ try{
     if (empty($rows)) {
         // Si no hay Voluntarios, mostrar el mensaje
         $panel .= '
-            <p>No hay Voluntarios para mostrar.</p>';
+                <div class="no-item">
+                    No hay Voluntarios para mostrar aún
+                </div>';
     } else {
         // Si hay Voluntarios, crear la tabla con los datos
         $panel .= '
