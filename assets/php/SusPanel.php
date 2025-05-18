@@ -234,8 +234,8 @@ try{
                     <input type="text" name="titulo" id="titulo" class="form-control" required>
                 </div>
                 <div class="mb-3">
-                    <label for="mensaje" class="form-label">Descripción</label>
-                    <textarea name="mensaje" id="mensaje" class="form-control" required></textarea>
+                    <label for="mensaje" class="form-label">Mensaje</label>
+                    <textarea name="mensaje" id="mensaje" class="form-control" oninput="autoResize(this)" required></textarea>
                 </div>
                 <span id="respuesta" class="text-danger"></span>
                 <button type="submit" class="btn btn-primary">Enviar</button>
