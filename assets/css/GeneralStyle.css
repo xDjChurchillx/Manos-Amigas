@@ -7,7 +7,7 @@
 
 
 body {
-    background-color: #F6F8D5;
+    background-color: var(--light);
 }
 .icono {
     width: 24px;
@@ -23,16 +23,16 @@ body {
     height: auto;
 }
 .bg1color {
-    background-color: #205781;
+    background-color: var(--primary);
 }
 .bg2color {
-    background-color: #4F959D;
+    background-color: var(--secondary);
 }
 .bg3color {
-    background-color: #98D2C0;
+    background-color: var(--accent);
 }
 .bg4color {
-    background-color: #F6F8D5;
+    background-color: var(--light);
 }
 .bg1gradient {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
