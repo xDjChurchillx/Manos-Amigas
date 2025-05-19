@@ -202,3 +202,8 @@
     .btn-anulacion:hover {
         background-color: #c82333;
     }
+
+
+a:hover {
+    color: var(--accent) !important;
+}
