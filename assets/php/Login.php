@@ -217,7 +217,7 @@ try{
                 exit();
             }  
         }elseif (array_key_exists('Error', $row)) {
-	      header("Location: /Gestion/Ingreso.html?error=1"); // Error en la base de datos
+	      header("Location: /Gestion/Ingreso.html?error=1"); // Usuario o contrase; ainvalidos
           exit();
         }else {
             header("Location: /Gestion/Ingreso.html?error=3"); // Error en la base de datos
@@ -227,7 +227,11 @@ try{
         $stmt->close();
         $conn->close();
          
+    }else {
+	  header("Location: /index.html?error=1"); // Fallo inesperado
+      exit();
     }
+
 } catch (Exception $ex) {
      echo json_encode([
         'status' => 'error',
