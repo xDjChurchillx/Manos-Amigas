@@ -88,21 +88,15 @@ try{
         }elseif (array_key_exists('Correo', $row)) {
 	        // Instancia un nuevo objeto PHPMailer
             $mail = new PHPMailer(true);
-            // Configura el servidor SMTP
-            //    $mail->isSMTP();
-            //    $mail->Host       = 'smtp.hostinger.com';  // Cambia esto por tu servidor SMTP
-            //    $mail->SMTPAuth   = true;
-            //    $mail->Username   = $mail1; // Cambia esto por tu nombre de usuario SMTP
-            //    $mail->Password   = $Pmail1; // Cambia esto por tu contraseña SMTP
-            //    $mail->SMTPSecure = 'tls';
-            //    $mail->Port       = 587;
+           // Configura el servidor SMTP
             $mail->isSMTP();
-            $mail->Host       = 'smtp.gmail.com';
+            $mail->Host       = 'smtp.hostinger.com';  // Cambia esto por tu servidor SMTP
             $mail->SMTPAuth   = true;
-            $mail->Username   = $mail1; 
-            $mail->Password   = $Pmail1;
-            $mail->SMTPSecure = 'tls';                      // También podés usar 'ssl'
+            $mail->Username   = $mail1; // Cambia esto por tu nombre de usuario SMTP
+            $mail->Password   = $Pmail1; // Cambia esto por tu contraseña SMTP
+            $mail->SMTPSecure = 'tls';
             $mail->Port       = 587;
+
             // Configura el remitente y el destinatario
             $mail->setFrom($mail1 , 'ManosAmigas');
             $mail->addAddress( html_entity_decode($row['Correo'], ENT_QUOTES | ENT_HTML5, 'UTF-8'), '');
@@ -213,7 +207,7 @@ try{
                 header("Location: /Gestion/Ingreso.html?error=15"); // success
                  exit();
             } else {
-                header("Location: /index.html?error=4"); // Fallo inesperado
+                header("Location: /Gestion/Ingreso.html?error=4"); // Usuario o contrase; ainvalidos
                 exit();
             }  
         }elseif (array_key_exists('Error', $row)) {
@@ -228,8 +222,8 @@ try{
         $conn->close();
          
     }else {
-	  header("Location: /index.html?error=1"); // Fallo inesperado
-      exit();
+	     header("Location: /Gestion/Ingreso.html?error=1"); // Usuario o contrase; ainvalidos
+          exit()
     }
 
 } catch (Exception $ex) {
