@@ -222,8 +222,8 @@ try{
         $conn->close();
          
     }else {
-	     header("Location: /Gestion/Ingreso.html?error=1"); // Usuario o contrase; invalidos
-          exit()
+	     header("Location: /Gestion/Ingreso.html?error=1"); // Usuario o contrase; ainvalidos
+          exit();
     }
 
 } catch (Exception $ex) {
