@@ -53,16 +53,12 @@ try{
             echo json_encode(["status" => "error", "ex" => "Todos los campos son obligatorios."]);
             exit();
         }
-//        if (strlen($User) < 8  || strlen($User) > 41) {
-//            echo json_encode(["status" => "error", "ex" => "Formato de Usuario incorrecto(de 8 a 40 caracteres)"]);
-//            exit();
-//       }
-//        if (strlen($nuevaContrasena) < 10 || strlen($nuevaContrasena) > 20 || strlen($nuevaContrasena) == 0) {
-//            echo json_encode(["status" => "error", "ex" => "Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)"]);
-//            exit();
-//        }
+        if (strlen($User) < 8  || strlen($User) > 41) {
+           echo json_encode(["status" => "error", "ex" => "Formato de Usuario incorrecto(de 8 a 40 caracteres)"]);
+           exit();
+        }
         if(strlen($nuevaContrasena) !== 0){
-           if (strlen($nuevaContrasena) < 3 || strlen($nuevaContrasena) > 20) {
+           if (strlen($nuevaContrasena) < 10 || strlen($nuevaContrasena) > 20) {
                 echo json_encode(["status" => "error", "ex" => "Formato de Nueva contraseña incorrecto(de 10 a 20 caracteres)"]);
                 exit();
             }
